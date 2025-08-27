@@ -4,7 +4,6 @@ import org.hidetake.gradle.swagger.generator.GenerateSwaggerUI
 plugins {
     kotlin("jvm") version "2.2.10"
     kotlin("plugin.spring") version "2.2.10"
-    kotlin("plugin.jpa") version "2.2.10"
     kotlin("kapt") version "2.2.10"
     id("org.springframework.boot") version "3.5.5"
     id("io.spring.dependency-management") version "1.1.7"
@@ -20,17 +19,6 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
-}
-allOpen {
-    annotation("jakarta.persistence.Entity")
-    annotation("jakarta.persistence.MappedSuperclass")
-    annotation("jakarta.persistence.Embeddable")
-}
-
-noArg {
-    annotation("jakarta.persistence.Entity")
-    annotation("jakarta.persistence.MappedSuperclass")
-    annotation("jakarta.persistence.Embeddable")
 }
 
 
@@ -50,10 +38,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     kapt("org.springframework.boot:spring-boot-configuration-processor")
 
-    //test
+    // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.11.0")
     // junit
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
@@ -78,12 +65,16 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
     testImplementation("io.kotest:kotest-framework-datatest:$kotestVersion")
     testImplementation("io.kotest.extensions:kotest-extensions-spring:1.3.0")
+    testImplementation("org.springframework:spring-jdbc")
+
     // web
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
 
     // database
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+    // https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-kotlin-sync
+//    implementation("org.mongodb:mongodb-driver-kotlin-sync:5.5.1")
 
 
     // caching

@@ -55,3 +55,6 @@ logback-prod.xml
 aplication-test.properties
 application-test.yml
 logback-test.xml
+
+### personal ###
+TODO.md
