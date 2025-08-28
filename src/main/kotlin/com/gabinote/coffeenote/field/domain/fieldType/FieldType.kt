@@ -1,24 +1,23 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
-import com.gabinote.coffeenote.common.dto.attribute.service.AttributeServiceDto
+import com.gabinote.coffeenote.common.dto.attribute.service.AttributeResServiceDto
 
 abstract class FieldType {
-    abstract val key : String
-    abstract val fieldTypeAttributeKeys : Set<FieldTypeAttributeKey>
-    abstract fun valueValidation(values:Set<String>): List<FieldTypeValidationResult>
+    abstract val key: String
+    abstract val fieldTypeAttributeKeys: Set<FieldTypeAttributeKey>
+    abstract fun valueValidation(values: Set<String>): List<FieldTypeValidationResult>
 
-    fun validationKey(attributes: Set<AttributeServiceDto>): List<FieldTypeValidationResult> {
+    fun validationKey(attributes: Set<AttributeResServiceDto>): List<FieldTypeValidationResult> {
         val attributeMap = attributes.associateBy { it.key }
-        return fieldTypeAttributeKeys.map{ fieldTypeAttributeKey ->
+        return fieldTypeAttributeKeys.map { fieldTypeAttributeKey ->
             validateAttribute(fieldTypeAttributeKey, attributeMap)
         }
     }
 
 
-
     private fun validateAttribute(
         fieldTypeAttributeKey: FieldTypeAttributeKey,
-        attributeMap: Map<String, AttributeServiceDto>
+        attributeMap: Map<String, AttributeResServiceDto>
     ): FieldTypeValidationResult {
         return attributeMap[fieldTypeAttributeKey.key]?.let { value ->
             fieldTypeAttributeKey.validationFunc(value.value)
