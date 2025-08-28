@@ -6,10 +6,10 @@ import org.bson.types.ObjectId
 data class FieldResServiceDto(
     val id: ObjectId,
     val externalId: String,
-    val default: Boolean,
     val name: String,
     val icon: String,
     val type: String,
     val attributes: Set<AttributeResServiceDto>,
     val owner: String?,
+    val default: Boolean,
 )

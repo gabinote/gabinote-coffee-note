@@ -6,6 +6,7 @@ import com.gabinote.coffeenote.common.dto.attribute.controller.AttributeResContr
 import com.gabinote.coffeenote.common.dto.attribute.controller.AttributeUpdateReqControllerDto
 import com.gabinote.coffeenote.common.dto.attribute.service.AttributeCreateReqServiceDto
 import com.gabinote.coffeenote.common.dto.attribute.service.AttributeResServiceDto
+import com.gabinote.coffeenote.common.dto.attribute.service.AttributeUpdateReqServiceDto
 import org.mapstruct.Mapper
 
 @Mapper(
@@ -32,5 +33,5 @@ interface AttributeMapper {
 
     fun toAttributeUpdateReqServiceDto(
         dto: AttributeUpdateReqControllerDto,
-    ): AttributeCreateReqServiceDto
+    ): AttributeUpdateReqServiceDto
 }

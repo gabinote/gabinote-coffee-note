@@ -6,6 +6,7 @@ import com.gabinote.coffeenote.common.dto.attribute.controller.AttributeResContr
 import com.gabinote.coffeenote.common.dto.attribute.controller.AttributeUpdateReqControllerDto
 import com.gabinote.coffeenote.common.dto.attribute.service.AttributeCreateReqServiceDto
 import com.gabinote.coffeenote.common.dto.attribute.service.AttributeResServiceDto
+import com.gabinote.coffeenote.common.dto.attribute.service.AttributeUpdateReqServiceDto
 import com.gabinote.coffeenote.testSupport.testTemplate.MockkTestTemplate
 import io.kotest.matchers.shouldBe
 
@@ -90,7 +91,7 @@ class AttributeMapperTest : MockkTestTemplate() {
                         key = "aftertaste",
                         value = setOf("long", "short")
                     )
-                    val expected = AttributeCreateReqServiceDto(
+                    val expected = AttributeUpdateReqServiceDto(
                         key = dto.key,
                         value = dto.value
                     )
