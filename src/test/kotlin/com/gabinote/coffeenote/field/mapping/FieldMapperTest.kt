@@ -23,6 +23,7 @@ import io.mockk.verify
 import org.bson.types.ObjectId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
+import java.util.*
 
 @ContextConfiguration(classes = [FieldMapperImpl::class, AttributeMapperImpl::class])
 class FieldMapperTest : MockkTestTemplate() {
@@ -184,7 +185,7 @@ class FieldMapperTest : MockkTestTemplate() {
                     )
 
                     val expectedOwnerId = "owner-id"
-                    val expectedExternalId = "field-external-id"
+                    val expectedExternalId = UUID.randomUUID()
 
                     val expected = FieldUpdateReqServiceDto(
                         name = dto.name,
@@ -217,13 +218,13 @@ class FieldMapperTest : MockkTestTemplate() {
                         name = "Updated Field",
                         icon = "updated-icon",
                         attributes = setOf(),
-                        externalId = "external-id",
+                        externalId = UUID.randomUUID(),
                         owner = "owner-id"
                     )
 
                     val existingField = Field(
                         id = null,
-                        externalId = "external-id",
+                        externalId = dto.externalId.toString(),
                         name = "Old Field",
                         icon = "old-icon",
                         type = "TEXT",
@@ -251,7 +252,7 @@ class FieldMapperTest : MockkTestTemplate() {
                     val dto = FieldUpdateReqServiceDto(
                         name = "Updated Field",
                         icon = null,
-                        externalId = "external-id",
+                        externalId = UUID.randomUUID(),
                         owner = "owner-id"
                     )
 
@@ -281,7 +282,7 @@ class FieldMapperTest : MockkTestTemplate() {
                     val dto = FieldUpdateReqServiceDto(
                         name = null,
                         icon = "new-icon",
-                        externalId = "external-id",
+                        externalId = UUID.randomUUID(),
                         owner = "owner-id"
                     )
 
@@ -378,7 +379,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         attributes = setOf(mockk<AttributeUpdateReqControllerDto>()),
                     )
 
-                    val expectedExternalId = "field-external-id"
+                    val expectedExternalId = UUID.randomUUID()
 
                     val expected = FieldUpdateDefaultReqServiceDto(
                         name = dto.name!!,
@@ -405,7 +406,7 @@ class FieldMapperTest : MockkTestTemplate() {
                     val dto = FieldUpdateDefaultReqServiceDto(
                         name = "Updated Default Field",
                         icon = "updated-default-icon",
-                        externalId = "updated-external-id",
+                        externalId = UUID.randomUUID(),
                         attributes = setOf(mockk<AttributeUpdateReqServiceDto>()),
                     )
 
@@ -441,7 +442,7 @@ class FieldMapperTest : MockkTestTemplate() {
                     val dto = FieldUpdateDefaultReqServiceDto(
                         name = "Updated Default Field",
                         icon = null,
-                        externalId = "updated-external-id",
+                        externalId = UUID.randomUUID(),
                         attributes = setOf(),
                     )
 
@@ -477,7 +478,7 @@ class FieldMapperTest : MockkTestTemplate() {
                     val dto = FieldUpdateDefaultReqServiceDto(
                         name = null,
                         icon = "new-default-icon",
-                        externalId = "new-external-id",
+                        externalId = UUID.randomUUID(),
                         attributes = setOf(),
                     )
 

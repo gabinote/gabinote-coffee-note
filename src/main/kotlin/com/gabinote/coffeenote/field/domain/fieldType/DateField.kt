@@ -1,11 +1,8 @@
-package com.gabinote.coffeenote.field.domain.fieldType.type
+package com.gabinote.coffeenote.field.domain.fieldType
 
 import com.gabinote.coffeenote.common.util.time.TimeHelper
-import com.gabinote.coffeenote.field.domain.fieldType.FieldType
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeAttributeKey
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
 
-class DateField : FieldType() {
+object DateField : FieldType() {
     override val key: String
         get() = "DATE"
 

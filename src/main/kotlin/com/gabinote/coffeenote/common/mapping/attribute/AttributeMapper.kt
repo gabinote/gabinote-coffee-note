@@ -27,6 +27,10 @@ interface AttributeMapper {
         dto: AttributeCreateReqServiceDto,
     ): Attribute
 
+    fun toAttribute(
+        dto: AttributeUpdateReqServiceDto,
+    ): Attribute
+
     fun toAttributeCreateReqServiceDto(
         dto: AttributeCreateReqControllerDto,
     ): AttributeCreateReqServiceDto

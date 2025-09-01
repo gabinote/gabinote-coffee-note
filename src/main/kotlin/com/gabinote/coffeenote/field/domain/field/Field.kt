@@ -1,7 +1,6 @@
 package com.gabinote.coffeenote.field.domain.field
 
 import com.gabinote.coffeenote.common.domain.attribute.Attribute
-import com.gabinote.coffeenote.field.domain.fieldType.FieldType
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
@@ -18,13 +17,12 @@ data class Field(
     var attributes: Set<Attribute> = emptySet(),
     var owner: String?,
 ) {
-    fun changeType(newFieldType: FieldType) {
-        this.type = newFieldType.key
-    }
 
     fun changeAttributes(newAttributes: Set<Attribute>) {
         this.attributes = newAttributes
     }
+
+    fun isOwner(owner: String) = this.owner == owner
 
     override fun toString(): String {
         return "Field(id=$id, externalId='$externalId', default=$default, name='$name', icon='$icon', type='$type', attributes=$attributes, owner=$owner)"

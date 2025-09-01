@@ -1,12 +1,8 @@
-package com.gabinote.coffeenote.field.domain.fieldType.type
+package com.gabinote.coffeenote.field.domain.fieldType
 
-import com.gabinote.coffeenote.field.domain.fieldType.FieldType
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeAttributeKey
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
-
-class ToggleField : FieldType() {
+object LongTextField : FieldType() {
     override val key: String
-        get() = "TOGGLE"
+        get() = "LONG_TEXT"
 
     override val fieldTypeAttributeKeys: Set<FieldTypeAttributeKey> = setOf()
 
@@ -16,17 +12,17 @@ class ToggleField : FieldType() {
             results.add(
                 FieldTypeValidationResult(
                     valid = false,
-                    message = "TOGGLE field can has only 1 value"
+                    message = "Long Text field can has only 1 value"
                 )
             )
         }
 
         val value = values.first()
-        if (value != "true" && value != "false") {
+        if (value.length > 10000) {
             results.add(
                 FieldTypeValidationResult(
                     valid = false,
-                    message = "TOGGLE field value must be either 'true' or 'false'"
+                    message = "Long Text field value cannot exceed 10,000 characters"
                 )
             )
         }
@@ -37,5 +33,6 @@ class ToggleField : FieldType() {
 
         return results
     }
+
 
 }

@@ -1,4 +1,3 @@
-import org.gradle.kotlin.dsl.withType
 import org.hidetake.gradle.swagger.generator.GenerateSwaggerUI
 
 plugins {
@@ -113,6 +112,8 @@ kotlin {
 
 tasks.test {
     useJUnitPlatform()
+    systemProperty("mockk.stacktraces.on", "true")
+    systemProperty("mockk.stacktraces.alignment", "left")
     jvmArgs(
         "--add-opens", "java.base/java.time=ALL-UNNAMED",
         "--add-opens", "java.base/java.lang.reflect=ALL-UNNAMED"

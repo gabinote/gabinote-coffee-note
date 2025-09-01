@@ -68,6 +68,23 @@ class AttributeMapperTest : MockkTestTemplate() {
                 }
             }
 
+            describe("AttributeMapper.toAttribute") {
+                context("AttributeUpdateReqServiceDto가 주어지면,") {
+                    val dto = AttributeUpdateReqServiceDto(
+                        key = "body",
+                        value = setOf("heavy", "light")
+                    )
+                    val expected = Attribute(
+                        key = dto.key,
+                        value = dto.value
+                    )
+                    it("Attribute 엔티티로 변환되어야 한다.") {
+                        val result = attributeMapper.toAttribute(dto)
+                        result shouldBe expected
+                    }
+                }
+            }
+
             describe("AttributeMapper.toAttributeCreateReqServiceDto") {
                 context("AttributeCreateReqControllerDto가 주어지면,") {
                     val dto = AttributeCreateReqControllerDto(

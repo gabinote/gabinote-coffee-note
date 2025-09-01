@@ -1,30 +1,35 @@
-package com.gabinote.coffeenote.field.domain.fieldType.type
+package com.gabinote.coffeenote.field.domain.fieldType
 
 import com.gabinote.coffeenote.common.util.time.TimeHelper
-import com.gabinote.coffeenote.field.domain.fieldType.FieldType
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeAttributeKey
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
+import com.gabinote.coffeenote.common.util.type.TypeCheckHelper.isInt
 
-class TimeField : FieldType() {
+object ScoreField : FieldType() {
     override val key: String
-        get() = "TIME"
+        get() = "SCORE"
 
     override val fieldTypeAttributeKeys: Set<FieldTypeAttributeKey> = setOf(
-        // 표시 형식을 12시간제 또는 24시간제로 설정하는 속성
-        // "true" (24시간제) 또는 "false" (12시간제) 값을 가짐
-        // 저장은 HH:mm 형식으로 저장되며, 표시 형식에 따라 변환하여 보여줌
         FieldTypeAttributeKey(
-            key = "24Format",
+            key = "maxScore",
             validationFunc = { value ->
                 when {
                     value.size != 1 -> FieldTypeValidationResult(
                         valid = false,
-                        message = "24Format must have exactly 1 value"
+                        message = "maxScore must have exactly 1 value"
                     )
 
-                    value.first() !in setOf("true", "false") -> FieldTypeValidationResult(
+                    !isInt(value.first()) -> FieldTypeValidationResult(
                         valid = false,
-                        message = "24Format value must be either 'true' or 'false'"
+                        message = "maxScore value must be an integer"
+                    )
+
+                    value.first().toInt() > 10 -> FieldTypeValidationResult(
+                        valid = false,
+                        message = "maxScore value cannot be greater than 10"
+                    )
+
+                    value.first().toInt() < 3 -> FieldTypeValidationResult(
+                        valid = false,
+                        message = "maxScore value cannot be less than 3"
                     )
 
                     else -> FieldTypeValidationResult(valid = true)
@@ -39,18 +44,17 @@ class TimeField : FieldType() {
             results.add(
                 FieldTypeValidationResult(
                     valid = false,
-                    message = "Time field can has only 1 value"
+                    message = "Date field can has only 1 value"
                 )
             )
         }
 
         val value = values.first()
-        // 저장은 HH:mm 형식으로 저장되며, 표시 형식에 따라 변환하여 보여줌
-        if (!TimeHelper.isValidTime(value)) {
+        if (!TimeHelper.isValidLocalDateTime(value)) {
             results.add(
                 FieldTypeValidationResult(
                     valid = false,
-                    message = "Time field value must be in HH:mm format (e.g., 14:48)"
+                    message = "Date field value must be in ISO-8601 format (e.g., 2023-10-05T14:48:00)"
                 )
             )
         }

@@ -5,6 +5,7 @@ import com.gabinote.coffeenote.field.domain.field.Field
 import com.gabinote.coffeenote.field.dto.field.controller.*
 import com.gabinote.coffeenote.field.dto.field.service.*
 import org.mapstruct.*
+import java.util.*
 
 @Mapper(
     componentModel = "spring",
@@ -28,7 +29,7 @@ interface FieldMapper {
     //update req
     fun toUpdateReqServiceDto(
         dto: FieldUpdateReqControllerDto,
-        externalId: String,
+        externalId: UUID,
         owner: String
     ): FieldUpdateReqServiceDto
 
@@ -53,7 +54,7 @@ interface FieldMapper {
     // update default req
     fun toUpdateDefaultReqServiceDto(
         dto: FieldUpdateDefaultReqControllerDto,
-        externalId: String
+        externalId: UUID
     ): FieldUpdateDefaultReqServiceDto
 
     @Mapping(target = "id", ignore = true)

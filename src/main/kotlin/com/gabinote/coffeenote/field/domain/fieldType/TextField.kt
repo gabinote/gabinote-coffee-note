@@ -1,10 +1,6 @@
-package com.gabinote.coffeenote.field.domain.fieldType.type
+package com.gabinote.coffeenote.field.domain.fieldType
 
-import com.gabinote.coffeenote.field.domain.fieldType.FieldType
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeAttributeKey
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
-
-class TextField : FieldType() {
+object TextField : FieldType() {
     override val key: String
         get() = "TEXT"
 

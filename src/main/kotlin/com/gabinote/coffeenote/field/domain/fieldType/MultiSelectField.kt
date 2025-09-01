@@ -1,12 +1,8 @@
-package com.gabinote.coffeenote.field.domain.fieldType.type
+package com.gabinote.coffeenote.field.domain.fieldType
 
-import com.gabinote.coffeenote.field.domain.fieldType.FieldType
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeAttributeKey
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
-
-class DropDownField : FieldType() {
+object MultiSelectField : FieldType() {
     override val key: String
-        get() = "DROP_DOWN"
+        get() = "MULTI_SELECT"
 
     override val fieldTypeAttributeKeys: Set<FieldTypeAttributeKey> = setOf(
         FieldTypeAttributeKey(
@@ -59,17 +55,16 @@ class DropDownField : FieldType() {
 
     override fun valueValidation(values: Set<String>): List<FieldTypeValidationResult> {
         val results = mutableListOf<FieldTypeValidationResult>()
-        if (values.size != 1) {
+        if (values.size > 10) {
             results.add(
                 FieldTypeValidationResult(
                     valid = false,
-                    message = "Dropdown field can has only 1 value"
+                    message = "Multi Select field can have at most 10 values"
                 )
             )
         }
 
-        val value = values.first()
-        if (value.length > 50) {
+        if (values.any { it.length > 50 }) {
             results.add(
                 FieldTypeValidationResult(
                     valid = false,
