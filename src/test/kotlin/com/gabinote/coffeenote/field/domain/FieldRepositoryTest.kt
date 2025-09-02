@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.field.domain
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.field.Field
 import com.gabinote.coffeenote.field.domain.field.FieldRepository
 import com.gabinote.coffeenote.testSupport.testTemplate.RepositoryTestTemplate
 import com.gabinote.coffeenote.testSupport.testUtil.page.TestPageableUtil
@@ -85,18 +86,16 @@ class FieldRepositoryTest : RepositoryTestTemplate() {
             describe("FieldRepository.save(신규)") {
                 context("attributes가 없는 신규 Field 객체가 주어지면") {
                     testDataHelper.setData("/testsets/field/domain/base-field.json")
-                    val newField = com.gabinote.coffeenote.field.domain.field.Field(
+                    val newField = Field(
                         name = "New Field",
                         type = "TEXT",
                         default = false,
                         owner = "cafb043b-f8f6-4a89-bd11-a1780d319980",
-                        externalId = "200062ac-2d7c-49cb-88da-6ebb674708f9",
                         icon = "default"
                     )
                     it("새로운 Field 객체를 저장하고, 저장된 객체를 반환한다") {
                         val savedField = fieldRepository.save(newField)
 
-                        savedField.externalId shouldBe newField.externalId
                         savedField.name shouldBe newField.name
                         savedField.type shouldBe newField.type
                         savedField.default shouldBe newField.default
@@ -108,12 +107,11 @@ class FieldRepositoryTest : RepositoryTestTemplate() {
 
                 context("attributes가 있는 신규 Field 객체가 주어지면") {
                     testDataHelper.setData("/testsets/field/domain/base-field.json")
-                    val newField = com.gabinote.coffeenote.field.domain.field.Field(
+                    val newField = Field(
                         name = "New Field",
                         type = "TEST",
                         default = false,
                         owner = "cafb043b-f8f6-4a89-bd11-a1780d319980",
-                        externalId = "200062ac-2d7c-49cb-88da-6ebb674708f9",
                         icon = "default",
                         attributes = setOf(
                             Attribute(

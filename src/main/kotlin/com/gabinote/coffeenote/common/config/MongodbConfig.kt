@@ -5,6 +5,4 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @EnableMongoAuditing
 @EnableMongoRepositories
-class MongodbConfig {
-
-}
+class MongodbConfig

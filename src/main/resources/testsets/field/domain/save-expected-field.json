@@ -30,19 +30,24 @@
       "attributes": [
         {
           "key": "values",
-          "value": ["Option A", "Option B", "Option C"]
+          "value": [
+            "Option A",
+            "Option B",
+            "Option C"
+          ]
         },
         {
           "key": "allowAddValue",
-          "value": ["true"]
+          "value": [
+            "true"
+          ]
         }
       ],
       "owner": "695b8482-c259-4493-82e2-8988599d21e9"
     },
-
     {
       "_id": "$anyObject()",
-      "externalId": "200062ac-2d7c-49cb-88da-6ebb674708f9",
+      "externalId": "00000000-0000-0000-0000-000000000000",
       "default": false,
       "name": "New Field",
       "icon": "default",

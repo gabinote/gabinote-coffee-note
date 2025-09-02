@@ -1,5 +1,6 @@
 package com.gabinote.coffeenote.field.domain.field
 
+import com.gabinote.coffeenote.common.util.auditor.extId.ExternalId
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
@@ -9,6 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class Field(
     @Id
     val id: ObjectId? = null,
+
+    @ExternalId
     var externalId: String? = null,
     var default: Boolean = false,
     var name: String,
