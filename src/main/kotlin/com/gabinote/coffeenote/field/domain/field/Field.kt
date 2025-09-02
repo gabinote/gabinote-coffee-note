@@ -1,6 +1,6 @@
 package com.gabinote.coffeenote.field.domain.field
 
-import com.gabinote.coffeenote.common.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.attribute.Attribute
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document

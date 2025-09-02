@@ -2,7 +2,7 @@ package com.gabinote.coffeenote.field.dto.field.controller
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
-import com.gabinote.coffeenote.common.dto.attribute.controller.AttributeResControllerDto
+import com.gabinote.coffeenote.field.dto.attribute.controller.AttributeResControllerDto
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class FieldResControllerDto(

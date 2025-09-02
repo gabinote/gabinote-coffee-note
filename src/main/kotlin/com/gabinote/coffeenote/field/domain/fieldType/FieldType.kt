@@ -1,6 +1,6 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
-import com.gabinote.coffeenote.common.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.attribute.Attribute
 
 sealed class FieldType {
 

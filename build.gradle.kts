@@ -137,3 +137,9 @@ openapi3 {
 tasks.withType<GenerateSwaggerUI> {
     dependsOn("openapi3")
 }
+
+swaggerSources {
+    create("api").apply {
+        setInputFile(File("${project.buildDir}/api-spec/openapi3.yaml"))
+    }
+}

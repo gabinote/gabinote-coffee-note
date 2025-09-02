@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ProblemDetail
 import java.net.URI
-import java.util.UUID
+import java.util.*
 
 object ExceptionAdviceHelper {
     fun getRequestId(request: HttpServletRequest): String =
@@ -23,8 +23,7 @@ object ExceptionAdviceHelper {
         problemDetail.title = title
         problemDetail.type = type
         problemDetail.instance = instance
-        problemDetail.properties?.let { it["requestId"] = requestId ?: UUID.randomUUID().toString() }
-        problemDetail.properties?.putAll(additionalProperties)
+        problemDetail.properties = additionalProperties
         return problemDetail
     }
 }

@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
 import org.springframework.stereotype.Component
+import java.util.Locale.getDefault
 
 @Component
 class FieldTypeRegistry(
@@ -22,4 +23,6 @@ class FieldTypeRegistry(
         typeMap[key] ?: throw IllegalArgumentException("Unknown field type key: $key")
 
     fun allTypes(): Collection<FieldType> = typeMap.values
+
+    fun isFieldType(key: String): Boolean = typeMap.containsKey(key.uppercase(getDefault()))
 }

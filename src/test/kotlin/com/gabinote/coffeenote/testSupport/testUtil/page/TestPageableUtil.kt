@@ -17,9 +17,9 @@ object TestPageableUtil {
 
     fun createPageable(
         page: Int = 0,
-        size: Int = 10,
+        size: Int = 20,
         sortKey: String? = "id",
-        sortDirection: Sort.Direction? = Sort.Direction.ASC
+        sortDirection: Sort.Direction? = Sort.Direction.DESC
     ): Pageable {
         return sortKey?.let {
             val sort = Sort.by(sortDirection ?: Sort.Direction.ASC, it)

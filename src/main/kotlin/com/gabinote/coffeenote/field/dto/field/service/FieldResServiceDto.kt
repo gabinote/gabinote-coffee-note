@@ -1,6 +1,6 @@
 package com.gabinote.coffeenote.field.dto.field.service
 
-import com.gabinote.coffeenote.common.dto.attribute.service.AttributeResServiceDto
+import com.gabinote.coffeenote.field.dto.attribute.service.AttributeResServiceDto
 import org.bson.types.ObjectId
 
 data class FieldResServiceDto(

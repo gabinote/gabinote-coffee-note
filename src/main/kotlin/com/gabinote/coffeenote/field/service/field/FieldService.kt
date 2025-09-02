@@ -1,16 +1,18 @@
 package com.gabinote.coffeenote.field.service.field
 
-import com.gabinote.coffeenote.common.domain.attribute.Attribute
-import com.gabinote.coffeenote.common.dto.attribute.service.AttributeCreateReqServiceDto
-import com.gabinote.coffeenote.common.dto.attribute.service.AttributeUpdateReqServiceDto
-import com.gabinote.coffeenote.common.mapping.attribute.AttributeMapper
 import com.gabinote.coffeenote.common.util.exception.service.ResourceNotFound
 import com.gabinote.coffeenote.common.util.exception.service.ResourceNotValid
+import com.gabinote.coffeenote.field.domain.attribute.Attribute
 import com.gabinote.coffeenote.field.domain.field.Field
 import com.gabinote.coffeenote.field.domain.field.FieldRepository
 import com.gabinote.coffeenote.field.domain.fieldType.FieldType
 import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeRegistry
+import com.gabinote.coffeenote.field.dto.attribute.service.AttributeCreateReqServiceDto
+import com.gabinote.coffeenote.field.dto.attribute.service.AttributeUpdateReqServiceDto
 import com.gabinote.coffeenote.field.dto.field.service.*
+import com.gabinote.coffeenote.field.enums.userSearch.FieldAdminSearchScope
+import com.gabinote.coffeenote.field.enums.userSearch.FieldUserSearchScope
+import com.gabinote.coffeenote.field.mapping.attribute.AttributeMapper
 import com.gabinote.coffeenote.field.mapping.field.FieldMapper
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Slice
@@ -51,6 +53,29 @@ class FieldService(
         val data = fieldRepository.findAllBy(pageable)
         return data.map { fieldMapper.toResServiceDto(it) }
     }
+
+    fun getAllByUserScope(
+        pageable: Pageable,
+        scope: FieldUserSearchScope,
+        executor: String
+    ): Slice<FieldResServiceDto> {
+        return when (scope) {
+            FieldUserSearchScope.ALL -> getAllOwnedOrDefault(pageable = pageable, executor = executor)
+            FieldUserSearchScope.OWNED -> getAllOwned(pageable = pageable, executor = executor)
+            FieldUserSearchScope.DEFAULT -> getAllDefault(pageable = pageable)
+        }
+    }
+
+    fun getAllByAdminScope(
+        pageable: Pageable,
+        scope: FieldAdminSearchScope
+    ): Slice<FieldResServiceDto> {
+        return when (scope) {
+            FieldAdminSearchScope.ALL -> getAll(pageable = pageable)
+            FieldAdminSearchScope.DEFAULT -> getAllDefault(pageable = pageable)
+        }
+    }
+
 
     fun getAllDefault(pageable: Pageable): Slice<FieldResServiceDto> {
         val data = fieldRepository.findAllByDefault(pageable = pageable)

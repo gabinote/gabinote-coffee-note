@@ -1,9 +1,9 @@
 package com.gabinote.coffeenote.field.mapping.field
 
-import com.gabinote.coffeenote.common.mapping.attribute.AttributeMapper
 import com.gabinote.coffeenote.field.domain.field.Field
 import com.gabinote.coffeenote.field.dto.field.controller.*
 import com.gabinote.coffeenote.field.dto.field.service.*
+import com.gabinote.coffeenote.field.mapping.attribute.AttributeMapper
 import org.mapstruct.*
 import java.util.*
 

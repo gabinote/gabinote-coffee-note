@@ -1,16 +1,16 @@
 package com.gabinote.coffeenote.field.domain
 
-import com.gabinote.coffeenote.common.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.attribute.Attribute
 import com.gabinote.coffeenote.field.domain.field.FieldRepository
 import com.gabinote.coffeenote.testSupport.testTemplate.RepositoryTestTemplate
 import com.gabinote.coffeenote.testSupport.testUtil.page.TestPageableUtil
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import org.springframework.beans.factory.annotation.Autowired
-import java.util.UUID
+import java.util.*
 
 
-class FieldRepositoryTest : RepositoryTestTemplate(){
+class FieldRepositoryTest : RepositoryTestTemplate() {
 
     @Autowired
     private lateinit var fieldRepository: FieldRepository
@@ -59,14 +59,18 @@ class FieldRepositoryTest : RepositoryTestTemplate(){
                     testDataHelper.setData("/testsets/field/domain/base-field.json")
                     val owner = "695b8482-c259-4493-82e2-8988599d21e9"
                     it("조건에 맞는 Field들을 반환한다") {
-                        val res = fieldRepository.findAllByDefaultOrOwner(true, owner, pageable = TestPageableUtil.createPageable())
+                        val res = fieldRepository.findAllByDefaultOrOwner(
+                            true,
+                            owner,
+                            pageable = TestPageableUtil.createPageable()
+                        )
 
                         res.content.all { it.default || it.owner == owner } shouldBe true
                     }
                 }
             }
 
-            describe("FieldRepository.findAllByOwner"){
+            describe("FieldRepository.findAllByOwner") {
                 context("owner가 주어진 owner인 Field들을 반환한다") {
                     testDataHelper.setData("/testsets/field/domain/base-field.json")
                     val owner = "695b8482-c259-4493-82e2-8988599d21e9"
@@ -78,7 +82,7 @@ class FieldRepositoryTest : RepositoryTestTemplate(){
                 }
             }
 
-            describe("FieldRepository.save(신규)"){
+            describe("FieldRepository.save(신규)") {
                 context("attributes가 없는 신규 Field 객체가 주어지면") {
                     testDataHelper.setData("/testsets/field/domain/base-field.json")
                     val newField = com.gabinote.coffeenote.field.domain.field.Field(
@@ -133,7 +137,7 @@ class FieldRepositoryTest : RepositoryTestTemplate(){
                 }
             }
 
-            describe("FieldRepository.save(수정)"){
+            describe("FieldRepository.save(수정)") {
                 context("기존 Field 객체를 올바르게 수정하면") {
                     testDataHelper.setData("/testsets/field/domain/base-field.json")
                     val existingField = fieldRepository.findByExternalId("8fd344e0-e074-49a4-ae22-ff8653ba02f2")!!

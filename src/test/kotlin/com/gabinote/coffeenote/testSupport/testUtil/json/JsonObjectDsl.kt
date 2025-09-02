@@ -2,8 +2,8 @@ package com.gabinote.api.testSupport.testUtil.json
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.databind.node.NullNode
+import com.fasterxml.jackson.databind.node.ObjectNode
 import com.gabinote.coffeenote.testSupport.testUtil.json.JsonArrayDsl
 
 fun jsonBuilder(block: JsonObjectDsl.() -> Unit): String =
@@ -34,10 +34,13 @@ class JsonObjectDsl {
     }
 
     /** 배열 추가: "tags" arr { +"a"; +"b" } */
-    fun String.arr(block: JsonArrayDsl.() -> Unit) {
+    infix fun String.arr(block: JsonArrayDsl.() -> Unit) {
         val child = JsonArrayDsl().apply(block).build()
         obj.set<JsonNode>(this, child)
     }
+
+    fun obj(block: JsonObjectDsl.() -> Unit): JsonNode =
+        JsonObjectDsl().apply(block).build()
 
     internal fun build(): ObjectNode = obj
 

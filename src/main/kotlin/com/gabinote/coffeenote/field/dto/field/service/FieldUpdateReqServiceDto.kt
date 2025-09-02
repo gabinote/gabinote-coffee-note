@@ -1,6 +1,6 @@
 package com.gabinote.coffeenote.field.dto.field.service
 
-import com.gabinote.coffeenote.common.dto.attribute.service.AttributeUpdateReqServiceDto
+import com.gabinote.coffeenote.field.dto.attribute.service.AttributeUpdateReqServiceDto
 import java.util.*
 
 data class FieldUpdateReqServiceDto(

@@ -16,7 +16,7 @@ object DropDownField : FieldType() {
 
                     value.size < 100 -> FieldTypeValidationResult(
                         valid = false,
-                        message = "Maximum number of options is 250."
+                        message = "Maximum number of options is 100."
                     )
 
                     value.any { it.isEmpty() } -> FieldTypeValidationResult(

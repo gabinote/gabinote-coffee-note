@@ -4,7 +4,11 @@ import com.gabinote.coffeenote.common.domain.base.BaseSortKey
 
 enum class FieldSortKey(
     override val key: String,
-): BaseSortKey{
+) : BaseSortKey {
     NAME("name"),
-    default("default");
+    DEFAULT("default"),
+    TYPE("type"),
+    OWNER("owner"),
+    ID("id"),
+    EXTERNAL_ID("externalId");
 }

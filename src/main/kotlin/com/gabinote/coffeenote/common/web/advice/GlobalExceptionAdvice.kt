@@ -7,6 +7,7 @@ import com.gabinote.gateway.manager.api.common.web.advice.ErrorLog
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.ConstraintViolationException
+import org.springframework.core.convert.ConversionFailedException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ProblemDetail
 import org.springframework.http.ResponseEntity
@@ -23,12 +24,41 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException
 import org.springframework.web.servlet.resource.NoResourceFoundException
 import java.net.URI
-import java.util.*
 
 private val logger = KotlinLogging.logger {}
 
 @RestControllerAdvice
 class GlobalExceptionAdvice {
+    @ExceptionHandler(ConversionFailedException::class)
+    fun handleConversionFailedException(
+        ex: ConversionFailedException,
+        request: HttpServletRequest
+    ): ResponseEntity<ProblemDetail> {
+        val requestId = getRequestId(request)
+        val httpStatus = HttpStatus.BAD_REQUEST
+        val detail = "Failed to convert value '${ex.value}' to type '${ex.targetType?.type}'"
+
+        val log = ErrorLog(
+            requestId = requestId,
+            method = request.method,
+            path = request.requestURI,
+            status = httpStatus,
+            error = "ConversionFailedException",
+            message = ex.message
+        )
+        logger.info { log }
+        logger.debug(ex) { "Conversion failed stacktrace [requestId=$requestId]" }
+
+        val pd = problemDetail(
+            status = httpStatus,
+            title = "Conversion Failed",
+            detail = detail,
+            instance = URI(request.requestURI),
+            requestId = requestId
+        )
+
+        return ResponseEntity.status(httpStatus).body(pd)
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleMethodArgumentNotValidException(
@@ -63,7 +93,7 @@ class GlobalExceptionAdvice {
             additionalProperties = mapOf("errors" to clientDetails)
         )
 
-        return ResponseEntity.status(httpStatus).header("X-Request-Id", requestId).body(pd)
+        return ResponseEntity.status(httpStatus).body(pd)
     }
 
     @ExceptionHandler(BindException::class)
@@ -87,7 +117,7 @@ class GlobalExceptionAdvice {
             error = "BindException",
             message = serverDetails.joinToString("; ")
         )
-        logger.info  { log }
+        logger.info { log }
         logger.debug(ex) { "BindException stacktrace [requestId=$requestId]" }
 
         val pd = problemDetail(
@@ -99,7 +129,7 @@ class GlobalExceptionAdvice {
             additionalProperties = mapOf("errors" to clientDetails)
         )
 
-        return ResponseEntity.status(httpStatus).header("X-Request-Id", requestId).body(pd)
+        return ResponseEntity.status(httpStatus).body(pd)
     }
 
     // --- Missing parameter ---
@@ -120,7 +150,7 @@ class GlobalExceptionAdvice {
             error = "MissingServletRequestParameterException",
             message = detail
         )
-        logger.info  { log }
+        logger.info { log }
         logger.debug(ex) { "Missing parameter stacktrace [requestId=$requestId]" }
 
         val pd = problemDetail(
@@ -131,7 +161,7 @@ class GlobalExceptionAdvice {
             requestId = requestId
         )
 
-        return ResponseEntity.status(httpStatus).header("X-Request-Id", requestId).body(pd)
+        return ResponseEntity.status(httpStatus).body(pd)
     }
 
     // --- Type mismatch ---
@@ -163,7 +193,7 @@ class GlobalExceptionAdvice {
             requestId = requestId
         )
 
-        return ResponseEntity.status(httpStatus).header("X-Request-Id", requestId).body(pd)
+        return ResponseEntity.status(httpStatus).body(pd)
     }
 
     // --- Malformed JSON / 메시지 읽기 실패 ---
@@ -190,7 +220,7 @@ class GlobalExceptionAdvice {
             error = "HttpMessageNotReadableException",
             message = ex.message
         )
-        logger.info  { log }
+        logger.info { log }
         logger.debug(ex) { "Malformed body stacktrace [requestId=$requestId]" }
 
         val pd = problemDetail(
@@ -201,7 +231,7 @@ class GlobalExceptionAdvice {
             requestId = requestId
         )
 
-        return ResponseEntity.status(httpStatus).header("X-Request-Id", requestId).body(pd)
+        return ResponseEntity.status(httpStatus).body(pd)
     }
 
     // --- HTTP method not allowed ---
@@ -235,7 +265,7 @@ class GlobalExceptionAdvice {
             requestId = requestId
         )
 
-        return ResponseEntity.status(httpStatus).header("X-Request-Id", requestId).body(pd)
+        return ResponseEntity.status(httpStatus).body(pd)
     }
 
     // --- Unsupported media type ---
@@ -269,7 +299,7 @@ class GlobalExceptionAdvice {
             requestId = requestId
         )
 
-        return ResponseEntity.status(httpStatus).header("X-Request-Id", requestId).body(pd)
+        return ResponseEntity.status(httpStatus).body(pd)
     }
 
     // --- No resource / handler found ---
@@ -301,7 +331,7 @@ class GlobalExceptionAdvice {
             requestId = requestId
         )
 
-        return ResponseEntity.status(httpStatus).header("X-Request-Id", requestId).body(pd)
+        return ResponseEntity.status(httpStatus).body(pd)
     }
 
     @ExceptionHandler(NoHandlerFoundException::class)
@@ -332,7 +362,7 @@ class GlobalExceptionAdvice {
             requestId = requestId
         )
 
-        return ResponseEntity.status(httpStatus).header("X-Request-Id", requestId).body(pd)
+        return ResponseEntity.status(httpStatus).body(pd)
     }
 
     // --- Method-level validation exceptions (ConstraintViolation) ---
@@ -376,7 +406,7 @@ class GlobalExceptionAdvice {
             additionalProperties = mapOf("errors" to clientDetails)
         )
 
-        return ResponseEntity.status(httpStatus).header("X-Request-Id", requestId).body(pd)
+        return ResponseEntity.status(httpStatus).body(pd)
     }
 
     // --- Fallback: 모든 기타 예외 처리 ---
@@ -407,7 +437,7 @@ class GlobalExceptionAdvice {
             requestId = requestId
         )
 
-        return ResponseEntity.status(httpStatus).header("X-Request-Id", requestId).body(pd)
+        return ResponseEntity.status(httpStatus).body(pd)
     }
 
 }

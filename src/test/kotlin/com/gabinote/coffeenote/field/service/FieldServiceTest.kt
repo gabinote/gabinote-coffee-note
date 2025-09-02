@@ -1,17 +1,17 @@
 package com.gabinote.coffeenote.field.service
 
-import com.gabinote.coffeenote.common.domain.attribute.Attribute
-import com.gabinote.coffeenote.common.dto.attribute.service.AttributeCreateReqServiceDto
-import com.gabinote.coffeenote.common.dto.attribute.service.AttributeUpdateReqServiceDto
-import com.gabinote.coffeenote.common.mapping.attribute.AttributeMapper
 import com.gabinote.coffeenote.common.util.exception.service.ResourceNotFound
 import com.gabinote.coffeenote.common.util.exception.service.ResourceNotValid
+import com.gabinote.coffeenote.field.domain.attribute.Attribute
 import com.gabinote.coffeenote.field.domain.field.Field
 import com.gabinote.coffeenote.field.domain.field.FieldRepository
 import com.gabinote.coffeenote.field.domain.fieldType.FieldType
 import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeRegistry
 import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
+import com.gabinote.coffeenote.field.dto.attribute.service.AttributeCreateReqServiceDto
+import com.gabinote.coffeenote.field.dto.attribute.service.AttributeUpdateReqServiceDto
 import com.gabinote.coffeenote.field.dto.field.service.*
+import com.gabinote.coffeenote.field.mapping.attribute.AttributeMapper
 import com.gabinote.coffeenote.field.mapping.field.FieldMapper
 import com.gabinote.coffeenote.field.service.field.FieldService
 import com.gabinote.coffeenote.testSupport.testTemplate.ServiceTestTemplate
