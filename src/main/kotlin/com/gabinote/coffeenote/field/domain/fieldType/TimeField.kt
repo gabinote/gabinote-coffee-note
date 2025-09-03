@@ -1,7 +1,9 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
 import com.gabinote.coffeenote.common.util.time.TimeHelper
+import com.gabinote.coffeenote.field.domain.attribute.Attribute
 
+// TODO: 구현 완성
 object TimeField : FieldType() {
     override val key: String
         get() = "TIME"
@@ -30,7 +32,7 @@ object TimeField : FieldType() {
         ),
     )
 
-    override fun valueValidation(values: Set<String>): List<FieldTypeValidationResult> {
+    override fun validationValues(values: Set<String>, attributes: Set<Attribute>): List<FieldTypeValidationResult> {
         val results = mutableListOf<FieldTypeValidationResult>()
         if (values.size != 1) {
             results.add(

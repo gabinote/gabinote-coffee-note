@@ -1,5 +1,8 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
+import com.gabinote.coffeenote.field.domain.attribute.Attribute
+
+// TODO: 구현 완성
 object MultiSelectField : FieldType() {
     override val key: String
         get() = "MULTI_SELECT"
@@ -53,7 +56,7 @@ object MultiSelectField : FieldType() {
         )
     )
 
-    override fun valueValidation(values: Set<String>): List<FieldTypeValidationResult> {
+    override fun validationValues(values: Set<String>, attributes: Set<Attribute>): List<FieldTypeValidationResult> {
         val results = mutableListOf<FieldTypeValidationResult>()
         if (values.size > 10) {
             results.add(

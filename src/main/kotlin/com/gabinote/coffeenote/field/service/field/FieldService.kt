@@ -217,7 +217,7 @@ class FieldService(
 
     private fun checkAttributes(fieldType: FieldType, attributes: Set<Attribute>) {
 
-        val res = fieldType.validationKey(attributes)
+        val res = fieldType.validationAttributes(attributes)
         if (res.any { !it.valid }) {
             val errors = res.filter { !it.valid }.map { it.message!! }
             throw ResourceNotValid(name = "Field Attribute", reasons = errors)

@@ -1,12 +1,15 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
+import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
+import com.gabinote.coffeenote.field.domain.attribute.Attribute
+
 object TextField : FieldType() {
     override val key: String
         get() = "TEXT"
 
     override val fieldTypeAttributeKeys: Set<FieldTypeAttributeKey> = setOf()
 
-    override fun valueValidation(values: Set<String>): List<FieldTypeValidationResult> {
+    override fun validationValues(values: Set<String>, attributes: Set<Attribute>): List<FieldTypeValidationResult> {
         val results = mutableListOf<FieldTypeValidationResult>()
         if (values.size != 1) {
             results.add(
@@ -17,7 +20,7 @@ object TextField : FieldType() {
             )
         }
 
-        val value = values.first()
+        val value = values.firstOrEmptyString()
         if (value.length > 100) {
             results.add(
                 FieldTypeValidationResult(

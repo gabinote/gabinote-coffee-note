@@ -609,7 +609,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     // checkAttributes()
                     beforeTest {
-                        every { testType.validationKey(setOf(attribute)) } returns listOf(
+                        every { testType.validationAttributes(setOf(attribute)) } returns listOf(
                             FieldTypeValidationResult(
                                 valid = true
                             )
@@ -648,7 +648,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                             attributeMapper.toAttribute(attributeReq)
                             validDto.type
                             fieldTypeRegistry.fromString("TEST")
-                            testType.validationKey(setOf(attribute))
+                            testType.validationAttributes(setOf(attribute))
                             newField.changeAttributes(setOf(attribute))
                             fieldRepository.save(newField)
                             fieldMapper.toResServiceDto(savedField)
@@ -684,7 +684,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     // checkAttributes()
                     beforeTest {
-                        every { testType.validationKey(setOf(attribute)) } returns listOf(
+                        every { testType.validationAttributes(setOf(attribute)) } returns listOf(
                             FieldTypeValidationResult(
                                 valid = false,
                                 message = "Invalid attribute"
@@ -705,7 +705,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                             attributeMapper.toAttribute(attributeReq)
                             validDto.type
                             fieldTypeRegistry.fromString("TEST")
-                            testType.validationKey(setOf(attribute))
+                            testType.validationAttributes(setOf(attribute))
                         }
                     }
                 }
@@ -756,7 +756,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                     beforeTest {
                         every { existingField.type } returns "TEST"
                         every { fieldTypeRegistry.fromString("TEST") } returns fieldType
-                        every { fieldType.validationKey(setOf(beforeAttribute)) } returns listOf(
+                        every { fieldType.validationAttributes(setOf(beforeAttribute)) } returns listOf(
                             FieldTypeValidationResult(
                                 valid = true
                             )
@@ -790,7 +790,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                             existingField.attributes
                             existingField.type
                             fieldTypeRegistry.fromString("TEST")
-                            fieldType.validationKey(setOf(beforeAttribute))
+                            fieldType.validationAttributes(setOf(beforeAttribute))
                             fieldRepository.save(existingField)
                             fieldMapper.toResServiceDto(savedField)
 
@@ -958,7 +958,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                     beforeTest {
                         every { existingField.type } returns "TEST"
                         every { fieldTypeRegistry.fromString("TEST") } returns fieldType
-                        every { fieldType.validationKey(setOf(beforeAttribute)) } returns listOf(
+                        every { fieldType.validationAttributes(setOf(beforeAttribute)) } returns listOf(
                             FieldTypeValidationResult(
                                 valid = false,
                                 message = "Invalid attribute"
@@ -987,7 +987,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                             existingField.attributes
                             existingField.type
                             fieldTypeRegistry.fromString("TEST")
-                            fieldType.validationKey(setOf(beforeAttribute))
+                            fieldType.validationAttributes(setOf(beforeAttribute))
 
                         }
                     }
@@ -1063,7 +1063,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     // checkAttributes()
                     beforeTest {
-                        every { testType.validationKey(setOf(attribute)) } returns listOf(
+                        every { testType.validationAttributes(setOf(attribute)) } returns listOf(
                             FieldTypeValidationResult(
                                 valid = true
                             )
@@ -1102,7 +1102,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                             attributeMapper.toAttribute(attributeReq)
                             validDto.type
                             fieldTypeRegistry.fromString("TEST")
-                            testType.validationKey(setOf(attribute))
+                            testType.validationAttributes(setOf(attribute))
                             newField.changeAttributes(setOf(attribute))
                             fieldRepository.save(newField)
                             fieldMapper.toResServiceDto(savedField)
@@ -1138,7 +1138,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     // checkAttributes()
                     beforeTest {
-                        every { testType.validationKey(setOf(attribute)) } returns listOf(
+                        every { testType.validationAttributes(setOf(attribute)) } returns listOf(
                             FieldTypeValidationResult(
                                 valid = false,
                                 message = "Invalid attribute"
@@ -1159,7 +1159,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                             attributeMapper.toAttribute(attributeReq)
                             validDto.type
                             fieldTypeRegistry.fromString("TEST")
-                            testType.validationKey(setOf(attribute))
+                            testType.validationAttributes(setOf(attribute))
                         }
                     }
                 }
@@ -1207,7 +1207,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                     beforeTest {
                         every { existingField.type } returns "TEST"
                         every { fieldTypeRegistry.fromString("TEST") } returns fieldType
-                        every { fieldType.validationKey(setOf(beforeAttribute)) } returns listOf(
+                        every { fieldType.validationAttributes(setOf(beforeAttribute)) } returns listOf(
                             FieldTypeValidationResult(
                                 valid = true
                             )
@@ -1240,7 +1240,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                             existingField.attributes
                             existingField.type
                             fieldTypeRegistry.fromString("TEST")
-                            fieldType.validationKey(setOf(beforeAttribute))
+                            fieldType.validationAttributes(setOf(beforeAttribute))
                             fieldRepository.save(existingField)
                             fieldMapper.toResServiceDto(savedField)
 
@@ -1400,7 +1400,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                     beforeTest {
                         every { existingField.type } returns "TEST"
                         every { fieldTypeRegistry.fromString("TEST") } returns fieldType
-                        every { fieldType.validationKey(setOf(beforeAttribute)) } returns listOf(
+                        every { fieldType.validationAttributes(setOf(beforeAttribute)) } returns listOf(
                             FieldTypeValidationResult(
                                 valid = false,
                                 message = "Invalid attribute"
@@ -1428,7 +1428,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                             existingField.attributes
                             existingField.type
                             fieldTypeRegistry.fromString("TEST")
-                            fieldType.validationKey(setOf(beforeAttribute))
+                            fieldType.validationAttributes(setOf(beforeAttribute))
 
                         }
                     }

@@ -6,9 +6,9 @@ sealed class FieldType {
 
     abstract val key: String
     abstract val fieldTypeAttributeKeys: Set<FieldTypeAttributeKey>
-    abstract fun valueValidation(values: Set<String>): List<FieldTypeValidationResult>
+    abstract fun validationValues(values: Set<String>, attributes: Set<Attribute>): List<FieldTypeValidationResult>
 
-    fun validationKey(attributes: Set<Attribute>): List<FieldTypeValidationResult> {
+    fun validationAttributes(attributes: Set<Attribute>): List<FieldTypeValidationResult> {
         val attributeMap = attributes.associateBy { it.key }
         return fieldTypeAttributeKeys.map { fieldTypeAttributeKey ->
             validateAttribute(fieldTypeAttributeKey, attributeMap)

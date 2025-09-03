@@ -1,6 +1,8 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
+import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
 import com.gabinote.coffeenote.common.util.time.TimeHelper
+import com.gabinote.coffeenote.field.domain.attribute.Attribute
 
 object DateField : FieldType() {
     override val key: String
@@ -8,7 +10,7 @@ object DateField : FieldType() {
 
     override val fieldTypeAttributeKeys: Set<FieldTypeAttributeKey> = setOf()
 
-    override fun valueValidation(values: Set<String>): List<FieldTypeValidationResult> {
+    override fun validationValues(values: Set<String>, attributes: Set<Attribute>): List<FieldTypeValidationResult> {
         val results = mutableListOf<FieldTypeValidationResult>()
         if (values.size != 1) {
             results.add(
@@ -19,12 +21,12 @@ object DateField : FieldType() {
             )
         }
 
-        val value = values.first()
-        if (!TimeHelper.isValidLocalDateTime(value)) {
+        val value = values.firstOrEmptyString()
+        if (!TimeHelper.isValidLocalDate(input = value)) {
             results.add(
                 FieldTypeValidationResult(
                     valid = false,
-                    message = "Date field value must be in ISO-8601 format (e.g., 2023-10-05T14:48:00)"
+                    message = "Date field value must be in ISO_LOCAL_DATE format (yyyy-MM-dd)"
                 )
             )
         }

@@ -1,15 +1,12 @@
-package com.gabinote.coffeenote.field.domain
+package com.gabinote.coffeenote.field.domain.field
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
-import com.gabinote.coffeenote.field.domain.field.Field
-import com.gabinote.coffeenote.field.domain.field.FieldRepository
 import com.gabinote.coffeenote.testSupport.testTemplate.RepositoryTestTemplate
 import com.gabinote.coffeenote.testSupport.testUtil.page.TestPageableUtil
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
-
 
 class FieldRepositoryTest : RepositoryTestTemplate() {
 

@@ -1,5 +1,8 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
+import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
+import com.gabinote.coffeenote.field.domain.attribute.Attribute
+
 object DropDownField : FieldType() {
     override val key: String
         get() = "DROP_DOWN"
@@ -29,6 +32,12 @@ object DropDownField : FieldType() {
                         message = "Each option cannot exceed 50 characters."
                     )
 
+                    // 중복된 값이 있는지 검사
+                    value.toSet().size != value.size -> FieldTypeValidationResult(
+                        valid = false,
+                        message = "Options cannot have duplicate values."
+                    )
+
                     else -> FieldTypeValidationResult(valid = true)
                 }
             }
@@ -42,7 +51,7 @@ object DropDownField : FieldType() {
                         message = "AllowAddValue must be a single string"
                     )
 
-                    value.first() !in setOf("true", "false") -> FieldTypeValidationResult(
+                    value.firstOrEmptyString() !in setOf("true", "false") -> FieldTypeValidationResult(
                         valid = false,
                         message = "AllowAddValue must be either 'true' or 'false'"
                     )
@@ -53,7 +62,7 @@ object DropDownField : FieldType() {
         )
     )
 
-    override fun valueValidation(values: Set<String>): List<FieldTypeValidationResult> {
+    override fun validationValues(values: Set<String>, attributes: Set<Attribute>): List<FieldTypeValidationResult> {
         val results = mutableListOf<FieldTypeValidationResult>()
         if (values.size != 1) {
             results.add(
@@ -64,7 +73,7 @@ object DropDownField : FieldType() {
             )
         }
 
-        val value = values.first()
+        val value = values.firstOrEmptyString()
         if (value.length > 50) {
             results.add(
                 FieldTypeValidationResult(
@@ -74,11 +83,48 @@ object DropDownField : FieldType() {
             )
         }
 
+        if (value.isEmpty()) {
+            results.add(
+                FieldTypeValidationResult(
+                    valid = false,
+                    message = "Dropdown field value cannot be empty"
+                )
+            )
+        }
+
         if (results.isEmpty()) {
             results.add(FieldTypeValidationResult(valid = true))
         }
 
+        val allowAddValue = getAllowAddValue(attributes)
+        val allowValues = getValues(attributes)
+
+        if (value !in allowValues && !allowAddValue) {
+            results.add(
+                FieldTypeValidationResult(
+                    valid = false,
+                    message = "The value is not in the list of allowed values, and adding new values is not permitted."
+                )
+            )
+        }
+
         return results
+    }
+
+    private fun getAllowAddValue(attributes: Set<Attribute>): Boolean {
+        val source = attributes.find { it.key == "allowAddValue" }
+        if (source == null || source.value.size != 1) {
+            throw IllegalArgumentException("Invalid allowAddValue attribute")
+        }
+        return source.value.first() == "true"
+    }
+
+    private fun getValues(attributes: Set<Attribute>): Set<String> {
+        val source = attributes.find { it.key == "values" }
+        if (source == null || source.value.size < 2) {
+            throw IllegalArgumentException("Invalid values attribute")
+        }
+        return source.value
     }
 
 }

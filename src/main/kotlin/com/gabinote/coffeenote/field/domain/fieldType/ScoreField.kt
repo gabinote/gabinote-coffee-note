@@ -1,7 +1,8 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
-import com.gabinote.coffeenote.common.util.time.TimeHelper
+import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
 import com.gabinote.coffeenote.common.util.type.TypeCheckHelper.isInt
+import com.gabinote.coffeenote.field.domain.attribute.Attribute
 
 object ScoreField : FieldType() {
     override val key: String
@@ -11,23 +12,26 @@ object ScoreField : FieldType() {
         FieldTypeAttributeKey(
             key = "maxScore",
             validationFunc = { value ->
+
+                val valueIsInt = isInt(value.firstOrEmptyString())
+
                 when {
                     value.size != 1 -> FieldTypeValidationResult(
                         valid = false,
                         message = "maxScore must have exactly 1 value"
                     )
 
-                    !isInt(value.first()) -> FieldTypeValidationResult(
+                    !valueIsInt -> FieldTypeValidationResult(
                         valid = false,
                         message = "maxScore value must be an integer"
                     )
 
-                    value.first().toInt() > 10 -> FieldTypeValidationResult(
+                    valueIsInt && value.firstOrEmptyString().toInt() > 10 -> FieldTypeValidationResult(
                         valid = false,
                         message = "maxScore value cannot be greater than 10"
                     )
 
-                    value.first().toInt() < 3 -> FieldTypeValidationResult(
+                    valueIsInt && value.firstOrEmptyString().toInt() < 3 -> FieldTypeValidationResult(
                         valid = false,
                         message = "maxScore value cannot be less than 3"
                     )
@@ -38,7 +42,7 @@ object ScoreField : FieldType() {
         ),
     )
 
-    override fun valueValidation(values: Set<String>): List<FieldTypeValidationResult> {
+    override fun validationValues(values: Set<String>, attributes: Set<Attribute>): List<FieldTypeValidationResult> {
         val results = mutableListOf<FieldTypeValidationResult>()
         if (values.size != 1) {
             results.add(
@@ -49,12 +53,32 @@ object ScoreField : FieldType() {
             )
         }
 
-        val value = values.first()
-        if (!TimeHelper.isValidLocalDateTime(value)) {
+        val value = values.firstOrEmptyString()
+        val valueIsInt = isInt(value)
+
+        if (!valueIsInt) {
             results.add(
                 FieldTypeValidationResult(
                     valid = false,
-                    message = "Date field value must be in ISO-8601 format (e.g., 2023-10-05T14:48:00)"
+                    message = "Date field value must be an integer"
+                )
+            )
+        }
+        val maxScore = getMaxScore(attributes)
+        if (valueIsInt && value.toInt() > maxScore) {
+            results.add(
+                FieldTypeValidationResult(
+                    valid = false,
+                    message = "Date field value cannot be greater than $maxScore"
+                )
+            )
+        }
+
+        if (valueIsInt && value.toInt() < 1) {
+            results.add(
+                FieldTypeValidationResult(
+                    valid = false,
+                    message = "Date field value cannot be less than 1"
                 )
             )
         }
@@ -66,4 +90,18 @@ object ScoreField : FieldType() {
         return results
     }
 
+    private fun getMaxScore(attributes: Set<Attribute>): Int {
+        val source = attributes.firstOrNull { it.key == "maxScore" }?.value
+
+        if (source == null || source.size != 1) {
+            throw IllegalArgumentException("Invalid maxScore attribute")
+        }
+
+        if (!isInt(source.first())) {
+            throw IllegalArgumentException("Invalid maxScore attribute value")
+        }
+
+        return source.first().toInt()
+
+    }
 }
