@@ -14,7 +14,7 @@ object DropDownField : FieldType() {
                         message = "At least two options are required. if you want to have only one option, use a Toggle field instead."
                     )
 
-                    value.size < 100 -> FieldTypeValidationResult(
+                    value.size > 100 -> FieldTypeValidationResult(
                         valid = false,
                         message = "Maximum number of options is 100."
                     )
@@ -26,7 +26,7 @@ object DropDownField : FieldType() {
 
                     value.any { it.length > 50 } -> FieldTypeValidationResult(
                         valid = false,
-                        message = "Options cannot be empty."
+                        message = "Each option cannot exceed 50 characters."
                     )
 
                     else -> FieldTypeValidationResult(valid = true)

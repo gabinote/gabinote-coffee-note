@@ -1,10 +1,11 @@
 package com.gabinote.coffeenote.common.util.context
 
 import org.springframework.context.annotation.Scope
+import org.springframework.context.annotation.ScopedProxyMode
 import org.springframework.stereotype.Component
 
 @Component
-@Scope("request")
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 class UserContext(
     private var _uid: String? = null,
     var roles: List<String> = emptyList()

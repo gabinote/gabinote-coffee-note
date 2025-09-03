@@ -1,0 +1,28 @@
+{
+  "fields": [
+    {
+      "_id": {
+        "$oid": "68ad627224a7d36283fa5ef2"
+      },
+      "externalId": "8fd344e0-e074-49a4-ae22-ff8653ba02f2",
+      "default": false,
+      "name": "user field to delete",
+      "icon": "delete_icon",
+      "type": "TEXT",
+      "attributes": [],
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e"
+    },
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea39"
+      },
+      "externalId": "3fcdd722-93ca-4693-9bef-496616dd6af3",
+      "default": true,
+      "name": "default field",
+      "icon": "default_icon",
+      "type": "TEXT",
+      "attributes": [],
+      "owner": null
+    }
+  ]
+}

@@ -5,9 +5,10 @@ import com.gabinote.coffeenote.common.util.exception.controller.GatewayAuthFaile
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
+import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 
-
+@Order(2)
 @Aspect
 @Component
 class NeedAuthAspect(

@@ -9,7 +9,6 @@ import org.bson.types.ObjectId
 import org.springframework.boot.test.context.TestComponent
 import org.springframework.core.io.ClassPathResource
 import org.springframework.data.mongodb.core.MongoTemplate
-import org.springframework.stereotype.Component
 
 private val logger = KotlinLogging.logger {}
 
@@ -17,7 +16,7 @@ private val logger = KotlinLogging.logger {}
 class TestDataHelper(
     private val mongoTemplate: MongoTemplate,
     private val objectMapper: ObjectMapper
-){
+) {
     fun setData(jsonFile: String) {
         val input = ClassPathResource(jsonFile).inputStream
         val root = objectMapper.readTree(input)
@@ -80,9 +79,28 @@ class TestDataHelper(
                     actVal != null && matchNode(expVal, actVal)
                 }
             }
-            // 배열이면 각 원소 비교
+            // 모든 배열은 순서 무관하게 비교
             expected.isArray -> {
-                expected.zip(actual).all { (exp, act) -> matchNode(exp, act) }
+                // 배열 크기가 같아야 함
+                if (expected.size() != actual.size()) return false
+
+                // 각 expected 요소에 대해 매칭되는 actual 요소가 있는지 확인
+                val actualList = actual.toList().toMutableList()
+
+                expected.all { expElement ->
+                    // 매칭되는 요소 찾기
+                    val matchIndex = actualList.indexOfFirst { actElement ->
+                        matchNode(expElement, actElement)
+                    }
+
+                    // 매칭되는 요소가 있으면 해당 요소 제거 (중복 매칭 방지)
+                    if (matchIndex >= 0) {
+                        actualList.removeAt(matchIndex)
+                        true
+                    } else {
+                        false
+                    }
+                }
             }
             // 패턴 문자열 검사
             expected.isTextual -> matchPattern(expected.asText(), actual)
@@ -97,11 +115,13 @@ class TestDataHelper(
                 val size = expected.removePrefix("\$anyObject(").removeSuffix(")").toInt()
                 actual.isObject && actual.size() == size
             }
+
             expected == "\$anyString()" -> actual.isTextual
             expected.startsWith("\$anyString(/") -> {
                 val regex = expected.removePrefix("\$anyString(/").removeSuffix("/)").toRegex()
                 actual.isTextual && regex.matches(actual.asText())
             }
+
             else -> expected == actual.asText()
         }
     }

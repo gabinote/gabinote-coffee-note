@@ -1,0 +1,49 @@
+{
+  "fields": [
+    {
+      "_id": "$anyObject()",
+      "externalId": "8fd344e0-e074-49a4-ae22-ff8653ba02f2",
+      "default": false,
+      "name": "other field",
+      "icon": "icon_b",
+      "type": "TEXT",
+      "attributes": [],
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e"
+    },
+    {
+      "_id": "$anyObject()",
+      "externalId": "3fcdd722-93ca-4693-9bef-496616dd6af3",
+      "default": true,
+      "name": "this is default",
+      "icon": "icon_a",
+      "type": "TEXT",
+      "attributes": [],
+      "owner": null
+    },
+    {
+      "_id": "$anyObject()",
+      "externalId": "088eb9c8-a340-4c98-9c64-a869d7e1a2ac",
+      "default": false,
+      "name": "updated field",
+      "icon": "updated_icon",
+      "type": "DROP_DOWN",
+      "attributes": [
+        {
+          "key": "values",
+          "value": [
+            "Option 가",
+            "Option 나",
+            "Option 다"
+          ]
+        },
+        {
+          "key": "allowAddValue",
+          "value": [
+            "false"
+          ]
+        }
+      ],
+      "owner": "695b8482-c259-4493-82e2-8988599d21e9"
+    }
+  ]
+}

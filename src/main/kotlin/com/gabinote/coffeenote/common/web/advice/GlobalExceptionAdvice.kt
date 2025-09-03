@@ -7,6 +7,7 @@ import com.gabinote.gateway.manager.api.common.web.advice.ErrorLog
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.ConstraintViolationException
+import org.springframework.core.annotation.Order
 import org.springframework.core.convert.ConversionFailedException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ProblemDetail
@@ -27,6 +28,7 @@ import java.net.URI
 
 private val logger = KotlinLogging.logger {}
 
+@Order(100)
 @RestControllerAdvice
 class GlobalExceptionAdvice {
     @ExceptionHandler(ConversionFailedException::class)

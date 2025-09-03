@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea39"
+      },
+      "externalId": "3fcdd722-93ca-4693-9bef-496616dd6af3",
+      "default": true,
+      "name": "default field",
+      "icon": "default_icon",
+      "type": "TEXT",
+      "attributes": [],
+      "owner": null
+    }
+  ]
+}
