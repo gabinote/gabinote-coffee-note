@@ -552,7 +552,7 @@ class FieldApiControllerTest() : WebMvcTestTemplate() {
                     val validDto = FieldCreateReqControllerDto(
                         name = "50자를 넘지 않는 이름",
                         icon = "50자를 넘지 않는 아이콘",
-                        type = "TEXT",
+                        type = "SHORT_TEXT",
                         attributes = setOf(
                             AttributeCreateReqControllerDto(
                                 key = "50자 넘지 않는 키",

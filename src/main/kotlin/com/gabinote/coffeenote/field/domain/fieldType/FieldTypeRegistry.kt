@@ -12,7 +12,7 @@ class FieldTypeRegistry(
         MultiSelectField,
         NumberField,
         ScoreField,
-        TextField,
+        ShortTextField,
         TimeField,
         ToggleField,
         ImageField,

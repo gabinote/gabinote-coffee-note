@@ -8,15 +8,15 @@ import io.kotest.data.row
 import io.kotest.data.table
 import io.kotest.matchers.shouldBe
 
-class TextFieldTypeTest : MockkTestTemplate() {
+class ShortTextFieldTypeTest : MockkTestTemplate() {
     init {
-        describe("[Field] TextFieldType Test") {
+        describe("[Field] ShortTextFieldType Test") {
             describe("validation attributes") {
                 context("올바른 attributes가 주어지면") {
                     val validAttributes = setOf<Attribute>()
 
                     it("Validation에 성공한다.") {
-                        val res = TextField.validationAttributes(validAttributes)
+                        val res = ShortTextField.validationAttributes(validAttributes)
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -25,7 +25,7 @@ class TextFieldTypeTest : MockkTestTemplate() {
                     val invalidAttributes = setOf(Attribute("key", setOf("value")))
 
                     it("Validation에 실패한다.") {
-                        val res = TextField.validationAttributes(invalidAttributes)
+                        val res = ShortTextField.validationAttributes(invalidAttributes)
                         res.all { !it.valid } shouldBe true
                     }
                 }
@@ -36,7 +36,7 @@ class TextFieldTypeTest : MockkTestTemplate() {
                     val validValue = "this is text field value"
 
                     it("Validation에 성공한다.") {
-                        val res = TextField.validationValues(values = setOf(validValue), attributes = setOf())
+                        val res = ShortTextField.validationValues(values = setOf(validValue), attributes = setOf())
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -55,7 +55,7 @@ class TextFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidValue, reason ->
                         context(reason) {
                             it("Validation에 실패한다.") {
-                                val res = TextField.validationValues(values = invalidValue, attributes = setOf())
+                                val res = ShortTextField.validationValues(values = invalidValue, attributes = setOf())
                                 res.all { !it.valid } shouldBe true
                             }
                         }

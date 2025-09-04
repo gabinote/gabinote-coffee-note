@@ -1,42 +1,10 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
-import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
-import com.gabinote.coffeenote.field.domain.attribute.Attribute
-
-object LongTextField : FieldType() {
+object LongTextField : TextField() {
     override val key: String
         get() = "LONG_TEXT"
 
-    override val fieldTypeAttributeKeys: Set<FieldTypeAttributeKey> = setOf()
-
-    override fun validationValues(values: Set<String>, attributes: Set<Attribute>): List<FieldTypeValidationResult> {
-        val results = mutableListOf<FieldTypeValidationResult>()
-        if (values.size != 1) {
-            results.add(
-                FieldTypeValidationResult(
-                    valid = false,
-                    message = "Long Text field can has only 1 value"
-                )
-            )
-        }
-
-        val value = values.firstOrEmptyString()
-
-        if (value.length > 10000) {
-            results.add(
-                FieldTypeValidationResult(
-                    valid = false,
-                    message = "Long Text field value cannot exceed 10,000 characters"
-                )
-            )
-        }
-
-        if (results.isEmpty()) {
-            results.add(FieldTypeValidationResult(valid = true))
-        }
-
-        return results
-    }
-
+    override val maxLength: Int = 10000
+    override val messageTypeName: String = "Long Text"
 
 }
