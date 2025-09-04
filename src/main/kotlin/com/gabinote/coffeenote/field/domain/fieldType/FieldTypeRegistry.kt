@@ -15,6 +15,7 @@ class FieldTypeRegistry(
         TextField,
         TimeField,
         ToggleField,
+        ImageField,
     )
 ) {
     private val typeMap: Map<String, FieldType> = fieldTypes.associateBy { it.key }

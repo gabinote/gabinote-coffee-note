@@ -2,7 +2,6 @@ package com.gabinote.coffeenote.field.domain.fieldType
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
 
-// TODO: 구현 완성
 object MultiSelectField : FieldType() {
     override val key: String
         get() = "MULTI_SELECT"
@@ -17,7 +16,7 @@ object MultiSelectField : FieldType() {
                         message = "At least two options are required. if you want to have only one option, use a Toggle field instead."
                     )
 
-                    value.size < 100 -> FieldTypeValidationResult(
+                    value.size > 100 -> FieldTypeValidationResult(
                         valid = false,
                         message = "Maximum number of options is 250."
                     )
@@ -58,11 +57,11 @@ object MultiSelectField : FieldType() {
 
     override fun validationValues(values: Set<String>, attributes: Set<Attribute>): List<FieldTypeValidationResult> {
         val results = mutableListOf<FieldTypeValidationResult>()
-        if (values.size > 10) {
+        if (values.size > 30) {
             results.add(
                 FieldTypeValidationResult(
                     valid = false,
-                    message = "Multi Select field can have at most 10 values"
+                    message = "Multi Select field can have at most 30 values"
                 )
             )
         }
@@ -71,7 +70,28 @@ object MultiSelectField : FieldType() {
             results.add(
                 FieldTypeValidationResult(
                     valid = false,
-                    message = "Dropdown field value cannot exceed 50 characters"
+                    message = "Multi Select field value cannot exceed 50 characters"
+                )
+            )
+        }
+
+        if (values.any { it.isBlank() }) {
+            results.add(
+                FieldTypeValidationResult(
+                    valid = false,
+                    message = "Multi Select field value cannot be empty"
+                )
+            )
+        }
+
+        val allowAddValue = getAllowAddValue(attributes)
+        val allowValues = getValues(attributes)
+
+        if (!allowAddValue && values.any { it !in allowValues }) {
+            results.add(
+                FieldTypeValidationResult(
+                    valid = false,
+                    message = "The value is not in the list of allowed values, and adding new values is not permitted."
                 )
             )
         }
@@ -83,4 +103,19 @@ object MultiSelectField : FieldType() {
         return results
     }
 
+    private fun getAllowAddValue(attributes: Set<Attribute>): Boolean {
+        val source = attributes.find { it.key == "allowAddValue" }
+        if (source == null || source.value.size != 1) {
+            throw IllegalArgumentException("Invalid allowAddValue attribute")
+        }
+        return source.value.first() == "true"
+    }
+
+    private fun getValues(attributes: Set<Attribute>): Set<String> {
+        val source = attributes.find { it.key == "values" }
+        if (source == null || source.value.size < 2) {
+            throw IllegalArgumentException("Invalid values attribute")
+        }
+        return source.value
+    }
 }

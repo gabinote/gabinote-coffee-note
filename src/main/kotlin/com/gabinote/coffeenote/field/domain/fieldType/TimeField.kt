@@ -1,9 +1,9 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
+import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
 import com.gabinote.coffeenote.common.util.time.TimeHelper
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
 
-// TODO: 구현 완성
 object TimeField : FieldType() {
     override val key: String
         get() = "TIME"
@@ -21,7 +21,7 @@ object TimeField : FieldType() {
                         message = "24Format must have exactly 1 value"
                     )
 
-                    value.first() !in setOf("true", "false") -> FieldTypeValidationResult(
+                    value.firstOrEmptyString() !in setOf("true", "false") -> FieldTypeValidationResult(
                         valid = false,
                         message = "24Format value must be either 'true' or 'false'"
                     )
@@ -43,7 +43,7 @@ object TimeField : FieldType() {
             )
         }
 
-        val value = values.first()
+        val value = values.firstOrEmptyString()
         // 저장은 HH:mm 형식으로 저장되며, 표시 형식에 따라 변환하여 보여줌
         if (!TimeHelper.isValidTime(value)) {
             results.add(
