@@ -28,9 +28,21 @@ import java.net.URI
 
 private val logger = KotlinLogging.logger {}
 
+/**
+ * 글로벌 예외 처리를 위한 어드바이스 클래스
+ * Spring MVC에서 발생하는 다양한 예외를 처리하여 일관된 응답 포맷 제공
+ * 모든 컨트롤러에 적용되는 마지막 예외 처리 계층
+ * @author 황준서
+ */
 @Order(100)
 @RestControllerAdvice
 class GlobalExceptionAdvice {
+    /**
+     * 변환 실패 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(ConversionFailedException::class)
     fun handleConversionFailedException(
         ex: ConversionFailedException,
@@ -62,6 +74,12 @@ class GlobalExceptionAdvice {
         return ResponseEntity.status(httpStatus).body(pd)
     }
 
+    /**
+     * 메서드 인자 유효성 검사 실패 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleMethodArgumentNotValidException(
         ex: MethodArgumentNotValidException,
@@ -98,6 +116,12 @@ class GlobalExceptionAdvice {
         return ResponseEntity.status(httpStatus).body(pd)
     }
 
+    /**
+     * 바인딩 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(BindException::class)
     fun handleBindException(
         ex: BindException,
@@ -135,6 +159,12 @@ class GlobalExceptionAdvice {
     }
 
     // --- Missing parameter ---
+    /**
+     * 필수 파라미터 누락 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(MissingServletRequestParameterException::class)
     fun handleMissingServletRequestParameterException(
         ex: MissingServletRequestParameterException,
@@ -167,6 +197,12 @@ class GlobalExceptionAdvice {
     }
 
     // --- Type mismatch ---
+    /**
+     * 메서드 인자 타입 불일치 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(MethodArgumentTypeMismatchException::class)
     fun handleMethodArgumentTypeMismatchException(
         ex: MethodArgumentTypeMismatchException,
@@ -199,6 +235,12 @@ class GlobalExceptionAdvice {
     }
 
     // --- Malformed JSON / 메시지 읽기 실패 ---
+    /**
+     * 잘못된 JSON 형식 또는 메시지 읽기 실패 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(HttpMessageNotReadableException::class)
     fun handleHttpMessageNotReadableException(
         ex: HttpMessageNotReadableException,
@@ -237,6 +279,12 @@ class GlobalExceptionAdvice {
     }
 
     // --- HTTP method not allowed ---
+    /**
+     * 지원하지 않는 HTTP 메서드 사용 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(HttpRequestMethodNotSupportedException::class)
     fun handleHttpRequestMethodNotSupportedException(
         ex: HttpRequestMethodNotSupportedException,
@@ -271,6 +319,12 @@ class GlobalExceptionAdvice {
     }
 
     // --- Unsupported media type ---
+    /**
+     * 지원하지 않는 미디어 타입 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(HttpMediaTypeNotSupportedException::class)
     fun handleHttpMediaTypeNotSupportedException(
         ex: HttpMediaTypeNotSupportedException,
@@ -305,6 +359,12 @@ class GlobalExceptionAdvice {
     }
 
     // --- No resource / handler found ---
+    /**
+     * 리소스 또는 핸들러를 찾을 수 없는 경우 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(NoResourceFoundException::class)
     fun handleNoResourceFoundException(
         ex: NoResourceFoundException,
@@ -336,6 +396,12 @@ class GlobalExceptionAdvice {
         return ResponseEntity.status(httpStatus).body(pd)
     }
 
+    /**
+     * 핸들러를 찾을 수 없는 경우 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(NoHandlerFoundException::class)
     fun handleNoHandlerFoundException(
         ex: NoHandlerFoundException,
@@ -368,6 +434,12 @@ class GlobalExceptionAdvice {
     }
 
     // --- Method-level validation exceptions (ConstraintViolation) ---
+    /**
+     * 메서드 수준 유효성 검사 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(HandlerMethodValidationException::class, ConstraintViolationException::class)
     fun handleValidationExceptions(
         ex: Exception,
@@ -412,6 +484,12 @@ class GlobalExceptionAdvice {
     }
 
     // --- Fallback: 모든 기타 예외 처리 ---
+    /**
+     * 모든 기타 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(Exception::class)
     fun handleException(
         ex: Exception,

@@ -17,10 +17,21 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 
 private val logger = KotlinLogging.logger {}
 
+/**
+ * 서비스 계층 예외 처리를 위한 어드바이스 클래스
+ * 서비스 계층에서 발생하는 비즈니스 예외를 처리
+ * @author 황준서
+ */
 @Order(1)
 @RestControllerAdvice
 class ServiceExceptionAdvice {
 
+    /**
+     * 리소스를 찾을 수 없는 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(ResourceNotFound::class)
     fun handleResourceNotFound(
         ex: ResourceNotFound,
@@ -47,6 +58,12 @@ class ServiceExceptionAdvice {
         return ResponseEntity(problemDetail, status)
     }
 
+    /**
+     * 리소스 중복 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(ResourceDuplicate::class)
     fun handleResourceDuplicate(
         ex: ResourceDuplicate,
@@ -72,6 +89,12 @@ class ServiceExceptionAdvice {
         return ResponseEntity(problemDetail, status)
     }
 
+    /**
+     * 리소스 유효성 검사 실패 예외 처리
+     * @param ex 발생한 예외
+     * @param request HTTP 요청
+     * @return 오류 응답
+     */
     @ExceptionHandler(ResourceNotValid::class)
     fun handleResourceNotValid(
         ex: ResourceNotValid,

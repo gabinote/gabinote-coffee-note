@@ -3,8 +3,19 @@ package com.gabinote.coffeenote.field.domain.fieldType
 import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
 
+/**
+ * 목록 선택 필드 타입들의 기본 추상 클래스
+ * 드롭다운, 다중 선택 등 목록에서 선택하는 필드들의 공통 기능 제공
+ * @author 황준서 (hzser123@gmail.com)
+ * @since 2025-09-08
+ */
 abstract class ListSelectField : FieldType() {
 
+    /**
+     * 목록 선택 필드가 지원하는 속성 키 집합
+     * - values: 선택 가능한 옵션 목록
+     * - allowAddValue: 사용자 정의 값 추가 허용 여부
+     */
     override val fieldTypeAttributeKeys: Set<FieldTypeAttributeKey> = setOf(
         FieldTypeAttributeKey(
             key = "values",
@@ -60,6 +71,12 @@ abstract class ListSelectField : FieldType() {
         )
     )
 
+    /**
+     * 사용자 정의 값 추가 허용 여부를 속성에서 추출
+     * @param attributes 필드 속성 집합
+     * @return 사용자 정의 값 추가 허용 여부
+     * @throws IllegalArgumentException 유효하지 않은 allowAddValue 속성인 경우
+     */
     fun getAllowAddValue(attributes: Set<Attribute>): Boolean {
         val source = attributes.find { it.key == "allowAddValue" }
         if (source == null || source.value.size != 1) {
@@ -68,6 +85,12 @@ abstract class ListSelectField : FieldType() {
         return source.value.first() == "true"
     }
 
+    /**
+     * 선택 가능한 값 목록을 속성에서 추출
+     * @param attributes 필드 속성 집합
+     * @return 선택 가능한 값 집합
+     * @throws IllegalArgumentException 유효하지 않은 values 속성인 경우
+     */
     fun getValues(attributes: Set<Attribute>): Set<String> {
         val source = attributes.find { it.key == "values" }
         if (source == null || source.value.size < 2) {

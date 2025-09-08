@@ -3,7 +3,16 @@ package com.gabinote.coffeenote.field.domain.fieldType
 import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
 
+/**
+ * 드롭다운 선택 필드 타입을 구현하는 싱글톤 객체
+ * 단일 항목을 선택할 수 있는 드롭다운 목록 필드
+ * @author 황준서 (hzser123@gmail.com)
+ * @since 2025-09-08
+ */
 object DropDownField : ListSelectField() {
+    /**
+     * 드롭다운 필드 타입의 고유 키
+     */
     override val key: String
         get() = "DROP_DOWN"
 
@@ -62,6 +71,12 @@ object DropDownField : ListSelectField() {
 //        )
 //    )
 
+    /**
+     * 드롭다운 필드 값의 유효성 검사를 수행
+     * @param values 검사할 값 집합
+     * @param attributes 필드 속성 집합
+     * @return 유효성 검사 결과 목록
+     */
     override fun validationValues(values: Set<String>, attributes: Set<Attribute>): List<FieldTypeValidationResult> {
         val results = mutableListOf<FieldTypeValidationResult>()
 
@@ -111,6 +126,5 @@ object DropDownField : ListSelectField() {
 
         return results
     }
-
 
 }

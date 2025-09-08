@@ -3,10 +3,23 @@ package com.gabinote.coffeenote.field.domain.fieldType
 import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
 
+/**
+ * 숫자 입력 필드 타입을 구현하는 싱글톤 객체
+ * 단위 속성을 지원하는 숫자 값을 처리
+ * @author 황준서 (hzser123@gmail.com)
+ * @since 2025-09-08
+ */
 object NumberField : FieldType() {
+    /**
+     * 숫자 필드 타입의 고유 키
+     */
     override val key: String
         get() = "NUMBER"
 
+    /**
+     * 숫자 필드가 지원하는 속성 키 집합
+     * - unit: 숫자 값의 단위 (예: kg, cm 등)
+     */
     override val fieldTypeAttributeKeys: Set<FieldTypeAttributeKey> = setOf(
         FieldTypeAttributeKey(
             key = "unit",
@@ -33,6 +46,12 @@ object NumberField : FieldType() {
         )
     )
 
+    /**
+     * 숫자 필드 값의 유효성 검사를 수행
+     * @param values 검사할 값 집합
+     * @param attributes 필드 속성 집합
+     * @return 유효성 검사 결과 목록
+     */
     override fun validationValues(values: Set<String>, attributes: Set<Attribute>): List<FieldTypeValidationResult> {
         val results = mutableListOf<FieldTypeValidationResult>()
         if (values.size != 1) {
