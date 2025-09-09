@@ -17,6 +17,12 @@ sealed class FieldType {
     abstract val key: String
 
     /**
+     * FieldType이 리스트 보기에서 표시될 수 있는지 여부
+     * true: 표시 가능, false: 표시 불가
+     */
+    abstract val canDisplay: Boolean
+
+    /**
      * FieldType이 가질 수 있는 Attribute 키들
      * 각 필드 타입별로 지원하는 속성 키 집합
      */

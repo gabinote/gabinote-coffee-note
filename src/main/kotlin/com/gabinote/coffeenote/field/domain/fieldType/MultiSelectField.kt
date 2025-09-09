@@ -12,8 +12,13 @@ object MultiSelectField : ListSelectField() {
     /**
      * 다중 선택 필드 타입의 고유 키
      */
-    override val key: String
-        get() = "MULTI_SELECT"
+    override val key: String = "MULTI_SELECT"
+
+    /**
+     * 다중 선택 필드가 리스트 보기에서 표시될 수 있는지 여부
+     * true: 표시 가능, false: 표시 불가
+     */
+    override val canDisplay: Boolean = true
 
     /**
      * 다중 선택 필드 값의 유효성 검사를 수행

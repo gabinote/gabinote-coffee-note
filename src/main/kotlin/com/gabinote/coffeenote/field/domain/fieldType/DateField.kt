@@ -16,6 +16,12 @@ object DateField : FieldType() {
     override val key: String = "DATE"
 
     /**
+     * 날짜 필드가 리스트 보기에서 표시될 수 있는지 여부
+     * true: 표시 가능, false: 표시 불가
+     */
+    override val canDisplay: Boolean = true
+
+    /**
      * 날짜 필드가 지원하는 속성 키 집합
      */
     override val fieldTypeAttributeKeys: Set<FieldTypeAttributeKey> = setOf()

@@ -13,9 +13,14 @@ object NumberField : FieldType() {
     /**
      * 숫자 필드 타입의 고유 키
      */
-    override val key: String
-        get() = "NUMBER"
+    override val key: String = "NUMBER"
 
+    /**
+     * 숫자 필드가 리스트 보기에서 표시될 수 있는지 여부
+     * true: 표시 가능, false: 표시 불가
+     */
+    override val canDisplay: Boolean = true
+    
     /**
      * 숫자 필드가 지원하는 속성 키 집합
      * - unit: 숫자 값의 단위 (예: kg, cm 등)

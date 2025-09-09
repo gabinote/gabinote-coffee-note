@@ -13,6 +13,12 @@ object LongTextField : TextField() {
     override val key: String = "LONG_TEXT"
 
     /**
+     * 긴 텍스트 필드가 리스트 보기에서 표시될 수 있는지 여부
+     * true: 표시 가능, false: 표시 불가
+     */
+    override val canDisplay: Boolean = false
+
+    /**
      * 긴 텍스트 필드의 최대 길이 (10000자)
      */
     override val maxLength: Int = 10000

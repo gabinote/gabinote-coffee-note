@@ -10,8 +10,13 @@ object ShortTextField : TextField() {
     /**
      * 짧은 텍스트 필드 타입의 고유 키
      */
-    override val key: String
-        get() = "SHORT_TEXT"
+    override val key: String = "SHORT_TEXT"
+
+    /**
+     * 짧은 텍스트 필드가 리스트 보기에서 표시될 수 있는지 여부
+     * true: 표시 가능, false: 표시 불가
+     */
+    override val canDisplay: Boolean = true
 
     /**
      * 짧은 텍스트 필드의 최대 길이 (100자)

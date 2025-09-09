@@ -14,8 +14,13 @@ object TimeField : FieldType() {
     /**
      * 시간 필드 타입의 고유 키
      */
-    override val key: String
-        get() = "TIME"
+    override val key: String = "TIME"
+
+    /**
+     * 시간 필드가 리스트 보기에서 표시될 수 있는지 여부
+     * true: 표시 가능, false: 표시 불가
+     */
+    override val canDisplay: Boolean = true
 
     /**
      * 시간 필드가 지원하는 속성 키 집합
