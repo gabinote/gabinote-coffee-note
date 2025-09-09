@@ -1,0 +1,39 @@
+{
+  "fields": [
+    {
+      "_id": "$anyObject()",
+      "externalId": "3fcdd722-93ca-4693-9bef-496616dd6af3",
+      "isDefault": true,
+      "name": "this is default",
+      "icon": "icon_a",
+      "type": "TEXT",
+      "attributes": [],
+      "owner": null
+    },
+    {
+      "_id": "$anyObject()",
+      "externalId": "088eb9c8-a340-4c98-9c64-a869d7e1a2ac",
+      "isDefault": false,
+      "name": "this is other user's field",
+      "icon": "icon_c",
+      "type": "DROP_DOWN",
+      "attributes": [
+        {
+          "key": "values",
+          "value": [
+            "Option A",
+            "Option B",
+            "Option C"
+          ]
+        },
+        {
+          "key": "allowAddValue",
+          "value": [
+            "true"
+          ]
+        }
+      ],
+      "owner": "695b8482-c259-4493-82e2-8988599d21e9"
+    }
+  ]
+}

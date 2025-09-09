@@ -1,0 +1,28 @@
+{
+  "fields": [
+    {
+      "_id": "$anyObject()",
+      "externalId": "088eb9c8-a340-4c98-9c64-a869d7e1a2ac",
+      "isDefault": true,
+      "name": "Admin Updated Field",
+      "icon": "admin_updated_icon",
+      "type": "DROP_DOWN",
+      "attributes": [
+        {
+          "key": "values",
+          "value": [
+            "Admin Updated Option A",
+            "Admin Updated Option B",
+            "Admin Updated Option C"
+          ]
+        },
+        {
+          "key": "allowAddValue",
+          "value": [
+            "false"
+          ]
+        }
+      ]
+    }
+  ]
+}

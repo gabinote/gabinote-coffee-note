@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: gabi-coffeenote
+
+  profiles:
+    active: local,test,prod

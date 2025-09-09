@@ -42,7 +42,6 @@ out/
 
 ### spring-boot ###
 application.properties
-application.yml
 
 application-dev.properties
 application-dev.yml
@@ -50,8 +49,9 @@ logback-dev.xml
 
 application-prod.properties
 application-prod.yml
-logback-prod.xml
 
 aplication-test.properties
 application-test.yml
-logback-test.xml
+
+### personal ###
+TODO.md
