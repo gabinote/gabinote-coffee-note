@@ -3,7 +3,7 @@
     {
       "_id": "$anyObject()",
       "externalId": "3fcdd722-93ca-4693-9bef-496616dd6af3",
-      "default": true,
+      "isDefault": true,
       "name": "Alpha",
       "icon": "icon_a",
       "type": "TEXT",
@@ -13,18 +13,24 @@
     {
       "_id": "$anyObject()",
       "externalId": "088eb9c8-a340-4c98-9c64-a869d7e1a2ac",
-      "default": false,
+      "isDefault": false,
       "name": "Charlie",
       "icon": "icon_c",
       "type": "DROP_DOWN",
       "attributes": [
         {
           "key": "values",
-          "value": ["Option A", "Option B", "Option C"]
+          "value": [
+            "Option A",
+            "Option B",
+            "Option C"
+          ]
         },
         {
           "key": "allowAddValue",
-          "value": ["true"]
+          "value": [
+            "true"
+          ]
         }
       ],
       "owner": "695b8482-c259-4493-82e2-8988599d21e9"

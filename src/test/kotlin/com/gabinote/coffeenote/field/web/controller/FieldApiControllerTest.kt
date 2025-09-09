@@ -74,7 +74,7 @@ class FieldApiControllerTest() : WebMvcTestTemplate() {
                     }
 
                     // size = 20, page = 0, sort = default,desc
-                    val defaultPageable = createPageable(sortKey = "default")
+                    val defaultPageable = createPageable(sortKey = "isDefault")
                     val fields = mockk<FieldResServiceDto>()
                     beforeTest {
                         every {
@@ -257,7 +257,7 @@ class FieldApiControllerTest() : WebMvcTestTemplate() {
                                 every { userContext.uid } returns requestor
                             }
 
-                            val pageable = createPageable(sortKey = "default", size = validSize)
+                            val pageable = createPageable(sortKey = "isDefault", size = validSize)
                             val fields = mockk<FieldResServiceDto>()
                             beforeTest {
                                 every {
@@ -343,7 +343,7 @@ class FieldApiControllerTest() : WebMvcTestTemplate() {
                                     every { userContext.uid } returns requestor
                                 }
 
-                                val pageable = createPageable(sortKey = "default")
+                                val pageable = createPageable(sortKey = "isDefault")
                                 val fields = mockk<FieldResServiceDto>()
                                 beforeTest {
                                     every {

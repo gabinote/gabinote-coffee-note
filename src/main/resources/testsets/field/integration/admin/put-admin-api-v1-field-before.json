@@ -5,7 +5,7 @@
         "$oid": "68ae99e280cfdf6c2614ea3a"
       },
       "externalId": "088eb9c8-a340-4c98-9c64-a869d7e1a2ac",
-      "default": true,
+      "isDefault": true,
       "name": "original field",
       "icon": "original_icon",
       "type": "DROP_DOWN",

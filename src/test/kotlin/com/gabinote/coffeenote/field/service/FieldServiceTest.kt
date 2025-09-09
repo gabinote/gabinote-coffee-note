@@ -142,7 +142,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     beforeTest {
                         every { fieldRepository.findByExternalId(validExternalId.toString()) } returns validField
-                        every { validField.default } returns true
+                        every { validField.isDefault } returns true
                         every { fieldMapper.toResServiceDto(validField) } returns expectedField
                     }
 
@@ -153,7 +153,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                         verify(exactly = 1) {
                             fieldRepository.findByExternalId(validExternalId.toString())
-                            validField.default
+                            validField.isDefault
                             fieldMapper.toResServiceDto(validField)
                         }
                     }
@@ -185,7 +185,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     beforeTest {
                         every { fieldRepository.findByExternalId(invalidExternalId.toString()) } returns invalidField
-                        every { invalidField.default } returns false
+                        every { invalidField.isDefault } returns false
                         every { invalidField.externalId } returns invalidExternalId.toString()
                     }
 
@@ -200,7 +200,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                         verify(exactly = 1) {
                             fieldRepository.findByExternalId(invalidExternalId.toString())
-                            invalidField.default
+                            invalidField.isDefault
                         }
                     }
                 }
@@ -316,7 +316,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                     val expected = listOf(mockk<FieldResServiceDto>()).toSlice(pageable)
 
                     beforeTest {
-                        every { fieldRepository.findAllByDefault(true, pageable) } returns fields
+                        every { fieldRepository.findAllByIsDefault(true, pageable) } returns fields
                         every { fieldMapper.toResServiceDto(fields.toList()[0]) } returns expected.toList()[0]
                     }
 
@@ -327,7 +327,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                         res.content[0] shouldBe expected.toList()[0]
 
                         verify(exactly = 1) {
-                            fieldRepository.findAllByDefault(true, pageable)
+                            fieldRepository.findAllByIsDefault(true, pageable)
                             fieldMapper.toResServiceDto(fields.toList()[0])
                         }
                     }
@@ -372,7 +372,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                     val expected = listOf(mockk<FieldResServiceDto>()).toSlice(pageable)
 
                     beforeTest {
-                        every { fieldRepository.findAllByDefaultOrOwner(true, fieldOwner, pageable) } returns fields
+                        every { fieldRepository.findAllByIsDefaultOrOwner(true, fieldOwner, pageable) } returns fields
                         every { fieldMapper.toResServiceDto(fields.toList()[0]) } returns expected.toList()[0]
                     }
 
@@ -383,7 +383,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                         res.content[0] shouldBe expected.toList()[0]
 
                         verify(exactly = 1) {
-                            fieldRepository.findAllByDefaultOrOwner(true, fieldOwner, pageable)
+                            fieldRepository.findAllByIsDefaultOrOwner(true, fieldOwner, pageable)
                             fieldMapper.toResServiceDto(fields.toList()[0])
                         }
                     }
@@ -441,7 +441,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                     beforeTest {
                         every { fieldRepository.findByExternalId(validExternalId.toString()) } returns validField
                         every { fieldRepository.delete(validField) } returns Unit
-                        every { validField.default } returns true
+                        every { validField.isDefault } returns true
                     }
 
                     it("해당 기본 Field 엔티티를 삭제한다.") {
@@ -450,7 +450,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                         verify(exactly = 1) {
                             fieldRepository.findByExternalId(validExternalId.toString())
-                            validField.default
+                            validField.isDefault
                             fieldRepository.delete(validField)
                         }
                     }
@@ -484,7 +484,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     beforeTest {
                         every { fieldRepository.findByExternalId(invalidExternalId.toString()) } returns invalidField
-                        every { invalidField.default } returns false
+                        every { invalidField.isDefault } returns false
                         every { invalidField.externalId } returns invalidExternalId.toString()
                     }
 
@@ -499,7 +499,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                         verify(exactly = 1) {
                             fieldRepository.findByExternalId(invalidExternalId.toString())
-                            invalidField.default
+                            invalidField.isDefault
                             invalidField.externalId
                         }
                     }
@@ -1178,7 +1178,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     // checkIsDefault
                     beforeTest {
-                        every { existingField.default } returns true
+                        every { existingField.isDefault } returns true
                     }
 
                     // update
@@ -1233,7 +1233,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                         verify {
                             validDto.externalId
                             fieldRepository.findByExternalId(externalId.toString())
-                            existingField.default
+                            existingField.isDefault
                             fieldMapper.updateFromDefaultDto(validDto, existingField)
                             validDto.attributes
                             attributeMapper.toAttribute(newAttributeReq)
@@ -1259,7 +1259,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     // checkIsDefault
                     beforeTest {
-                        every { existingField.default } returns true
+                        every { existingField.isDefault } returns true
                     }
 
                     // update
@@ -1292,7 +1292,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                         verify {
                             validDto.externalId
                             fieldRepository.findByExternalId(externalId.toString())
-                            existingField.default
+                            existingField.isDefault
                             fieldMapper.updateFromDefaultDto(validDto, existingField)
                             validDto.attributes
                             fieldRepository.save(existingField)
@@ -1313,7 +1313,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     // checkIsDefault
                     beforeTest {
-                        every { existingField.default } returns true
+                        every { existingField.isDefault } returns true
                     }
 
                     // update
@@ -1351,7 +1351,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                         verify {
                             invalidDto.externalId
                             fieldRepository.findByExternalId(externalId.toString())
-                            existingField.default
+                            existingField.isDefault
                             fieldMapper.updateFromDefaultDto(invalidDto, existingField)
                             invalidDto.attributes
                             attributeMapper.toAttribute(newAttributeReq)
@@ -1371,7 +1371,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     // checkOwnerShop
                     beforeTest {
-                        every { existingField.default } returns true
+                        every { existingField.isDefault } returns true
                     }
 
                     // update
@@ -1421,7 +1421,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                         verify {
                             invalidDto.externalId
                             fieldRepository.findByExternalId(externalId.toString())
-                            existingField.default
+                            existingField.isDefault
                             fieldMapper.updateFromDefaultDto(invalidDto, existingField)
                             invalidDto.attributes
                             attributeMapper.toAttribute(newAttributeReq)
@@ -1445,7 +1445,7 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     // checkOwnerShop
                     beforeTest {
-                        every { existingField.default } returns false
+                        every { existingField.isDefault } returns false
                         every { existingField.externalId } returns externalId.toString()
                     }
 
@@ -1462,7 +1462,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                         verify {
                             invalidDto.externalId
                             fieldRepository.findByExternalId(externalId.toString())
-                            existingField.default
+                            existingField.isDefault
                             existingField.externalId
                         }
                     }

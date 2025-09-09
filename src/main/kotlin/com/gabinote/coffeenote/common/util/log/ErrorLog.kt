@@ -1,4 +1,4 @@
-package com.gabinote.gateway.manager.api.common.web.advice
+package com.gabinote.coffeenote.common.util.log
 
 import org.springframework.http.HttpStatus
 import java.time.Instant

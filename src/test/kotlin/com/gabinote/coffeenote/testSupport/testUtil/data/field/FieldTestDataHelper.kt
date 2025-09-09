@@ -20,7 +20,7 @@ object FieldTestDataHelper {
     ): FieldResControllerDto {
         return FieldResControllerDto(
             externalId = externalId,
-            default = default,
+            isDefault = default,
             name = name,
             icon = icon,
             type = type,

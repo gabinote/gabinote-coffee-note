@@ -10,8 +10,7 @@ object LongTextField : TextField() {
     /**
      * 긴 텍스트 필드 타입의 고유 키
      */
-    override val key: String
-        get() = "LONG_TEXT"
+    override val key: String = "LONG_TEXT"
 
     /**
      * 긴 텍스트 필드의 최대 길이 (10000자)

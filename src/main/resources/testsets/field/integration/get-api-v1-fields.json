@@ -5,7 +5,7 @@
         "$oid": "68ad627224a7d36283fa5ef2"
       },
       "externalId": "8fd344e0-e074-49a4-ae22-ff8653ba02f2",
-      "default": false,
+      "isDefault": false,
       "name": "this is not default",
       "icon": "icon_b",
       "type": "TEXT",
@@ -17,7 +17,7 @@
         "$oid": "68ae99e280cfdf6c2614ea39"
       },
       "externalId": "3fcdd722-93ca-4693-9bef-496616dd6af3",
-      "default": true,
+      "isDefault": true,
       "name": "this is default",
       "icon": "icon_a",
       "type": "TEXT",
@@ -29,7 +29,7 @@
         "$oid": "68ae99e280cfdf6c2614ea3a"
       },
       "externalId": "088eb9c8-a340-4c98-9c64-a869d7e1a2ac",
-      "default": false,
+      "isDefault": false,
       "name": "this is other user's field",
       "icon": "icon_c",
       "type": "DROP_DOWN",

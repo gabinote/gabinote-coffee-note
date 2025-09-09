@@ -28,7 +28,7 @@ data class Field(
     /**
      * 기본 필드 여부
      */
-    var default: Boolean = false,
+    var isDefault: Boolean = false,
 
     /**
      * 필드 이름
@@ -54,7 +54,7 @@ data class Field(
     /**
      * 필드 소유자
      */
-    var owner: String?,
+    var owner: String? = null,
 ) {
 
     /**
@@ -73,6 +73,6 @@ data class Field(
     fun isOwner(owner: String) = this.owner == owner
 
     override fun toString(): String {
-        return "Field(id=$id, externalId='$externalId', default=$default, name='$name', icon='$icon', type='$type', attributes=$attributes, owner=$owner)"
+        return "Field(id=$id, externalId='$externalId', isDefault=$isDefault, name='$name', icon='$icon', type='$type', attributes=$attributes, owner=$owner)"
     }
 }

@@ -3,7 +3,7 @@
     {
       "_id": "$anyObject()",
       "externalId": "8fd344e0-e074-49a4-ae22-ff8653ba02f2",
-      "default": false,
+      "isDefault": false,
       "name": "Bravo",
       "icon": "icon_b",
       "type": "TEXT",
@@ -13,7 +13,7 @@
     {
       "_id": "$anyObject()",
       "externalId": "3fcdd722-93ca-4693-9bef-496616dd6af3",
-      "default": true,
+      "isDefault": true,
       "name": "Alpha",
       "icon": "icon_a",
       "type": "TEXT",
@@ -23,7 +23,7 @@
     {
       "_id": "$anyObject()",
       "externalId": "088eb9c8-a340-4c98-9c64-a869d7e1a2ac",
-      "default": false,
+      "isDefault": false,
       "name": "Charlie",
       "icon": "icon_c",
       "type": "DROP_DOWN",
@@ -48,7 +48,7 @@
     {
       "_id": "$anyObject()",
       "externalId": "00000000-0000-0000-0000-000000000000",
-      "default": false,
+      "isDefault": false,
       "name": "New Field",
       "icon": "default",
       "type": "TEST",

@@ -18,7 +18,7 @@ data class FieldResControllerDto(
     /**
      * 기본 필드 여부
      */
-    val default: Boolean,
+    val isDefault: Boolean,
 
     /**
      * 필드 이름

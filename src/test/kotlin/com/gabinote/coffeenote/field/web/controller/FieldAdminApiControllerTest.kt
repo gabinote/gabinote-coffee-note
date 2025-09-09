@@ -73,7 +73,7 @@ class FieldAdminApiControllerTest : WebMvcTestTemplate() {
 
                 context("쿼리파라미터 없는 올바른 요청이 주어졌을 때") {
                     // size = 20, page = 0, sort = default,desc, scope = ALL
-                    val defaultPageable = createPageable(sortKey = "default")
+                    val defaultPageable = createPageable(sortKey = "isDefault")
                     val fields = mockk<FieldResServiceDto>()
                     beforeTest {
                         every {
@@ -239,7 +239,7 @@ class FieldAdminApiControllerTest : WebMvcTestTemplate() {
                     describe("size test") {
                         context("올바른 페이징 사이즈가 주어졌을 때") {
                             val validSize = 50
-                            val pageable = createPageable(sortKey = "default", size = validSize)
+                            val pageable = createPageable(sortKey = "isDefault", size = validSize)
                             val fields = mockk<FieldResServiceDto>()
                             beforeTest {
                                 every {
@@ -314,7 +314,7 @@ class FieldAdminApiControllerTest : WebMvcTestTemplate() {
                             row(FieldAdminSearchScope.DEFAULT),
                         ).forAll { scope ->
                             context("scope = $scope 가 주어졌을 때") {
-                                val pageable = createPageable(sortKey = "default")
+                                val pageable = createPageable(sortKey = "isDefault")
                                 val fields = mockk<FieldResServiceDto>()
                                 beforeTest {
                                     every {

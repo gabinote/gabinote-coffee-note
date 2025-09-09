@@ -34,7 +34,7 @@ class FieldAdminApiController(
     @GetMapping("/fields")
     fun getFields(
         @PageSizeCheck(min = 1, max = 100)
-        @PageableDefault(page = 0, size = 20, sort = ["default"], direction = Sort.Direction.DESC)
+        @PageableDefault(page = 0, size = 20, sort = ["isDefault"], direction = Sort.Direction.DESC)
         @PageSortKeyCheck(sortKey = FieldSortKey::class, message = "Invalid sort key")
         pageable: Pageable,
 

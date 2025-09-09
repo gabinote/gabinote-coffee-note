@@ -17,7 +17,7 @@ enum class FieldSortKey(
     /**
      * 기본 필드 여부로 정렬
      */
-    DEFAULT("default"),
+    DEFAULT("isDefault"),
 
     /**
      * 필드 타입으로 정렬

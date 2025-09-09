@@ -8,6 +8,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
     id("com.epages.restdocs-api-spec") version "0.17.1"
     id("org.hidetake.swagger.generator") version "2.18.2"
+    id("jacoco")
 }
 
 group = "com.gabinote"
@@ -95,9 +96,10 @@ dependencies {
 
     // dto
     // mapstruct
-    implementation("org.mapstruct:mapstruct:1.6.3")
-    kapt("org.mapstruct:mapstruct-processor:1.6.3")
-    kaptTest("org.mapstruct:mapstruct-processor:1.6.3")
+    // https://mvnrepository.com/artifact/org.mapstruct/mapstruct
+    implementation("org.mapstruct:mapstruct:1.5.5.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
+    kaptTest("org.mapstruct:mapstruct-processor:1.5.5.Final")
     // jackson
     implementation(platform("com.fasterxml.jackson:jackson-bom:2.15.2"))
     implementation("com.fasterxml.jackson.core:jackson-databind")
@@ -123,6 +125,33 @@ tasks.test {
         events("passed", "skipped", "failed")
     }
     finalizedBy("openapi3")
+    finalizedBy("jacocoTestReport")
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // 테스트 후에 JaCoCo 리포트 생성
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+}
+
+tasks.jacocoTestCoverageVerification {
+    dependsOn(tasks.test)
+
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.8".toBigDecimal()
+            }
+            excludes = listOf(
+                "com.common.config.*",
+                "com.common.dto.*",
+                "com.field.dto.*",
+            )
+        }
+    }
 }
 
 

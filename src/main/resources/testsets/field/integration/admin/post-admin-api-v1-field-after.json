@@ -3,7 +3,7 @@
     {
       "_id": "$anyObject()",
       "externalId": "3fcdd722-93ca-4693-9bef-496616dd6af3",
-      "default": true,
+      "isDefault": true,
       "name": "default field",
       "icon": "default_icon",
       "type": "TEXT",
@@ -13,7 +13,7 @@
     {
       "_id": "$anyObject()",
       "externalId": "00000000-0000-0000-0000-000000000000",
-      "default": true,
+      "isDefault": true,
       "name": "Admin Created Field",
       "icon": "admin_icon",
       "type": "DROP_DOWN",

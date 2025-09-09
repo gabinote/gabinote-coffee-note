@@ -1,9 +1,11 @@
 {
   "fields": [
     {
-      "_id": { "$oid": "68ad627224a7d36283fa5ef2" },
+      "_id": {
+        "$oid": "68ad627224a7d36283fa5ef2"
+      },
       "externalId": "8fd344e0-e074-49a4-ae22-ff8653ba02f2",
-      "default": false,
+      "isDefault": false,
       "name": "Bravo",
       "icon": "icon_b",
       "type": "TEXT",
@@ -11,9 +13,11 @@
       "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e"
     },
     {
-      "_id": { "$oid": "68ae99e280cfdf6c2614ea39" },
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea39"
+      },
       "externalId": "3fcdd722-93ca-4693-9bef-496616dd6af3",
-      "default": true,
+      "isDefault": true,
       "name": "Alpha",
       "icon": "icon_a",
       "type": "TEXT",
@@ -21,20 +25,28 @@
       "owner": null
     },
     {
-      "_id": { "$oid": "68ae99e280cfdf6c2614ea3a" },
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea3a"
+      },
       "externalId": "088eb9c8-a340-4c98-9c64-a869d7e1a2ac",
-      "default": false,
+      "isDefault": false,
       "name": "Charlie",
       "icon": "icon_c",
       "type": "DROP_DOWN",
       "attributes": [
         {
           "key": "values",
-          "value": ["Option A", "Option B", "Option C"]
+          "value": [
+            "Option A",
+            "Option B",
+            "Option C"
+          ]
         },
         {
           "key": "allowAddValue",
-          "value": ["true"]
+          "value": [
+            "true"
+          ]
         }
       ],
       "owner": "695b8482-c259-4493-82e2-8988599d21e9"

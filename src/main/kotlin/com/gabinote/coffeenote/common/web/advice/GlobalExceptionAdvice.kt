@@ -1,9 +1,9 @@
 package com.gabinote.coffeenote.common.web.advice
 
 import com.fasterxml.jackson.databind.exc.MismatchedInputException
+import com.gabinote.coffeenote.common.util.log.ErrorLog
 import com.gabinote.coffeenote.common.web.advice.ExceptionAdviceHelper.getRequestId
 import com.gabinote.coffeenote.common.web.advice.ExceptionAdviceHelper.problemDetail
-import com.gabinote.gateway.manager.api.common.web.advice.ErrorLog
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.ConstraintViolationException

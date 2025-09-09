@@ -44,9 +44,9 @@ class FieldRepositoryTest : RepositoryTestTemplate() {
                 context("default가 true가 주어지면") {
                     testDataHelper.setData("/testsets/field/domain/base-field.json")
                     it("default가 true인 Field들을 반환한다") {
-                        val res = fieldRepository.findAllByDefault(true, pageable = TestPageableUtil.createPageable())
+                        val res = fieldRepository.findAllByIsDefault(true, pageable = TestPageableUtil.createPageable())
 
-                        res.content.all { it.default } shouldBe true
+                        res.content.all { it.isDefault } shouldBe true
                         res.content.all { it.owner == null } shouldBe true
                     }
                 }
@@ -57,13 +57,13 @@ class FieldRepositoryTest : RepositoryTestTemplate() {
                     testDataHelper.setData("/testsets/field/domain/base-field.json")
                     val owner = "695b8482-c259-4493-82e2-8988599d21e9"
                     it("조건에 맞는 Field들을 반환한다") {
-                        val res = fieldRepository.findAllByDefaultOrOwner(
+                        val res = fieldRepository.findAllByIsDefaultOrOwner(
                             true,
                             owner,
                             pageable = TestPageableUtil.createPageable()
                         )
 
-                        res.content.all { it.default || it.owner == owner } shouldBe true
+                        res.content.all { it.isDefault || it.owner == owner } shouldBe true
                     }
                 }
             }
@@ -86,7 +86,7 @@ class FieldRepositoryTest : RepositoryTestTemplate() {
                     val newField = Field(
                         name = "New Field",
                         type = "TEXT",
-                        default = false,
+                        isDefault = false,
                         owner = "cafb043b-f8f6-4a89-bd11-a1780d319980",
                         icon = "default"
                     )
@@ -95,7 +95,7 @@ class FieldRepositoryTest : RepositoryTestTemplate() {
 
                         savedField.name shouldBe newField.name
                         savedField.type shouldBe newField.type
-                        savedField.default shouldBe newField.default
+                        savedField.isDefault shouldBe newField.isDefault
                         savedField.owner shouldBe newField.owner
 
                         testDataHelper.assertData("/testsets/field/domain/save-expected-field.json")
@@ -107,7 +107,7 @@ class FieldRepositoryTest : RepositoryTestTemplate() {
                     val newField = Field(
                         name = "New Field",
                         type = "TEST",
-                        default = false,
+                        isDefault = false,
                         owner = "cafb043b-f8f6-4a89-bd11-a1780d319980",
                         icon = "default",
                         attributes = setOf(
@@ -123,7 +123,7 @@ class FieldRepositoryTest : RepositoryTestTemplate() {
                         savedField.externalId shouldBe newField.externalId
                         savedField.name shouldBe newField.name
                         savedField.type shouldBe newField.type
-                        savedField.default shouldBe newField.default
+                        savedField.isDefault shouldBe newField.isDefault
                         savedField.owner shouldBe newField.owner
                         savedField.attributes shouldBe newField.attributes
 
@@ -145,7 +145,7 @@ class FieldRepositoryTest : RepositoryTestTemplate() {
                         savedField.name shouldBe existingField.name
                         savedField.icon shouldBe existingField.icon
                         savedField.type shouldBe existingField.type
-                        savedField.default shouldBe existingField.default
+                        savedField.isDefault shouldBe existingField.isDefault
                         savedField.owner shouldBe existingField.owner
                         savedField.attributes shouldBe existingField.attributes
 

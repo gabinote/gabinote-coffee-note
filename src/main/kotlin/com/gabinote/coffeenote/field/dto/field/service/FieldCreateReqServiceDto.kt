@@ -7,10 +7,6 @@ import com.gabinote.coffeenote.field.dto.attribute.service.AttributeCreateReqSer
  * @author 황준서
  */
 data class FieldCreateReqServiceDto(
-    /**
-     * 기본 필드 여부
-     */
-    val default: Boolean,
 
     /**
      * 필드 이름

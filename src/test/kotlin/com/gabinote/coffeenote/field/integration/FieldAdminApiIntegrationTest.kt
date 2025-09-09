@@ -27,14 +27,14 @@ class FieldAdminApiIntegrationTest : IntegrationTestTemplate() {
                         body("content.size()", equalTo(3))
 
                         body("content[0].external_id", equalTo("3fcdd722-93ca-4693-9bef-496616dd6af3"))
-                        body("content[0].default", equalTo(true))
+                        body("content[0].is_default", equalTo(true))
 
                         body("content[1].external_id", equalTo("8fd344e0-e074-49a4-ae22-ff8653ba02f2"))
-                        body("content[1].default", equalTo(false))
+                        body("content[1].is_default", equalTo(false))
                         body("content[1].owner", equalTo("d15cdbf8-22bc-47e2-9e9a-4d171cb6522e"))
 
                         body("content[2].external_id", equalTo("088eb9c8-a340-4c98-9c64-a869d7e1a2ac"))
-                        body("content[2].default", equalTo(false))
+                        body("content[2].is_default", equalTo(false))
                         body("content[2].owner", equalTo("695b8482-c259-4493-82e2-8988599d21e9"))
                     }
                 }
@@ -53,7 +53,7 @@ class FieldAdminApiIntegrationTest : IntegrationTestTemplate() {
                     }.Then {
                         statusCode(200)
                         body("external_id", equalTo("3fcdd722-93ca-4693-9bef-496616dd6af3"))
-                        body("default", equalTo(true))
+                        body("is_default", equalTo(true))
                     }
                 }
 
@@ -69,7 +69,7 @@ class FieldAdminApiIntegrationTest : IntegrationTestTemplate() {
                     }.Then {
                         statusCode(200)
                         body("external_id", equalTo("8fd344e0-e074-49a4-ae22-ff8653ba02f2"))
-                        body("default", equalTo(false))
+                        body("is_default", equalTo(false))
                         body("owner", equalTo("d15cdbf8-22bc-47e2-9e9a-4d171cb6522e"))
                     }
                 }
@@ -128,7 +128,7 @@ class FieldAdminApiIntegrationTest : IntegrationTestTemplate() {
                         body("name", equalTo("Admin Created Field"))
                         body("icon", equalTo("admin_icon"))
                         body("type", equalTo("DROP_DOWN"))
-                        body("default", equalTo(true))
+                        body("is_default", equalTo(true))
                         body("owner", equalTo(null))
                         body("external_id", equalTo("00000000-0000-0000-0000-000000000000"))
                     }
@@ -174,7 +174,7 @@ class FieldAdminApiIntegrationTest : IntegrationTestTemplate() {
                         body("name", equalTo("Admin Updated Field"))
                         body("icon", equalTo("admin_updated_icon"))
                         body("type", equalTo("DROP_DOWN"))
-                        body("default", equalTo(true))
+                        body("is_default", equalTo(true))
                         body("owner", equalTo(null))
                         body("external_id", equalTo("088eb9c8-a340-4c98-9c64-a869d7e1a2ac"))
                     }

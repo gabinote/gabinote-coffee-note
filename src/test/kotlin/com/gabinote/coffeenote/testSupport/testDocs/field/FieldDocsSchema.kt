@@ -8,7 +8,7 @@ import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 object FieldDocsSchema {
     val fieldResponseSchema: Array<FieldDescriptor> = arrayOf(
         fieldWithPath("external_id").type(SimpleType.STRING).description("Field external ID"),
-        fieldWithPath("default").type(SimpleType.BOOLEAN).description("기본 Field 여부"),
+        fieldWithPath("is_default").type(SimpleType.BOOLEAN).description("기본 Field 여부"),
         fieldWithPath("name").type(SimpleType.STRING).description("Field 이름"),
         fieldWithPath("icon").type(SimpleType.STRING).description("Field 아이콘"),
         fieldWithPath("type").type(SimpleType.STRING).description("Field 타입"),
@@ -20,7 +20,7 @@ object FieldDocsSchema {
 
     val fieldSliceResponseSchema: Array<FieldDescriptor> = arrayOf(
         fieldWithPath("content[].external_id").type(SimpleType.STRING).description("Field external ID"),
-        fieldWithPath("content[].default").type(SimpleType.BOOLEAN).description("기본 Field 여부"),
+        fieldWithPath("content[].is_default").type(SimpleType.BOOLEAN).description("기본 Field 여부"),
         fieldWithPath("content[].name").type(SimpleType.STRING).description("Field 이름"),
         fieldWithPath("content[].icon").type(SimpleType.STRING).description("Field 아이콘"),
         fieldWithPath("content[].type").type(SimpleType.STRING).description("Field 타입"),

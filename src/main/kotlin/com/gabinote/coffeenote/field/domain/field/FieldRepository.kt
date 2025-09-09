@@ -19,7 +19,7 @@ interface FieldRepository : MongoRepository<Field, ObjectId> {
      * @param pageable 페이지 정보
      * @return 필드 슬라이스
      */
-    fun findAllByDefault(default: Boolean = true, pageable: Pageable): Slice<Field>
+    fun findAllByIsDefault(default: Boolean = true, pageable: Pageable): Slice<Field>
 
     /**
      * 기본 필드이거나 특정 소유자의 필드를 페이징하여 조회
@@ -28,7 +28,7 @@ interface FieldRepository : MongoRepository<Field, ObjectId> {
      * @param pageable 페이지 정보
      * @return 필드 슬라이스
      */
-    fun findAllByDefaultOrOwner(default: Boolean = true, owner: String, pageable: Pageable): Slice<Field>
+    fun findAllByIsDefaultOrOwner(default: Boolean = true, owner: String, pageable: Pageable): Slice<Field>
 
     /**
      * 특정 소유자의 필드를 페이징하여 조회

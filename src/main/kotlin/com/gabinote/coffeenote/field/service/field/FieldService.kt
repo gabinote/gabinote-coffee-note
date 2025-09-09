@@ -129,7 +129,7 @@ class FieldService(
      * @return 필드 응답 DTO 슬라이스
      */
     fun getAllDefault(pageable: Pageable): Slice<FieldResServiceDto> {
-        val data = fieldRepository.findAllByDefault(pageable = pageable)
+        val data = fieldRepository.findAllByIsDefault(pageable = pageable)
         return data.map { fieldMapper.toResServiceDto(it) }
     }
 
@@ -151,7 +151,7 @@ class FieldService(
      * @return 필드 응답 DTO 슬라이스
      */
     fun getAllOwnedOrDefault(pageable: Pageable, executor: String): Slice<FieldResServiceDto> {
-        val data = fieldRepository.findAllByDefaultOrOwner(pageable = pageable, owner = executor)
+        val data = fieldRepository.findAllByIsDefaultOrOwner(pageable = pageable, owner = executor)
         return data.map { fieldMapper.toResServiceDto(it) }
     }
 
@@ -287,7 +287,7 @@ class FieldService(
      * @throws ResourceNotFound 기본 필드가 아닌 경우
      */
     private fun checkIsDefault(field: Field) {
-        if (!field.default) {
+        if (!field.isDefault) {
             throw ResourceNotFound("Default Field", identifier = field.externalId!!, identifierType = "externalId")
         }
     }

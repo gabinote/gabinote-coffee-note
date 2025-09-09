@@ -36,6 +36,7 @@ interface FieldMapper {
      * @see Field
      * @see FieldResServiceDto
      */
+    @Mapping(source = "default", target = "isDefault")
     fun toResServiceDto(field: Field): FieldResServiceDto
 
     /**
@@ -45,6 +46,7 @@ interface FieldMapper {
      * @see FieldResServiceDto
      * @see FieldResControllerDto
      */
+    @Mapping(source = "default", target = "isDefault")
     fun toResControllerDto(dto: FieldResServiceDto): FieldResControllerDto
 
 

@@ -36,7 +36,7 @@ class FieldMapperTest : MockkTestTemplate() {
         describe("[Field] FieldMapper") {
 
             describe("FieldMapper.toResServiceDto") {
-                context("올바른 Field 엔티티가 주어지면,") {
+                context("isDefault가 false인 Field 엔티티가 주어지면,") {
                     val field = Field(
                         id = mockk<ObjectId>(),
                         externalId = "field-external-id",
@@ -44,7 +44,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         name = "Field Name",
                         icon = "field-icon",
                         type = "custom",
-                        default = false,
+                        isDefault = false,
                         attributes = setOf(mockk<Attribute>())
                     )
                     val expected = FieldResServiceDto(
@@ -55,7 +55,41 @@ class FieldMapperTest : MockkTestTemplate() {
                         type = field.type,
                         attributes = setOf(mockk<AttributeResServiceDto>()),
                         owner = field.owner,
-                        default = field.default,
+                        isDefault = field.isDefault,
+                    )
+
+                    beforeEach {
+                        every { attributeMapper.toAttributeResServiceDto(field.attributes.first()) } returns expected.attributes.first()
+                    }
+
+                    it("FieldResServiceDto로 변환되어야 한다.") {
+                        val result = fieldMapper.toResServiceDto(field)
+                        result shouldBe expected
+
+                        verify(exactly = 1) { attributeMapper.toAttributeResServiceDto(field.attributes.first()) }
+                    }
+                }
+
+                context("isDefault가 true인 Field 엔티티가 주어지면,") {
+                    val field = Field(
+                        id = mockk<ObjectId>(),
+                        externalId = "field-external-id",
+                        owner = "owner-id",
+                        name = "Field Name",
+                        icon = "field-icon",
+                        type = "custom",
+                        isDefault = true,
+                        attributes = setOf(mockk<Attribute>())
+                    )
+                    val expected = FieldResServiceDto(
+                        id = field.id!!,
+                        externalId = field.externalId!!,
+                        name = field.name,
+                        icon = field.icon,
+                        type = field.type,
+                        attributes = setOf(mockk<AttributeResServiceDto>()),
+                        owner = field.owner,
+                        isDefault = field.isDefault,
                     )
 
                     beforeEach {
@@ -71,8 +105,10 @@ class FieldMapperTest : MockkTestTemplate() {
                 }
             }
 
+
+
             describe("FieldMapper.toResControllerDto") {
-                context("올바른 FieldResServiceDto가 주어지면,") {
+                context("isDefault가 false인 FieldResServiceDto가 주어지면,") {
                     val dto = FieldResServiceDto(
                         id = mockk<ObjectId>(),
                         externalId = "field-external-id",
@@ -81,7 +117,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         icon = "field-icon",
                         type = "custom",
                         attributes = setOf(mockk<AttributeResServiceDto>()),
-                        default = false,
+                        isDefault = false,
                     )
                     val expected = FieldResControllerDto(
                         externalId = dto.externalId,
@@ -90,7 +126,39 @@ class FieldMapperTest : MockkTestTemplate() {
                         icon = dto.icon,
                         type = dto.type,
                         attributes = setOf(mockk<AttributeResControllerDto>()),
-                        default = dto.default,
+                        isDefault = dto.isDefault,
+                    )
+
+                    beforeEach {
+                        every { attributeMapper.toAttributeResControllerDto(dto.attributes.first()) } returns expected.attributes.first()
+                    }
+
+                    it("FieldResControllerDto로 변환되어야 한다.") {
+                        val result = fieldMapper.toResControllerDto(dto)
+                        result shouldBe expected
+
+                        verify(exactly = 1) { attributeMapper.toAttributeResControllerDto(dto.attributes.first()) }
+                    }
+                }
+                context("isDefault가 true인 FieldResServiceDto가 주어지면,") {
+                    val dto = FieldResServiceDto(
+                        id = mockk<ObjectId>(),
+                        externalId = "field-external-id",
+                        owner = "owner-id",
+                        name = "Field Name",
+                        icon = "field-icon",
+                        type = "custom",
+                        attributes = setOf(mockk<AttributeResServiceDto>()),
+                        isDefault = true,
+                    )
+                    val expected = FieldResControllerDto(
+                        externalId = dto.externalId,
+                        owner = dto.owner,
+                        name = dto.name,
+                        icon = dto.icon,
+                        type = dto.type,
+                        attributes = setOf(mockk<AttributeResControllerDto>()),
+                        isDefault = dto.isDefault,
                     )
 
                     beforeEach {
@@ -123,7 +191,6 @@ class FieldMapperTest : MockkTestTemplate() {
                         type = dto.type,
                         attributes = setOf(mockk<AttributeCreateReqServiceDto>()),
                         owner = expectedOwner,
-                        default = false,
                     )
 
                     beforeEach {
@@ -147,7 +214,6 @@ class FieldMapperTest : MockkTestTemplate() {
                         type = "custom",
                         attributes = setOf(mockk<AttributeCreateReqServiceDto>()),
                         owner = "owner-id",
-                        default = false,
                     )
 
                     var expected = Field(
@@ -158,7 +224,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         type = dto.type,
                         attributes = setOf(mockk<Attribute>()),
                         owner = dto.owner,
-                        default = dto.default,
+                        isDefault = false,
                     )
 
                     beforeEach {
@@ -355,14 +421,14 @@ class FieldMapperTest : MockkTestTemplate() {
                         type = dto.type,
                         attributes = setOf(mockk<Attribute>()),
                         owner = null,
-                        default = true,
+                        isDefault = true,
                     )
 
                     beforeEach {
                         every { attributeMapper.toAttribute(dto.attributes.first()) } returns expected.attributes.first()
                     }
 
-                    it("Default가 true인 Field 엔티티로 변환되어야 한다.") {
+                    it("isDefault가 true인 Field 엔티티로 변환되어야 한다.") {
                         val result = fieldMapper.toFieldDefault(dto)
                         result shouldBe expected
                     }
@@ -412,7 +478,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         name = "Old Default Field",
                         icon = "old-default-icon",
                         type = "TEXT",
-                        default = true,
+                        isDefault = true,
                         attributes = setOf(mockk<Attribute>()),
                         owner = null,
                         externalId = "old-external-id",
@@ -423,7 +489,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         name = dto.name!!, // name is updated
                         icon = dto.icon!!, // icon is updated
                         type = existingField.type,
-                        default = true,
+                        isDefault = true,
                         attributes = existingField.attributes,
                         owner = existingField.owner,
                         externalId = existingField.externalId,
@@ -448,7 +514,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         name = "Old Default Field",
                         icon = "old-default-icon",
                         type = "TEXT",
-                        default = true,
+                        isDefault = true,
                         attributes = setOf(mockk<Attribute>()),
                         owner = null,
                         externalId = "old-external-id",
@@ -459,7 +525,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         name = dto.name!!, // name is updated
                         icon = existingField.icon, // icon is not updated
                         type = existingField.type,
-                        default = true,
+                        isDefault = true,
                         attributes = existingField.attributes,
                         owner = existingField.owner,
                         externalId = existingField.externalId,
@@ -484,7 +550,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         name = "Old Default Field",
                         icon = "old-default-icon",
                         type = "TEXT",
-                        default = true,
+                        isDefault = true,
                         attributes = setOf(mockk<Attribute>()),
                         owner = null,
                         externalId = "old-external-id",
@@ -495,7 +561,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         name = existingField.name, // name is not updated
                         icon = dto.icon!!, // icon is updated
                         type = existingField.type,
-                        default = true,
+                        isDefault = true,
                         attributes = existingField.attributes,
                         owner = existingField.owner,
                         externalId = existingField.externalId,
