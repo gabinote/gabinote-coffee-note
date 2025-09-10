@@ -49,6 +49,7 @@
       "isDefault": false,
       "fields": [
         {
+          "_id": "60bd213b-f560-4f7a-90e2-019eef5d0082",
           "name": "Coffee Origin",
           "icon": "coffee-origin",
           "type": "TEXT",
@@ -57,6 +58,7 @@
           "isDisplay": true
         },
         {
+          "_id": "c25bf62d-2625-444b-881b-273e2a6b58ec",
           "name": "Extraction Time",
           "icon": "timer-updated",
           "type": "NUMBER",
@@ -72,6 +74,7 @@
           "isDisplay": true
         },
         {
+          "_id": "0fdb5826-c37b-4915-85ed-7ccf6432776a",
           "name": "Taste Profile",
           "icon": "taste",
           "type": "DROPDOWN",
@@ -102,6 +105,7 @@
       "isDefault": false,
       "fields": [
         {
+          "_id": "9693687d-399f-44cd-90f9-42f7a61b6ee6",
           "name": "Filter Type",
           "icon": "filter",
           "type": "DROPDOWN",
@@ -119,6 +123,7 @@
           "isDisplay": true
         },
         {
+          "_id": "3ae239e6-8826-48e3-8222-659f4495a085",
           "name": "Water Temperature",
           "icon": "thermometer",
           "type": "NUMBER",
@@ -134,6 +139,7 @@
           "isDisplay": true
         },
         {
+          "_id": "f1c2d3e4-5a6b-7c8d-9e0f-1a2b3c4d5e6f",
           "name": "Notes",
           "icon": "notes",
           "type": "LONGTEXT",

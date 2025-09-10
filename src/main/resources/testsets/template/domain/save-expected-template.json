@@ -11,6 +11,7 @@
       "owner": null,
       "fields": [
         {
+          "_id": "d70f81e9-5842-40f8-b71b-6bd34b40bf18",
           "name": "Coffee Type",
           "icon": "coffee-bean",
           "type": "TEXT",
@@ -19,6 +20,7 @@
           "isDisplay": true
         },
         {
+          "_id": "1e6f4c3a-2b4d-4e5f-8a9b-0c1d2e3f4a5b",
           "name": "Brewing Method",
           "icon": "coffee-machine",
           "type": "DROPDOWN",
@@ -49,6 +51,7 @@
       "isDefault": false,
       "fields": [
         {
+          "_id": "be799e6a-ebbb-4577-a5b3-8ecb2b5a70c3",
           "name": "Espresso Beans",
           "icon": "coffee-bean",
           "type": "TEXT",
@@ -57,6 +60,7 @@
           "isDisplay": true
         },
         {
+          "_id": "eb4f1db8-5c9b-49cf-969a-b70b704f0314",
           "name": "Extraction Time",
           "icon": "timer",
           "type": "NUMBER",
@@ -84,6 +88,7 @@
       "isDefault": false,
       "fields": [
         {
+          "_id": "9693687d-399f-44cd-90f9-42f7a61b6ee6",
           "name": "Filter Type",
           "icon": "filter",
           "type": "DROPDOWN",
@@ -101,6 +106,7 @@
           "isDisplay": true
         },
         {
+          "_id": "3ae239e6-8826-48e3-8222-659f4495a085",
           "name": "Water Temperature",
           "icon": "thermometer",
           "type": "NUMBER",
@@ -116,6 +122,7 @@
           "isDisplay": true
         },
         {
+          "_id": "f1c2d3e4-5a6b-7c8d-9e0f-1a2b3c4d5e6f",
           "name": "Notes",
           "icon": "notes",
           "type": "LONGTEXT",
@@ -136,6 +143,7 @@
       "owner": "cafb043b-f8f6-4a89-bd11-a1780d319980",
       "fields": [
         {
+          "_id": "6e844351-d486-4031-9aab-0f289a372839",
           "name": "Tea Origin",
           "icon": "tea-leaf",
           "type": "TEXT",
@@ -144,6 +152,7 @@
           "isDisplay": true
         },
         {
+          "_id": "f5246465-6e2c-449d-ab4a-6176deba5c60",
           "name": "Water Temperature",
           "icon": "thermometer",
           "type": "NUMBER",
@@ -159,6 +168,7 @@
           "isDisplay": true
         },
         {
+          "_id": "35a6e051-c3ca-4066-9b18-17648758830a",
           "name": "Whisking Technique",
           "icon": "whisk",
           "type": "DROPDOWN",

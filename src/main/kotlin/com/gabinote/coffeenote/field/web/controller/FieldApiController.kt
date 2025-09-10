@@ -80,6 +80,7 @@ class FieldApiController(
         return ResponseEntity.status(HttpStatus.CREATED).body(data)
     }
 
+    // TODO : PATCH 로 기존 api 는 변경 후 새로운 PUT api 생성
     @NeedAuth
     @PutMapping("/field/me/{extId}")
     fun updateOwnedField(

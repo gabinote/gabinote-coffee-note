@@ -38,6 +38,7 @@ class TemplateRepositoryTest : RepositoryTestTemplate() {
                         res.fields.size shouldBe 2
 
                         val firstField = res.fields[0]
+                        firstField.id shouldBe "d70f81e9-5842-40f8-b71b-6bd34b40bf18"
                         firstField.name shouldBe "Coffee Type"
                         firstField.icon shouldBe "coffee-bean"
                         firstField.type shouldBe "TEXT"
@@ -46,6 +47,7 @@ class TemplateRepositoryTest : RepositoryTestTemplate() {
                         firstField.isDisplay shouldBe true
 
                         val secondField = res.fields[1]
+                        secondField.id shouldBe "1e6f4c3a-2b4d-4e5f-8a9b-0c1d2e3f4a5b"
                         secondField.name shouldBe "Brewing Method"
                         secondField.icon shouldBe "coffee-machine"
                         secondField.type shouldBe "DROPDOWN"
@@ -158,6 +160,7 @@ class TemplateRepositoryTest : RepositoryTestTemplate() {
 
                     val templateFields = listOf(
                         TemplateField(
+                            id = "6e844351-d486-4031-9aab-0f289a372839",
                             name = "Tea Origin",
                             icon = "tea-leaf",
                             type = "TEXT",
@@ -166,6 +169,7 @@ class TemplateRepositoryTest : RepositoryTestTemplate() {
                             isDisplay = true
                         ),
                         TemplateField(
+                            id = "f5246465-6e2c-449d-ab4a-6176deba5c60",
                             name = "Water Temperature",
                             icon = "thermometer",
                             type = "NUMBER",
@@ -179,6 +183,7 @@ class TemplateRepositoryTest : RepositoryTestTemplate() {
                             isDisplay = true
                         ),
                         TemplateField(
+                            id = "35a6e051-c3ca-4066-9b18-17648758830a",
                             name = "Whisking Technique",
                             icon = "whisk",
                             type = "DROPDOWN",
@@ -217,6 +222,7 @@ class TemplateRepositoryTest : RepositoryTestTemplate() {
                         savedTemplate.owner shouldBe newTemplate.owner
 
                         val firstField = savedTemplate.fields[0]
+                        firstField.id shouldBe "6e844351-d486-4031-9aab-0f289a372839"
                         firstField.name shouldBe "Tea Origin"
                         firstField.icon shouldBe "tea-leaf"
                         firstField.type shouldBe "TEXT"
@@ -225,6 +231,7 @@ class TemplateRepositoryTest : RepositoryTestTemplate() {
                         firstField.isDisplay shouldBe true
 
                         val secondField = savedTemplate.fields[1]
+                        secondField.id shouldBe "f5246465-6e2c-449d-ab4a-6176deba5c60"
                         secondField.name shouldBe "Water Temperature"
                         secondField.icon shouldBe "thermometer"
                         secondField.type shouldBe "NUMBER"
@@ -237,6 +244,7 @@ class TemplateRepositoryTest : RepositoryTestTemplate() {
                         unitAttribute.value shouldBe listOf("°C")
 
                         val thirdField = savedTemplate.fields[2]
+                        thirdField.id shouldBe "35a6e051-c3ca-4066-9b18-17648758830a"
                         thirdField.name shouldBe "Whisking Technique"
                         thirdField.icon shouldBe "whisk"
                         thirdField.type shouldBe "DROPDOWN"
@@ -260,6 +268,7 @@ class TemplateRepositoryTest : RepositoryTestTemplate() {
                     val existingTemplate = templateRepository.findByExternalId(targetExternalId)
                     val updatedTemplateFields = listOf(
                         TemplateField(
+                            id = "60bd213b-f560-4f7a-90e2-019eef5d0082",
                             name = "Coffee Origin",
                             icon = "coffee-origin",
                             type = "TEXT",
@@ -268,6 +277,7 @@ class TemplateRepositoryTest : RepositoryTestTemplate() {
                             isDisplay = true
                         ),
                         TemplateField(
+                            id = "c25bf62d-2625-444b-881b-273e2a6b58ec",
                             name = "Extraction Time",
                             icon = "timer-updated",
                             type = "NUMBER",
@@ -281,6 +291,7 @@ class TemplateRepositoryTest : RepositoryTestTemplate() {
                             isDisplay = true
                         ),
                         TemplateField(
+                            id = "0fdb5826-c37b-4915-85ed-7ccf6432776a",
                             name = "Taste Profile",
                             icon = "taste",
                             type = "DROPDOWN",
@@ -316,6 +327,7 @@ class TemplateRepositoryTest : RepositoryTestTemplate() {
                         savedTemplate.isDefault shouldBe existingTemplate.isDefault
 
                         val firstField = savedTemplate.fields[0]
+                        firstField.id shouldBe "60bd213b-f560-4f7a-90e2-019eef5d0082"
                         firstField.name shouldBe "Coffee Origin"
                         firstField.icon shouldBe "coffee-origin"
                         firstField.type shouldBe "TEXT"
@@ -324,6 +336,7 @@ class TemplateRepositoryTest : RepositoryTestTemplate() {
                         firstField.isDisplay shouldBe true
 
                         val secondField = savedTemplate.fields[1]
+                        secondField.id shouldBe "c25bf62d-2625-444b-881b-273e2a6b58ec"
                         secondField.name shouldBe "Extraction Time"
                         secondField.icon shouldBe "timer-updated"
                         secondField.type shouldBe "NUMBER"
@@ -336,6 +349,7 @@ class TemplateRepositoryTest : RepositoryTestTemplate() {
                         unitAttribute.value shouldBe listOf("seconds")
 
                         val thirdField = savedTemplate.fields[2]
+                        thirdField.id shouldBe "0fdb5826-c37b-4915-85ed-7ccf6432776a"
                         thirdField.name shouldBe "Taste Profile"
                         thirdField.icon shouldBe "taste"
                         thirdField.type shouldBe "DROPDOWN"
