@@ -217,7 +217,7 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                 }
             }
 
-            describe("TemplateFieldMapper.toEntity") {
+            describe("TemplateFieldMapper.toTemplateField") {
                 context("올바른 TemplateFieldCreateReqServiceDto가 주어지면,") {
                     val attributeDto = mockk<AttributeCreateReqServiceDto>()
                     val dto = TemplateFieldCreateReqServiceDto(
@@ -247,7 +247,7 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                     )
 
                     it("TemplateField 엔티티로 변환되어야 한다.") {
-                        val result = templateFieldMapper.toEntity(dto)
+                        val result = templateFieldMapper.toTemplateField(dto)
                         result shouldBe expected
 
                         verify(exactly = 1) { attributeMapper.toAttribute(attributeDto) }

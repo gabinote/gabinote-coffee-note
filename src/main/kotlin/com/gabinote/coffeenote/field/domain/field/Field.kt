@@ -28,6 +28,7 @@ data class Field(
     /**
      * 기본 필드 여부
      */
+    @JvmField
     var isDefault: Boolean = false,
 
     /**

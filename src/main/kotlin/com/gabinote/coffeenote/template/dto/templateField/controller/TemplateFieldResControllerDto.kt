@@ -11,6 +11,7 @@ data class TemplateFieldResControllerDto(
     val icon: String,
     val type: String,
     val order: Int,
+    @JvmField
     var isDisplay: Boolean,
     var attributes: Set<AttributeResControllerDto> = emptySet(),
 )

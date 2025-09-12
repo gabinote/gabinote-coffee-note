@@ -46,5 +46,6 @@ data class FieldResServiceDto(
     /**
      * 기본 필드 여부
      */
+    @JvmField
     val isDefault: Boolean,
 )

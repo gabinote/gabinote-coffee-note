@@ -43,9 +43,10 @@ data class TemplateField(
      * 해당 옵션이 활성화 되어있으면, 리스트보기시에 커피노트에서 해당 필드가 표시됨
      * true: 표시, false: 숨김
      */
+    @JvmField
     var isDisplay: Boolean = true
 ) {
     override fun toString(): String {
-        return "TemplateField(name='$name', icon='$icon', type='$type', attributes=$attributes, order=$order)"
+        return "TemplateField(id='$id', name='$name', icon='$icon', type='$type', attributes=$attributes, order=$order, isDisplay=$isDisplay)"
     }
 }

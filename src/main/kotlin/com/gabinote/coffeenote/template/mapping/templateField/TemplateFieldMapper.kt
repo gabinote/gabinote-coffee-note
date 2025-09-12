@@ -17,24 +17,18 @@ import org.mapstruct.*
 interface TemplateFieldMapper {
 
 
-    @Mapping(source = "display", target = "isDisplay")
     fun toResServiceDto(templateField: TemplateField): TemplateFieldResServiceDto
 
-    @Mapping(source = "display", target = "isDisplay")
     fun toResControllerDto(dto: TemplateFieldResServiceDto): TemplateFieldResControllerDto
 
-    @Mapping(source = "display", target = "isDisplay")
     fun toCreateReqServiceDto(dto: TemplateFieldCreateReqControllerDto): TemplateFieldCreateReqServiceDto
 
-    @Mapping(source = "display", target = "isDisplay")
     fun toPatchReqServiceDto(dto: TemplateFieldPatchReqControllerDto): TemplateFieldPatchReqServiceDto
 
-    @Mapping(source = "display", target = "isDisplay")
-    fun toEntity(dto: TemplateFieldCreateReqServiceDto): TemplateField
+    fun toTemplateField(dto: TemplateFieldCreateReqServiceDto): TemplateField
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "attributes", ignore = true)
-    @Mapping(source = "display", target = "display")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     fun patchFromDto(dto: TemplateFieldPatchReqServiceDto, @MappingTarget entity: TemplateField): TemplateField
 

@@ -41,6 +41,7 @@ sealed class FieldType {
      * @param attributes 검사할 속성 집합
      * @return 유효성 검사 결과 목록
      */
+    //TODO: 속성키 중복 체크
     fun validationAttributes(attributes: Set<Attribute>): List<FieldTypeValidationResult> {
         val attributeMap = attributes.associateBy { it.key }
         return fieldTypeAttributeKeys.map { fieldTypeAttributeKey ->

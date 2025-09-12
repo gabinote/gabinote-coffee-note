@@ -8,6 +8,8 @@ data class TemplateFieldPatchReqControllerDto(
     val icon: String? = null,
     val type: String? = null,
     val order: Int? = null,
+
+    @JvmField
     var isDisplay: Boolean? = null,
     var attributes: Set<AttributeUpdateReqControllerDto> = emptySet(),
 )

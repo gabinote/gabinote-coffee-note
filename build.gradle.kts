@@ -20,8 +20,13 @@ java {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
-
-
+//sourceSets {
+//    main {
+//        resources {
+//            srcDirs("src/main/resources")
+//        }
+//    }
+//}
 dependencyManagement {
     imports {
         mavenBom("org.testcontainers:testcontainers-bom:1.20.6")
@@ -99,7 +104,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.mapstruct/mapstruct
     implementation("org.mapstruct:mapstruct:1.5.5.Final")
     kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
-    kaptTest("org.mapstruct:mapstruct-processor:1.5.5.Final")
+//    compileOnly("org.mapstruct:mapstruct-processor:1.5.5.Final")
     // jackson
     implementation(platform("com.fasterxml.jackson:jackson-bom:2.15.2"))
     implementation("com.fasterxml.jackson.core:jackson-databind")

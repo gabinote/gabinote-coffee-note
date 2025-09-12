@@ -38,6 +38,7 @@ data class Template(
      * 템플릿 공개 여부
      * true: 공개, false: 비공개
      */
+    @JvmField
     var isOpen: Boolean = false,
 
     /**
@@ -48,6 +49,7 @@ data class Template(
     /**
      * 기본 템플릿 여부
      */
+    @JvmField
     var isDefault: Boolean = false,
 
     /**
