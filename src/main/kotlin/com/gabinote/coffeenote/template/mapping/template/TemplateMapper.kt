@@ -2,13 +2,11 @@ package com.gabinote.coffeenote.template.mapping.template
 
 import com.gabinote.coffeenote.field.mapping.attribute.AttributeMapper
 import com.gabinote.coffeenote.template.domain.template.Template
-import com.gabinote.coffeenote.template.dto.template.controller.TemplateCreateDefaultReqControllerDto
-import com.gabinote.coffeenote.template.dto.template.controller.TemplateCreateReqControllerDto
-import com.gabinote.coffeenote.template.dto.template.service.TemplateCreateDefaultReqServiceDto
-import com.gabinote.coffeenote.template.dto.template.service.TemplateCreateReqServiceDto
+import com.gabinote.coffeenote.template.dto.template.controller.*
+import com.gabinote.coffeenote.template.dto.template.service.*
 import com.gabinote.coffeenote.template.mapping.templateField.TemplateFieldMapper
-import org.mapstruct.Mapper
-import org.mapstruct.Mapping
+import org.mapstruct.*
+import java.util.*
 
 @Mapper(
     componentModel = "spring",
@@ -25,7 +23,6 @@ interface TemplateMapper {
      * @see TemplateCreateReqControllerDto
      * @see TemplateCreateReqServiceDto
      */
-//    @Mapping(source = "isOpen", target = "isOpen")
     fun toCreateReqServiceDto(dto: TemplateCreateReqControllerDto, owner: String): TemplateCreateReqServiceDto
 
 
@@ -41,7 +38,6 @@ interface TemplateMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "externalId", ignore = true)
     @Mapping(target = "isDefault", constant = "false")
-//    @Mapping(source = "isOpen", target = "isOpen")
     fun toTemplate(dto: TemplateCreateReqServiceDto): Template
 
     /**
@@ -70,5 +66,34 @@ interface TemplateMapper {
     @Mapping(target = "isOpen", constant = "true")
     fun toDefaultTemplate(dto: TemplateCreateDefaultReqServiceDto): Template
 
+    fun toUpdateDefaultReqServiceDto(
+        dto: TemplateUpdateDefaultReqControllerDto,
+        externalId: UUID
+    ): TemplateUpdateDefaultReqServiceDto
 
+    fun toUpdateReqServiceDto(
+        dto: TemplateUpdateReqControllerDto,
+        owner: String,
+        externalId: UUID
+    ): TemplateUpdateReqServiceDto
+
+    fun toResServiceDto(template: Template): TemplateResServiceDto
+
+    fun toResControllerDto(dto: TemplateResServiceDto): TemplateResControllerDto
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "externalId", ignore = true)
+    @Mapping(target = "owner", ignore = true)
+    @Mapping(target = "isDefault", ignore = true)
+    @Mapping(target = "fields", ignore = true)
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    fun updateFromDto(dto: TemplateUpdateReqServiceDto, @MappingTarget entity: Template): Template
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "externalId", ignore = true)
+    @Mapping(target = "owner", ignore = true)
+    @Mapping(target = "isDefault", ignore = true)
+    @Mapping(target = "fields", ignore = true)
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    fun updateDefaultFromDto(dto: TemplateUpdateDefaultReqServiceDto, @MappingTarget entity: Template): Template
 }

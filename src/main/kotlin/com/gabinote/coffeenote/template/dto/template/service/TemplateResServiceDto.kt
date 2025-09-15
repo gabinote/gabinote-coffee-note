@@ -9,8 +9,10 @@ data class TemplateResServiceDto(
     val name: String,
     val icon: String,
     val description: String,
+    @JvmField
     val isOpen: Boolean,
     val owner: String?,
+    @JvmField
     val isDefault: Boolean,
     val fields: List<TemplateFieldResServiceDto> = emptyList(),
 )

@@ -24,7 +24,6 @@ import io.mockk.mockk
 import io.mockk.verify
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
-import java.util.*
 
 @ContextConfiguration(classes = [TemplateFieldMapperImpl::class, AttributeMapperImpl::class])
 class TemplateFieldMapperTest : MockkTestTemplate() {
@@ -36,27 +35,21 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
     lateinit var attributeMapper: AttributeMapper
 
     init {
-        describe("[TemplateField] TemplateFieldMapper") {
+        describe("[Template] TemplateFieldMapper Test") {
 
             describe("TemplateFieldMapper.toResServiceDto") {
                 context("TemplateField 엔티티가 주어지면,") {
                     val attribute = mockk<Attribute>()
                     val templateField = TemplateField(
-                        id = UUID.randomUUID().toString(),
+                        id = "template-field-id",
                         name = "Template Field Name",
-                        icon = "icon.png",
+                        icon = "field-icon",
                         type = "text",
                         attributes = setOf(attribute),
                         order = 1,
                         isDisplay = true
                     )
-
                     val expectedAttribute = mockk<AttributeResServiceDto>()
-
-                    beforeTest {
-                        every { attributeMapper.toAttributeResServiceDto(attribute) } returns expectedAttribute
-                    }
-
                     val expected = TemplateFieldResServiceDto(
                         id = templateField.id,
                         name = templateField.name,
@@ -67,11 +60,42 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                         attributes = setOf(expectedAttribute)
                     )
 
+                    beforeTest {
+                        every { attributeMapper.toAttributeResServiceDto(attribute) } returns expectedAttribute
+                    }
+
                     it("TemplateFieldResServiceDto로 변환되어야 한다.") {
                         val result = templateFieldMapper.toResServiceDto(templateField)
                         result shouldBe expected
 
                         verify(exactly = 1) { attributeMapper.toAttributeResServiceDto(attribute) }
+                    }
+                }
+                context("attributes가 빈 TemplateField 엔티티가 주어지면,") {
+                    val templateField = TemplateField(
+                        id = "template-field-id",
+                        name = "Simple Field",
+                        icon = "simple-icon",
+                        type = "text",
+                        attributes = emptySet(),
+                        order = 0,
+                        isDisplay = true
+                    )
+                    val expected = TemplateFieldResServiceDto(
+                        id = templateField.id,
+                        name = templateField.name,
+                        icon = templateField.icon,
+                        type = templateField.type,
+                        order = templateField.order,
+                        isDisplay = templateField.isDisplay,
+                        attributes = emptySet()
+                    )
+
+                    it("빈 attributes를 가진 TemplateFieldResServiceDto로 변환되어야 한다.") {
+                        val result = templateFieldMapper.toResServiceDto(templateField)
+                        result shouldBe expected
+
+                        verify(exactly = 0) { attributeMapper.toAttributeResServiceDto(any<Attribute>()) }
                     }
                 }
             }
@@ -80,21 +104,15 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                 context("TemplateFieldResServiceDto가 주어지면,") {
                     val attributeDto = mockk<AttributeResServiceDto>()
                     val dto = TemplateFieldResServiceDto(
-                        id = UUID.randomUUID().toString(),
+                        id = "template-field-id",
                         name = "Template Field Name",
-                        icon = "icon.png",
+                        icon = "field-icon",
                         type = "text",
                         order = 1,
                         isDisplay = true,
                         attributes = setOf(attributeDto)
                     )
-
                     val expectedAttribute = mockk<AttributeResControllerDto>()
-
-                    beforeTest {
-                        every { attributeMapper.toAttributeResControllerDto(attributeDto) } returns expectedAttribute
-                    }
-
                     val expected = TemplateFieldResControllerDto(
                         id = dto.id,
                         name = dto.name,
@@ -105,11 +123,42 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                         attributes = setOf(expectedAttribute)
                     )
 
+                    beforeTest {
+                        every { attributeMapper.toAttributeResControllerDto(attributeDto) } returns expectedAttribute
+                    }
+
                     it("TemplateFieldResControllerDto로 변환되어야 한다.") {
                         val result = templateFieldMapper.toResControllerDto(dto)
                         result shouldBe expected
 
                         verify(exactly = 1) { attributeMapper.toAttributeResControllerDto(attributeDto) }
+                    }
+                }
+                context("attributes가 빈 TemplateFieldResServiceDto가 주어지면,") {
+                    val dto = TemplateFieldResServiceDto(
+                        id = "template-field-id",
+                        name = "Simple Field",
+                        icon = "simple-icon",
+                        type = "text",
+                        order = 0,
+                        isDisplay = true,
+                        attributes = emptySet()
+                    )
+                    val expected = TemplateFieldResControllerDto(
+                        id = dto.id,
+                        name = dto.name,
+                        icon = dto.icon,
+                        type = dto.type,
+                        order = dto.order,
+                        isDisplay = dto.isDisplay,
+                        attributes = emptySet()
+                    )
+
+                    it("빈 attributes를 가진 TemplateFieldResControllerDto로 변환되어야 한다.") {
+                        val result = templateFieldMapper.toResControllerDto(dto)
+                        result shouldBe expected
+
+                        verify(exactly = 0) { attributeMapper.toAttributeResControllerDto(any<AttributeResServiceDto>()) }
                     }
                 }
             }
@@ -118,21 +167,15 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                 context("올바른 TemplateFieldCreateReqControllerDto가 주어지면,") {
                     val attributeDto = mockk<AttributeCreateReqControllerDto>()
                     val dto = TemplateFieldCreateReqControllerDto(
-                        id = UUID.randomUUID().toString(),
+                        id = "template-field-id",
                         name = "Template Field Name",
-                        icon = "icon.png",
+                        icon = "field-icon",
                         type = "text",
                         order = 1,
                         isDisplay = true,
                         attributes = setOf(attributeDto)
                     )
-
                     val expectedAttribute = mockk<AttributeCreateReqServiceDto>()
-
-                    beforeTest {
-                        every { attributeMapper.toAttributeCreateReqServiceDto(attributeDto) } returns expectedAttribute
-                    }
-
                     val expected = TemplateFieldCreateReqServiceDto(
                         id = dto.id,
                         name = dto.name,
@@ -143,6 +186,10 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                         attributes = setOf(expectedAttribute)
                     )
 
+                    beforeTest {
+                        every { attributeMapper.toAttributeCreateReqServiceDto(attributeDto) } returns expectedAttribute
+                    }
+
                     it("TemplateFieldCreateReqServiceDto로 변환되어야 한다.") {
                         val result = templateFieldMapper.toCreateReqServiceDto(dto)
                         result shouldBe expected
@@ -150,27 +197,48 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                         verify(exactly = 1) { attributeMapper.toAttributeCreateReqServiceDto(attributeDto) }
                     }
                 }
+                context("attributes가 빈 TemplateFieldCreateReqControllerDto가 주어지면,") {
+                    val dto = TemplateFieldCreateReqControllerDto(
+                        id = "template-field-id",
+                        name = "Simple Field",
+                        icon = "simple-icon",
+                        type = "text",
+                        order = 0,
+                        isDisplay = false,
+                        attributes = emptySet()
+                    )
+                    val expected = TemplateFieldCreateReqServiceDto(
+                        id = dto.id,
+                        name = dto.name,
+                        icon = dto.icon,
+                        type = dto.type,
+                        order = dto.order,
+                        isDisplay = dto.isDisplay,
+                        attributes = emptySet()
+                    )
+
+                    it("빈 attributes를 가진 TemplateFieldCreateReqServiceDto로 변환되어야 한다.") {
+                        val result = templateFieldMapper.toCreateReqServiceDto(dto)
+                        result shouldBe expected
+
+                        verify(exactly = 0) { attributeMapper.toAttributeCreateReqServiceDto(any<AttributeCreateReqControllerDto>()) }
+                    }
+                }
             }
 
             describe("TemplateFieldMapper.toPatchReqServiceDto") {
-                context("올바른 TemplateFieldPatchReqControllerDto가 주어지면,") {
+                context("모든 필드가 설정된 TemplateFieldPatchReqControllerDto가 주어지면,") {
                     val attributeDto = mockk<AttributeUpdateReqControllerDto>()
                     val dto = TemplateFieldPatchReqControllerDto(
-                        id = UUID.randomUUID().toString(),
+                        id = "template-field-id",
                         name = "Updated Template Field",
-                        icon = "updated-icon.png",
+                        icon = "updated-icon",
                         type = "updated-type",
                         order = 2,
                         isDisplay = false,
                         attributes = setOf(attributeDto)
                     )
-
                     val expectedAttribute = mockk<AttributeUpdateReqServiceDto>()
-
-                    beforeTest {
-                        every { attributeMapper.toAttributeUpdateReqServiceDto(attributeDto) } returns expectedAttribute
-                    }
-
                     val expected = TemplateFieldPatchReqServiceDto(
                         id = dto.id,
                         name = dto.name,
@@ -181,6 +249,10 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                         attributes = setOf(expectedAttribute)
                     )
 
+                    beforeTest {
+                        every { attributeMapper.toAttributeUpdateReqServiceDto(attributeDto) } returns expectedAttribute
+                    }
+
                     it("TemplateFieldPatchReqServiceDto로 변환되어야 한다.") {
                         val result = templateFieldMapper.toPatchReqServiceDto(dto)
                         result shouldBe expected
@@ -188,18 +260,16 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                         verify(exactly = 1) { attributeMapper.toAttributeUpdateReqServiceDto(attributeDto) }
                     }
                 }
-
                 context("일부 필드만 설정된 TemplateFieldPatchReqControllerDto가 주어지면,") {
                     val dto = TemplateFieldPatchReqControllerDto(
-                        id = UUID.randomUUID().toString(),
-                        name = "Updated Template Field",
+                        id = "template-field-id",
+                        name = "Updated Name Only",
                         icon = null,
                         type = null,
                         order = null,
                         isDisplay = null,
                         attributes = emptySet()
                     )
-
                     val expected = TemplateFieldPatchReqServiceDto(
                         id = dto.id,
                         name = dto.name,
@@ -213,6 +283,8 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                     it("null 값이 보존된 TemplateFieldPatchReqServiceDto로 변환되어야 한다.") {
                         val result = templateFieldMapper.toPatchReqServiceDto(dto)
                         result shouldBe expected
+
+                        verify(exactly = 0) { attributeMapper.toAttributeUpdateReqServiceDto(any<AttributeUpdateReqControllerDto>()) }
                     }
                 }
             }
@@ -221,21 +293,15 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                 context("올바른 TemplateFieldCreateReqServiceDto가 주어지면,") {
                     val attributeDto = mockk<AttributeCreateReqServiceDto>()
                     val dto = TemplateFieldCreateReqServiceDto(
-                        id = UUID.randomUUID().toString(),
+                        id = "template-field-id",
                         name = "Template Field Name",
-                        icon = "icon.png",
+                        icon = "field-icon",
                         type = "text",
                         order = 1,
                         isDisplay = true,
                         attributes = setOf(attributeDto)
                     )
-
                     val expectedAttribute = mockk<Attribute>()
-
-                    beforeTest {
-                        every { attributeMapper.toAttribute(attributeDto) } returns expectedAttribute
-                    }
-
                     val expected = TemplateField(
                         id = dto.id,
                         name = dto.name,
@@ -246,6 +312,10 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                         attributes = setOf(expectedAttribute)
                     )
 
+                    beforeTest {
+                        every { attributeMapper.toAttribute(attributeDto) } returns expectedAttribute
+                    }
+
                     it("TemplateField 엔티티로 변환되어야 한다.") {
                         val result = templateFieldMapper.toTemplateField(dto)
                         result shouldBe expected
@@ -253,30 +323,55 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                         verify(exactly = 1) { attributeMapper.toAttribute(attributeDto) }
                     }
                 }
+                context("attributes가 빈 TemplateFieldCreateReqServiceDto가 주어지면,") {
+                    val dto = TemplateFieldCreateReqServiceDto(
+                        id = "simple-field-id",
+                        name = "Simple Field",
+                        icon = "simple-icon",
+                        type = "number",
+                        order = 0,
+                        isDisplay = false,
+                        attributes = emptySet()
+                    )
+                    val expected = TemplateField(
+                        id = dto.id,
+                        name = dto.name,
+                        icon = dto.icon,
+                        type = dto.type,
+                        order = dto.order,
+                        isDisplay = dto.isDisplay,
+                        attributes = emptySet()
+                    )
+
+                    it("빈 attributes를 가진 TemplateField 엔티티로 변환되어야 한다.") {
+                        val result = templateFieldMapper.toTemplateField(dto)
+                        result shouldBe expected
+
+                        verify(exactly = 0) { attributeMapper.toAttribute(any<AttributeCreateReqServiceDto>()) }
+                    }
+                }
             }
 
             describe("TemplateFieldMapper.patchFromDto") {
                 context("모든 값이 들어있는 TemplateFieldPatchReqServiceDto와 기존 TemplateField 엔티티가 주어지면,") {
                     val dto = TemplateFieldPatchReqServiceDto(
-                        id = UUID.randomUUID().toString(),
+                        id = "dto-id", // 무시될 값
                         name = "Updated Template Field",
-                        icon = "updated-icon.png",
+                        icon = "updated-icon",
                         type = "updated-type",
                         order = 2,
                         isDisplay = false,
-                        attributes = setOf()
+                        attributes = setOf() // 무시될 값
                     )
-
                     val existingEntity = TemplateField(
-                        id = UUID.randomUUID().toString(),
-                        name = "Template Field Name",
-                        icon = "icon.png",
-                        type = "text",
+                        id = "existing-id",
+                        name = "Original Field",
+                        icon = "original-icon",
+                        type = "original-type",
                         order = 1,
                         isDisplay = true,
                         attributes = setOf(mockk<Attribute>())
                     )
-
                     val expected = TemplateField(
                         id = existingEntity.id, // id는 무시됨
                         name = dto.name!!,
@@ -287,33 +382,30 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                         attributes = existingEntity.attributes // attributes는 무시됨
                     )
 
-                    it("기존 엔티티의 필드들이 업데이트되어야 한다.") {
+                    it("기존 엔티티의 지정된 필드들이 업데이트되어야 한다.") {
                         val result = templateFieldMapper.patchFromDto(dto, existingEntity)
                         result shouldBe expected
                     }
                 }
-
-                context("일부 값만 들어있는 TemplateFieldPatchReqServiceDto와 기존 TemplateField 엔티티가 주어지면,") {
+                context("name만 들어있는 TemplateFieldPatchReqServiceDto가 주어지면,") {
                     val dto = TemplateFieldPatchReqServiceDto(
-                        id = UUID.randomUUID().toString(), // 무시될 값
-                        name = "Updated Template Field",
+                        id = "dto-id", // 무시될 값
+                        name = "Updated Name Only",
                         icon = null,
                         type = null,
                         order = null,
                         isDisplay = null,
                         attributes = setOf() // 무시될 값
                     )
-
                     val existingEntity = TemplateField(
-                        id = UUID.randomUUID().toString(),
-                        name = "Template Field Name",
-                        icon = "icon.png",
-                        type = "text",
+                        id = "existing-id",
+                        name = "Original Field",
+                        icon = "original-icon",
+                        type = "original-type",
                         order = 1,
                         isDisplay = true,
                         attributes = setOf(mockk<Attribute>())
                     )
-
                     val expected = TemplateField(
                         id = existingEntity.id, // id는 변경되지 않음
                         name = dto.name!!, // 업데이트됨
@@ -324,7 +416,75 @@ class TemplateFieldMapperTest : MockkTestTemplate() {
                         attributes = existingEntity.attributes // 무시됨
                     )
 
-                    it("null이 아닌 필드만 업데이트되어야 한다.") {
+                    it("기존 엔티티의 name 필드만 업데이트되어야 한다.") {
+                        val result = templateFieldMapper.patchFromDto(dto, existingEntity)
+                        result shouldBe expected
+                    }
+                }
+                context("isDisplay만 들어있는 TemplateFieldPatchReqServiceDto가 주어지면,") {
+                    val dto = TemplateFieldPatchReqServiceDto(
+                        id = "dto-id", // 무시될 값
+                        name = null,
+                        icon = null,
+                        type = null,
+                        order = null,
+                        isDisplay = false,
+                        attributes = setOf() // 무시될 값
+                    )
+                    val existingEntity = TemplateField(
+                        id = "existing-id",
+                        name = "Original Field",
+                        icon = "original-icon",
+                        type = "original-type",
+                        order = 1,
+                        isDisplay = true,
+                        attributes = setOf(mockk<Attribute>())
+                    )
+                    val expected = TemplateField(
+                        id = existingEntity.id, // id는 변경되지 않음
+                        name = existingEntity.name, // null이므로 변경되지 않음
+                        icon = existingEntity.icon, // null이므로 변경되지 않음
+                        type = existingEntity.type, // null이므로 변경되지 않음
+                        order = existingEntity.order, // null이므로 변경되지 않음
+                        isDisplay = dto.isDisplay!!, // 업데이트됨
+                        attributes = existingEntity.attributes // 무시됨
+                    )
+
+                    it("기존 엔티티의 isDisplay 필드만 업데이트되어야 한다.") {
+                        val result = templateFieldMapper.patchFromDto(dto, existingEntity)
+                        result shouldBe expected
+                    }
+                }
+                context("order와 icon만 들어있는 TemplateFieldPatchReqServiceDto가 주어지면,") {
+                    val dto = TemplateFieldPatchReqServiceDto(
+                        id = "dto-id", // 무시될 값
+                        name = null,
+                        icon = "new-icon",
+                        type = null,
+                        order = 5,
+                        isDisplay = null,
+                        attributes = setOf() // 무시될 값
+                    )
+                    val existingEntity = TemplateField(
+                        id = "existing-id",
+                        name = "Original Field",
+                        icon = "original-icon",
+                        type = "original-type",
+                        order = 1,
+                        isDisplay = true,
+                        attributes = setOf(mockk<Attribute>())
+                    )
+                    val expected = TemplateField(
+                        id = existingEntity.id, // id는 변경되지 않음
+                        name = existingEntity.name, // null이므로 변경되지 않음
+                        icon = dto.icon!!, // 업데이트됨
+                        type = existingEntity.type, // null이므로 변경되지 않음
+                        order = dto.order!!, // 업데이트됨
+                        isDisplay = existingEntity.isDisplay, // null이므로 변경되지 않음
+                        attributes = existingEntity.attributes // 무시됨
+                    )
+
+                    it("기존 엔티티의 order와 icon 필드만 업데이트되어야 한다.") {
                         val result = templateFieldMapper.patchFromDto(dto, existingEntity)
                         result shouldBe expected
                     }
