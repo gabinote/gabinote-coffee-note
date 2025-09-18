@@ -6,7 +6,7 @@
       "isDefault": false,
       "name": "Bravo",
       "icon": "icon_b",
-      "type": "TEXT",
+      "type": "SHORT_TEXT",
       "attributes": [],
       "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e"
     },
@@ -16,7 +16,7 @@
       "isDefault": true,
       "name": "Alpha",
       "icon": "icon_a",
-      "type": "TEXT",
+      "type": "SHORT_TEXT",
       "attributes": [],
       "owner": null
     },
@@ -51,7 +51,7 @@
       "isDefault": false,
       "name": "New Field",
       "icon": "default",
-      "type": "TEXT",
+      "type": "SHORT_TEXT",
       "attributes": [],
       "owner": "cafb043b-f8f6-4a89-bd11-a1780d319980"
     }

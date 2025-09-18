@@ -13,6 +13,7 @@ import com.gabinote.coffeenote.field.dto.field.service.FieldUpdateDefaultReqServ
 import org.bson.types.ObjectId
 import java.util.*
 
+//TODO: 변경된 스펙에 맞게 수정 필요
 object FieldTestDataHelper {
     fun createTestFieldResControllerDto(
         externalId: String = UUID.randomUUID().toString(),
@@ -30,7 +31,7 @@ object FieldTestDataHelper {
             isDefault = default,
             name = name,
             icon = icon,
-            type = type,
+            type = TestFieldType,
             attributes = attributes,
             owner = owner,
         )
@@ -71,7 +72,7 @@ object FieldTestDataHelper {
         return FieldCreateReqControllerDto(
             name = name,
             icon = icon,
-            type = type,
+            type = TestFieldType,
             attributes = attributes,
         )
 
@@ -91,7 +92,7 @@ object FieldTestDataHelper {
         return FieldCreateDefaultReqServiceDto(
             name = name,
             icon = icon,
-            type = type,
+            type = TestFieldType,
             attributes = attributes,
         )
 

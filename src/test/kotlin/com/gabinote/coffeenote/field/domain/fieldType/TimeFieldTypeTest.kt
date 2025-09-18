@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.fieldType.type.TimeFieldType
 import com.gabinote.coffeenote.testSupport.testTemplate.MockkTestTemplate
 import io.kotest.data.forAll
 import io.kotest.data.headers
@@ -8,8 +9,10 @@ import io.kotest.data.row
 import io.kotest.data.table
 import io.kotest.matchers.shouldBe
 
-
 class TimeFieldTypeTest : MockkTestTemplate() {
+
+    private val timeFieldType = TimeFieldType()
+
     init {
         describe("[Field] TimeFieldType Test") {
             describe("validation attributes") {
@@ -22,7 +25,7 @@ class TimeFieldTypeTest : MockkTestTemplate() {
                     ).forAll { validAttributes, reason ->
                         context(reason) {
                             it("Validation 에 성공한다") {
-                                val res = TimeField.validationAttributes(validAttributes)
+                                val res = timeFieldType.validationAttributes(validAttributes)
                                 res.all { it.valid } shouldBe true
                             }
                         }
@@ -38,7 +41,7 @@ class TimeFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidAttributes, reason ->
                         context(reason) {
                             it("Validation 에 실패한다") {
-                                val res = TimeField.validationAttributes(invalidAttributes)
+                                val res = timeFieldType.validationAttributes(invalidAttributes)
                                 res.all { !it.valid } shouldBe true
                             }
                         }
@@ -56,7 +59,7 @@ class TimeFieldTypeTest : MockkTestTemplate() {
                     ).forAll { validValues, reason ->
                         context(reason) {
                             it("Validation 에 성공한다") {
-                                val res = TimeField.validationValues(values = validValues, attributes = setOf())
+                                val res = timeFieldType.validationValues(values = validValues, attributes = setOf())
                                 res.all { it.valid } shouldBe true
                             }
                         }
@@ -76,7 +79,7 @@ class TimeFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidValues, reason ->
                         context(reason) {
                             it("Validation 에 실패한다") {
-                                val res = TimeField.validationValues(values = invalidValues, attributes = setOf())
+                                val res = timeFieldType.validationValues(values = invalidValues, attributes = setOf())
                                 res.all { !it.valid } shouldBe true
                             }
                         }

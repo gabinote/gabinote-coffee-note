@@ -1,8 +1,13 @@
-package com.gabinote.coffeenote.field.domain.fieldType
+package com.gabinote.coffeenote.field.domain.fieldType.type
 
 import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
 import com.gabinote.coffeenote.common.util.type.TypeCheckHelper.isInt
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.fieldType.FieldType
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeAttributeKey
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeKey
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
+import org.springframework.stereotype.Component
 
 /**
  * 점수 입력 필드 타입을 구현하는 싱글톤 객체
@@ -10,11 +15,12 @@ import com.gabinote.coffeenote.field.domain.attribute.Attribute
  * @author 황준서 (hzser123@gmail.com)
  * @since 2025-09-08
  */
-object ScoreField : FieldType() {
+@Component
+class ScoreFieldType : FieldType() {
     /**
      * 점수 필드 타입의 고유 키
      */
-    override val key: String = "SCORE"
+    override val key: FieldTypeKey = FieldTypeKey.SCORE
 
     /**
      * 점수 필드가 리스트 보기에서 표시될 수 있는지 여부

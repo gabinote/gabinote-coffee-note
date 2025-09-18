@@ -85,7 +85,7 @@ class FieldRepositoryTest : RepositoryTestTemplate() {
                     testDataHelper.setData("/testsets/field/domain/base-field.json")
                     val newField = Field(
                         name = "New Field",
-                        type = "TEXT",
+                        type = "SHORT_TEXT",
                         isDefault = false,
                         owner = "cafb043b-f8f6-4a89-bd11-a1780d319980",
                         icon = "default"

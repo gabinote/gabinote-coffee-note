@@ -7,8 +7,6 @@ import com.epages.restdocs.apispec.ResourceSnippetParameters
 import com.epages.restdocs.apispec.Schema
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.gabinote.api.testSupport.testUtil.json.jsonBuilder
-import com.gabinote.coffeenote.common.mapping.slice.SliceMapper
-import com.gabinote.coffeenote.common.util.context.UserContext
 import com.gabinote.coffeenote.field.dto.attribute.controller.AttributeCreateReqControllerDto
 import com.gabinote.coffeenote.field.dto.attribute.controller.AttributeUpdateReqControllerDto
 import com.gabinote.coffeenote.field.dto.field.controller.FieldCreateDefaultReqControllerDto
@@ -17,15 +15,12 @@ import com.gabinote.coffeenote.field.dto.field.controller.FieldUpdateReqControll
 import com.gabinote.coffeenote.field.dto.field.service.FieldCreateDefaultReqServiceDto
 import com.gabinote.coffeenote.field.dto.field.service.FieldResServiceDto
 import com.gabinote.coffeenote.field.dto.field.service.FieldUpdateDefaultReqServiceDto
-import com.gabinote.coffeenote.field.enums.userSearch.FieldAdminSearchScope
-import com.gabinote.coffeenote.field.mapping.field.FieldMapper
-import com.gabinote.coffeenote.field.service.field.FieldService
-import com.gabinote.coffeenote.testSupport.testTemplate.WebMvcTestTemplate
+import com.gabinote.coffeenote.field.enums.adminSearch.FieldAdminSearchScope
 import com.gabinote.coffeenote.testSupport.testUtil.data.field.FieldTestDataHelper.createTestFieldResControllerDto
+import com.gabinote.coffeenote.testSupport.testUtil.data.field.TestFieldType
 import com.gabinote.coffeenote.testSupport.testUtil.page.TestPageableUtil.createPageable
 import com.gabinote.coffeenote.testSupport.testUtil.page.TestSliceUtil.toSlice
 import com.gabinote.coffeenote.testSupport.testUtil.page.TestSliceUtil.toSliceResponse
-import com.ninjasquad.springmockk.MockkBean
 import io.kotest.data.forAll
 import io.kotest.data.headers
 import io.kotest.data.row
@@ -44,25 +39,16 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.util.*
 
+
 @WebMvcTest(controllers = [FieldAdminApiController::class])
-class FieldAdminApiControllerTest : WebMvcTestTemplate() {
+class FieldAdminApiControllerTest : FieldApiTestTemplate() {
+
     @Autowired
     lateinit var mockMvc: MockMvc
 
     @Autowired
     private lateinit var objectMapper: ObjectMapper
 
-    @MockkBean
-    private lateinit var fieldService: FieldService
-
-    @MockkBean
-    private lateinit var fieldMapper: FieldMapper
-
-    @MockkBean
-    private lateinit var sliceMapper: SliceMapper
-
-    @MockkBean
-    private lateinit var userContext: UserContext
 
     private val apiPrefix = "/admin/api/v1"
 
@@ -444,11 +430,10 @@ class FieldAdminApiControllerTest : WebMvcTestTemplate() {
             describe("FieldAdminApiController.createDefaultField") {
 
                 context("올바른 요청이 주어졌을 때") {
-
                     val validDto = FieldCreateDefaultReqControllerDto(
                         name = "50자를 넘지 않는 이름",
                         icon = "50자를 넘지 않는 아이콘",
-                        type = "SHORT_TEXT",
+                        type = TestFieldType,
                         attributes = setOf(
                             AttributeCreateReqControllerDto(
                                 key = "50자 넘지 않는 키",

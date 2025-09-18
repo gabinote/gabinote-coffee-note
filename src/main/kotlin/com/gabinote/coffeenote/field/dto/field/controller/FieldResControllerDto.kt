@@ -2,6 +2,7 @@ package com.gabinote.coffeenote.field.dto.field.controller
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
+import com.gabinote.coffeenote.field.domain.fieldType.FieldType
 import com.gabinote.coffeenote.field.dto.attribute.controller.AttributeResControllerDto
 
 /**
@@ -34,7 +35,7 @@ data class FieldResControllerDto(
     /**
      * 필드 타입
      */
-    val type: String,
+    val type: FieldType,
 
     /**
      * 필드 속성 목록

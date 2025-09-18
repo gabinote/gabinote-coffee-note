@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.fieldType.type.ScoreFieldType
 import com.gabinote.coffeenote.testSupport.testTemplate.MockkTestTemplate
 import io.kotest.data.forAll
 import io.kotest.data.headers
@@ -8,8 +9,10 @@ import io.kotest.data.row
 import io.kotest.data.table
 import io.kotest.matchers.shouldBe
 
-
 class ScoreFieldTypeTest : MockkTestTemplate() {
+
+    private val scoreFieldType = ScoreFieldType()
+
     init {
         describe("[Field] ScoreFieldType Test") {
             describe("validation attributes") {
@@ -19,7 +22,7 @@ class ScoreFieldTypeTest : MockkTestTemplate() {
                     )
 
                     it("Validation 에 성공한다") {
-                        val res = ScoreField.validationAttributes(validAttributes)
+                        val res = scoreFieldType.validationAttributes(validAttributes)
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -46,7 +49,7 @@ class ScoreFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidAttributes, reason ->
                         context(reason) {
                             it("Validation 에 실패한다") {
-                                val res = ScoreField.validationAttributes(invalidAttributes)
+                                val res = scoreFieldType.validationAttributes(invalidAttributes)
                                 res.all { !it.valid } shouldBe true
                             }
                         }
@@ -62,7 +65,7 @@ class ScoreFieldTypeTest : MockkTestTemplate() {
                     val attributes = setOf(Attribute(key = "maxScore", value = setOf("10")))
 
                     it("Validation에 성공한다.") {
-                        val res = ScoreField.validationValues(validValues, attributes)
+                        val res = scoreFieldType.validationValues(validValues, attributes)
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -98,7 +101,7 @@ class ScoreFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidValue, attributes, reason ->
                         context(reason) {
                             it("Validation 에 실패한다") {
-                                val res = ScoreField.validationValues(invalidValue, attributes)
+                                val res = scoreFieldType.validationValues(invalidValue, attributes)
                                 res.all { !it.valid } shouldBe true
                             }
                         }

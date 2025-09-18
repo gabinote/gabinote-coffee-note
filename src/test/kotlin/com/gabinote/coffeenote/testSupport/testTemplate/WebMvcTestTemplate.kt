@@ -2,7 +2,7 @@ package com.gabinote.coffeenote.testSupport.testTemplate
 
 
 import com.gabinote.coffeenote.common.config.JacksonConfig
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeRegistry
+import com.gabinote.coffeenote.testSupport.testConfig.jackson.UseJackson
 import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.junit5.MockKExtension
 import org.junit.jupiter.api.extension.ExtendWith
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy
 import org.springframework.context.annotation.Import
 import org.springframework.test.annotation.DirtiesContext
 
-
+@UseJackson
 @AutoConfigureMockMvc
 @EnableAspectJAutoProxy
 @AutoConfigureRestDocs
@@ -21,7 +21,6 @@ import org.springframework.test.annotation.DirtiesContext
 @Import(
     JacksonConfig::class,
     WebMvcTestTemplate.FilterConfig::class,
-    FieldTypeRegistry::class,
 )
 @ExtendWith(MockKExtension::class)
 abstract class WebMvcTestTemplate : DescribeSpec() {

@@ -1,19 +1,25 @@
-package com.gabinote.coffeenote.field.domain.fieldType
+package com.gabinote.coffeenote.field.domain.fieldType.type
 
 import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
 import com.gabinote.coffeenote.common.util.time.TimeHelper
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.fieldType.FieldType
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeAttributeKey
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeKey
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
+import org.springframework.stereotype.Component
 
 /**
  * 날짜 선택 필드 타입을 구현하는 싱글톤 객체
  * ISO 로컬 날짜 형식(yyyy-MM-dd)의 값을 처리
  * @author 황준서
  */
-object DateField : FieldType() {
+@Component
+class DateFieldType : FieldType() {
     /**
      * 날짜 필드 타입의 고유 키
      */
-    override val key: String = "DATE"
+    override val key: FieldTypeKey = FieldTypeKey.DATE
 
     /**
      * 날짜 필드가 리스트 보기에서 표시될 수 있는지 여부

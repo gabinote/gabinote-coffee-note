@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.fieldType.type.LongTextFieldType
 import com.gabinote.coffeenote.testSupport.testTemplate.MockkTestTemplate
 import io.kotest.data.forAll
 import io.kotest.data.headers
@@ -9,13 +10,16 @@ import io.kotest.data.table
 import io.kotest.matchers.shouldBe
 
 class LongTextFieldTypeTest : MockkTestTemplate() {
+
+    private val longTextFieldType = LongTextFieldType()
+
     init {
         describe("[Field] LongTextFieldType Test") {
             describe("validation attributes") {
                 context("올바른 Attribute가 주어진 경우") {
                     val validAttributes = setOf<Attribute>()
                     it("Validation 에 성공한다") {
-                        val res = LongTextField.validationAttributes(validAttributes)
+                        val res = longTextFieldType.validationAttributes(validAttributes)
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -29,7 +33,7 @@ class LongTextFieldTypeTest : MockkTestTemplate() {
                     )
 
                     it("Validation에 실패한다.") {
-                        val res = LongTextField.validationAttributes(invalidAttribute)
+                        val res = longTextFieldType.validationAttributes(invalidAttribute)
                         res.all { !it.valid } shouldBe true
                     }
                 }
@@ -39,7 +43,7 @@ class LongTextFieldTypeTest : MockkTestTemplate() {
                 context("올바른 value가 주어진 경우") {
                     val validValue = "this is long text field value"
                     it("Validation 에 성공한다") {
-                        val res = LongTextField.validationValues(values = setOf(validValue), attributes = setOf())
+                        val res = longTextFieldType.validationValues(values = setOf(validValue), attributes = setOf())
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -53,7 +57,8 @@ class LongTextFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidValue, reason ->
                         context(reason) {
                             it("Validation 에 실패한다") {
-                                val res = LongTextField.validationValues(values = invalidValue, attributes = setOf())
+                                val res =
+                                    longTextFieldType.validationValues(values = invalidValue, attributes = setOf())
                                 res.all { !it.valid } shouldBe true
                             }
                         }

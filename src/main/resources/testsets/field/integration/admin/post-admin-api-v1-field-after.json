@@ -6,7 +6,7 @@
       "isDefault": true,
       "name": "default field",
       "icon": "default_icon",
-      "type": "TEXT",
+      "type": "SHORT_TEXT",
       "attributes": [],
       "owner": null
     },

@@ -6,16 +6,15 @@ import com.gabinote.coffeenote.field.domain.attribute.Attribute
 import com.gabinote.coffeenote.field.domain.field.Field
 import com.gabinote.coffeenote.field.domain.field.FieldRepository
 import com.gabinote.coffeenote.field.domain.fieldType.FieldType
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeRegistry
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeFactory
 import com.gabinote.coffeenote.field.dto.attribute.service.AttributeCreateReqServiceDto
 import com.gabinote.coffeenote.field.dto.attribute.service.AttributeUpdateReqServiceDto
 import com.gabinote.coffeenote.field.dto.field.service.FieldCreateDefaultReqServiceDto
 import com.gabinote.coffeenote.field.dto.field.service.FieldCreateReqServiceDto
 import com.gabinote.coffeenote.field.dto.field.service.FieldResServiceDto
 import com.gabinote.coffeenote.field.dto.field.service.FieldUpdateReqServiceDto
-import com.gabinote.coffeenote.field.mapping.attribute.AttributeMapper
 import com.gabinote.coffeenote.field.mapping.field.FieldMapper
+import com.gabinote.coffeenote.field.service.attribute.AttributeService
 import com.gabinote.coffeenote.field.service.field.FieldService
 import com.gabinote.coffeenote.testSupport.testTemplate.ServiceTestTemplate
 import com.gabinote.coffeenote.testSupport.testUtil.data.field.FieldTestDataHelper.createTestField
@@ -44,10 +43,11 @@ class FieldServiceTest : ServiceTestTemplate() {
     lateinit var fieldMapper: FieldMapper
 
     @MockK
-    lateinit var attributeMapper: AttributeMapper
+    lateinit var fieldTypeFactory: FieldTypeFactory
 
     @MockK
-    lateinit var fieldTypeRegistry: FieldTypeRegistry
+    lateinit var attributeService: AttributeService
+
 
     init {
         beforeTest {
@@ -55,8 +55,8 @@ class FieldServiceTest : ServiceTestTemplate() {
             fieldService = FieldService(
                 fieldRepository = fieldRepository,
                 fieldMapper = fieldMapper,
-                attributeMapper = attributeMapper,
-                fieldTypeRegistry = fieldTypeRegistry
+                fieldTypeFactory = fieldTypeFactory,
+                attributeService = attributeService
             )
         }
 
@@ -577,8 +577,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                     val testType = mockk<FieldType>()
 
                     beforeTest {
-                        every { validDto.type } returns "TEST"
-                        every { fieldTypeRegistry.fromString("TEST") } returns testType
+                        every { validDto.type } returns testType
                     }
 
 
@@ -587,25 +586,16 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     beforeTest {
                         every { validDto.attributes } returns setOf(attributeReq)
-                        every { attributeMapper.toAttribute(attributeReq) } returns attribute
-                    }
-
-
-                    // checkAttributes()
-                    beforeTest {
-                        every { testType.validationAttributes(setOf(attribute)) } returns listOf(
-                            FieldTypeValidationResult(
-                                valid = true
+                        every {
+                            attributeService.createAttribute(
+                                fieldType = testType,
+                                attributesCreateReq = setOf(attributeReq)
                             )
+                        } returns setOf(
+                            attribute
                         )
-                    }
-
-                    // 검증 성공후 신규 필드에 속성 적용
-                    beforeTest {
                         every { newField.changeAttributes(setOf(attribute)) } returns Unit
                     }
-
-
                     // 저장
                     val savedField = mockk<Field>()
 
@@ -628,11 +618,12 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                         verify(exactly = 1) {
                             fieldMapper.toField(validDto)
-                            validDto.attributes
-                            attributeMapper.toAttribute(attributeReq)
                             validDto.type
-                            fieldTypeRegistry.fromString("TEST")
-                            testType.validationAttributes(setOf(attribute))
+                            validDto.attributes
+                            attributeService.createAttribute(
+                                fieldType = testType,
+                                attributesCreateReq = setOf(attributeReq)
+                            )
                             newField.changeAttributes(setOf(attribute))
                             fieldRepository.save(newField)
                             fieldMapper.toResServiceDto(savedField)
@@ -653,43 +644,32 @@ class FieldServiceTest : ServiceTestTemplate() {
                     val testType = mockk<FieldType>()
 
                     beforeTest {
-                        every { validDto.type } returns "TEST"
-                        every { fieldTypeRegistry.fromString("TEST") } returns testType
+                        every { validDto.type } returns testType
                     }
-
-                    //attribute 검증
-                    val attribute = mockk<Attribute>()
 
                     beforeTest {
                         every { validDto.attributes } returns setOf(attributeReq)
-                        every { attributeMapper.toAttribute(attributeReq) } returns attribute
-                    }
-
-
-                    // checkAttributes()
-                    beforeTest {
-                        every { testType.validationAttributes(setOf(attribute)) } returns listOf(
-                            FieldTypeValidationResult(
-                                valid = false,
-                                message = "Invalid attribute"
+                        every {
+                            attributeService.createAttribute(
+                                fieldType = testType,
+                                attributesCreateReq = setOf(attributeReq)
                             )
-                        )
+                        } throws ResourceNotValid(name = "Field Attribute", reasons = listOf("Invalid attribute"))
                     }
 
                     it("ResourceNotValid 예외가 발생해야 한다.") {
                         val ex = assertThrows<ResourceNotValid> {
                             fieldService.createOwnedField(validDto)
                         }
-                        ex.name shouldBe "Field Attribute"
-                        ex.reasons shouldBe listOf("Invalid attribute")
 
                         verify(exactly = 1) {
                             fieldMapper.toField(validDto)
-                            validDto.attributes
-                            attributeMapper.toAttribute(attributeReq)
                             validDto.type
-                            fieldTypeRegistry.fromString("TEST")
-                            testType.validationAttributes(setOf(attribute))
+                            validDto.attributes
+                            attributeService.createAttribute(
+                                fieldType = testType,
+                                attributesCreateReq = setOf(attributeReq)
+                            )
                         }
                     }
                 }
@@ -720,31 +700,27 @@ class FieldServiceTest : ServiceTestTemplate() {
                     }
 
                     //updateAttributesIfNeeded()
+
                     val newAttributeReq = mockk<AttributeUpdateReqServiceDto>()
-                    val newAttribute = Attribute(
-                        key = "TEST",
-                        value = setOf("NEW")
-                    )
-                    val beforeAttribute = Attribute(
-                        key = "TEST",
-                        value = setOf("BEFORE")
-                    )
+                    val testType = mockk<FieldType>()
+                    beforeTest {
+                        every { existingField.type } returns "TEST"
+                        every { fieldTypeFactory.getFieldType("TEST") } returns testType
+                    }
+
+                    val beforeAttribute = mockk<Attribute>()
+                    val newAttribute = mockk<Attribute>()
 
                     beforeTest {
                         every { validDto.attributes } returns setOf(newAttributeReq)
-                        every { attributeMapper.toAttribute(newAttributeReq) } returns newAttribute
                         every { existingField.attributes } returns setOf(beforeAttribute)
-                    }
-                    // attribute 검증
-                    val fieldType = mockk<FieldType>()
-                    beforeTest {
-                        every { existingField.type } returns "TEST"
-                        every { fieldTypeRegistry.fromString("TEST") } returns fieldType
-                        every { fieldType.validationAttributes(setOf(beforeAttribute)) } returns listOf(
-                            FieldTypeValidationResult(
-                                valid = true
+                        every {
+                            attributeService.updateAttribute(
+                                fieldType = testType,
+                                oldAttributes = setOf(beforeAttribute),
+                                newAttributeReq = setOf(newAttributeReq)
                             )
-                        )
+                        } returns setOf(newAttribute)
                     }
 
                     //save
@@ -769,133 +745,17 @@ class FieldServiceTest : ServiceTestTemplate() {
                             validDto.owner
                             existingField.isOwner(executor)
                             fieldMapper.updateFromDto(validDto, existingField)
-                            validDto.attributes
-                            attributeMapper.toAttribute(newAttributeReq)
-                            existingField.attributes
                             existingField.type
-                            fieldTypeRegistry.fromString("TEST")
-                            fieldType.validationAttributes(setOf(beforeAttribute))
-                            fieldRepository.save(existingField)
-                            fieldMapper.toResServiceDto(savedField)
-
-                        }
-                    }
-                }
-
-                context("Attribute 수정이 없는 올바른 수정 정보가 주어지면,") {
-                    val validDto = mockk<FieldUpdateReqServiceDto>()
-                    val externalId = UUID.randomUUID()
-                    val existingField = mockk<Field>()
-                    beforeTest {
-                        every { validDto.externalId } returns externalId
-                        every { fieldRepository.findByExternalId(externalId.toString()) } returns existingField
-                    }
-
-                    // checkOwnerShop
-                    val executor = UUID.randomUUID().toString()
-                    beforeTest {
-                        every { validDto.owner } returns executor
-                        every { existingField.isOwner(executor) } returns true
-                    }
-
-                    // update
-                    beforeTest {
-                        every { fieldMapper.updateFromDto(validDto, existingField) } returns existingField
-                    }
-
-                    //updateAttributesIfNeeded()
-                    val newAttributeReq = mockk<AttributeUpdateReqServiceDto>()
-                    beforeTest {
-                        every { validDto.attributes } returns setOf()
-                    }
-
-                    //save
-                    val savedField = mockk<Field>()
-                    beforeTest {
-                        every { fieldRepository.save(existingField) } returns savedField
-                    }
-
-                    val expected = mockk<FieldResServiceDto>()
-                    beforeTest {
-                        every { fieldMapper.toResServiceDto(savedField) } returns expected
-                    }
-
-                    it("Attributes 수정 없이 자기 소유의 Field를 수정하여 반환해야 한다.") {
-                        val res = fieldService.updateOwnedField(dto = validDto)
-                        res shouldNotBe null
-                        res shouldBe expected
-
-                        verify {
-                            validDto.externalId
-                            fieldRepository.findByExternalId(externalId.toString())
-                            validDto.owner
-                            existingField.isOwner(executor)
-                            fieldMapper.updateFromDto(validDto, existingField)
+                            fieldTypeFactory.getFieldType("TEST")
                             validDto.attributes
+                            existingField.attributes
+                            attributeService.updateAttribute(
+                                fieldType = testType,
+                                oldAttributes = setOf(beforeAttribute),
+                                newAttributeReq = setOf(newAttributeReq)
+                            )
                             fieldRepository.save(existingField)
                             fieldMapper.toResServiceDto(savedField)
-
-                        }
-                    }
-                }
-
-                context("잘못된 attribute key를 가진  수정 정보가 주어지면,") {
-                    val invalidDto = mockk<FieldUpdateReqServiceDto>()
-                    val externalId = UUID.randomUUID()
-                    val existingField = mockk<Field>()
-                    beforeTest {
-                        every { invalidDto.externalId } returns externalId
-                        every { fieldRepository.findByExternalId(externalId.toString()) } returns existingField
-                    }
-
-                    // checkOwnerShop
-                    val executor = UUID.randomUUID().toString()
-                    beforeTest {
-                        every { invalidDto.owner } returns executor
-                        every { existingField.isOwner(executor) } returns true
-                    }
-
-                    // update
-                    beforeTest {
-                        every { fieldMapper.updateFromDto(invalidDto, existingField) } returns existingField
-                    }
-
-                    //updateAttributesIfNeeded()
-                    val newAttributeReq = mockk<AttributeUpdateReqServiceDto>()
-                    val newAttribute = Attribute(
-                        key = "NOT_EXIST_KEY",
-                        value = setOf("NEW")
-                    )
-                    val beforeAttribute = Attribute(
-                        key = "TEST",
-                        value = setOf("BEFORE")
-                    )
-
-                    beforeTest {
-                        every { invalidDto.attributes } returns setOf(newAttributeReq)
-                        every { attributeMapper.toAttribute(newAttributeReq) } returns newAttribute
-                        every { existingField.attributes } returns setOf(beforeAttribute)
-                    }
-
-
-                    it("ResourceNotValid 예외가 발생해야 한다.") {
-                        val ex = assertThrows<ResourceNotValid> {
-                            fieldService.updateOwnedField(dto = invalidDto)
-                        }
-
-                        ex.name shouldBe "Field Attribute"
-                        ex.reasons shouldBe listOf("Unknown attribute key: NOT_EXIST_KEY")
-
-
-                        verify {
-                            invalidDto.externalId
-                            fieldRepository.findByExternalId(externalId.toString())
-                            invalidDto.owner
-                            existingField.isOwner(executor)
-                            fieldMapper.updateFromDto(invalidDto, existingField)
-                            invalidDto.attributes
-                            attributeMapper.toAttribute(newAttributeReq)
-                            existingField.attributes
                         }
                     }
                 }
@@ -923,30 +783,27 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     //updateAttributesIfNeeded()
                     val newAttributeReq = mockk<AttributeUpdateReqServiceDto>()
-                    val newAttribute = Attribute(
-                        key = "TEST",
-                        value = setOf("NEW")
-                    )
-                    val beforeAttribute = Attribute(
-                        key = "TEST",
-                        value = setOf("BEFORE")
-                    )
+                    val testType = mockk<FieldType>()
+                    beforeTest {
+                        every { existingField.type } returns "TEST"
+                        every { fieldTypeFactory.getFieldType("TEST") } returns testType
+                    }
+
+                    val beforeAttribute = mockk<Attribute>()
+                    val newAttribute = mockk<Attribute>()
 
                     beforeTest {
                         every { invalidDto.attributes } returns setOf(newAttributeReq)
-                        every { attributeMapper.toAttribute(newAttributeReq) } returns newAttribute
                         every { existingField.attributes } returns setOf(beforeAttribute)
-                    }
-                    // attribute 검증
-                    val fieldType = mockk<FieldType>()
-                    beforeTest {
-                        every { existingField.type } returns "TEST"
-                        every { fieldTypeRegistry.fromString("TEST") } returns fieldType
-                        every { fieldType.validationAttributes(setOf(beforeAttribute)) } returns listOf(
-                            FieldTypeValidationResult(
-                                valid = false,
-                                message = "Invalid attribute"
+                        every {
+                            attributeService.updateAttribute(
+                                fieldType = testType,
+                                oldAttributes = setOf(beforeAttribute),
+                                newAttributeReq = setOf(newAttributeReq)
                             )
+                        } throws ResourceNotValid(
+                            name = "Field Attribute",
+                            reasons = listOf("Invalid attribute")
                         )
                     }
 
@@ -956,23 +813,21 @@ class FieldServiceTest : ServiceTestTemplate() {
                             fieldService.updateOwnedField(dto = invalidDto)
                         }
 
-                        ex.name shouldBe "Field Attribute"
-                        ex.reasons shouldBe listOf("Invalid attribute")
-
-
                         verify {
                             invalidDto.externalId
                             fieldRepository.findByExternalId(externalId.toString())
                             invalidDto.owner
                             existingField.isOwner(executor)
                             fieldMapper.updateFromDto(invalidDto, existingField)
-                            invalidDto.attributes
-                            attributeMapper.toAttribute(newAttributeReq)
-                            existingField.attributes
                             existingField.type
-                            fieldTypeRegistry.fromString("TEST")
-                            fieldType.validationAttributes(setOf(beforeAttribute))
-
+                            fieldTypeFactory.getFieldType("TEST")
+                            invalidDto.attributes
+                            existingField.attributes
+                            attributeService.updateAttribute(
+                                fieldType = testType,
+                                oldAttributes = setOf(beforeAttribute),
+                                newAttributeReq = setOf(newAttributeReq)
+                            )
                         }
                     }
                 }
@@ -1031,8 +886,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                     val testType = mockk<FieldType>()
 
                     beforeTest {
-                        every { validDto.type } returns "TEST"
-                        every { fieldTypeRegistry.fromString("TEST") } returns testType
+                        every { validDto.type } returns testType
                     }
 
 
@@ -1041,21 +895,14 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                     beforeTest {
                         every { validDto.attributes } returns setOf(attributeReq)
-                        every { attributeMapper.toAttribute(attributeReq) } returns attribute
-                    }
-
-
-                    // checkAttributes()
-                    beforeTest {
-                        every { testType.validationAttributes(setOf(attribute)) } returns listOf(
-                            FieldTypeValidationResult(
-                                valid = true
+                        every {
+                            attributeService.createAttribute(
+                                fieldType = testType,
+                                attributesCreateReq = setOf(attributeReq)
                             )
+                        } returns setOf(
+                            attribute
                         )
-                    }
-
-                    // 검증 성공후 신규 필드에 속성 적용
-                    beforeTest {
                         every { newField.changeAttributes(setOf(attribute)) } returns Unit
                     }
 
@@ -1082,11 +929,12 @@ class FieldServiceTest : ServiceTestTemplate() {
 
                         verify(exactly = 1) {
                             fieldMapper.toFieldDefault(validDto)
-                            validDto.attributes
-                            attributeMapper.toAttribute(attributeReq)
                             validDto.type
-                            fieldTypeRegistry.fromString("TEST")
-                            testType.validationAttributes(setOf(attribute))
+                            validDto.attributes
+                            attributeService.createAttribute(
+                                fieldType = testType,
+                                attributesCreateReq = setOf(attributeReq)
+                            )
                             newField.changeAttributes(setOf(attribute))
                             fieldRepository.save(newField)
                             fieldMapper.toResServiceDto(savedField)
@@ -1107,50 +955,44 @@ class FieldServiceTest : ServiceTestTemplate() {
                     val testType = mockk<FieldType>()
 
                     beforeTest {
-                        every { validDto.type } returns "TEST"
-                        every { fieldTypeRegistry.fromString("TEST") } returns testType
+                        every { validDto.type } returns testType
                     }
+
 
                     //attribute 검증
-                    val attribute = mockk<Attribute>()
-
                     beforeTest {
                         every { validDto.attributes } returns setOf(attributeReq)
-                        every { attributeMapper.toAttribute(attributeReq) } returns attribute
-                    }
-
-
-                    // checkAttributes()
-                    beforeTest {
-                        every { testType.validationAttributes(setOf(attribute)) } returns listOf(
-                            FieldTypeValidationResult(
-                                valid = false,
-                                message = "Invalid attribute"
+                        every {
+                            attributeService.createAttribute(
+                                fieldType = testType,
+                                attributesCreateReq = setOf(attributeReq)
                             )
+                        } throws ResourceNotValid(
+                            name = "Field Attribute",
+                            reasons = listOf("Invalid attribute")
                         )
+
                     }
 
                     it("ResourceNotValid 예외가 발생해야 한다.") {
                         val ex = assertThrows<ResourceNotValid> {
                             fieldService.createDefaultField(validDto)
                         }
-                        ex.name shouldBe "Field Attribute"
-                        ex.reasons shouldBe listOf("Invalid attribute")
-
                         verify(exactly = 1) {
                             fieldMapper.toFieldDefault(validDto)
-                            validDto.attributes
-                            attributeMapper.toAttribute(attributeReq)
                             validDto.type
-                            fieldTypeRegistry.fromString("TEST")
-                            testType.validationAttributes(setOf(attribute))
+                            validDto.attributes
+                            attributeService.createAttribute(
+                                fieldType = testType,
+                                attributesCreateReq = setOf(attributeReq)
+                            )
                         }
                     }
                 }
             }
 
             describe("FieldService.updateDefaultField") {
-                // TODO: 안돼용...
+
                 context("올바른 수정 정보가 주어지면,") {
 
                     val externalId = UUID.randomUUID()
@@ -1162,10 +1004,7 @@ class FieldServiceTest : ServiceTestTemplate() {
                         externalId = externalId,
                         attributes = setOf(attributeUpdateReq)
                     )
-                    val beforeAttribute = Attribute(
-                        key = "TEST",
-                        value = setOf("BEFORE")
-                    )
+                    val beforeAttribute = mockk<Attribute>()
                     val existingField =
                         createTestField(default = true, type = "TEST", attributes = setOf(beforeAttribute))
                     beforeTest {
@@ -1178,24 +1017,23 @@ class FieldServiceTest : ServiceTestTemplate() {
                     }
 
                     //updateAttributesIfNeeded()
-                    val newAttribute = Attribute(
-                        key = "TEST",
-                        value = setOf("NEW")
-                    )
-
-
+                    val testType = mockk<FieldType>()
                     beforeTest {
-                        every { attributeMapper.toAttribute(attributeUpdateReq) } returns newAttribute
+                        every { fieldTypeFactory.getFieldType("TEST") } returns testType
                     }
-                    // attribute 검증
-                    val fieldType = mockk<FieldType>()
+
+
+                    val newAttribute = mockk<Attribute>()
+
                     beforeTest {
-                        every { fieldTypeRegistry.fromString("TEST") } returns fieldType
-                        every { fieldType.validationAttributes(setOf(newAttribute)) } returns listOf(
-                            FieldTypeValidationResult(
-                                valid = true
+
+                        every {
+                            attributeService.updateAttribute(
+                                fieldType = testType,
+                                oldAttributes = setOf(beforeAttribute),
+                                newAttributeReq = setOf(attributeUpdateReq)
                             )
-                        )
+                        } returns setOf(newAttribute)
                     }
 
                     //save
@@ -1217,101 +1055,15 @@ class FieldServiceTest : ServiceTestTemplate() {
                         verify {
                             fieldRepository.findByExternalId(externalId.toString())
                             fieldMapper.updateFromDefaultDto(validDto, existingField)
-                            attributeMapper.toAttribute(attributeUpdateReq)
-                            fieldTypeRegistry.fromString("TEST")
-                            fieldType.validationAttributes(setOf(beforeAttribute))
+                            fieldTypeFactory.getFieldType("TEST")
+                            attributeService.updateAttribute(
+                                fieldType = testType,
+                                oldAttributes = setOf(beforeAttribute),
+                                newAttributeReq = setOf(attributeUpdateReq)
+                            )
                             fieldRepository.save(existingField)
                             fieldMapper.toResServiceDto(savedField)
 
-                        }
-                    }
-                }
-
-                context("Attribute 수정이 없는 올바른 수정 정보가 주어지면,") {
-
-                    val externalId = UUID.randomUUID()
-                    val existingField = createTestField(default = true, type = "TEST")
-                    val validDto = createTestFieldUpdateReqServiceDto(externalId = externalId, attributes = setOf())
-                    beforeTest {
-                        every { fieldRepository.findByExternalId(externalId.toString()) } returns existingField
-                    }
-
-                    // update
-                    beforeTest {
-                        every { fieldMapper.updateFromDefaultDto(validDto, existingField) } returns existingField
-                    }
-                    //save
-                    val savedField = mockk<Field>()
-                    beforeTest {
-                        every { fieldRepository.save(existingField) } returns savedField
-                    }
-
-                    val expected = mockk<FieldResServiceDto>()
-                    beforeTest {
-                        every { fieldMapper.toResServiceDto(savedField) } returns expected
-                    }
-
-                    it("Attributes 수정 없이 기본값 Field를 수정하여 반환해야 한다.") {
-                        val res = fieldService.updateDefaultField(dto = validDto)
-                        res shouldNotBe null
-                        res shouldBe expected
-
-                        verify {
-                            fieldRepository.findByExternalId(externalId.toString())
-                            fieldMapper.updateFromDefaultDto(validDto, existingField)
-                            fieldRepository.save(existingField)
-                            fieldMapper.toResServiceDto(savedField)
-
-                        }
-                    }
-                }
-
-                context("잘못된 attribute key를 가진  수정 정보가 주어지면,") {
-                    val externalId = UUID.randomUUID()
-                    val invalidAttributeReq = AttributeUpdateReqServiceDto(key = "NOT_EXIST_KEY", value = setOf("NEW"))
-                    val invalidDto = createTestFieldUpdateReqServiceDto(
-                        externalId = externalId,
-                        attributes = setOf(invalidAttributeReq)
-                    )
-
-                    val attribute = Attribute(
-                        key = "TEST",
-                        value = setOf("BEFORE")
-                    )
-                    val existingField = createTestField(default = true, type = "TEST", attributes = setOf(attribute))
-                    beforeTest {
-                        every { fieldRepository.findByExternalId(externalId.toString()) } returns existingField
-                    }
-                    // update
-                    beforeTest {
-                        every { fieldMapper.updateFromDefaultDto(invalidDto, existingField) } returns existingField
-                    }
-
-                    //updateAttributesIfNeeded()
-                    val newAttribute = Attribute(
-                        key = "NOT_EXIST_KEY",
-                        value = setOf("NEW")
-                    )
-
-
-                    beforeTest {
-                        every { attributeMapper.toAttribute(invalidAttributeReq) } returns newAttribute
-                    }
-
-
-                    it("ResourceNotValid 예외가 발생해야 한다.") {
-                        val ex = assertThrows<ResourceNotValid> {
-                            fieldService.updateDefaultField(dto = invalidDto)
-                        }
-
-                        ex.name shouldBe "Field Attribute"
-                        ex.reasons shouldBe listOf("Unknown attribute key: NOT_EXIST_KEY")
-
-
-                        verify {
-                            fieldRepository.findByExternalId(externalId.toString())
-                            fieldMapper.updateFromDefaultDto(invalidDto, existingField)
-                            attributeMapper.toAttribute(invalidAttributeReq)
                         }
                     }
                 }
@@ -1327,7 +1079,9 @@ class FieldServiceTest : ServiceTestTemplate() {
                         externalId = externalId,
                         attributes = setOf(invalidAttributeReq)
                     )
-                    val existingField = createTestField(default = true, type = "TEST")
+                    val beforeAttribute = mockk<Attribute>()
+                    val existingField =
+                        createTestField(default = true, type = "TEST", attributes = setOf(beforeAttribute))
                     beforeTest {
                         every { fieldRepository.findByExternalId(externalId.toString()) } returns existingField
                     }
@@ -1340,24 +1094,20 @@ class FieldServiceTest : ServiceTestTemplate() {
                     }
 
                     //updateAttributesIfNeeded()
-                    val invalidAttribute = Attribute(
-                        key = "test",
-                        value = setOf("BEFORE")
-                    )
+                    val testType = mockk<FieldType>()
+                    beforeTest {
+                        every { fieldTypeFactory.getFieldType("TEST") } returns testType
+                    }
+
 
                     beforeTest {
-                        every { attributeMapper.toAttribute(invalidAttributeReq) } returns invalidAttribute
-                    }
-                    // attribute 검증
-                    val fieldType = mockk<FieldType>()
-                    beforeTest {
-                        every { fieldTypeRegistry.fromString("TEST") } returns fieldType
-                        every { fieldType.validationAttributes(setOf(invalidAttribute)) } returns listOf(
-                            FieldTypeValidationResult(
-                                valid = false,
-                                message = "Invalid attribute"
+                        every {
+                            attributeService.updateAttribute(
+                                fieldType = testType,
+                                oldAttributes = setOf(beforeAttribute),
+                                newAttributeReq = setOf(invalidAttributeReq)
                             )
-                        )
+                        } throws ResourceNotValid(name = "Field Attribute", reasons = listOf("Invalid attribute"))
                     }
 
 
@@ -1366,16 +1116,20 @@ class FieldServiceTest : ServiceTestTemplate() {
                             fieldService.updateDefaultField(dto = invalidDto)
                         }
 
-                        ex.name shouldBe "Field Attribute"
-                        ex.reasons shouldBe listOf("Invalid attribute")
-
 
                         verify {
+                            invalidDto.externalId
                             fieldRepository.findByExternalId(externalId.toString())
                             fieldMapper.updateFromDefaultDto(invalidDto, existingField)
-                            attributeMapper.toAttribute(invalidAttributeReq)
-                            fieldTypeRegistry.fromString("TEST")
-                            fieldType.validationAttributes(setOf(invalidAttribute))
+                            existingField.type
+                            fieldTypeFactory.getFieldType("TEST")
+                            invalidDto.attributes
+                            existingField.attributes
+                            attributeService.updateAttribute(
+                                fieldType = testType,
+                                oldAttributes = setOf(beforeAttribute),
+                                newAttributeReq = setOf(invalidAttributeReq)
+                            )
 
                         }
                     }

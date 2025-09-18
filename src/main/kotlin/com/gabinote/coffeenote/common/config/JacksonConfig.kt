@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.gabinote.coffeenote.common.util.json.fieldType.FieldTypeDeserializer
+import com.gabinote.coffeenote.common.util.json.fieldType.FieldTypeModule
+import com.gabinote.coffeenote.common.util.json.fieldType.FieldTypeSerializer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
@@ -17,7 +20,10 @@ import java.time.format.DateTimeFormatter
  * @author 황준서
  */
 @Configuration
-class JacksonConfig {
+class JacksonConfig(
+    private val fieldTypeSerializer: FieldTypeSerializer,
+    private val fieldTypeDeserializer: FieldTypeDeserializer
+) {
 
     /**
      * ObjectMapper 빈 구성
@@ -26,7 +32,10 @@ class JacksonConfig {
      * @return 구성된 ObjectMapper
      */
     @Bean
-    fun objectMapper(builder: Jackson2ObjectMapperBuilder): ObjectMapper {
+    fun objectMapper(
+        builder: Jackson2ObjectMapperBuilder,
+        fieldTypeModule: FieldTypeModule
+    ): ObjectMapper {
         val objectMapper = builder.createXmlMapper(false).build<ObjectMapper>()
 
         // Kotlin 모듈 등록
@@ -38,6 +47,9 @@ class JacksonConfig {
             LocalDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
         )
         objectMapper.registerModule(javaTimeModule)
+
+        // Custom Module 등록
+        objectMapper.registerModule(fieldTypeModule)
 
 
         // Serialization 설정
@@ -54,4 +66,10 @@ class JacksonConfig {
     fun jackson2ObjectMapperBuilder(): Jackson2ObjectMapperBuilder {
         return Jackson2ObjectMapperBuilder()
     }
+
+//    @Bean
+//    fun fieldTypeModule(): FieldTypeModule {
+//        // 주입받은 Bean들을 사용하여 모듈을 생성하고, 이 모듈을 Bean으로 등록
+//        return FieldTypeModule(fieldTypeSerializer, fieldTypeDeserializer)
+//    }
 }

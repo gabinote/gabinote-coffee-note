@@ -4,6 +4,7 @@ import com.gabinote.coffeenote.field.domain.field.Field
 import com.gabinote.coffeenote.field.dto.field.controller.*
 import com.gabinote.coffeenote.field.dto.field.service.*
 import com.gabinote.coffeenote.field.mapping.attribute.AttributeMapper
+import com.gabinote.coffeenote.field.mapping.fieldType.FieldTypeMapper
 import org.mapstruct.*
 import java.util.*
 
@@ -24,7 +25,7 @@ import java.util.*
  */
 @Mapper(
     componentModel = "spring",
-    uses = [AttributeMapper::class]
+    uses = [AttributeMapper::class, FieldTypeMapper::class]
 )
 interface FieldMapper {
 

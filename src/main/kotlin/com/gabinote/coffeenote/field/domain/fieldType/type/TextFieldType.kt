@@ -1,7 +1,10 @@
-package com.gabinote.coffeenote.field.domain.fieldType
+package com.gabinote.coffeenote.field.domain.fieldType.type
 
 import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.fieldType.FieldType
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeAttributeKey
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
 
 /**
  * 텍스트 입력 필드 타입의 기본 추상 클래스
@@ -9,7 +12,7 @@ import com.gabinote.coffeenote.field.domain.attribute.Attribute
  * @author 황준서 (hzser123@gmail.com)
  * @since 2025-09-08
  */
-abstract class TextField : FieldType() {
+abstract class TextFieldType : FieldType() {
     /**
      * 텍스트 필드의 최대 길이
      */

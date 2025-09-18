@@ -1,7 +1,12 @@
-package com.gabinote.coffeenote.field.domain.fieldType
+package com.gabinote.coffeenote.field.domain.fieldType.type
 
 import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.fieldType.FieldType
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeAttributeKey
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeKey
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
+import org.springframework.stereotype.Component
 
 /**
  * 숫자 입력 필드 타입을 구현하는 싱글톤 객체
@@ -9,18 +14,19 @@ import com.gabinote.coffeenote.field.domain.attribute.Attribute
  * @author 황준서 (hzser123@gmail.com)
  * @since 2025-09-08
  */
-object NumberField : FieldType() {
+@Component
+class NumberFieldType : FieldType() {
     /**
      * 숫자 필드 타입의 고유 키
      */
-    override val key: String = "NUMBER"
+    override val key: FieldTypeKey = FieldTypeKey.NUMBER
 
     /**
      * 숫자 필드가 리스트 보기에서 표시될 수 있는지 여부
      * true: 표시 가능, false: 표시 불가
      */
     override val canDisplay: Boolean = true
-    
+
     /**
      * 숫자 필드가 지원하는 속성 키 집합
      * - unit: 숫자 값의 단위 (예: kg, cm 등)

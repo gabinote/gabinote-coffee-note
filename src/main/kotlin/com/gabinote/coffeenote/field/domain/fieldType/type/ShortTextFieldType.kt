@@ -1,4 +1,7 @@
-package com.gabinote.coffeenote.field.domain.fieldType
+package com.gabinote.coffeenote.field.domain.fieldType.type
+
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeKey
+import org.springframework.stereotype.Component
 
 /**
  * 짧은 텍스트 입력 필드 타입을 구현하는 싱글톤 객체
@@ -6,11 +9,12 @@ package com.gabinote.coffeenote.field.domain.fieldType
  * @author 황준서 (hzser123@gmail.com)
  * @since 2025-09-08
  */
-object ShortTextField : TextField() {
+@Component
+class ShortTextFieldType : TextFieldType() {
     /**
      * 짧은 텍스트 필드 타입의 고유 키
      */
-    override val key: String = "SHORT_TEXT"
+    override val key: FieldTypeKey = FieldTypeKey.SHORT_TEXT
 
     /**
      * 짧은 텍스트 필드가 리스트 보기에서 표시될 수 있는지 여부

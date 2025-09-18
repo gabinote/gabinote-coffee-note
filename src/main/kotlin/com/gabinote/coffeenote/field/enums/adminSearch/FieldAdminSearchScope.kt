@@ -1,4 +1,4 @@
-package com.gabinote.coffeenote.field.enums.userSearch
+package com.gabinote.coffeenote.field.enums.adminSearch
 
 /**
  * 관리자 필드 검색 범위를 정의하는 열거형

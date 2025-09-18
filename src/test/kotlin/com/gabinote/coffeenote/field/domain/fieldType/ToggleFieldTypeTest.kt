@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.fieldType.type.ToggleFieldType
 import com.gabinote.coffeenote.testSupport.testTemplate.MockkTestTemplate
 import io.kotest.data.forAll
 import io.kotest.data.headers
@@ -8,8 +9,10 @@ import io.kotest.data.row
 import io.kotest.data.table
 import io.kotest.matchers.shouldBe
 
-
 class ToggleFieldTypeTest : MockkTestTemplate() {
+
+    private val toggleFieldType = ToggleFieldType()
+
     init {
         describe("[Field] ToggleFieldType Test") {
             describe("validation attributes") {
@@ -18,7 +21,7 @@ class ToggleFieldTypeTest : MockkTestTemplate() {
 
                     val validAttributes = emptySet<Attribute>()
                     it("Validation 에 성공한다") {
-                        val res = ToggleField.validationAttributes(validAttributes)
+                        val res = toggleFieldType.validationAttributes(validAttributes)
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -28,7 +31,7 @@ class ToggleFieldTypeTest : MockkTestTemplate() {
                         Attribute(key = "invalid", value = setOf("value"))
                     )
                     it("Validation 에 실패한다") {
-                        val res = ToggleField.validationAttributes(invalidAttributes)
+                        val res = toggleFieldType.validationAttributes(invalidAttributes)
                         res.all { !it.valid } shouldBe true
                     }
                 }
@@ -44,7 +47,7 @@ class ToggleFieldTypeTest : MockkTestTemplate() {
                     ).forAll { validValues, reason ->
                         context(reason) {
                             it("Validation 에 성공한다") {
-                                val res = ToggleField.validationValues(values = validValues, attributes = setOf())
+                                val res = toggleFieldType.validationValues(values = validValues, attributes = setOf())
                                 res.all { it.valid } shouldBe true
                             }
                         }
@@ -60,7 +63,7 @@ class ToggleFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidValues, reason ->
                         context(reason) {
                             it("Validation 에 실패한다") {
-                                val res = ToggleField.validationValues(values = invalidValues, attributes = setOf())
+                                val res = toggleFieldType.validationValues(values = invalidValues, attributes = setOf())
                                 res.all { !it.valid } shouldBe true
                             }
                         }

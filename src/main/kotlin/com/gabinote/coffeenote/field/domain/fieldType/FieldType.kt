@@ -2,19 +2,8 @@ package com.gabinote.coffeenote.field.domain.fieldType
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
 
-/**
- * FieldType을 나타내는 sealed class
- * 다양한 필드 타입들의 기본 클래스
- * @author 황준서 (hzser123@gmail.com)
- * @since 2025-09-08
- */
-sealed class FieldType {
-
-    /**
-     * FieldType의 고유 키
-     * dto의 fieldType 필드와 매핑됨
-     */
-    abstract val key: String
+abstract class FieldType {
+    abstract val key: FieldTypeKey
 
     /**
      * FieldType이 리스트 보기에서 표시될 수 있는지 여부
@@ -41,11 +30,33 @@ sealed class FieldType {
      * @param attributes 검사할 속성 집합
      * @return 유효성 검사 결과 목록
      */
-    //TODO: 속성키 중복 체크
     fun validationAttributes(attributes: Set<Attribute>): List<FieldTypeValidationResult> {
+        val errorResult = mutableListOf<FieldTypeValidationResult>()
+        validateAttributeNotDuplicated(attributes = attributes, errors = errorResult)
         val attributeMap = attributes.associateBy { it.key }
-        return fieldTypeAttributeKeys.map { fieldTypeAttributeKey ->
-            validateAttribute(fieldTypeAttributeKey, attributeMap)
+        fieldTypeAttributeKeys.map { fieldTypeAttributeKey ->
+            validateAttribute(
+                fieldTypeAttributeKey = fieldTypeAttributeKey,
+                attributeMap = attributeMap,
+                errors = errorResult
+            )
+        }
+        return errorResult
+    }
+
+    private fun validateAttributeNotDuplicated(
+        attributes: Set<Attribute>,
+        errors: MutableList<FieldTypeValidationResult>
+    ) {
+        val attributeKeys = attributes.map { it.key }
+        val duplicatedKeys = attributeKeys.groupingBy { it }.eachCount().filter { it.value > 1 }.keys
+        if (duplicatedKeys.isNotEmpty()) {
+            errors.add(
+                FieldTypeValidationResult(
+                    valid = false,
+                    message = "Attribute keys are duplicated: ${duplicatedKeys.joinToString(", ")}"
+                )
+            )
         }
     }
 
@@ -57,13 +68,24 @@ sealed class FieldType {
      */
     private fun validateAttribute(
         fieldTypeAttributeKey: FieldTypeAttributeKey,
-        attributeMap: Map<String, Attribute>
-    ): FieldTypeValidationResult {
-        return attributeMap[fieldTypeAttributeKey.key]?.let { value ->
-            fieldTypeAttributeKey.validationFunc(value.value)
-        } ?: FieldTypeValidationResult(
-            valid = false,
-            message = "Unknown attribute key: ${fieldTypeAttributeKey.key}"
+        attributeMap: Map<String, Attribute>,
+        errors: MutableList<FieldTypeValidationResult>,
+    ) {
+
+        attributeMap[fieldTypeAttributeKey.key]?.let { value ->
+            val res = fieldTypeAttributeKey.validationFunc(value.value)
+            if (!res.valid) {
+                errors.add(res)
+            }
+        } ?: errors.add(
+            FieldTypeValidationResult(
+                valid = false,
+                message = "Unknown attribute key: ${fieldTypeAttributeKey.key}"
+            )
         )
+    }
+
+    fun getKeyString(): String {
+        return key.key
     }
 }

@@ -12,7 +12,10 @@ import com.gabinote.coffeenote.field.dto.field.controller.*
 import com.gabinote.coffeenote.field.dto.field.service.*
 import com.gabinote.coffeenote.field.mapping.attribute.AttributeMapper
 import com.gabinote.coffeenote.field.mapping.attribute.AttributeMapperImpl
+import com.gabinote.coffeenote.field.mapping.fieldType.FieldTypeMapper
+import com.gabinote.coffeenote.field.mapping.fieldType.FieldTypeMapperImpl
 import com.gabinote.coffeenote.testSupport.testTemplate.MockkTestTemplate
+import com.gabinote.coffeenote.testSupport.testUtil.data.field.TestFieldType
 import com.ninjasquad.springmockk.MockkBean
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -23,7 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import java.util.*
 
-@ContextConfiguration(classes = [FieldMapperImpl::class, AttributeMapperImpl::class])
+@ContextConfiguration(classes = [FieldMapperImpl::class, AttributeMapperImpl::class, FieldTypeMapperImpl::class])
 class FieldMapperTest : MockkTestTemplate() {
 
     @Autowired
@@ -31,6 +34,9 @@ class FieldMapperTest : MockkTestTemplate() {
 
     @MockkBean
     lateinit var attributeMapper: AttributeMapper
+
+    @MockkBean
+    lateinit var fieldTypeMapper: FieldTypeMapper
 
     init {
         describe("[Field] FieldMapper") {
@@ -52,7 +58,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         externalId = field.externalId!!,
                         name = field.name,
                         icon = field.icon,
-                        type = field.type,
+                        type = TestFieldType,
                         attributes = setOf(mockk<AttributeResServiceDto>()),
                         owner = field.owner,
                         isDefault = field.isDefault,
@@ -60,13 +66,17 @@ class FieldMapperTest : MockkTestTemplate() {
 
                     beforeEach {
                         every { attributeMapper.toAttributeResServiceDto(field.attributes.first()) } returns expected.attributes.first()
+                        every { fieldTypeMapper.toFieldType(field.type) } returns TestFieldType
                     }
 
                     it("FieldResServiceDto로 변환되어야 한다.") {
                         val result = fieldMapper.toResServiceDto(field)
                         result shouldBe expected
 
-                        verify(exactly = 1) { attributeMapper.toAttributeResServiceDto(field.attributes.first()) }
+                        verify(exactly = 1) {
+                            attributeMapper.toAttributeResServiceDto(field.attributes.first())
+                            fieldTypeMapper.toFieldType(field.type)
+                        }
                     }
                 }
 
@@ -86,7 +96,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         externalId = field.externalId!!,
                         name = field.name,
                         icon = field.icon,
-                        type = field.type,
+                        type = TestFieldType,
                         attributes = setOf(mockk<AttributeResServiceDto>()),
                         owner = field.owner,
                         isDefault = field.isDefault,
@@ -94,13 +104,17 @@ class FieldMapperTest : MockkTestTemplate() {
 
                     beforeEach {
                         every { attributeMapper.toAttributeResServiceDto(field.attributes.first()) } returns expected.attributes.first()
+                        every { fieldTypeMapper.toFieldType(field.type) } returns TestFieldType
                     }
 
                     it("FieldResServiceDto로 변환되어야 한다.") {
                         val result = fieldMapper.toResServiceDto(field)
                         result shouldBe expected
 
-                        verify(exactly = 1) { attributeMapper.toAttributeResServiceDto(field.attributes.first()) }
+                        verify(exactly = 1) {
+                            attributeMapper.toAttributeResServiceDto(field.attributes.first())
+                            fieldTypeMapper.toFieldType(field.type)
+                        }
                     }
                 }
             }
@@ -115,7 +129,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         owner = "owner-id",
                         name = "Field Name",
                         icon = "field-icon",
-                        type = "custom",
+                        type = TestFieldType,
                         attributes = setOf(mockk<AttributeResServiceDto>()),
                         isDefault = false,
                     )
@@ -147,7 +161,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         owner = "owner-id",
                         name = "Field Name",
                         icon = "field-icon",
-                        type = "custom",
+                        type = TestFieldType,
                         attributes = setOf(mockk<AttributeResServiceDto>()),
                         isDefault = true,
                     )
@@ -179,7 +193,7 @@ class FieldMapperTest : MockkTestTemplate() {
                     var dto = FieldCreateReqControllerDto(
                         name = "Field Name",
                         icon = "field-icon",
-                        type = "custom",
+                        type = TestFieldType,
                         attributes = setOf(mockk<AttributeCreateReqControllerDto>()),
                     )
 
@@ -211,7 +225,7 @@ class FieldMapperTest : MockkTestTemplate() {
                     var dto = FieldCreateReqServiceDto(
                         name = "Field Name",
                         icon = "field-icon",
-                        type = "custom",
+                        type = TestFieldType,
                         attributes = setOf(mockk<AttributeCreateReqServiceDto>()),
                         owner = "owner-id",
                     )
@@ -221,7 +235,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         externalId = null,
                         name = dto.name,
                         icon = dto.icon,
-                        type = dto.type,
+                        type = dto.type.getKeyString(),
                         attributes = setOf(mockk<Attribute>()),
                         owner = dto.owner,
                         isDefault = false,
@@ -229,13 +243,17 @@ class FieldMapperTest : MockkTestTemplate() {
 
                     beforeEach {
                         every { attributeMapper.toAttribute(dto.attributes.first()) } returns expected.attributes.first()
+                        every { fieldTypeMapper.toString(dto.type) } returns expected.type
                     }
 
                     it("Field 엔티티로 변환되어야 한다.") {
                         val result = fieldMapper.toField(dto)
                         result shouldBe expected
 
-                        verify(exactly = 1) { attributeMapper.toAttribute(dto.attributes.first()) }
+                        verify(exactly = 1) {
+                            attributeMapper.toAttribute(dto.attributes.first())
+                            fieldTypeMapper.toString(dto.type)
+                        }
                     }
                 }
             }
@@ -379,14 +397,14 @@ class FieldMapperTest : MockkTestTemplate() {
                     val dto = FieldCreateDefaultReqControllerDto(
                         name = "기본 필드",
                         icon = "default-icon",
-                        type = "TEXT",
+                        type = TestFieldType,
                         attributes = setOf(mockk<AttributeCreateReqControllerDto>()),
                     )
 
                     val expected = FieldCreateDefaultReqServiceDto(
                         name = "기본 필드",
                         icon = "default-icon",
-                        type = "TEXT",
+                        type = TestFieldType,
                         attributes = setOf(mockk<AttributeCreateReqServiceDto>()),
                     )
 
@@ -409,7 +427,7 @@ class FieldMapperTest : MockkTestTemplate() {
                     val dto = FieldCreateDefaultReqServiceDto(
                         name = "기본 필드",
                         icon = "default-icon",
-                        type = "TEXT",
+                        type = TestFieldType,
                         attributes = setOf(mockk<AttributeCreateReqServiceDto>()),
                     )
 
@@ -418,7 +436,7 @@ class FieldMapperTest : MockkTestTemplate() {
                         externalId = null,
                         name = dto.name,
                         icon = dto.icon,
-                        type = dto.type,
+                        type = dto.type.getKeyString(),
                         attributes = setOf(mockk<Attribute>()),
                         owner = null,
                         isDefault = true,
@@ -426,11 +444,17 @@ class FieldMapperTest : MockkTestTemplate() {
 
                     beforeEach {
                         every { attributeMapper.toAttribute(dto.attributes.first()) } returns expected.attributes.first()
+                        every { fieldTypeMapper.toString(dto.type) } returns expected.type
                     }
 
                     it("isDefault가 true인 Field 엔티티로 변환되어야 한다.") {
                         val result = fieldMapper.toFieldDefault(dto)
                         result shouldBe expected
+
+                        verify(exactly = 1) {
+                            attributeMapper.toAttribute(dto.attributes.first())
+                            fieldTypeMapper.toString(dto.type)
+                        }
                     }
                 }
             }

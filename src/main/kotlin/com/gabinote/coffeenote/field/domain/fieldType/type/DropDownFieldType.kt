@@ -1,74 +1,81 @@
-package com.gabinote.coffeenote.field.domain.fieldType
+package com.gabinote.coffeenote.field.domain.fieldType.type
 
+import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeKey
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
+import org.springframework.stereotype.Component
 
 /**
- * 다중 선택 필드 타입을 구현하는 싱글톤 객체
- * 여러 항목을 선택할 수 있는 필드 타입
+ * 드롭다운 선택 필드 타입을 구현하는 싱글톤 객체
+ * 단일 항목을 선택할 수 있는 드롭다운 목록 필드
  * @author 황준서 (hzser123@gmail.com)
  * @since 2025-09-08
  */
-object MultiSelectField : ListSelectField() {
+@Component
+class DropDownFieldType : ListSelectFieldType() {
     /**
-     * 다중 선택 필드 타입의 고유 키
+     * 드롭다운 필드 타입의 고유 키
      */
-    override val key: String = "MULTI_SELECT"
+    override val key: FieldTypeKey = FieldTypeKey.DROP_DOWN
 
     /**
-     * 다중 선택 필드가 리스트 보기에서 표시될 수 있는지 여부
+     * 드롭다운 필드가 리스트 보기에서 표시될 수 있는지 여부
      * true: 표시 가능, false: 표시 불가
      */
     override val canDisplay: Boolean = true
 
     /**
-     * 다중 선택 필드 값의 유효성 검사를 수행
+     * 드롭다운 필드 값의 유효성 검사를 수행
      * @param values 검사할 값 집합
      * @param attributes 필드 속성 집합
      * @return 유효성 검사 결과 목록
      */
     override fun validationValues(values: Set<String>, attributes: Set<Attribute>): List<FieldTypeValidationResult> {
         val results = mutableListOf<FieldTypeValidationResult>()
-        if (values.size > 30) {
+
+        if (values.size != 1) {
             results.add(
                 FieldTypeValidationResult(
                     valid = false,
-                    message = "Multi Select field can have at most 30 values"
+                    message = "Dropdown field can has only 1 value"
                 )
             )
         }
 
-        if (values.any { it.length > 50 }) {
+        val value = values.firstOrEmptyString()
+        if (value.length > 50) {
             results.add(
                 FieldTypeValidationResult(
                     valid = false,
-                    message = "Multi Select field value cannot exceed 50 characters"
+                    message = "Dropdown field value cannot exceed 50 characters"
                 )
             )
         }
 
-        if (values.any { it.isBlank() }) {
+        if (value.isEmpty()) {
             results.add(
                 FieldTypeValidationResult(
                     valid = false,
-                    message = "Multi Select field value cannot be empty"
-                )
-            )
-        }
-
-        val allowAddValue = getAllowAddValue(attributes)
-        val allowValues = getValues(attributes)
-
-        if (!allowAddValue && values.any { it !in allowValues }) {
-            results.add(
-                FieldTypeValidationResult(
-                    valid = false,
-                    message = "The value is not in the list of allowed values, and adding new values is not permitted."
+                    message = "Dropdown field value cannot be empty"
                 )
             )
         }
 
         if (results.isEmpty()) {
             results.add(FieldTypeValidationResult(valid = true))
+        }
+
+        val allowAddValue = getAllowAddValue(attributes)
+        val allowValues = getValues(attributes)
+
+        if (value !in allowValues && !allowAddValue) {
+            results.add(
+                FieldTypeValidationResult(
+                    valid = false,
+                    message = "The value is not in the list of allowed values, and adding new values is not permitted."
+                )
+            )
         }
 
         return results

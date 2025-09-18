@@ -1,7 +1,10 @@
-package com.gabinote.coffeenote.field.domain.fieldType
+package com.gabinote.coffeenote.field.domain.fieldType.type
 
 import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.fieldType.FieldType
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeAttributeKey
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
 
 /**
  * 목록 선택 필드 타입들의 기본 추상 클래스
@@ -9,7 +12,7 @@ import com.gabinote.coffeenote.field.domain.attribute.Attribute
  * @author 황준서 (hzser123@gmail.com)
  * @since 2025-09-08
  */
-abstract class ListSelectField : FieldType() {
+abstract class ListSelectFieldType : FieldType() {
 
     /**
      * 목록 선택 필드가 지원하는 속성 키 집합

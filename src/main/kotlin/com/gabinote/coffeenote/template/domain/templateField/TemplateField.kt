@@ -1,7 +1,6 @@
 package com.gabinote.coffeenote.template.domain.templateField
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
-import com.gabinote.coffeenote.field.domain.fieldType.ShortTextField
 
 /**
  * 템플릿 필드 도메인 엔티티
@@ -26,7 +25,7 @@ data class TemplateField(
      * 필드 타입
      * @see com.gabinote.coffeenote.field.domain.fieldType.FieldType
      */
-    var type: String = ShortTextField.key,
+    var type: String,
 
     /**
      * 필드 속성 집합
