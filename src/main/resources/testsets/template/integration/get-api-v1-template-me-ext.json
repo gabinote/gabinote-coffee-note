@@ -1,0 +1,40 @@
+{
+  "templates": [
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea40"
+      },
+      "externalId": "d1e2f3a4-b5c6-7890-abcd-ef1234567890",
+      "name": "My Personal Coffee Template",
+      "icon": "personal-coffee",
+      "description": "My personal coffee tasting notes template",
+      "isOpen": true,
+      "isDefault": false,
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "fields": [
+        {
+          "_id": "field-4",
+          "name": "Coffee Origin",
+          "icon": "globe",
+          "type": "SHORT_TEXT",
+          "order": 1,
+          "isDisplay": true,
+          "attributes": []
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea39"
+      },
+      "externalId": "3fcdd722-93ca-4693-9bef-496616dd6af3",
+      "name": "Default Coffee Review Template",
+      "icon": "coffee",
+      "description": "A standard template for coffee reviews",
+      "isOpen": true,
+      "isDefault": true,
+      "owner": null,
+      "fields": []
+    }
+  ]
+}

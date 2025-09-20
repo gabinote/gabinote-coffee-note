@@ -20,7 +20,7 @@ class TimeFieldType : FieldType() {
     /**
      * 시간 필드 타입의 고유 키
      */
-    override val key: FieldTypeKey = FieldTypeKey.SHORT_TEXT
+    override val key: FieldTypeKey = FieldTypeKey.TIME
 
     /**
      * 시간 필드가 리스트 보기에서 표시될 수 있는지 여부

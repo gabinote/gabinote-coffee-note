@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.template.mapping.templateField
 
 import com.gabinote.coffeenote.field.mapping.attribute.AttributeMapper
+import com.gabinote.coffeenote.field.mapping.fieldType.FieldTypeMapper
 import com.gabinote.coffeenote.template.domain.templateField.TemplateField
 import com.gabinote.coffeenote.template.dto.templateField.controller.TemplateFieldCreateReqControllerDto
 import com.gabinote.coffeenote.template.dto.templateField.controller.TemplateFieldPatchReqControllerDto
@@ -12,7 +13,7 @@ import org.mapstruct.*
 
 @Mapper(
     componentModel = "spring",
-    uses = [AttributeMapper::class]
+    uses = [AttributeMapper::class, FieldTypeMapper::class]
 )
 interface TemplateFieldMapper {
 
@@ -25,6 +26,7 @@ interface TemplateFieldMapper {
 
     fun toPatchReqServiceDto(dto: TemplateFieldPatchReqControllerDto): TemplateFieldPatchReqServiceDto
 
+    @Mapping(target = "attributes", expression = "java(java.util.Collections.emptySet())")
     fun toTemplateField(dto: TemplateFieldCreateReqServiceDto): TemplateField
 
     @Mapping(target = "id", ignore = true)

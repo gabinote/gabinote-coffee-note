@@ -3,6 +3,7 @@ package com.gabinote.coffeenote.testSupport.testUtil.data.field
 import com.gabinote.coffeenote.field.dto.attribute.controller.AttributeCreateReqControllerDto
 import com.gabinote.coffeenote.field.dto.attribute.controller.AttributeResControllerDto
 import com.gabinote.coffeenote.field.dto.attribute.service.AttributeCreateReqServiceDto
+import com.gabinote.coffeenote.field.dto.attribute.service.AttributeResServiceDto
 import com.gabinote.coffeenote.field.dto.attribute.service.AttributeUpdateReqServiceDto
 
 object AttributeTestDataHelper {
@@ -34,6 +35,22 @@ object AttributeTestDataHelper {
         key: String = "test",
         value: Set<String> = setOf("test"),
     ) = AttributeResControllerDto(
+        key = key,
+        value = value,
+    )
+
+    fun createTestAttribute(
+        key: String = "test",
+        value: Set<String> = setOf("test"),
+    ) = com.gabinote.coffeenote.field.domain.attribute.Attribute(
+        key = key,
+        value = value,
+    )
+
+    fun createTestAttributeResServiceDto(
+        key: String = "test",
+        value: Set<String> = setOf("test"),
+    ) = AttributeResServiceDto(
         key = key,
         value = value,
     )

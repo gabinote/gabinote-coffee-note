@@ -43,4 +43,6 @@ interface TemplateRepository : MongoRepository<Template, ObjectId> {
      * @return 템플릿 슬라이스
      */
     fun findAllByOwnerOrIsDefault(owner: String, isDefault: Boolean = true, pageable: Pageable): Slice<Template>
+
+    fun findAllBy(pageable: Pageable): Slice<Template>
 }

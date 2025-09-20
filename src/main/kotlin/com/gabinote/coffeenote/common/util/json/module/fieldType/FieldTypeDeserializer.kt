@@ -1,4 +1,4 @@
-package com.gabinote.coffeenote.common.util.json.fieldType
+package com.gabinote.coffeenote.common.util.json.module.fieldType
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
@@ -6,10 +6,9 @@ import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonNode
 import com.gabinote.coffeenote.field.domain.fieldType.FieldType
 import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeFactory
+import org.springframework.boot.jackson.JsonComponent
 
-import org.springframework.stereotype.Component
-
-@Component
+@JsonComponent
 class FieldTypeDeserializer(
     private val fieldTypeFactory: FieldTypeFactory
 ) : JsonDeserializer<FieldType>() {

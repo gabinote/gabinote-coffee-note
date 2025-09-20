@@ -59,6 +59,9 @@ data class Template(
     var fields: List<TemplateField> = listOf()
 ) {
 
+    fun changeFields(newFields: List<TemplateField>) {
+        this.fields = newFields
+    }
 
     override fun toString(): String {
         return "Template(id=$id, externalId=$externalId, name='$name', description='$description', isOpen=$isOpen, owner='$owner', fields=$fields)"

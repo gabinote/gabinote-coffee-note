@@ -10,11 +10,9 @@ import com.gabinote.coffeenote.common.domain.base.BaseSortKey
 enum class TemplateSortKey(
     override val key: String
 ) : BaseSortKey {
-    ID("_id"),
     EXTERNAL_ID("externalId"),
     ICON("icon"),
     NAME("name"),
-    DESCRIPTION("description"),
     IS_OPEN("isOpen"),
     OWNER("owner"),
     IS_DEFAULT("isDefault")

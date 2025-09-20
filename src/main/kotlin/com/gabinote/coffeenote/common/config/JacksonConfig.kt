@@ -5,9 +5,7 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.gabinote.coffeenote.common.util.json.fieldType.FieldTypeDeserializer
-import com.gabinote.coffeenote.common.util.json.fieldType.FieldTypeModule
-import com.gabinote.coffeenote.common.util.json.fieldType.FieldTypeSerializer
+import com.gabinote.coffeenote.common.util.json.module.fieldType.FieldTypeModule
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
@@ -20,10 +18,7 @@ import java.time.format.DateTimeFormatter
  * @author 황준서
  */
 @Configuration
-class JacksonConfig(
-    private val fieldTypeSerializer: FieldTypeSerializer,
-    private val fieldTypeDeserializer: FieldTypeDeserializer
-) {
+class JacksonConfig() {
 
     /**
      * ObjectMapper 빈 구성
@@ -67,9 +62,4 @@ class JacksonConfig(
         return Jackson2ObjectMapperBuilder()
     }
 
-//    @Bean
-//    fun fieldTypeModule(): FieldTypeModule {
-//        // 주입받은 Bean들을 사용하여 모듈을 생성하고, 이 모듈을 Bean으로 등록
-//        return FieldTypeModule(fieldTypeSerializer, fieldTypeDeserializer)
-//    }
 }

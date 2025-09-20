@@ -1,15 +1,14 @@
 package com.gabinote.coffeenote.template.service.template
 
 import com.gabinote.coffeenote.common.util.exception.service.ResourceNotFound
-import com.gabinote.coffeenote.field.mapping.attribute.AttributeMapper
 import com.gabinote.coffeenote.template.domain.template.Template
 import com.gabinote.coffeenote.template.domain.template.TemplateRepository
-import com.gabinote.coffeenote.template.dto.template.service.TemplateCreateDefaultReqServiceDto
-import com.gabinote.coffeenote.template.dto.template.service.TemplateResServiceDto
+import com.gabinote.coffeenote.template.dto.template.service.*
+import com.gabinote.coffeenote.template.dto.templateField.service.TemplateFieldCreateReqServiceDto
 import com.gabinote.coffeenote.template.mapping.template.TemplateMapper
-import com.gabinote.coffeenote.template.mapping.templateField.TemplateFieldMapper
 import com.gabinote.coffeenote.template.service.template.strategy.GetTemplateByExternalIdStrategyFactory
 import com.gabinote.coffeenote.template.service.template.strategy.GetTemplateByExternalIdStrategyType
+import com.gabinote.coffeenote.template.service.templateField.TemplateFieldService
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Slice
 import org.springframework.stereotype.Service
@@ -19,9 +18,8 @@ import java.util.*
 class TemplateService(
     private val templateRepository: TemplateRepository,
     private val templateMapper: TemplateMapper,
-    private val templateFieldMapper: TemplateFieldMapper,
-    private val attributeMapper: AttributeMapper,
-    private val getTemplateByExternalIdStrategyFactory: GetTemplateByExternalIdStrategyFactory
+    private val getTemplateByExternalIdStrategyFactory: GetTemplateByExternalIdStrategyFactory,
+    private val templateFieldService: TemplateFieldService
 ) {
     //get
     fun fetchByExternalId(externalId: UUID): Template {
@@ -42,31 +40,9 @@ class TemplateService(
         strategy.validate(requestor = requestor, template = template)
         return templateMapper.toResServiceDto(template)
     }
-//    fun getByExternalId(externalId: UUID): TemplateResServiceDto {
-//        val template = fetchByExternalId(externalId)
-//        return templateMapper.toResServiceDto(template)
-//    }
-//
-//    fun getOpenedByExternalId(externalId: UUID): TemplateResServiceDto {
-//        val template = fetchByExternalId(externalId)
-//        checkIsOpen(template)
-//        return templateMapper.toResServiceDto(template)
-//    }
-//
-//    fun getOwnedByExternalId(externalId: UUID, owner: String): TemplateResServiceDto {
-//        val template = fetchByExternalId(externalId)
-//        checkOwnership(template, owner)
-//        return templateMapper.toResServiceDto(template)
-//    }
-//
-//    fun getDefaultByExternalId(externalId: UUID): TemplateResServiceDto {
-//        val template = fetchByExternalId(externalId)
-//        checkIsDefault(template)
-//        return templateMapper.toResServiceDto(template)
-//    }
 
     fun getAll(pageable: Pageable): Slice<TemplateResServiceDto> {
-        val templates = templateRepository.findAll(pageable)
+        val templates = templateRepository.findAllBy(pageable)
         return templates.map { templateMapper.toResServiceDto(it) }
     }
 
@@ -83,12 +59,54 @@ class TemplateService(
     //create
     fun createDefault(dto: TemplateCreateDefaultReqServiceDto): TemplateResServiceDto {
         val template = templateMapper.toDefaultTemplate(dto)
-        val savedTemplate = templateRepository.save(template)
+        return createTemplate(dto.fields, template)
+    }
+
+    fun createOwned(dto: TemplateCreateReqServiceDto): TemplateResServiceDto {
+        //TODO 사용자 갯수 제한
+        val template = templateMapper.toTemplate(dto)
+        return createTemplate(dto.fields, template)
+    }
+
+
+    //update
+    // TODO 중복 분리하기
+    fun updateDefault(dto: TemplateUpdateDefaultReqServiceDto): TemplateResServiceDto {
+        val existsTemplate = fetchByExternalId(dto.externalId)
+        checkIsDefault(existsTemplate)
+        templateMapper.updateDefaultFromDto(dto = dto, entity = existsTemplate)
+        val updatedFields = templateFieldService.create(dto.fields)
+        existsTemplate.changeFields(updatedFields)
+
+        val savedTemplate = templateRepository.save(existsTemplate)
         return templateMapper.toResServiceDto(savedTemplate)
     }
 
-    //update
+    fun updateOwned(dto: TemplateUpdateReqServiceDto): TemplateResServiceDto {
+        val existsTemplate = fetchByExternalId(dto.externalId)
+        checkOwnership(existsTemplate, dto.owner)
+        templateMapper.updateFromDto(dto = dto, entity = existsTemplate)
+        val updatedFields = templateFieldService.create(dto.fields)
+        existsTemplate.changeFields(updatedFields)
+
+        val savedTemplate = templateRepository.save(existsTemplate)
+        return templateMapper.toResServiceDto(savedTemplate)
+    }
+
+
     //delete
+    fun deleteOwned(externalId: UUID, owner: String) {
+        val existsTemplate = fetchByExternalId(externalId)
+        checkOwnership(existsTemplate, owner)
+        templateRepository.delete(existsTemplate)
+    }
+
+    fun deleteDefault(externalId: UUID) {
+        val existsTemplate = fetchByExternalId(externalId)
+        checkIsDefault(existsTemplate)
+        templateRepository.delete(existsTemplate)
+    }
+
     private fun checkOwnership(template: Template, owner: String) {
         if (template.owner != owner) {
             throw ResourceNotFound(
@@ -119,4 +137,15 @@ class TemplateService(
         }
     }
 
+    private fun createTemplate(
+        templateFields: List<TemplateFieldCreateReqServiceDto>,
+        template: Template
+    ): TemplateResServiceDto {
+        val templateFields = templateFieldService.create(templateFields)
+        template.changeFields(templateFields)
+
+        val savedTemplate = templateRepository.save(template)
+        return templateMapper.toResServiceDto(savedTemplate)
+    }
 }
+

@@ -1,0 +1,65 @@
+{
+  "templates": [
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea40"
+      },
+      "externalId": "d1e2f3a4-b5c6-7890-abcd-ef1234567890",
+      "name": "My Personal Coffee Template",
+      "icon": "personal-coffee",
+      "description": "My personal coffee tasting notes template",
+      "isOpen": true,
+      "isDefault": false,
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "fields": [
+        {
+          "_id": "field-4",
+          "name": "Coffee Origin",
+          "icon": "globe",
+          "type": "SHORT_TEXT",
+          "order": 1,
+          "isDisplay": true,
+          "attributes": []
+        },
+        {
+          "_id": "field-5",
+          "name": "Brewing Method",
+          "icon": "brew",
+          "type": "DROP_DOWN",
+          "order": 2,
+          "isDisplay": true,
+          "attributes": [
+            {
+              "key": "values",
+              "value": [
+                "V60",
+                "French Press",
+                "Espresso",
+                "AeroPress"
+              ]
+            },
+            {
+              "key": "allowAddValue",
+              "value": [
+                "true"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea41"
+      },
+      "externalId": "e2f3a4b5-c6d7-8901-bcde-f23456789012",
+      "name": "Other User Template",
+      "icon": "other-icon",
+      "description": "Template belonging to another user",
+      "isOpen": false,
+      "isDefault": false,
+      "owner": "695b8482-c259-4493-82e2-8988599d21e9",
+      "fields": []
+    }
+  ]
+}

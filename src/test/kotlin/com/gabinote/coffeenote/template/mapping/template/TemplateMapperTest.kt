@@ -272,25 +272,32 @@ class TemplateMapperTest : MockkTestTemplate() {
 
             describe("TemplateMapper.toUpdateDefaultReqServiceDto") {
                 context("올바른 TemplateUpdateDefaultReqControllerDto와 externalId가 주어지면,") {
-                    val fieldServiceDto = mockk<TemplateFieldCreateReqServiceDto>()
+                    val fieldControllerDto = mockk<TemplateFieldCreateReqControllerDto>()
                     val dto = TemplateUpdateDefaultReqControllerDto(
                         name = "Updated Default Template",
                         icon = "updated-default-icon",
                         description = "Updated Default Description",
-                        fields = listOf(fieldServiceDto)
+                        fields = listOf(fieldControllerDto)
                     )
                     val externalId = UUID.randomUUID()
+                    val fieldServiceDto = mockk<TemplateFieldCreateReqServiceDto>()
+
+                    beforeTest {
+                        every { templateFieldMapper.toCreateReqServiceDto(fieldControllerDto) } returns fieldServiceDto
+                    }
+
                     val expected = TemplateUpdateDefaultReqServiceDto(
                         externalId = externalId,
                         name = dto.name,
                         icon = dto.icon,
                         description = dto.description,
-                        fields = dto.fields
+                        fields = listOf(fieldServiceDto)
                     )
 
                     it("TemplateUpdateDefaultReqServiceDto로 변환되어야 한다.") {
                         val result = templateMapper.toUpdateDefaultReqServiceDto(dto, externalId)
                         result shouldBe expected
+                        verify(exactly = 1) { templateFieldMapper.toCreateReqServiceDto(fieldControllerDto) }
                     }
                 }
                 context("fields가 빈 TemplateUpdateDefaultReqControllerDto가 주어지면,") {
@@ -312,22 +319,27 @@ class TemplateMapperTest : MockkTestTemplate() {
                     it("빈 fields를 가진 TemplateUpdateDefaultReqServiceDto로 변환되어야 한다.") {
                         val result = templateMapper.toUpdateDefaultReqServiceDto(dto, externalId)
                         result shouldBe expected
+
                     }
                 }
             }
 
             describe("TemplateMapper.toUpdateReqServiceDto") {
                 context("올바른 TemplateUpdateReqControllerDto, owner, externalId가 주어지면,") {
-                    val fieldServiceDto = mockk<TemplateFieldCreateReqServiceDto>()
+                    val fieldControllerDto = mockk<TemplateFieldCreateReqControllerDto>()
                     val dto = TemplateUpdateReqControllerDto(
                         name = "Updated Template",
                         icon = "updated-icon",
                         description = "Updated Description",
                         isOpen = true,
-                        fields = listOf(fieldServiceDto)
+                        fields = listOf(fieldControllerDto)
                     )
                     val owner = "owner-id"
                     val externalId = UUID.randomUUID()
+                    val fieldServiceDto = mockk<TemplateFieldCreateReqServiceDto>()
+                    beforeTest {
+                        every { templateFieldMapper.toCreateReqServiceDto(fieldControllerDto) } returns fieldServiceDto
+                    }
                     val expected = TemplateUpdateReqServiceDto(
                         externalId = externalId,
                         name = dto.name,
@@ -335,12 +347,13 @@ class TemplateMapperTest : MockkTestTemplate() {
                         description = dto.description,
                         isOpen = dto.isOpen,
                         owner = owner,
-                        fields = dto.fields
+                        fields = listOf(fieldServiceDto)
                     )
 
                     it("TemplateUpdateReqServiceDto로 변환되어야 한다.") {
                         val result = templateMapper.toUpdateReqServiceDto(dto, owner, externalId)
                         result shouldBe expected
+                        verify(exactly = 1) { templateFieldMapper.toCreateReqServiceDto(fieldControllerDto) }
                     }
                 }
                 context("fields가 빈 TemplateUpdateReqControllerDto가 주어지면,") {
@@ -375,7 +388,7 @@ class TemplateMapperTest : MockkTestTemplate() {
                     val templateField = mockk<TemplateField>()
                     val template = Template(
                         id = ObjectId("507f1f77bcf86cd799439011"),
-                        externalId = "template-external-id",
+                        externalId = UUID.randomUUID().toString(),
                         name = "Template Name",
                         icon = "template-icon",
                         description = "Template Description",
@@ -387,7 +400,7 @@ class TemplateMapperTest : MockkTestTemplate() {
                     val fieldResServiceDto = mockk<TemplateFieldResServiceDto>()
                     val expected = TemplateResServiceDto(
                         id = template.id!!,
-                        externalId = template.externalId!!,
+                        externalId = UUID.fromString(template.externalId!!),
                         name = template.name,
                         icon = template.icon,
                         description = template.description,
@@ -412,7 +425,7 @@ class TemplateMapperTest : MockkTestTemplate() {
                     val templateField = mockk<TemplateField>()
                     val template = Template(
                         id = ObjectId("507f1f77bcf86cd799439012"),
-                        externalId = "default-template-external-id",
+                        externalId = UUID.randomUUID().toString(),
                         name = "Default Template",
                         icon = "default-icon",
                         description = "Default Template Description",
@@ -424,7 +437,7 @@ class TemplateMapperTest : MockkTestTemplate() {
                     val fieldResServiceDto = mockk<TemplateFieldResServiceDto>()
                     val expected = TemplateResServiceDto(
                         id = template.id!!,
-                        externalId = template.externalId!!,
+                        externalId = UUID.fromString(template.externalId!!),
                         name = template.name,
                         icon = template.icon,
                         description = template.description,
@@ -448,7 +461,7 @@ class TemplateMapperTest : MockkTestTemplate() {
                 context("fields가 빈 Template 엔티티가 주어지면,") {
                     val template = Template(
                         id = ObjectId("507f1f77bcf86cd799439013"),
-                        externalId = "empty-template-external-id",
+                        externalId = UUID.randomUUID().toString(),
                         name = "Empty Template",
                         icon = "empty-icon",
                         description = "Empty Template Description",
@@ -459,7 +472,7 @@ class TemplateMapperTest : MockkTestTemplate() {
                     )
                     val expected = TemplateResServiceDto(
                         id = template.id!!,
-                        externalId = template.externalId!!,
+                        externalId = UUID.fromString(template.externalId!!),
                         name = template.name,
                         icon = template.icon,
                         description = template.description,
@@ -483,7 +496,7 @@ class TemplateMapperTest : MockkTestTemplate() {
                     val fieldResServiceDto = mockk<TemplateFieldResServiceDto>()
                     val dto = TemplateResServiceDto(
                         id = ObjectId("507f1f77bcf86cd799439011"),
-                        externalId = "template-external-id",
+                        externalId = UUID.randomUUID(),
                         name = "Template Name",
                         icon = "template-icon",
                         description = "Template Description",
@@ -519,7 +532,7 @@ class TemplateMapperTest : MockkTestTemplate() {
                     val fieldResServiceDto = mockk<TemplateFieldResServiceDto>()
                     val dto = TemplateResServiceDto(
                         id = ObjectId("507f1f77bcf86cd799439012"),
-                        externalId = "default-template-external-id",
+                        externalId = UUID.randomUUID(),
                         name = "Default Template",
                         icon = "default-icon",
                         description = "Default Template Description",
@@ -554,7 +567,7 @@ class TemplateMapperTest : MockkTestTemplate() {
                 context("fields가 빈 TemplateResServiceDto가 주어지면,") {
                     val dto = TemplateResServiceDto(
                         id = ObjectId("507f1f77bcf86cd799439013"),
-                        externalId = "empty-template-external-id",
+                        externalId = UUID.randomUUID(),
                         name = "Empty Template",
                         icon = "empty-icon",
                         description = "Empty Template Description",

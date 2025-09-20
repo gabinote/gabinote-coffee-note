@@ -1,0 +1,59 @@
+{
+  "templates": [
+    {
+      "_id": "$anyObject()",
+      "externalId": "3fcdd722-93ca-4693-9bef-496616dd6af3",
+      "name": "Existing Default Template",
+      "icon": "existing-coffee",
+      "description": "An existing default template",
+      "isOpen": true,
+      "isDefault": true,
+      "fields": [
+        {
+          "_id": "00000000-0000-0000-0000-000000000000",
+          "name": "Coffee Name",
+          "icon": "coffee-bean",
+          "type": "SHORT_TEXT",
+          "order": 1,
+          "isDisplay": true,
+          "attributes": []
+        }
+      ]
+    },
+    {
+      "_id": "$anyObject()",
+      "externalId": "00000000-0000-0000-0000-000000000000",
+      "name": "Admin Created Template",
+      "icon": "admin-created",
+      "description": "A template created by admin",
+      "isOpen": true,
+      "isDefault": true,
+      "fields": [
+        {
+          "_id": "00000000-0000-0000-0000-000000000000",
+          "name": "Admin Field",
+          "icon": "admin-field",
+          "type": "DROP_DOWN",
+          "order": 1,
+          "isDisplay": true,
+          "attributes": [
+            {
+              "key": "values",
+              "value": [
+                "Admin Option A",
+                "Admin Option B"
+              ]
+            },
+            {
+              "key": "allowAddValue",
+              "value": [
+                "true"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+

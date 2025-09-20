@@ -45,6 +45,10 @@ data class TemplateField(
     @JvmField
     var isDisplay: Boolean = true
 ) {
+    fun changeAttributes(newAttributes: Set<Attribute>) {
+        this.attributes = newAttributes
+    }
+
     override fun toString(): String {
         return "TemplateField(id='$id', name='$name', icon='$icon', type='$type', attributes=$attributes, order=$order, isDisplay=$isDisplay)"
     }

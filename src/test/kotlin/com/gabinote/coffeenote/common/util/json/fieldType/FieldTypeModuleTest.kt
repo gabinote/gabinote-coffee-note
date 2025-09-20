@@ -12,13 +12,8 @@ import io.mockk.every
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.json.JacksonTester
-import org.springframework.context.annotation.Import
 
-@Import(
-    FieldTypeModule::class,
-    FieldTypeSerializer::class,
-    FieldTypeDeserializer::class
-)
+
 class FieldTypeModuleTest : JsonTestTemplate() {
     @Autowired
     private lateinit var jacksonTester: JacksonTester<FieldType>

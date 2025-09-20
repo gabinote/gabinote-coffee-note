@@ -1,12 +1,12 @@
-package com.gabinote.coffeenote.common.util.json.fieldType
+package com.gabinote.coffeenote.common.util.json.module.fieldType
 
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.JsonSerializer
 import com.fasterxml.jackson.databind.SerializerProvider
 import com.gabinote.coffeenote.field.domain.fieldType.FieldType
-import org.springframework.stereotype.Component
+import org.springframework.boot.jackson.JsonComponent
 
-@Component
+@JsonComponent
 class FieldTypeSerializer : JsonSerializer<FieldType>() {
     override fun serialize(
         value: FieldType,

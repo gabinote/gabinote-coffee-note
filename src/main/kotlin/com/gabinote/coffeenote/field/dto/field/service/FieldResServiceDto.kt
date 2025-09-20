@@ -17,6 +17,7 @@ data class FieldResServiceDto(
     /**
      * 필드 외부 식별자
      */
+    //TODO : UUID로 변경
     val externalId: String,
 
     /**

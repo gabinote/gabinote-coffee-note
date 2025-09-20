@@ -1,4 +1,4 @@
-package com.gabinote.coffeenote.common.util.json.fieldType
+package com.gabinote.coffeenote.common.util.json.module.fieldType
 
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.gabinote.coffeenote.field.domain.fieldType.FieldType
@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component
 
 @Component
 class FieldTypeModule(
-
     private val fieldTypeSerializer: FieldTypeSerializer,
     private val fieldTypeDeserializer: FieldTypeDeserializer
 ) : SimpleModule() {

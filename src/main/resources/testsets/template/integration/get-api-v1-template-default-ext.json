@@ -1,0 +1,27 @@
+{
+  "templates": [
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea39"
+      },
+      "externalId": "3fcdd722-93ca-4693-9bef-496616dd6af3",
+      "name": "Default Coffee Review Template",
+      "icon": "coffee",
+      "description": "A standard template for coffee reviews",
+      "isOpen": true,
+      "isDefault": true,
+      "owner": null,
+      "fields": [
+        {
+          "_id": "field-1",
+          "name": "Coffee Name",
+          "icon": "coffee-bean",
+          "type": "SHORT_TEXT",
+          "order": 1,
+          "isDisplay": true,
+          "attributes": []
+        }
+      ]
+    }
+  ]
+}

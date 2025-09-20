@@ -1,0 +1,41 @@
+{
+  "templates": [
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea41"
+      },
+      "externalId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Template To Be Deleted",
+      "icon": "delete-template",
+      "description": "This default template will be deleted",
+      "isOpen": true,
+      "isDefault": true,
+      "owner": null,
+      "fields": [
+        {
+          "_id": "field-in-deleted-template",
+          "name": "Field in Deleted Template",
+          "icon": "delete-field",
+          "type": "SHORT_TEXT",
+          "order": 1,
+          "isDisplay": true,
+          "attributes": []
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea42"
+      },
+      "externalId": "b2c3d4e5-f6a7-8901-bcde-f23456789012",
+      "name": "Template To Remain",
+      "icon": "remain-template",
+      "description": "This template should remain after deletion",
+      "isOpen": false,
+      "isDefault": true,
+      "owner": null,
+      "fields": []
+    }
+  ]
+}
+

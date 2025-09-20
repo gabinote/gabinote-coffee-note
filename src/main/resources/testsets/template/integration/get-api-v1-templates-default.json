@@ -1,0 +1,76 @@
+{
+  "templates": [
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea39"
+      },
+      "externalId": "3fcdd722-93ca-4693-9bef-496616dd6af3",
+      "name": "Default Coffee Review Template",
+      "icon": "coffee",
+      "description": "A standard template for coffee reviews",
+      "isOpen": true,
+      "isDefault": true,
+      "owner": null,
+      "fields": [
+        {
+          "_id": "field-1",
+          "name": "Coffee Name",
+          "icon": "coffee-bean",
+          "type": "SHORT_TEXT",
+          "order": 1,
+          "isDisplay": true,
+          "attributes": []
+        },
+        {
+          "_id": "field-2",
+          "name": "Rating",
+          "icon": "star",
+          "type": "DROP_DOWN",
+          "order": 2,
+          "isDisplay": true,
+          "attributes": [
+            {
+              "key": "values",
+              "value": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ]
+            },
+            {
+              "key": "allowAddValue",
+              "value": [
+                "false"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea3b"
+      },
+      "externalId": "8fd344e0-e074-49a4-ae22-ff8653ba02f2",
+      "name": "Professional Cupping Template",
+      "icon": "cupping",
+      "description": "Professional coffee cupping evaluation template",
+      "isOpen": false,
+      "isDefault": true,
+      "owner": null,
+      "fields": [
+        {
+          "_id": "field-3",
+          "name": "Aroma",
+          "icon": "nose",
+          "type": "LONG_TEXT",
+          "order": 1,
+          "isDisplay": true,
+          "attributes": []
+        }
+      ]
+    }
+  ]
+}
