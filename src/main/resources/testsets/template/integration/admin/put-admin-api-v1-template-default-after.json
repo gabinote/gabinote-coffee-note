@@ -24,7 +24,7 @@
           "icon": "admin-added",
           "type": "LONG_TEXT",
           "order": 2,
-          "isDisplay": true,
+          "isDisplay": false,
           "attributes": []
         }
       ]

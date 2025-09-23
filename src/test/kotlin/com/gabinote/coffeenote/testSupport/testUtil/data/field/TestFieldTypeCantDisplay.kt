@@ -6,9 +6,9 @@ import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeAttributeKey
 import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeKey
 import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
 
-object TestFieldType : FieldType() {
+object TestFieldTypeCantDisplay : FieldType() {
     override val key: FieldTypeKey = FieldTypeKey.DROP_DOWN
-    override val canDisplay: Boolean = true
+    override val canDisplay: Boolean = false
     override val fieldTypeAttributeKeys: Set<FieldTypeAttributeKey> = setOf(
         FieldTypeAttributeKey(key = "isValid", validationFunc = { value ->
             if (value.size != 1 || (value.first() != "true" && value.first() != "ok")) {

@@ -104,7 +104,7 @@ class TemplateAdminApiIntegrationTest : IntegrationTestTemplate() {
                                         "icon" to "admin-added"
                                         "type" to "LONG_TEXT"
                                         "order" to 2
-                                        "is_display" to true
+                                        "is_display" to false
                                         "attributes" arr { }
                                     }
                                 }

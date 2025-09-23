@@ -59,7 +59,7 @@ class TemplateFieldService(
         }
     }
 
-    private fun checkDisplayValid(dto: List<TemplateFieldCreateReqServiceDto>) {
+    private fun checkDisplayCntValid(dto: List<TemplateFieldCreateReqServiceDto>) {
         dto.count { it.isDisplay }
 //        if (displayCount == 0) {
 //            throw ResourceNotValid(
@@ -68,6 +68,16 @@ class TemplateFieldService(
 //            )
 //        }
         //TODO : 나중에 설정값 통해서 최대 표시 개수 제한 걸기
+
+    }
+
+    private fun checkDisplayValid(dto: List<TemplateFieldCreateReqServiceDto>) {
+        if (dto.any { it.isDisplay && !it.type.canDisplay }) {
+            throw ResourceNotValid(
+                name = "TemplateField",
+                reasons = listOf("Fields that can be displayed must be set to display.")
+            )
+        }
 
     }
 

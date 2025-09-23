@@ -9,6 +9,7 @@ import com.gabinote.coffeenote.testSupport.testTemplate.ServiceTestTemplate
 import com.gabinote.coffeenote.testSupport.testUtil.data.field.AttributeTestDataHelper.createTestAttribute
 import com.gabinote.coffeenote.testSupport.testUtil.data.field.AttributeTestDataHelper.createTestAttributeCreateReqServiceDto
 import com.gabinote.coffeenote.testSupport.testUtil.data.field.TestFieldType
+import com.gabinote.coffeenote.testSupport.testUtil.data.field.TestFieldTypeCantDisplay
 import com.gabinote.coffeenote.testSupport.testUtil.data.template.TemplateFieldDataHelper.createTestTemplateField
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
@@ -239,6 +240,22 @@ class TemplateFieldServiceTest : ServiceTestTemplate() {
                         it("ResourceNotValid 예외를 던진다") {
                             val ex = assertThrows<ResourceNotValid> {
                                 templateFieldService.create(duplicateIdDtoList)
+                            }
+                        }
+                    }
+                    context("isDisplay 가 허용되지 않는 필드타입인데 isDisplay = true 로 설정하면") {
+                        val invalidDisplayDto = TemplateFieldCreateReqServiceDto(
+                            id = "field1",
+                            name = "Field 1",
+                            icon = "icon1",
+                            type = TestFieldTypeCantDisplay, // canDisplay = true 인 필드타입 사용
+                            order = 1,
+                            isDisplay = true, // 허용되지 않는 필드타입인데 isDisplay =
+                            attributes = setOf(createTestAttributeCreateReqServiceDto())
+                        )
+                        it("ResourceNotValid 예외를 던진다") {
+                            val ex = assertThrows<ResourceNotValid> {
+                                templateFieldService.create(listOf(invalidDisplayDto))
                             }
                         }
                     }
