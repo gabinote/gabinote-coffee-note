@@ -2,18 +2,17 @@ package com.gabinote.coffeenote.field.service.field
 
 import com.gabinote.coffeenote.common.util.exception.service.ResourceNotFound
 import com.gabinote.coffeenote.common.util.exception.service.ResourceNotValid
-import com.gabinote.coffeenote.field.domain.attribute.Attribute
 import com.gabinote.coffeenote.field.domain.field.Field
 import com.gabinote.coffeenote.field.domain.field.FieldRepository
 import com.gabinote.coffeenote.field.domain.fieldType.FieldType
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeRegistry
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeFactory
 import com.gabinote.coffeenote.field.dto.attribute.service.AttributeCreateReqServiceDto
 import com.gabinote.coffeenote.field.dto.attribute.service.AttributeUpdateReqServiceDto
 import com.gabinote.coffeenote.field.dto.field.service.*
-import com.gabinote.coffeenote.field.enums.userSearch.FieldAdminSearchScope
+import com.gabinote.coffeenote.field.enums.adminSearch.FieldAdminSearchScope
 import com.gabinote.coffeenote.field.enums.userSearch.FieldUserSearchScope
-import com.gabinote.coffeenote.field.mapping.attribute.AttributeMapper
 import com.gabinote.coffeenote.field.mapping.field.FieldMapper
+import com.gabinote.coffeenote.field.service.attribute.AttributeService
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Slice
 import org.springframework.stereotype.Service
@@ -28,8 +27,8 @@ import java.util.*
 class FieldService(
     private val fieldRepository: FieldRepository,
     private val fieldMapper: FieldMapper,
-    private val attributeMapper: AttributeMapper,
-    private val fieldTypeRegistry: FieldTypeRegistry,
+    private val attributeService: AttributeService,
+    private val fieldTypeFactory: FieldTypeFactory,
 ) {
 
     /**
@@ -42,7 +41,7 @@ class FieldService(
         return fieldRepository.findByExternalId(externalId.toString())
             ?: throw ResourceNotFound(name = "Field", identifier = externalId.toString(), identifierType = "externalId")
     }
-
+    //TODO: 나중에 전략 패턴으로 바꾸기
     /**
      * 외부 식별자로 필드를 조회
      * @param externalId 필드 외부 식별자
@@ -197,7 +196,7 @@ class FieldService(
     fun createOwnedField(dto: FieldCreateReqServiceDto): FieldResServiceDto {
         // TODO : Config 서버 통해서 유저 필드 제한 수 가져오기
         val newField = fieldMapper.toField(dto)
-        return createNewField(newField = newField, type = dto.type, attributes = dto.attributes)
+        return createNewField(newField = newField, type = dto.type, attributesCreateReq = dto.attributes)
     }
 
     /**
@@ -225,7 +224,7 @@ class FieldService(
      */
     fun createDefaultField(dto: FieldCreateDefaultReqServiceDto): FieldResServiceDto {
         val newField = fieldMapper.toFieldDefault(dto)
-        return createNewField(newField = newField, type = dto.type, attributes = dto.attributes)
+        return createNewField(newField = newField, type = dto.type, attributesCreateReq = dto.attributes)
     }
 
     /**
@@ -248,23 +247,16 @@ class FieldService(
      * 새 필드 생성 공통 로직
      * @param newField 생성할 필드 엔티티
      * @param type 필드 타입
-     * @param attributes 속성 목록
+     * @param attributesCreateReq 속성 목록
      * @return 생성된 필드 응답 DTO
      */
     private fun createNewField(
         newField: Field,
-        type: String,
-        attributes: Set<AttributeCreateReqServiceDto>
+        type: FieldType,
+        attributesCreateReq: Set<AttributeCreateReqServiceDto>
     ): FieldResServiceDto {
-        val fieldType = fieldTypeRegistry.fromString(type)
-
-        //attribute 검증
-        val attributes = attributes.map { attributeMapper.toAttribute(it) }.toSet()
-        checkAttributes(fieldType = fieldType, attributes = attributes)
-
-
+        val attributes = attributeService.createAttribute(fieldType = type, attributesCreateReq = attributesCreateReq)
         newField.changeAttributes(attributes)
-
         val savedField = fieldRepository.save(newField)
         return fieldMapper.toResServiceDto(field = savedField)
     }
@@ -299,62 +291,16 @@ class FieldService(
      * @throws ResourceNotValid 속성 유효성 검사 실패 시
      */
     private fun updateAttributesIfNeeded(field: Field, updateAttributes: Set<AttributeUpdateReqServiceDto>) {
-        val newAttributes = updateAttributes.map { attributeMapper.toAttribute(it) }.toSet()
-        if (newAttributes.isEmpty() || field.attributes == newAttributes) {
-            return
-        }
-
-        val errors = updateFromNewAttribute(existsAttribute = field.attributes, newAttributes = newAttributes)
-        if (errors.isNotEmpty()) {
-            throw ResourceNotValid(name = "Field Attribute", reasons = errors)
-        }
-        val fieldType = fieldTypeRegistry.fromString(field.type)
-        checkAttributes(fieldType = fieldType, attributes = field.attributes)
+        val fieldType = fieldTypeFactory.getFieldType(field.type) ?: throw IllegalArgumentException(
+            "Unknown field type: ${field.type}"
+        )
+        val updatedAttribute = attributeService.updateAttribute(
+            fieldType = fieldType,
+            oldAttributes = field.attributes,
+            newAttributeReq = updateAttributes
+        )
+        field.changeAttributes(updatedAttribute)
     }
 
-    /**
-     * 새 속성으로 기존 속성 업데이트
-     * @param existsAttribute 기존 속성 집합
-     * @param newAttributes 새 속성 집합
-     * @return 오류 메시지 목록
-     */
-    private fun updateFromNewAttribute(existsAttribute: Set<Attribute>, newAttributes: Set<Attribute>): List<String> {
-        val errors = mutableListOf<String>()
-        var raisedError = false
-        val existsMap = existsAttribute.associateBy { it.key }
-
-
-        for (newAttribute in newAttributes) {
-
-            val target = existsMap[newAttribute.key]
-
-            if (target == null) {
-                errors.add("Unknown attribute key: ${newAttribute.key}")
-                raisedError = true
-                continue
-            }
-
-            if (raisedError) {
-                continue
-            }
-
-            target.changeValue(newAttribute.value)
-        }
-        return errors
-    }
-
-    /**
-     * 필드 속성 유효성 검사
-     * @param fieldType 필드 타입
-     * @param attributes 검사할 속성 집합
-     * @throws ResourceNotValid 유효성 검사 실패 시
-     */
-    private fun checkAttributes(fieldType: FieldType, attributes: Set<Attribute>) {
-        val res = fieldType.validationAttributes(attributes)
-        if (res.any { !it.valid }) {
-            val errors = res.filter { !it.valid }.map { it.message!! }
-            throw ResourceNotValid(name = "Field Attribute", reasons = errors)
-        }
-    }
 
 }

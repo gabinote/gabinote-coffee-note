@@ -1,0 +1,81 @@
+{
+  "templates": [
+    {
+      "_id": "$anyObject()",
+      "externalId": "e5f0d358-ae1a-4f9b-9c2e-0c3e1268ca9d",
+      "icon": "coffee",
+      "name": "Default Coffee Template",
+      "description": "A default template for coffee notes",
+      "isOpen": true,
+      "isDefault": true,
+      "owner": null,
+      "fields": [
+        {
+          "_id": "d70f81e9-5842-40f8-b71b-6bd34b40bf18",
+          "name": "Coffee Type",
+          "icon": "coffee-bean",
+          "type": "TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true
+        },
+        {
+          "_id": "1e6f4c3a-2b4d-4e5f-8a9b-0c1d2e3f4a5b",
+          "name": "Brewing Method",
+          "icon": "coffee-machine",
+          "type": "DROPDOWN",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "Pour Over",
+                "French Press",
+                "Espresso",
+                "AeroPress"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true
+        }
+      ]
+    },
+    {
+      "_id": "$anyObject()",
+      "externalId": "a3b4c5d6-e7f8-9a0b-1c2d-3e4f5a6b7c8d",
+      "icon": "espresso",
+      "name": "Espresso Template",
+      "description": "Template for espresso notes",
+      "isOpen": false,
+      "owner": "695b8482-c259-4493-82e2-8988599d21e9",
+      "isDefault": false,
+      "fields": [
+        {
+          "_id": "be799e6a-ebbb-4577-a5b3-8ecb2b5a70c3",
+          "name": "Espresso Beans",
+          "icon": "coffee-bean",
+          "type": "TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true
+        },
+        {
+          "_id": "eb4f1db8-5c9b-49cf-969a-b70b704f0314",
+          "name": "Extraction Time",
+          "icon": "timer",
+          "type": "NUMBER",
+          "attributes": [
+            {
+              "key": "unit",
+              "value": [
+                "seconds"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true
+        }
+      ]
+    }
+  ]
+}

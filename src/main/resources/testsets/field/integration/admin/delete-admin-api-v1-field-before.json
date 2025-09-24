@@ -8,7 +8,7 @@
       "isDefault": false,
       "name": "user field to delete",
       "icon": "delete_icon",
-      "type": "TEXT",
+      "type": "SHORT_TEXT",
       "attributes": [],
       "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e"
     },
@@ -20,7 +20,7 @@
       "isDefault": true,
       "name": "default field",
       "icon": "default_icon",
-      "type": "TEXT",
+      "type": "SHORT_TEXT",
       "attributes": [],
       "owner": null
     }

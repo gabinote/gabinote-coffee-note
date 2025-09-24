@@ -1,0 +1,27 @@
+{
+  "templates": [
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea42"
+      },
+      "externalId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Open Coffee Template",
+      "icon": "open-coffee",
+      "description": "An open template for public use",
+      "isOpen": true,
+      "isDefault": false,
+      "owner": "695b8482-c259-4493-82e2-8988599d21e9",
+      "fields": [
+        {
+          "_id": "field-6",
+          "name": "Taste Notes",
+          "icon": "taste",
+          "type": "LONG_TEXT",
+          "order": 1,
+          "isDisplay": true,
+          "attributes": []
+        }
+      ]
+    }
+  ]
+}

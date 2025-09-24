@@ -1,0 +1,36 @@
+{
+  "templates": [
+    {
+      "_id": "$anyObject()",
+      "externalId": "d1e2f3a4-b5c6-7890-abcd-ef1234567890",
+      "name": "My Personal Coffee Template",
+      "icon": "personal-coffee",
+      "description": "My personal coffee tasting notes template",
+      "isOpen": true,
+      "isDefault": false,
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "fields": []
+    },
+    {
+      "_id": "$anyObject()",
+      "externalId": "00000000-0000-0000-0000-000000000000",
+      "name": "New Coffee Template",
+      "icon": "new-coffee-icon",
+      "description": "A brand new coffee template",
+      "isOpen": true,
+      "isDefault": false,
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "fields": [
+        {
+          "_id": "00000000-0000-0000-0000-000000000000",
+          "name": "New Coffee Field",
+          "icon": "new-coffee-icon",
+          "type": "SHORT_TEXT",
+          "order": 1,
+          "isDisplay": true,
+          "attributes": []
+        }
+      ]
+    }
+  ]
+}

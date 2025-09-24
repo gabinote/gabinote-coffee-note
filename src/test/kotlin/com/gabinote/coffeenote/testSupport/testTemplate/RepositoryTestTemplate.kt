@@ -1,7 +1,6 @@
 package com.gabinote.coffeenote.testSupport.testTemplate
 
 
-import com.gabinote.coffeenote.common.config.JacksonConfig
 import com.gabinote.coffeenote.common.util.auditor.extId.ExternalIdListener
 import com.gabinote.coffeenote.testSupport.testConfig.db.UseTestDatabase
 import com.gabinote.coffeenote.testSupport.testUtil.data.TestDataHelper
@@ -14,10 +13,10 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest
 import org.springframework.context.annotation.Import
 import org.springframework.data.mongodb.config.EnableMongoAuditing
 
+
 @EnableMongoAuditing
 @ExtendWith(MockKExtension::class)
 @Import(
-    JacksonConfig::class,
     TestDataHelper::class,
     TestUuidSource::class,
     ExternalIdListener::class

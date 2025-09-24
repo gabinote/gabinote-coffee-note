@@ -15,8 +15,9 @@ private val logger = KotlinLogging.logger {}
 @TestComponent
 class TestDataHelper(
     private val mongoTemplate: MongoTemplate,
-    private val objectMapper: ObjectMapper
-) {
+
+    ) {
+    private val objectMapper: ObjectMapper = ObjectMapper()
     fun setData(jsonFile: String) {
         val input = ClassPathResource(jsonFile).inputStream
         val root = objectMapper.readTree(input)

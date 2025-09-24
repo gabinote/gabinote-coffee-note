@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.fieldType.type.DropDownFieldType
 import com.gabinote.coffeenote.testSupport.testTemplate.MockkTestTemplate
 import com.gabinote.coffeenote.testSupport.testUtil.data.TestCollectionHelper
 import io.kotest.data.forAll
@@ -10,6 +11,9 @@ import io.kotest.data.table
 import io.kotest.matchers.shouldBe
 
 class DropDownFieldTypeTest : MockkTestTemplate() {
+
+    private val dropDownFieldType = DropDownFieldType()
+
     init {
         describe("[Field] DropDownFieldType Test") {
             describe("validation attributes") {
@@ -21,7 +25,7 @@ class DropDownFieldTypeTest : MockkTestTemplate() {
                     )
 
                     it("Validation 에 통과한다.") {
-                        val res = DropDownField.validationAttributes(validAttributes)
+                        val res = dropDownFieldType.validationAttributes(validAttributes)
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -47,7 +51,7 @@ class DropDownFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidAttributes, reason ->
                         context(reason) {
                             it("Validation 에 통과하지 못한다.") {
-                                val res = DropDownField.validationAttributes(invalidAttributes)
+                                val res = dropDownFieldType.validationAttributes(invalidAttributes)
                                 res.any { !it.valid } shouldBe true
                             }
                         }
@@ -106,7 +110,7 @@ class DropDownFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidAttributes, reason ->
                         context(reason) {
                             it("Validation 에 통과하지 못한다.") {
-                                val res = DropDownField.validationAttributes(invalidAttributes)
+                                val res = dropDownFieldType.validationAttributes(invalidAttributes)
                                 res.any { !it.valid } shouldBe true
                             }
                         }
@@ -141,7 +145,7 @@ class DropDownFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidAttributes, reason ->
                         context(reason) {
                             it("Validation 에 통과하지 못한다.") {
-                                val res = DropDownField.validationAttributes(invalidAttributes)
+                                val res = dropDownFieldType.validationAttributes(invalidAttributes)
                                 res.any { !it.valid } shouldBe true
                             }
                         }
@@ -159,7 +163,7 @@ class DropDownFieldTypeTest : MockkTestTemplate() {
                     )
 
                     it("Validation 에 통과한다.") {
-                        val res = DropDownField.validationValues(validValues, attributes)
+                        val res = dropDownFieldType.validationValues(validValues, attributes)
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -172,7 +176,7 @@ class DropDownFieldTypeTest : MockkTestTemplate() {
                     )
 
                     it("Validation 에 통과한다.") {
-                        val res = DropDownField.validationValues(validValues, attributes)
+                        val res = dropDownFieldType.validationValues(validValues, attributes)
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -215,7 +219,7 @@ class DropDownFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidValues, attributes, reason ->
                         context(reason) {
                             it("Validation 에 통과하지 못한다.") {
-                                val res = DropDownField.validationValues(invalidValues, attributes)
+                                val res = dropDownFieldType.validationValues(invalidValues, attributes)
                                 res.any { !it.valid } shouldBe true
                             }
                         }

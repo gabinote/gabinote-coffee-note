@@ -1,0 +1,15 @@
+{
+  "templates": [
+    {
+      "_id": "$anyObject()",
+      "externalId": "e2f3a4b5-c6d7-8901-bcde-f23456789012",
+      "name": "Another Template",
+      "icon": "another-icon",
+      "description": "This template should remain after deletion",
+      "isOpen": false,
+      "isDefault": false,
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "fields": []
+    }
+  ]
+}

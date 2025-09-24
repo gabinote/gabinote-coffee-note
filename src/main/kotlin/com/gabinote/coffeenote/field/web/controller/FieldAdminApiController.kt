@@ -9,7 +9,7 @@ import com.gabinote.coffeenote.field.domain.field.FieldSortKey
 import com.gabinote.coffeenote.field.dto.field.controller.FieldCreateDefaultReqControllerDto
 import com.gabinote.coffeenote.field.dto.field.controller.FieldResControllerDto
 import com.gabinote.coffeenote.field.dto.field.controller.FieldUpdateDefaultReqControllerDto
-import com.gabinote.coffeenote.field.enums.userSearch.FieldAdminSearchScope
+import com.gabinote.coffeenote.field.enums.adminSearch.FieldAdminSearchScope
 import com.gabinote.coffeenote.field.mapping.field.FieldMapper
 import com.gabinote.coffeenote.field.service.field.FieldService
 import jakarta.validation.Valid
@@ -68,6 +68,7 @@ class FieldAdminApiController(
         return ResponseEntity.status(HttpStatus.CREATED).body(data)
     }
 
+    // TODO : PATCH 로 기존 api 는 변경 후 새로운 PUT api 생성
     @NeedAuth
     @PutMapping("/field/default/{extId}")
     fun updateDefaultField(

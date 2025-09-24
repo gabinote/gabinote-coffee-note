@@ -6,7 +6,7 @@
       "isDefault": true,
       "name": "Alpha",
       "icon": "icon_a",
-      "type": "TEXT",
+      "type": "SHORT_TEXT",
       "attributes": [],
       "owner": null
     },

@@ -6,7 +6,7 @@
       "isDefault": false,
       "name": "Modified Field",
       "icon": "modified_icon",
-      "type": "TEXT",
+      "type": "SHORT_TEXT",
       "attributes": [],
       "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e"
     },
@@ -16,7 +16,7 @@
       "isDefault": true,
       "name": "Alpha",
       "icon": "icon_a",
-      "type": "TEXT",
+      "type": "SHORT_TEXT",
       "attributes": [],
       "owner": null
     },

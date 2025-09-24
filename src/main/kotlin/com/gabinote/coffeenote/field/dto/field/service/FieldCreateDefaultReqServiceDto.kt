@@ -1,5 +1,6 @@
 package com.gabinote.coffeenote.field.dto.field.service
 
+import com.gabinote.coffeenote.field.domain.fieldType.FieldType
 import com.gabinote.coffeenote.field.dto.attribute.service.AttributeCreateReqServiceDto
 
 /**
@@ -20,7 +21,7 @@ data class FieldCreateDefaultReqServiceDto(
     /**
      * 필드 타입
      */
-    val type: String,
+    val type: FieldType,
 
     /**
      * 필드 속성 목록

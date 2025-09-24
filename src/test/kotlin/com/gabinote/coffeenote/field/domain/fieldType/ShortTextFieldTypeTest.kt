@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.fieldType.type.ShortTextFieldType
 import com.gabinote.coffeenote.testSupport.testTemplate.MockkTestTemplate
 import io.kotest.data.forAll
 import io.kotest.data.headers
@@ -9,6 +10,9 @@ import io.kotest.data.table
 import io.kotest.matchers.shouldBe
 
 class ShortTextFieldTypeTest : MockkTestTemplate() {
+
+    private val shortTextFieldType = ShortTextFieldType()
+
     init {
         describe("[Field] ShortTextFieldType Test") {
             describe("validation attributes") {
@@ -16,7 +20,7 @@ class ShortTextFieldTypeTest : MockkTestTemplate() {
                     val validAttributes = setOf<Attribute>()
 
                     it("Validation에 성공한다.") {
-                        val res = ShortTextField.validationAttributes(validAttributes)
+                        val res = shortTextFieldType.validationAttributes(validAttributes)
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -25,7 +29,7 @@ class ShortTextFieldTypeTest : MockkTestTemplate() {
                     val invalidAttributes = setOf(Attribute("key", setOf("value")))
 
                     it("Validation에 실패한다.") {
-                        val res = ShortTextField.validationAttributes(invalidAttributes)
+                        val res = shortTextFieldType.validationAttributes(invalidAttributes)
                         res.all { !it.valid } shouldBe true
                     }
                 }
@@ -36,7 +40,7 @@ class ShortTextFieldTypeTest : MockkTestTemplate() {
                     val validValue = "this is text field value"
 
                     it("Validation에 성공한다.") {
-                        val res = ShortTextField.validationValues(values = setOf(validValue), attributes = setOf())
+                        val res = shortTextFieldType.validationValues(values = setOf(validValue), attributes = setOf())
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -55,7 +59,8 @@ class ShortTextFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidValue, reason ->
                         context(reason) {
                             it("Validation에 실패한다.") {
-                                val res = ShortTextField.validationValues(values = invalidValue, attributes = setOf())
+                                val res =
+                                    shortTextFieldType.validationValues(values = invalidValue, attributes = setOf())
                                 res.all { !it.valid } shouldBe true
                             }
                         }

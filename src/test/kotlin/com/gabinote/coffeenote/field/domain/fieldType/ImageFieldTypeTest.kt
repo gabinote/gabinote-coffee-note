@@ -1,10 +1,13 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
+import com.gabinote.coffeenote.field.domain.fieldType.type.ImageFieldType
 import com.gabinote.coffeenote.testSupport.testTemplate.MockkTestTemplate
 import io.kotest.matchers.shouldBe
 import java.util.*
 
 class ImageFieldTypeTest : MockkTestTemplate() {
+
+    private val imageFieldType = ImageFieldType()
 
     init {
         describe("[Field] ImageFieldType Test") {
@@ -12,7 +15,7 @@ class ImageFieldTypeTest : MockkTestTemplate() {
                 context("빈 Attributes가 주어지면") {
                     val validAttributes = emptySet<com.gabinote.coffeenote.field.domain.attribute.Attribute>()
                     it("Validation 에 통과한다.") {
-                        val res = ImageField.validationAttributes(validAttributes)
+                        val res = imageFieldType.validationAttributes(validAttributes)
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -22,7 +25,7 @@ class ImageFieldTypeTest : MockkTestTemplate() {
                         com.gabinote.coffeenote.field.domain.attribute.Attribute("key", setOf("value"))
                     )
                     it("Validation 에 통과하지 못한다.") {
-                        val res = ImageField.validationAttributes(invalidAttributes)
+                        val res = imageFieldType.validationAttributes(invalidAttributes)
                         res.all { !it.valid } shouldBe true
                     }
                 }
@@ -32,7 +35,7 @@ class ImageFieldTypeTest : MockkTestTemplate() {
                 context("올바른 Image Value가 주어지면") {
                     val validValues = setOf(UUID.randomUUID().toString())
                     it("Validation 에 통과한다.") {
-                        val res = ImageField.validationValues(validValues, emptySet())
+                        val res = imageFieldType.validationValues(validValues, emptySet())
 
                         res.all { it.valid } shouldBe true
                     }
@@ -41,7 +44,7 @@ class ImageFieldTypeTest : MockkTestTemplate() {
                 context("올바르지 않은 Image Value가 주어지면") {
                     val invalidValues = setOf("not-a-valid-url")
                     it("Validation 에 통과하지 못한다.") {
-                        val res = ImageField.validationValues(invalidValues, emptySet())
+                        val res = imageFieldType.validationValues(invalidValues, emptySet())
                         res.all { !it.valid } shouldBe true
                     }
                 }
@@ -49,7 +52,7 @@ class ImageFieldTypeTest : MockkTestTemplate() {
                 context("Value가 한개가 아니라면") {
                     val invalidValues = setOf(UUID.randomUUID().toString(), UUID.randomUUID().toString())
                     it("Validation 에 통과하지 못한다.") {
-                        val res = ImageField.validationValues(invalidValues, emptySet())
+                        val res = imageFieldType.validationValues(invalidValues, emptySet())
                         res.all { !it.valid } shouldBe true
                     }
                 }

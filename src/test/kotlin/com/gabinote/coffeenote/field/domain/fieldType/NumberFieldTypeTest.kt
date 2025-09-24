@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.fieldType.type.NumberFieldType
 import com.gabinote.coffeenote.testSupport.testTemplate.MockkTestTemplate
 import io.kotest.data.forAll
 import io.kotest.data.headers
@@ -9,6 +10,9 @@ import io.kotest.data.table
 import io.kotest.matchers.shouldBe
 
 class NumberFieldTypeTest : MockkTestTemplate() {
+
+    private val numberFieldType = NumberFieldType()
+
     init {
         describe("[Field] NumberFieldType Test") {
             describe("validation attributes") {
@@ -17,7 +21,7 @@ class NumberFieldTypeTest : MockkTestTemplate() {
                         Attribute(key = "unit", value = setOf("kg")),
                     )
                     it("Validation 에 성공한다") {
-                        val res = NumberField.validationAttributes(validAttributes)
+                        val res = numberFieldType.validationAttributes(validAttributes)
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -59,7 +63,7 @@ class NumberFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidAttribute, reason ->
                         context(reason) {
                             it("Validation 에 실패한다") {
-                                val res = NumberField.validationAttributes(invalidAttribute)
+                                val res = numberFieldType.validationAttributes(invalidAttribute)
                                 res.all { !it.valid } shouldBe true
                             }
                         }
@@ -71,7 +75,7 @@ class NumberFieldTypeTest : MockkTestTemplate() {
                 context("올바른 value가 주어진 경우") {
                     val validValue = "50"
                     it("Validation 에 성공한다") {
-                        val res = NumberField.validationValues(
+                        val res = numberFieldType.validationValues(
                             values = setOf(validValue), attributes = setOf(
                                 Attribute(
                                     key = "unit",
@@ -92,7 +96,7 @@ class NumberFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidValue, reason ->
                         context(reason) {
                             it("Validation 에 실패한다") {
-                                val res = NumberField.validationValues(values = invalidValue, attributes = setOf())
+                                val res = numberFieldType.validationValues(values = invalidValue, attributes = setOf())
                                 res.all { !it.valid } shouldBe true
                             }
                         }

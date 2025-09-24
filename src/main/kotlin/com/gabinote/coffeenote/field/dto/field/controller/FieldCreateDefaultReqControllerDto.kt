@@ -2,8 +2,8 @@ package com.gabinote.coffeenote.field.dto.field.controller
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
+import com.gabinote.coffeenote.field.domain.fieldType.FieldType
 import com.gabinote.coffeenote.field.dto.attribute.controller.AttributeCreateReqControllerDto
-import com.gabinote.coffeenote.field.util.validation.fieldType.RequiredFieldType
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
@@ -35,8 +35,8 @@ data class FieldCreateDefaultReqControllerDto(
      * 필드 타입
      * 유효한 필드 타입이어야 함
      */
-    @field:RequiredFieldType
-    val type: String,
+
+    val type: FieldType,
 
     /**
      * 필드 속성 목록

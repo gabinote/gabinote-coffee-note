@@ -4,6 +4,7 @@ import com.gabinote.coffeenote.field.domain.field.Field
 import com.gabinote.coffeenote.field.dto.field.controller.*
 import com.gabinote.coffeenote.field.dto.field.service.*
 import com.gabinote.coffeenote.field.mapping.attribute.AttributeMapper
+import com.gabinote.coffeenote.field.mapping.fieldType.FieldTypeMapper
 import org.mapstruct.*
 import java.util.*
 
@@ -24,7 +25,7 @@ import java.util.*
  */
 @Mapper(
     componentModel = "spring",
-    uses = [AttributeMapper::class]
+    uses = [AttributeMapper::class, FieldTypeMapper::class]
 )
 interface FieldMapper {
 
@@ -36,7 +37,7 @@ interface FieldMapper {
      * @see Field
      * @see FieldResServiceDto
      */
-    @Mapping(source = "default", target = "isDefault")
+//    @Mapping(source = "default", target = "isDefault")
     fun toResServiceDto(field: Field): FieldResServiceDto
 
     /**
@@ -46,7 +47,7 @@ interface FieldMapper {
      * @see FieldResServiceDto
      * @see FieldResControllerDto
      */
-    @Mapping(source = "default", target = "isDefault")
+//    @Mapping(source = "default", target = "isDefault")
     fun toResControllerDto(dto: FieldResServiceDto): FieldResControllerDto
 
 
@@ -68,7 +69,7 @@ interface FieldMapper {
      * @see FieldCreateReqServiceDto
      * @see Field
      */
-    @Mapping(target = "default", constant = "false")
+    @Mapping(target = "isDefault", constant = "false")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "externalId", ignore = true)
     fun toField(dto: FieldCreateReqServiceDto): Field
@@ -102,7 +103,7 @@ interface FieldMapper {
     @Mapping(target = "attributes", ignore = true)
     @Mapping(target = "type", ignore = true)
     @Mapping(target = "owner", ignore = true)
-    @Mapping(target = "default", ignore = true)
+    @Mapping(target = "isDefault", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     fun updateFromDto(dto: FieldUpdateReqServiceDto, @MappingTarget to: Field): Field
 
@@ -125,7 +126,7 @@ interface FieldMapper {
      * @see Field
      */
     @Mapping(target = "externalId", ignore = true)
-    @Mapping(target = "default", constant = "true")
+    @Mapping(target = "isDefault", constant = "true")
     @Mapping(target = "id", ignore = true)
     fun toFieldDefault(dto: FieldCreateDefaultReqServiceDto): Field
 
@@ -155,7 +156,7 @@ interface FieldMapper {
     @Mapping(target = "externalId", ignore = true)
     @Mapping(target = "type", ignore = true)
     @Mapping(target = "owner", ignore = true)
-    @Mapping(target = "default", ignore = true)
+    @Mapping(target = "isDefault", ignore = true)
     @Mapping(target = "attributes", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     fun updateFromDefaultDto(dto: FieldUpdateDefaultReqServiceDto, @MappingTarget to: Field): Field

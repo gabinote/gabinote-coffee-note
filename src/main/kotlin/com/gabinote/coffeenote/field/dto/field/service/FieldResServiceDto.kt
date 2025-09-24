@@ -1,5 +1,6 @@
 package com.gabinote.coffeenote.field.dto.field.service
 
+import com.gabinote.coffeenote.field.domain.fieldType.FieldType
 import com.gabinote.coffeenote.field.dto.attribute.service.AttributeResServiceDto
 import org.bson.types.ObjectId
 
@@ -16,6 +17,7 @@ data class FieldResServiceDto(
     /**
      * 필드 외부 식별자
      */
+    //TODO : UUID로 변경
     val externalId: String,
 
     /**
@@ -31,7 +33,7 @@ data class FieldResServiceDto(
     /**
      * 필드 타입
      */
-    val type: String,
+    val type: FieldType,
 
     /**
      * 필드 속성 목록
@@ -46,5 +48,6 @@ data class FieldResServiceDto(
     /**
      * 기본 필드 여부
      */
+    @JvmField
     val isDefault: Boolean,
 )

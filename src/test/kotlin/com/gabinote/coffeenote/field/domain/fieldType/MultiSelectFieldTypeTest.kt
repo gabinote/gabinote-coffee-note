@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.field.domain.fieldType
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.field.domain.fieldType.type.MultiSelectFieldType
 import com.gabinote.coffeenote.testSupport.testTemplate.MockkTestTemplate
 import com.gabinote.coffeenote.testSupport.testUtil.data.TestCollectionHelper
 import io.kotest.data.forAll
@@ -10,6 +11,9 @@ import io.kotest.data.table
 import io.kotest.matchers.shouldBe
 
 class MultiSelectFieldTypeTest : MockkTestTemplate() {
+
+    private val multiSelectFieldType = MultiSelectFieldType()
+
     init {
         describe("[Field] MultiSelectFieldType Test") {
             describe("validation attributes") {
@@ -20,7 +24,7 @@ class MultiSelectFieldTypeTest : MockkTestTemplate() {
                     )
 
                     it("Validation 에 통과한다.") {
-                        val res = MultiSelectField.validationAttributes(validAttributes)
+                        val res = multiSelectFieldType.validationAttributes(validAttributes)
                         res.all { it.valid } shouldBe true
                     }
                 }
@@ -46,7 +50,7 @@ class MultiSelectFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidAttributes, reason ->
                         context(reason) {
                             it("Validation 에 통과하지 못한다.") {
-                                val res = MultiSelectField.validationAttributes(invalidAttributes)
+                                val res = multiSelectFieldType.validationAttributes(invalidAttributes)
                                 res.any { !it.valid } shouldBe true
                             }
                         }
@@ -105,7 +109,7 @@ class MultiSelectFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidAttributes, reason ->
                         context(reason) {
                             it("Validation 에 통과하지 못한다.") {
-                                val res = MultiSelectField.validationAttributes(invalidAttributes)
+                                val res = multiSelectFieldType.validationAttributes(invalidAttributes)
                                 res.any { !it.valid } shouldBe true
                             }
                         }
@@ -140,7 +144,7 @@ class MultiSelectFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidAttributes, reason ->
                         context(reason) {
                             it("Validation 에 통과하지 못한다.") {
-                                val res = MultiSelectField.validationAttributes(invalidAttributes)
+                                val res = multiSelectFieldType.validationAttributes(invalidAttributes)
                                 res.any { !it.valid } shouldBe true
                             }
                         }
@@ -188,7 +192,7 @@ class MultiSelectFieldTypeTest : MockkTestTemplate() {
                     ).forAll { validValues, attributes, reason ->
                         context(reason) {
                             it("Validation 에 통과한다.") {
-                                val res = MultiSelectField.validationValues(validValues, attributes)
+                                val res = multiSelectFieldType.validationValues(validValues, attributes)
                                 res.all { it.valid } shouldBe true
                             }
                         }
@@ -234,7 +238,7 @@ class MultiSelectFieldTypeTest : MockkTestTemplate() {
                     ).forAll { invalidValues, attributes, reason ->
                         context(reason) {
                             it("Validation 에 통과하지 못한다.") {
-                                val res = MultiSelectField.validationValues(invalidValues, attributes)
+                                val res = multiSelectFieldType.validationValues(invalidValues, attributes)
                                 res.any { !it.valid } shouldBe true
                             }
                         }

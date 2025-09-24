@@ -1,0 +1,28 @@
+{
+  "templates": [
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea40"
+      },
+      "externalId": "d1e2f3a4-b5c6-7890-abcd-ef1234567890",
+      "name": "Default Template To Update",
+      "icon": "update-template",
+      "description": "A default template that will be updated",
+      "isOpen": true,
+      "isDefault": true,
+      "owner": null,
+      "fields": [
+        {
+          "_id": "00000000-0000-0000-0000-000000000001",
+          "name": "Original Field",
+          "icon": "original-icon",
+          "type": "SHORT_TEXT",
+          "order": 1,
+          "isDisplay": true,
+          "attributes": []
+        }
+      ]
+    }
+  ]
+}
+
