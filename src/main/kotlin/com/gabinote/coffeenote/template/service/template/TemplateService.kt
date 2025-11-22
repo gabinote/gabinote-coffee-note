@@ -19,7 +19,7 @@ class TemplateService(
     private val templateRepository: TemplateRepository,
     private val templateMapper: TemplateMapper,
     private val getTemplateByExternalIdStrategyFactory: GetTemplateByExternalIdStrategyFactory,
-    private val templateFieldService: TemplateFieldService
+    private val templateFieldService: TemplateFieldService,
 ) {
     //get
     fun fetchByExternalId(externalId: UUID): Template {
@@ -33,7 +33,7 @@ class TemplateService(
     fun getByExternalId(
         externalId: UUID,
         requestor: String,
-        strategyType: GetTemplateByExternalIdStrategyType
+        strategyType: GetTemplateByExternalIdStrategyType,
     ): TemplateResServiceDto {
         val template = fetchByExternalId(externalId)
         val strategy = getTemplateByExternalIdStrategyFactory.getStrategy(strategyType)
@@ -68,7 +68,7 @@ class TemplateService(
         return createTemplate(dto.fields, template)
     }
 
-
+    //TODO PUT 이랑 PATCH 분리
     //update
     // TODO 중복 분리하기
     fun updateDefault(dto: TemplateUpdateDefaultReqServiceDto): TemplateResServiceDto {
@@ -139,7 +139,7 @@ class TemplateService(
 
     private fun createTemplate(
         templateFields: List<TemplateFieldCreateReqServiceDto>,
-        template: Template
+        template: Template,
     ): TemplateResServiceDto {
         val templateFields = templateFieldService.create(templateFields)
         template.changeFields(templateFields)

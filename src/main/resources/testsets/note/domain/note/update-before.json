@@ -1,0 +1,116 @@
+{
+  "notes": [
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0001"
+      },
+      "externalId": "a1b2c3d4-e5f6-4789-0123-4567890abcde",
+      "title": "카페인 분석 노트: 에티오피아 예가체프",
+      "thumbnail": "https://images.example.com/thumbnails/coffee_yirgacheffe.jpg",
+      "createdDate": "2024-07-29T10:00:00.123",
+      "modifiedDate": "2024-07-29T10:00:00.123",
+      "fields": [
+        {
+          "_id": "field_001",
+          "name": "원산지",
+          "icon": "globe",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "에티오피아"
+          ]
+        },
+        {
+          "_id": "field_002",
+          "name": "로스팅 정도",
+          "icon": "fire",
+          "type": "RADIO",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "라이트",
+                "미디엄",
+                "다크"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "라이트"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "원산지",
+          "icon": "globe",
+          "values": [
+            "에티오피아"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "target"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0002"
+      },
+      "externalId": "b2c3d4e5-f6a7-4890-1234-567890abcdef",
+      "title": "핸드드립 레시피: 케냐 AA",
+      "thumbnail": null,
+      "createdDate": "2024-07-28T15:30:00.456",
+      "modifiedDate": "2024-07-29T11:05:20.789",
+      "fields": [
+        {
+          "_id": "field_003",
+          "name": "추출 온도",
+          "icon": "temp",
+          "type": "NUMBER",
+          "attributes": [
+            {
+              "key": "unit",
+              "value": [
+                "℃"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "92"
+          ]
+        },
+        {
+          "_id": "field_004",
+          "name": "총 추출 시간",
+          "icon": "clock",
+          "type": "DURATION",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "03:15"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "추출 온도",
+          "icon": "temp",
+          "values": [
+            "92"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": false,
+      "owner": "user_beta_5678"
+    }
+  ]
+}

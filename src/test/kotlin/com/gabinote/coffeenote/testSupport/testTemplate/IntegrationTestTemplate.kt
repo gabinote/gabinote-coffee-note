@@ -1,8 +1,7 @@
 package com.gabinote.coffeenote.testSupport.testTemplate
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.gabinote.coffeenote.common.config.JacksonConfig
-import com.gabinote.coffeenote.testSupport.testConfig.db.UseTestDatabase
+import com.gabinote.coffeenote.testSupport.testConfig.common.UseTestContainers
 import com.gabinote.coffeenote.testSupport.testUtil.data.TestDataHelper
 import com.gabinote.coffeenote.testSupport.testUtil.uuid.TestUuidSource
 import io.kotest.core.spec.style.FeatureSpec
@@ -18,12 +17,12 @@ import org.testcontainers.junit.jupiter.Testcontainers
 
 @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
 @Import(
-    JacksonConfig::class,
+//    JacksonConfig::class,
     TestDataHelper::class,
     TestUuidSource::class,
 )
 @Testcontainers
-@UseTestDatabase
+@UseTestContainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 abstract class IntegrationTestTemplate : FeatureSpec() {
     @LocalServerPort

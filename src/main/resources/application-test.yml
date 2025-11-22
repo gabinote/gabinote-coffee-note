@@ -17,5 +17,5 @@ spring:
       - org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration
 
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-test.xml
 

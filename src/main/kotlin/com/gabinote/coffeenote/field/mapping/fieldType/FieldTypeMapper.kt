@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired
 abstract class FieldTypeMapper(
 ) {
     @Autowired
-    protected lateinit var fieldTypeFactory: FieldTypeFactory
+    lateinit var fieldTypeFactory: FieldTypeFactory
 
     fun toString(fieldType: FieldType): String {
         return fieldType.getKeyString()

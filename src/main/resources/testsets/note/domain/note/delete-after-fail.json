@@ -1,0 +1,231 @@
+{
+  "notes": [
+    {
+      "_id": "$anyObject()",
+      "externalId": "a1b2c3d4-e5f6-4789-0123-4567890abcde",
+      "title": "카페인 분석 노트: 에티오피아 예가체프",
+      "thumbnail": "https://images.example.com/thumbnails/coffee_yirgacheffe.jpg",
+      "createdDate": "2024-07-29T10:00:00.123",
+      "modifiedDate": "2024-07-29T10:00:00.123",
+      "fields": [
+        {
+          "_id": "field_001",
+          "name": "원산지",
+          "icon": "globe",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "에티오피아"
+          ]
+        },
+        {
+          "_id": "field_002",
+          "name": "로스팅 정도",
+          "icon": "fire",
+          "type": "RADIO",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "라이트",
+                "미디엄",
+                "다크"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "라이트"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "원산지",
+          "icon": "globe",
+          "values": [
+            "에티오피아"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "target"
+    },
+    {
+      "_id": "$anyObject()",
+      "externalId": "b2c3d4e5-f6a7-4890-1234-567890abcdef",
+      "title": "핸드드립 레시피: 케냐 AA",
+      "thumbnail": null,
+      "createdDate": "2024-07-28T15:30:00.456",
+      "modifiedDate": "2024-07-29T11:05:20.789",
+      "fields": [
+        {
+          "_id": "field_003",
+          "name": "추출 온도",
+          "icon": "temp",
+          "type": "NUMBER",
+          "attributes": [
+            {
+              "key": "unit",
+              "value": [
+                "℃"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "92"
+          ]
+        },
+        {
+          "_id": "field_004",
+          "name": "총 추출 시간",
+          "icon": "clock",
+          "type": "DURATION",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "03:15"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "추출 온도",
+          "icon": "temp",
+          "values": [
+            "92"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": false,
+      "owner": "target"
+    },
+    {
+      "_id": "$anyObject()",
+      "externalId": "c3d4e5f6-a7b8-4901-2345-67890abcdef0",
+      "title": "콜드브루 시음 기록",
+      "thumbnail": "https://images.example.com/thumbnails/cold_brew_sample.png",
+      "createdDate": "2024-07-27T08:10:55.000",
+      "modifiedDate": "2024-07-27T08:10:55.000",
+      "fields": [
+        {
+          "_id": "field_005",
+          "name": "산미",
+          "icon": "lemon",
+          "type": "RATING",
+          "attributes": [
+            {
+              "key": "max",
+              "value": [
+                "5"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "4"
+          ]
+        },
+        {
+          "_id": "field_006",
+          "name": "플레이버 노트",
+          "icon": "flavor",
+          "type": "MULTI_SELECT",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "초콜릿",
+                "견과류",
+                "베리",
+                "꽃"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "초콜릿",
+            "견과류"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "산미",
+          "icon": "lemon",
+          "values": [
+            "4"
+          ],
+          "order": 1
+        },
+        {
+          "name": "플레이버 노트",
+          "icon": "flavor",
+          "values": [
+            "초콜릿",
+            "견과류"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": true,
+      "owner": "non_target"
+    },
+    {
+      "_id": "$anyObject()",
+      "externalId": "d4e5f6a7-b8c9-4012-3456-7890abcdef01",
+      "title": "하와이안 코나 농장 방문기",
+      "thumbnail": "https://images.example.com/thumbnails/hawaii_kona.jpg",
+      "createdDate": "2024-07-26T20:45:10.500",
+      "modifiedDate": "2024-07-29T12:00:00.000",
+      "fields": [
+        {
+          "_id": "field_007",
+          "name": "방문일",
+          "icon": "calendar",
+          "type": "DATE",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "2024-05-15"
+          ]
+        },
+        {
+          "_id": "field_008",
+          "name": "특이사항",
+          "icon": "memo",
+          "type": "LONG_TEXT",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "농장주와 직접 인터뷰 진행. 습도가 매우 높았음."
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "방문일",
+          "icon": "calendar",
+          "values": [
+            "2024-05-15"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "non_target"
+    }
+  ]
+}

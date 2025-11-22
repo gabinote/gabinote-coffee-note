@@ -63,6 +63,7 @@ class TemplateApiController(
         return ResponseEntity.ok(res)
     }
 
+
     @NeedAuth
     @GetMapping("/template/open/{externalId}")
     fun getOpenTemplate(
@@ -77,6 +78,7 @@ class TemplateApiController(
         return ResponseEntity.ok(res)
     }
 
+    // TODO : 조회시 필드 정보 제외하고 가져오게 최적화 필요
     @NeedAuth
     @GetMapping("/templates/default")
     fun getAllDefaultTemplates(
@@ -91,6 +93,7 @@ class TemplateApiController(
         return ResponseEntity.ok(res)
     }
 
+    // TODO : 조회시 필드 정보 제외하고 가져오게 최적화 필요
     @NeedAuth
     @GetMapping("/templates/me")
     fun getAllMyTemplates(

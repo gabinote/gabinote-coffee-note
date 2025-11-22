@@ -1,0 +1,33 @@
+{
+  "uid": "noteFieldIndex",
+  "data": [
+    {
+      "id": "a1b2c3d4-0001-4000-8000-000000000001",
+      "owner": "user_coffee_lover_01",
+      "name": "원두명",
+      "value": "에티오피아 예가체프 G1 코체레",
+      "noteId": "65321a0b1f2e3d4c5a6b7c80"
+    },
+    {
+      "id": "a1b2c3d4-0001-4000-8000-000000000002",
+      "owner": "user_coffee_lover_01",
+      "name": "로스터리",
+      "value": "커피 리브레",
+      "noteId": "65321a0b1f2e3d4c5a6b7c80"
+    },
+    {
+      "id": "a1b2c3d4-0001-4000-8000-000000000003",
+      "owner": "user_coffee_lover_01",
+      "name": "신규 필드1",
+      "value": "신규 값1",
+      "noteId": "65321a0b1f2e3d4c5a6b7c80"
+    },
+    {
+      "id": "a1b2c3d4-0001-4000-8000-000000000004",
+      "owner": "user_coffee_lover_01",
+      "name": "신규 필드2",
+      "value": "신규 값2",
+      "noteId": "65321a0b1f2e3d4c5a6b7c80"
+    }
+  ]
+}

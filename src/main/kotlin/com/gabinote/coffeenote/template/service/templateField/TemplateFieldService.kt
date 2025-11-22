@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 @Service
 class TemplateFieldService(
     private val attributeService: AttributeService,
-    private val templateFieldMapper: TemplateFieldMapper
+    private val templateFieldMapper: TemplateFieldMapper,
 ) {
     fun create(dto: List<TemplateFieldCreateReqServiceDto>): List<TemplateField> {
         checkOrdersValid(dto)

@@ -43,7 +43,7 @@ data class TemplateField(
      * true: 표시, false: 숨김
      */
     @JvmField
-    var isDisplay: Boolean = true
+    var isDisplay: Boolean = true,
 ) {
     fun changeAttributes(newAttributes: Set<Attribute>) {
         this.attributes = newAttributes
