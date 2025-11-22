@@ -1,0 +1,61 @@
+{
+  "notes": [
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0001"
+      },
+      "externalId": "a1b2c3d4-e5f6-4789-0123-4567890abcde",
+      "title": "카페인 분석 노트: 에티오피아 예가체프",
+      "thumbnail": "https://images.example.com/thumbnails/coffee_yirgacheffe.jpg",
+      "createdDate": "2024-07-29T10:00:00.123",
+      "modifiedDate": "2024-07-29T10:00:00.123",
+      "fields": [
+        {
+          "_id": "field_001",
+          "name": "원산지",
+          "icon": "globe",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "에티오피아"
+          ]
+        },
+        {
+          "_id": "field_002",
+          "name": "로스팅 정도",
+          "icon": "fire",
+          "type": "RADIO",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "라이트",
+                "미디엄",
+                "다크"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "라이트"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "원산지",
+          "icon": "globe",
+          "values": [
+            "에티오피아"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "target"
+    }
+  ]
+}

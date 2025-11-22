@@ -1,0 +1,104 @@
+{
+  "uid": "noteIndex",
+  "data": [
+    {
+      "id": "65571b111a00000000000001",
+      "externalId": "a1a1a1a1-0001-4001-8001-000000000001",
+      "title": "에티오피아 예가체프 G1 워시드",
+      "owner": "user_alpha",
+      "createdDate": 1731821801000,
+      "modifiedDate": 1731821801000,
+      "filters": {
+        "품종": [
+          "에티오피아"
+        ],
+        "가공_방식": [
+          "워시드"
+        ],
+        "추출_방식": [
+          "푸어오버"
+        ],
+        "등급": [
+          "G1"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "품종",
+          "tag": "BEAN_COUNTRY_TAG",
+          "value": [
+            "에티오피아"
+          ],
+          "order": 0
+        },
+        {
+          "name": "가공_방식",
+          "tag": "PROCESS_METHOD_TAG",
+          "value": [
+            "워시드"
+          ],
+          "order": 1
+        },
+        {
+          "name": "등급",
+          "tag": "GRADE_TAG",
+          "value": [
+            "G1"
+          ],
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "65571b111a00000000000002",
+      "externalId": "a1a1a1a1-0002-4002-8002-000000000002",
+      "title": "케냐 AA 아이스 드립",
+      "owner": "user_alpha",
+      "createdDate": 1731821802000,
+      "modifiedDate": 1731821802000,
+      "filters": {
+        "품종": [
+          "케냐"
+        ],
+        "로스팅_포인트": [
+          "미디엄"
+        ],
+        "향미": [
+          "자몽",
+          "과일향",
+          "산미"
+        ],
+        "태그": [
+          "여름",
+          "아이스"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "품종",
+          "tag": "BEAN_COUNTRY_TAG",
+          "value": [
+            "케냐"
+          ],
+          "order": 0
+        },
+        {
+          "name": "로스팅_포인트",
+          "tag": "ROAST_LEVEL_TAG",
+          "value": [
+            "미디엄"
+          ],
+          "order": 1
+        },
+        {
+          "name": "향미",
+          "tag": "FLAVOR_NOTE_TAG",
+          "value": [
+            "자몽, 과일향, 산미"
+          ],
+          "order": 2
+        }
+      ]
+    }
+  ]
+}

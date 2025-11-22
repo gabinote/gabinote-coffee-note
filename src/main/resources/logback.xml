@@ -23,7 +23,7 @@
 
     <springProfile name="test">
         <logger name="org.springframework" level="debug"/>
-        <logger name="com.gabinote.coffeenote" level="debug"/>
+        <logger name="com.gabinote" level="debug"/>
         <logger name="org.testcontainers" level="INFO"/>
         <logger name="tc" level="INFO"/>
         <logger name="com.github.dockerjava" level="WARN"/>

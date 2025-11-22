@@ -5,7 +5,6 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
-
 import org.testcontainers.containers.MongoDBContainer
 import org.testcontainers.utility.DockerImageName
 
@@ -20,6 +19,7 @@ class DatabaseContainerInitializer : ApplicationContextInitializer<ConfigurableA
             withCommand("--bind_ip_all --replSet rs0")
             withReuse(true)
         }
+
     }
 
     override fun initialize(context: ConfigurableApplicationContext) {

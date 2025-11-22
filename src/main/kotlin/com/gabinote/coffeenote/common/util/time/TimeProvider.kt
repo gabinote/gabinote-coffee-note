@@ -1,17 +1,18 @@
 package com.gabinote.coffeenote.common.util.time
 
-import java.time.Clock
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-class TimeProvider(
-    private val clock: Clock
-) {
-    fun nowDt(): LocalDateTime {
-        return LocalDateTime.now(clock)
-    }
+interface TimeProvider {
+    /**
+     * 현재 날짜와 시간을 반환
+     * @return 현재 LocalDateTime
+     */
+    fun now(): LocalDateTime
 
-    fun nowDate(): LocalDate {
-        return LocalDate.now(clock)
-    }
+    /**
+     * 현재 날짜를 반환
+     * @return 현재 LocalDate
+     */
+    fun today(): LocalDate
 }

@@ -4,6 +4,7 @@ plugins {
     kotlin("jvm") version "2.2.10"
     kotlin("plugin.spring") version "2.2.10"
     kotlin("kapt") version "2.2.10"
+    id("org.jetbrains.kotlin.plugin.noarg") version "2.2.10"
     id("org.springframework.boot") version "3.5.5"
     id("io.spring.dependency-management") version "1.1.7"
     id("com.epages.restdocs-api-spec") version "0.17.1"
@@ -14,22 +15,20 @@ plugins {
 group = "com.gabinote"
 version = "0.0.1-SNAPSHOT"
 description = "gabi-coffeenote"
-
+noArg {
+    annotation("com.fasterxml.jackson.annotation.JsonCreator")
+    annotation("com.fasterxml.jackson.annotation.JsonIgnoreProperties")
+    annotation("com.gabinote.coffeenote.common.util.json.annotation.JsonNoArg")
+}
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
-//sourceSets {
-//    main {
-//        resources {
-//            srcDirs("src/main/resources")
-//        }
-//    }
-//}
+
 dependencyManagement {
     imports {
-        mavenBom("org.testcontainers:testcontainers-bom:1.20.6")
+        mavenBom("org.testcontainers:testcontainers-bom:2.0.2")
     }
 }
 
@@ -44,7 +43,11 @@ dependencies {
     kapt("org.springframework.boot:spring-boot-configuration-processor")
 
     // test
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+
+//        exclude(group = "com.vaadin.external.google", module = "android-json")
+
+    }
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     // junit
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -61,6 +64,7 @@ dependencies {
     // testcontainers
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:mongodb")
+    testImplementation("org.testcontainers:kafka")
     // rest assured
     testImplementation("io.rest-assured:rest-assured:5.5.5")
     testImplementation("io.rest-assured:kotlin-extensions:5.5.5")
@@ -78,9 +82,12 @@ dependencies {
 
     // database
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-    // https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-kotlin-sync
-//    implementation("org.mongodb:mongodb-driver-kotlin-sync:5.5.1")
-
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    // https://mvnrepository.com/artifact/com.meilisearch.sdk/meilisearch-java
+    implementation("com.meilisearch.sdk:meilisearch-java:0.16.1") {
+        exclude(group = "com.vaadin.external.google", module = "android-json")
+    }
 
     // caching
     implementation("org.springframework.boot:spring-boot-starter-cache")
@@ -109,6 +116,15 @@ dependencies {
     implementation(platform("com.fasterxml.jackson:jackson-bom:2.15.2"))
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    //kafka
+    implementation("org.springframework.kafka:spring-kafka")
+// https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-circuitbreaker
+    implementation("io.github.resilience4j:resilience4j-circuitbreaker:2.3.0")
+
+    //json
+    // https://mvnrepository.com/artifact/com.lectra/koson
+    implementation("com.lectra:koson:1.2.9")
 }
 
 kotlin {
