@@ -55,7 +55,8 @@
         }
       ],
       "isOpen": true,
-      "owner": "target"
+      "owner": "target",
+      "hash": "14d89da7df2cede931296b9f3a58609a"
     },
     {
       "_id": {
@@ -110,7 +111,8 @@
         }
       ],
       "isOpen": false,
-      "owner": "user_beta_5678"
+      "owner": "user_beta_5678",
+      "hash": "4721d089299694e08bce17db7bb33c6b"
     }
   ]
 }

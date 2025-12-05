@@ -50,4 +50,5 @@ class HashHelper {
     fun compareHash(targetHash: String, expectedHash: String): Boolean {
         return targetHash == expectedHash
     }
+
 }

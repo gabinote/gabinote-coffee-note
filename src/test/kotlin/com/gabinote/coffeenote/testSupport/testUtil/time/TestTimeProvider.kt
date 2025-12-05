@@ -26,6 +26,6 @@ class TestTimeProvider : TimeProvider {
     }
 
     override fun zoneOffset(): ZoneOffset {
-        return ZoneOffset.of("Asia/Seoul")
+        return ZoneOffset.ofHours(9)
     }
 }

@@ -12,15 +12,18 @@ class NoteDisplayFieldService(
 
     fun create(dto: List<NoteFieldCreateReqServiceDto>): List<NoteDisplayField> {
         val displayFields = dto.filter { it.isDisplay }.sortedBy { it.order }
-        val order = 0
+        var order = 0
         val data: MutableList<NoteDisplayField> = mutableListOf()
         for (displayField in displayFields) {
+            if (!displayField.isDisplay) {
+                continue
+            }
             val displayData = noteDisplayFieldMapper.toDisplayField(
                 dto = displayField,
                 overrideOrder = order
             )
             data.add(displayData)
-            order + 1
+            order++
         }
         return data
     }

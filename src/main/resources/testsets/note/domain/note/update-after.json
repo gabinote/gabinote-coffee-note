@@ -5,8 +5,8 @@
       "externalId": "a1b2c3d4-e5f6-4789-0123-4567890abcde",
       "title": "콜드브루 시음 기록",
       "thumbnail": "https://images.example.com/thumbnails/cold_brew_sample.png",
-      "createdDate": 1722247200123,
-      "modifiedDate": 1030492800000,
+      "createdDate": 1722214800123,
+      "modifiedDate": 1030460400000,
       "fields": [
         {
           "_id": "field_005",
@@ -71,7 +71,8 @@
         }
       ],
       "isOpen": true,
-      "owner": "target"
+      "owner": "target",
+      "hash": "updated-hash"
     },
     {
       "_id": "$anyObject()",
@@ -124,7 +125,8 @@
         }
       ],
       "isOpen": false,
-      "owner": "user_beta_5678"
+      "owner": "user_beta_5678",
+      "hash": "4721d089299694e08bce17db7bb33c6b"
     }
   ]
 }

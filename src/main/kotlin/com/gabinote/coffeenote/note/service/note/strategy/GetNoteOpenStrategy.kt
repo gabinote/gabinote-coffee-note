@@ -5,17 +5,16 @@ import com.gabinote.coffeenote.note.domain.note.Note
 import org.springframework.stereotype.Component
 
 @Component
-class GetOwnedStrategy : GetNoteByExternalIdStrategy {
-    override fun validate(requestor: String, note: Note): Note {
-        if (note.owner != requestor) {
+class GetNoteOpenStrategy : GetNoteByExternalIdStrategy {
+    override fun validate(requestor: String, note: Note) {
+        if (!note.isOpen) {
             throw ResourceNotFound(
-                name = "Owned Note",
+                name = "Opened Note",
                 identifier = note.externalId.toString(),
                 identifierType = "externalId"
             )
         }
-        return note
     }
 
-    override val type = GetNoteByExternalIdStrategyType.OWNED
+    override val type = GetNoteByExternalIdStrategyType.OPENED
 }

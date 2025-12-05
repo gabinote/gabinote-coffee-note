@@ -100,34 +100,38 @@ class NoteService(
         checkMaxNoteCount(dto.owner)
         val note = createNote(dto)
         val saved = noteRepository.save(note)
-        noteHashService.create(saved)
         return noteMapper.toNoteResServiceDto(saved)
     }
 
     @Transactional
-    fun update(dto: NoteUpdateReqServiceDto): NoteResServiceDto {
+    fun update(dto: NoteUpdateReqServiceDto): NoteResServiceDto? {
         val existsNote = fetchByExternalId(dto.externalId)
         checkOwnership(existsNote, dto.owner)
         val createReq = noteMapper.toCreateReqServiceDto(dto)
-        val note = createNote(createReq)
-        noteMapper.updateNoteFromEntity(source = note, target = existsNote)
-        existsNote.apply {
-            changeFields(note.fields)
-            changeDisplayFields(note.displayFields)
+        val newNote = createNote(createReq)
+        if (!isChange(existsNote, newNote)) {
+            return null
         }
+        noteMapper.updateNoteFromEntity(source = newNote, target = existsNote)
+        existsNote.updateFields(newNote = newNote)
         val updatedNote = noteRepository.save(existsNote)
-        noteHashService.update(updatedNote)
         return noteMapper.toNoteResServiceDto(updatedNote)
     }
 
+    @Transactional
     fun deleteByExternalId(externalId: UUID, owner: String) {
         val existsNote = fetchByExternalId(externalId)
         checkOwnership(existsNote, owner)
         noteRepository.delete(existsNote)
     }
 
+    @Transactional
     fun deleteAllByOwner(owner: String) {
         noteRepository.deleteAllByOwner(owner)
+    }
+
+    private fun isChange(origin: Note, newNote: Note): Boolean {
+        return origin.hash != newNote.hash || origin.isOpen != newNote.isOpen
     }
 
     private fun createNote(
@@ -136,10 +140,16 @@ class NoteService(
         val fields = noteFieldService.create(dto.fields)
         val displayFields = noteDisplayFieldService.create(dto.fields)
         val newNote = noteMapper.toNote(dto = dto).apply {
-            changeFields(fields)
-            changeDisplayFields(displayFields)
+            setFields(fields, displayFields)
         }
+        applyHash(newNote)
         return newNote
+    }
+
+    private fun applyHash(note: Note) {
+
+        val hash = noteHashService.create(note)
+        note.changeHash(hash)
     }
 
 
@@ -155,7 +165,7 @@ class NoteService(
 
 
     private fun checkMaxNoteCount(owner: String) {
-        val maxNoteCount = policyService.getByKey(PolicyKey.NOTE_MAX_COUNT_PER_DEFAULT_USER).toInt()
+        val maxNoteCount = policyService.getByKey(PolicyKey.NOTE_MAX_COUNT_PER_DEFAULT_USER).toLong()
         val currentNoteCount = noteRepository.countByOwner(owner)
         if (currentNoteCount >= maxNoteCount) {
             throw ResourceQuotaLimit(

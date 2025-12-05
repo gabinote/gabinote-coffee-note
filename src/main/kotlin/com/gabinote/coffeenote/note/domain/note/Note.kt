@@ -35,6 +35,8 @@ data class Note(
 
     var owner: String,
 
+    var hash: String? = null,
+
     ) {
     fun changeField(fields: List<NoteField>) {
         this.fields = fields
@@ -51,4 +53,20 @@ data class Note(
     fun changeDisplayFields(newDisplayFields: List<NoteDisplayField>) {
         this.displayFields = newDisplayFields
     }
+
+    fun changeHash(newHash: String) {
+        this.hash = newHash
+    }
+
+    fun setFields(fields: List<NoteField>, displayFields: List<NoteDisplayField>) {
+        this.fields = fields
+        this.displayFields = displayFields
+    }
+
+    fun updateFields(newNote: Note) {
+        this.fields = newNote.fields
+        this.displayFields = newNote.displayFields
+    }
+
+
 }

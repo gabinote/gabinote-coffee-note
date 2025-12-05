@@ -1,9 +1,9 @@
 package com.gabinote.coffeenote.common.util.exception.service
 
 class ResourceQuotaLimit(
-    name: String,
-    quotaType: String,
-    quotaLimit: Int,
+    val name: String,
+    val quotaType: String,
+    val quotaLimit: Long,
 ) : ServiceException() {
 
     override val errorMessage: String =

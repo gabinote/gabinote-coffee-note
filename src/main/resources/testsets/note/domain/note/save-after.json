@@ -53,15 +53,16 @@
         }
       ],
       "isOpen": true,
-      "owner": "target"
+      "owner": "target",
+      "hash": "6a6a201de94067a489892244de3514a1"
     },
     {
       "_id": "$anyObject()",
       "externalId": "00000000-0000-0000-0000-000000000000",
       "title": "콜드브루 시음 기록",
       "thumbnail": "https://images.example.com/thumbnails/cold_brew_sample.png",
-      "createdDate": 1030492800000,
-      "modifiedDate": 1030492800000,
+      "createdDate": 1030460400000,
+      "modifiedDate": 1030460400000,
       "fields": [
         {
           "_id": "field_005",
@@ -126,7 +127,8 @@
         }
       ],
       "isOpen": true,
-      "owner": "user_gamma_9012"
+      "owner": "user_gamma_9012",
+      "hash": "test-hash"
     }
   ]
 }

@@ -54,6 +54,18 @@ class NoteFieldService(
     private fun validationNoteField(dto: List<NoteFieldCreateReqServiceDto>) {
         checkOrdersValid(dto)
         checkDisplayedFieldCount(dto)
+        checkIdUnique(dto)
+    }
+
+    private fun checkIdUnique(dto: List<NoteFieldCreateReqServiceDto>) {
+        val ids = dto.map { it.id }
+        val idSet = ids.toSet()
+        if (ids.size != idSet.size) {
+            throw ResourceNotValid(
+                name = "NoteField",
+                reasons = listOf("Duplicate field IDs are not allowed.")
+            )
+        }
     }
 
     private fun checkDisplayedFieldCount(dto: List<NoteFieldCreateReqServiceDto>) {
@@ -77,11 +89,11 @@ class NoteFieldService(
             )
         }
 
-        val expectedOrders = (1..orders.size).toSet()
+        val expectedOrders = (0..<orders.size).toSet()
         if (orderSet != expectedOrders) {
             throw ResourceNotValid(
                 name = "NoteField",
-                reasons = listOf("Order values must be a continuous sequence starting from 1 to ${orders.size}.")
+                reasons = listOf("Order values must be a continuous sequence starting from 0 to ${orders.size - 1}.")
             )
         }
     }

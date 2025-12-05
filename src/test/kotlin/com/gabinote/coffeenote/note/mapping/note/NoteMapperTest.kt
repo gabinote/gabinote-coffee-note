@@ -23,6 +23,7 @@ import com.gabinote.coffeenote.note.mapping.noteDisplayField.NoteDisplayFieldMap
 import com.gabinote.coffeenote.note.mapping.noteField.NoteFieldMapper
 import com.gabinote.coffeenote.note.mapping.noteField.NoteFieldMapperImpl
 import com.gabinote.coffeenote.testSupport.testTemplate.MockkTestTemplate
+import com.gabinote.coffeenote.testSupport.testUtil.data.note.NoteHashTestDataHelper
 import com.gabinote.coffeenote.testSupport.testUtil.time.TestTimeProvider
 import com.gabinote.coffeenote.testSupport.testUtil.uuid.TestUuidSource
 import com.ninjasquad.springmockk.MockkBean
@@ -73,7 +74,8 @@ class NoteMapperTest : MockkTestTemplate() {
                         fields = listOf(noteField),
                         displayFields = listOf(displayField),
                         isOpen = true,
-                        owner = "test-owner"
+                        owner = "test-owner",
+                        hash = NoteHashTestDataHelper.TEST_HASH
                     )
 
                     val expectedNoteField = mockk<NoteFieldResServiceDto>()
@@ -126,7 +128,8 @@ class NoteMapperTest : MockkTestTemplate() {
                         fields = emptyList(),
                         displayFields = emptyList(),
                         isOpen = false,
-                        owner = "test-owner"
+                        owner = "test-owner",
+                        hash = NoteHashTestDataHelper.TEST_HASH
                     )
 
                     val expected = NoteResServiceDto(
@@ -395,6 +398,7 @@ class NoteMapperTest : MockkTestTemplate() {
                         modifiedDate = null,
                         id = null,
                         externalId = null,
+                        hash = null
                     )
 
                     it("Note 엔티티로 변환되어야 한다.") {
@@ -529,7 +533,8 @@ class NoteMapperTest : MockkTestTemplate() {
                         fields = listOf(sourceField),
                         displayFields = listOf(sourceDisplayField),
                         isOpen = true,
-                        owner = "source-owner"
+                        owner = "source-owner",
+                        hash = NoteHashTestDataHelper.TEST_HASH
                     )
 
 
@@ -543,7 +548,8 @@ class NoteMapperTest : MockkTestTemplate() {
                         fields = emptyList(),
                         displayFields = emptyList(),
                         isOpen = false,
-                        owner = "target-owner"
+                        owner = "target-owner",
+                        hash = NoteHashTestDataHelper.TEST_HASH
                     )
 
                     val updatedNote = Note(
@@ -556,13 +562,14 @@ class NoteMapperTest : MockkTestTemplate() {
                         fields = listOf(), // 업데이트 X
                         displayFields = listOf(), // 업데이트 X
                         isOpen = true,
-                        owner = targetNote.owner // 업데이트 X
+                        owner = targetNote.owner, // 업데이트 X
+                        hash = NoteHashTestDataHelper.TEST_HASH // 업데이트 X
                     )
 
                     it("target Note의 내용이 source로 업데이트되지만, id, externalId, owner, dates는 유지되어야 한다.") {
                         noteMapper.updateNoteFromEntity(sourceNote, targetNote)
                         targetNote shouldBe updatedNote
-                        
+
                     }
                 }
             }

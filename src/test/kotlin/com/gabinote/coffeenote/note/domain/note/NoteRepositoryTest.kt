@@ -2,6 +2,7 @@ package com.gabinote.coffeenote.note.domain.note
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
 import com.gabinote.coffeenote.testSupport.testTemplate.RepositoryTestTemplate
+import com.gabinote.coffeenote.testSupport.testUtil.data.note.NoteHashTestDataHelper
 import com.gabinote.coffeenote.testSupport.testUtil.page.TestPageableUtil.createPageable
 import io.kotest.matchers.shouldBe
 import org.springframework.beans.factory.annotation.Autowired
@@ -149,7 +150,8 @@ class NoteRepositoryTest : RepositoryTestTemplate() {
                                 )
                             ),
                             isOpen = true,
-                            owner = "user_gamma_9012"
+                            owner = "user_gamma_9012",
+                            hash = NoteHashTestDataHelper.TEST_HASH
                         )
                         noteRepository.save(newNote)
                         testDataHelper.assertData("$baseDataDir/save-after.json")
@@ -201,6 +203,7 @@ class NoteRepositoryTest : RepositoryTestTemplate() {
                             )
                         )
                         isOpen = true
+                        hash = "updated-hash"
                     }
                     it("Note를 수정한다") {
                         noteRepository.save(existingNote)

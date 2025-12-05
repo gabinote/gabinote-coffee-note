@@ -38,4 +38,6 @@ class NoteFieldIndexService(
             noteFieldIndexMapper.toNoteFieldValueFacetWithCountResServiceDto(it)
         }
     }
+
+
 }
