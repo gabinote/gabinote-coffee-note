@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.note.domain.noteFieldIndex
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelper.filterText
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelper.searchFacetWithName
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelper.validationInput
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.data.FacetWithCount
@@ -25,7 +26,9 @@ class NoteFieldIndexRepository(
     ): List<FacetWithCount> {
         validationInput(owner, query)
 
-        val filter = listOf("owner = \"$owner\"")
+        val filter = listOf(
+            filterText("owner", owner)
+        )
         val facets = listOf("name")
         return index.searchFacetWithName(
             query = query,
@@ -41,7 +44,10 @@ class NoteFieldIndexRepository(
         query: String,
     ): List<FacetWithCount> {
         validationInput(owner, fieldName, query)
-        val filter = listOf("owner = \"$owner\"", "name = \"$fieldName\"")
+        val filter = listOf(
+            filterText("owner", owner),
+            filterText("name", fieldName)
+        )
         val facets = listOf("value")
 
         return index.searchFacetWithName(
@@ -68,12 +74,12 @@ class NoteFieldIndexRepository(
     }
 
     fun deleteAllByNoteId(noteId: String): TaskInfo {
-        val filter = "noteId = \"$noteId\""
+        val filter = filterText("noteId", noteId)
         return index.deleteDocumentsByFilter(filter)
     }
 
     fun deleteAllByOwner(owner: String): TaskInfo {
-        val filter = "owner = \"$owner\""
+        val filter = filterText("owner", owner)
         return index.deleteDocumentsByFilter(filter)
     }
 

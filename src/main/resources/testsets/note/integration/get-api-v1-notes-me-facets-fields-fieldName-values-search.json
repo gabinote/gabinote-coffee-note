@@ -1,0 +1,27 @@
+{
+  "uid": "noteFieldIndex",
+  "data": [
+    {
+      "id": "value-index-1",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "name": "Origin",
+      "value": "Ethiopia",
+      "noteId": "note-1"
+    },
+    {
+      "id": "value-index-2",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "name": "Origin",
+      "value": "Ethiopian Highlands",
+      "noteId": "note-2"
+    },
+    {
+      "id": "value-index-3",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "name": "Origin",
+      "value": "East Africa Ethiopia",
+      "noteId": "note-3"
+    }
+  ]
+}
+

@@ -3,6 +3,7 @@ package com.gabinote.coffeenote.testSupport.testUtil.data.note
 import com.gabinote.coffeenote.note.domain.note.NoteDisplayField
 import com.gabinote.coffeenote.note.dto.noteDisplayField.controller.NoteDisplayFieldResControllerDto
 import com.gabinote.coffeenote.note.dto.noteDisplayField.service.NoteDisplayFieldResServiceDto
+import com.gabinote.coffeenote.note.dto.noteIndexDisplayField.controller.IndexDisplayFieldResControllerDto
 import com.gabinote.coffeenote.note.dto.noteIndexDisplayField.service.IndexDisplayFieldResServiceDto
 
 object NoteDisplayFieldTestDataHelper {
@@ -36,6 +37,18 @@ object NoteDisplayFieldTestDataHelper {
         value: List<String> = listOf("에티오피아"),
         order: Int = 0,
     ) = IndexDisplayFieldResServiceDto(
+        name = name,
+        tag = tag,
+        value = value,
+        order = order,
+    )
+
+    fun createTestIndexDisplayFieldResControllerDto(
+        name: String = "원산지",
+        tag: String = "원산지",
+        value: List<String> = listOf("에티오피아"),
+        order: Int = 0,
+    ) = IndexDisplayFieldResControllerDto(
         name = name,
         tag = tag,
         value = value,

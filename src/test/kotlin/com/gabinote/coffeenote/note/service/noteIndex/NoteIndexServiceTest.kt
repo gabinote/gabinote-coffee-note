@@ -5,8 +5,8 @@ import com.gabinote.coffeenote.note.domain.noteIndex.IndexDisplayField
 import com.gabinote.coffeenote.note.domain.noteIndex.NoteIndex
 import com.gabinote.coffeenote.note.domain.noteIndex.NoteIndexRepository
 import com.gabinote.coffeenote.note.domain.noteIndex.vo.DateRangeFilter
-import com.gabinote.coffeenote.note.dto.note.domain.NoteFilterCondition
-import com.gabinote.coffeenote.note.dto.note.domain.NoteSearchCondition
+import com.gabinote.coffeenote.note.dto.noteIndex.domain.NoteFilterCondition
+import com.gabinote.coffeenote.note.dto.noteIndex.domain.NoteSearchCondition
 import com.gabinote.coffeenote.note.dto.noteIndex.service.NoteIndexResServiceDto
 import com.gabinote.coffeenote.note.dto.noteIndexDisplayField.service.IndexDisplayFieldResServiceDto
 import com.gabinote.coffeenote.note.mapping.noteIndex.NoteIndexMapper

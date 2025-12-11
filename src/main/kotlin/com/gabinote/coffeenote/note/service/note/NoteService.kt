@@ -22,7 +22,6 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Slice
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 val logger = KotlinLogging.logger {}
@@ -68,7 +67,7 @@ class NoteService(
 
     fun getOpenByExternalId(
         externalId: UUID,
-        requestor: String,
+        requestor: String = "",
     ): NoteResServiceDto {
         return getByExternalId(
             externalId = externalId,
@@ -95,7 +94,6 @@ class NoteService(
         }
     }
 
-    @Transactional
     fun create(dto: NoteCreateReqServiceDto): NoteResServiceDto {
         checkMaxNoteCount(dto.owner)
         val note = createNote(dto)
@@ -103,14 +101,13 @@ class NoteService(
         return noteMapper.toNoteResServiceDto(saved)
     }
 
-    @Transactional
-    fun update(dto: NoteUpdateReqServiceDto): NoteResServiceDto? {
+    fun update(dto: NoteUpdateReqServiceDto): NoteResServiceDto {
         val existsNote = fetchByExternalId(dto.externalId)
         checkOwnership(existsNote, dto.owner)
         val createReq = noteMapper.toCreateReqServiceDto(dto)
         val newNote = createNote(createReq)
         if (!isChange(existsNote, newNote)) {
-            return null
+            return noteMapper.toNoteResServiceDto(existsNote)
         }
         noteMapper.updateNoteFromEntity(source = newNote, target = existsNote)
         existsNote.updateFields(newNote = newNote)
@@ -118,14 +115,12 @@ class NoteService(
         return noteMapper.toNoteResServiceDto(updatedNote)
     }
 
-    @Transactional
     fun deleteByExternalId(externalId: UUID, owner: String) {
         val existsNote = fetchByExternalId(externalId)
         checkOwnership(existsNote, owner)
         noteRepository.delete(existsNote)
     }
 
-    @Transactional
     fun deleteAllByOwner(owner: String) {
         noteRepository.deleteAllByOwner(owner)
     }

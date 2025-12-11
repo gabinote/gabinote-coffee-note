@@ -1,0 +1,41 @@
+{
+  "notes": [
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea40"
+      },
+      "externalId": "a1b2c3d4-e5f6-4789-8234-567890abcdef",
+      "title": "My First Coffee Note",
+      "thumbnail": "https://example.com/thumbnail1.jpg",
+      "createdDate": "2024-01-01T10:00:00.123",
+      "modifiedDate": "2024-01-02T10:00:00.123",
+      "fields": [
+        {
+          "_id": "field-1",
+          "name": "Coffee Name",
+          "icon": "coffee",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "Ethiopian Yirgacheffe"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "Coffee Name",
+          "icon": "coffee",
+          "values": [
+            "Ethiopian Yirgacheffe"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "aa16262f-c79b-4e9b-9b0d-abcbffbaeb1c",
+      "hash": "hash123"
+    }
+  ]
+}

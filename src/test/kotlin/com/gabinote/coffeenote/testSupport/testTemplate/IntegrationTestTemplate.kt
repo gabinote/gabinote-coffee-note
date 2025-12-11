@@ -3,6 +3,8 @@ package com.gabinote.coffeenote.testSupport.testTemplate
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.gabinote.coffeenote.testSupport.testConfig.common.UseTestContainers
 import com.gabinote.coffeenote.testSupport.testUtil.data.TestDataHelper
+import com.gabinote.coffeenote.testSupport.testUtil.data.meilisearch.TestMeiliSearchHelper
+import com.gabinote.coffeenote.testSupport.testUtil.time.TestTimeProvider
 import com.gabinote.coffeenote.testSupport.testUtil.uuid.TestUuidSource
 import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.core.test.TestCaseOrder
@@ -20,6 +22,8 @@ import org.testcontainers.junit.jupiter.Testcontainers
 //    JacksonConfig::class,
     TestDataHelper::class,
     TestUuidSource::class,
+    TestMeiliSearchHelper::class,
+    TestTimeProvider::class,
 )
 @Testcontainers
 @UseTestContainers
@@ -33,6 +37,9 @@ abstract class IntegrationTestTemplate : FeatureSpec() {
 
     @Autowired
     lateinit var testDataHelper: TestDataHelper
+
+    @Autowired
+    lateinit var testMeiliSearchHelper: TestMeiliSearchHelper
 
 
     val apiPrefix: String = "/api/v1"

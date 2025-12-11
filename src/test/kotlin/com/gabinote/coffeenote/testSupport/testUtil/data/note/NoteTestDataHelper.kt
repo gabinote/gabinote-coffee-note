@@ -5,6 +5,7 @@ import com.gabinote.coffeenote.note.domain.note.NoteDisplayField
 import com.gabinote.coffeenote.note.domain.note.NoteField
 import com.gabinote.coffeenote.note.domain.note.vo.NoteOwnedItem
 import com.gabinote.coffeenote.note.dto.note.controller.NoteCreateReqControllerDto
+import com.gabinote.coffeenote.note.dto.note.controller.NoteListResControllerDto
 import com.gabinote.coffeenote.note.dto.note.controller.NoteResControllerDto
 import com.gabinote.coffeenote.note.dto.note.controller.NoteUpdateReqControllerDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteCreateReqServiceDto
@@ -184,6 +185,28 @@ object NoteTestDataHelper {
         owner: String = "test-owner",
     ) = NoteListResServiceDto(
         id = id,
+        externalId = externalId,
+        title = title,
+        thumbnail = thumbnail,
+        createdDate = createdDate,
+        modifiedDate = modifiedDate,
+        displayFields = displayFields,
+        isOpen = isOpen,
+        owner = owner,
+    )
+
+    fun createTestNoteListResControllerDto(
+        externalId: UUID = UUID.randomUUID(),
+        title: String = "테스트 노트",
+        thumbnail: String? = null,
+        createdDate: LocalDateTime = LocalDateTime.now(),
+        modifiedDate: LocalDateTime = LocalDateTime.now(),
+        displayFields: List<NoteDisplayFieldResControllerDto> = listOf(
+            NoteDisplayFieldTestDataHelper.createTestNoteDisplayFieldControllerDto()
+        ),
+        isOpen: Boolean = false,
+        owner: String = "test-owner",
+    ) = NoteListResControllerDto(
         externalId = externalId,
         title = title,
         thumbnail = thumbnail,

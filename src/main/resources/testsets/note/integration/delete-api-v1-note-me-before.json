@@ -1,0 +1,20 @@
+{
+  "notes": [
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea46"
+      },
+      "externalId": "f6a7b8c9-d0e1-4234-8789-012345f01234",
+      "title": "Note To Delete",
+      "thumbnail": null,
+      "createdDate": "2024-01-15T10:00:00.123",
+      "modifiedDate": "2024-01-15T10:00:00.123",
+      "fields": [],
+      "displayFields": [],
+      "isOpen": false,
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "hash": "hashDEL"
+    }
+  ]
+}
+

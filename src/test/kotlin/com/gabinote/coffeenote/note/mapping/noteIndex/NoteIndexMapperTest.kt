@@ -5,6 +5,10 @@ import com.gabinote.coffeenote.common.mapping.time.TimeMapperImpl
 import com.gabinote.coffeenote.note.domain.noteIndex.IndexDisplayField
 import com.gabinote.coffeenote.note.domain.noteIndex.NoteIndex
 import com.gabinote.coffeenote.note.dto.noteIndex.controller.NoteIndexResControllerDto
+import com.gabinote.coffeenote.note.dto.noteIndex.controller.OwnedNoteFilterCondition
+import com.gabinote.coffeenote.note.dto.noteIndex.controller.OwnedSearchNoteCondition
+import com.gabinote.coffeenote.note.dto.noteIndex.domain.NoteFilterCondition
+import com.gabinote.coffeenote.note.dto.noteIndex.domain.NoteSearchCondition
 import com.gabinote.coffeenote.note.dto.noteIndex.service.NoteIndexResServiceDto
 import com.gabinote.coffeenote.note.dto.noteIndexDisplayField.controller.IndexDisplayFieldResControllerDto
 import com.gabinote.coffeenote.note.dto.noteIndexDisplayField.service.IndexDisplayFieldResServiceDto
@@ -129,6 +133,70 @@ class NoteIndexMapperTest : MockkTestTemplate() {
                         verify(exactly = 1) {
                             noteIndexDisplayFieldMapper.toDisplayFieldResControllerDto(displayFieldResDto)
                         }
+                    }
+                }
+            }
+
+            describe("NoteIndexMapper.toNoteFilterCondition") {
+                context("OwnedNoteFilterCondition, owner, pageable이 주어지면") {
+                    val fieldOptions = mapOf("field1" to listOf("value1", "value2"))
+                    val createdDateStart = TestTimeProvider.testDateTime
+                    val createdDateEnd = TestTimeProvider.testDateTime.plusDays(1)
+                    val modifiedDateStart = TestTimeProvider.testDateTime
+                    val modifiedDateEnd = TestTimeProvider.testDateTime.plusDays(2)
+                    val highlightTag = "test-tag"
+                    val owner = "test-owner"
+                    val pageable = mockk<org.springframework.data.domain.Pageable>()
+
+                    val ownedCondition = OwnedNoteFilterCondition(
+                        fieldOptions = fieldOptions,
+                        createdDateStart = createdDateStart,
+                        createdDateEnd = createdDateEnd,
+                        modifiedDateStart = modifiedDateStart,
+                        modifiedDateEnd = modifiedDateEnd,
+                        highlightTag = highlightTag
+                    )
+
+                    val expected = NoteFilterCondition(
+                        fieldOptions = fieldOptions,
+                        owner = owner,
+                        createdDateStart = createdDateStart,
+                        createdDateEnd = createdDateEnd,
+                        modifiedDateStart = modifiedDateStart,
+                        modifiedDateEnd = modifiedDateEnd,
+                        pageable = pageable,
+                        highlightTag = highlightTag
+                    )
+
+                    it("NoteFilterCondition으로 변환되어야 한다.") {
+                        val result = noteIndexMapper.toNoteFilterCondition(ownedCondition, owner, pageable)
+                        result shouldBe expected
+                    }
+                }
+            }
+
+            describe("NoteIndexMapper.toNoteSearchCondition") {
+                context("OwnedSearchNoteCondition, owner, pageable이 주어지면") {
+                    val query = "test query"
+                    val highlightTag = "test-tag"
+                    val owner = "test-owner"
+                    val pageable = mockk<org.springframework.data.domain.Pageable>()
+
+                    val ownedCondition = OwnedSearchNoteCondition(
+                        query = query,
+                        highlightTag = highlightTag
+                    )
+
+                    val expected = NoteSearchCondition(
+                        query = query,
+                        owner = owner,
+                        pageable = pageable,
+                        highlightTag = highlightTag
+                    )
+
+                    it("NoteSearchCondition으로 변환되어야 한다.") {
+                        val result = noteIndexMapper.toNoteSearchCondition(ownedCondition, owner, pageable)
+                        result shouldBe expected
                     }
                 }
             }

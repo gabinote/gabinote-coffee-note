@@ -2,6 +2,8 @@ package com.gabinote.coffeenote.note.domain.noteIndex
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.gabinote.coffeenote.common.util.meiliSearch.client.data.MatchesPosition
+import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelper.filterText
+import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelper.filterTextIn
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelper.searchAsPage
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelper.validationInput
 import com.gabinote.coffeenote.note.domain.noteIndex.vo.DateRangeFilter
@@ -52,7 +54,10 @@ class NoteIndexRepository(
     ): Slice<NoteIndex> {
         validationInput(owner, query, highlightTag)
 
-        val filter = listOf("owner = \"$owner\"")
+//        val filter = listOf("owner = \"${owner.escapeForMeili()}\"")
+        val filter = listOf(
+            filterText("owner", owner)
+        )
         val req =
             setupSearchReq(
                 query = query,
@@ -74,7 +79,9 @@ class NoteIndexRepository(
         validationInput(owner, highlightTag)
 
         // 입력 필터는 setupFilters 메서드에서 검증 처리
-        val searchFilters = mutableListOf("owner = \"$owner\"")
+        val searchFilters = mutableListOf(
+            filterText("owner", owner)
+        )
         setupFilters(filters, searchFilters)
         createdDateFilter?.let {
             setupDateRangeFilter(
@@ -119,12 +126,12 @@ class NoteIndexRepository(
     }
 
     fun deleteAllByExternalId(externalId: String): TaskInfo {
-        val filter = "externalId = \"$externalId\""
+        val filter = filterText("externalId", externalId)
         return index.deleteDocumentsByFilter(filter)
     }
 
     fun deleteAllByOwner(owner: String): TaskInfo {
-        val filter = "owner = \"$owner\""
+        val filter = filterText("owner", owner)
         return index.deleteDocumentsByFilter(filter)
     }
 
@@ -335,7 +342,8 @@ class NoteIndexRepository(
     ) {
         for ((key, values) in filters) {
             validationInput(key, *values.toTypedArray())
-            val valueFilters = "filters.$key IN [${values.joinToString(",") { "\"$it\"" }}]"
+//            val valueFilters = "filters.$key IN [${values.joinToString(",") { "\"$it\"" }}]"
+            val valueFilters = filterTextIn("filters.$key", values)
             searchFilters.add(valueFilters)
         }
     }

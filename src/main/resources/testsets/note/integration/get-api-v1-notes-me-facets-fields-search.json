@@ -1,0 +1,41 @@
+{
+  "uid": "noteFieldIndex",
+  "data": [
+    {
+      "id": "field-index-1",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "name": "Coffee Name",
+      "value": "Ethiopian Yirgacheffe",
+      "noteId": "note-1"
+    },
+    {
+      "id": "field-index-2",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "name": "Coffee Name",
+      "value": "Colombian Supremo",
+      "noteId": "note-2"
+    },
+    {
+      "id": "field-index-3",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "name": "Origin",
+      "value": "Ethiopia",
+      "noteId": "note-3"
+    },
+    {
+      "id": "field-index-4",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "name": "Coffee Blend",
+      "value": "Coffee House Blend",
+      "noteId": "note-4"
+    },
+    {
+      "id": "field-index-5",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "name": "Coffee Type",
+      "value": "Coffee Arabica",
+      "noteId": "note-5"
+    }
+  ]
+}
+

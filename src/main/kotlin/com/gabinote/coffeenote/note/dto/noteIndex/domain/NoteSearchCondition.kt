@@ -1,4 +1,4 @@
-package com.gabinote.coffeenote.note.dto.note.domain
+package com.gabinote.coffeenote.note.dto.noteIndex.domain
 
 import org.springframework.data.domain.Pageable
 

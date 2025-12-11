@@ -3,6 +3,8 @@ spring:
     activate:
       on-profile: test
 
+
+
   main:
     allow-bean-definition-overriding: true
 

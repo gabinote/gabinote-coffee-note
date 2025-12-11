@@ -728,12 +728,17 @@ class NoteServiceTest : ServiceTestTemplate() {
                         }
 
                         //d. 해쉬 비교하여 변경 감지
-                        // 여기서 동일 해쉬 판단으로 null 리턴해야함
-
+                        // 여기서 동일 해쉬 판단으로 기존값 리턴해야함
+                        val noteResServiceDto = mockk<NoteResServiceDto>()
+                        beforeTest {
+                            every {
+                                noteMapper.toNoteResServiceDto(existingNote)
+                            } returns noteResServiceDto
+                        }
 
                         it("노트를 수정하고 반환한다.") {
                             val res = noteService.update(updateReq)
-                            res shouldBe null
+                            res shouldBe noteResServiceDto
 
                             //a
                             verify(exactly = 1) {

@@ -92,21 +92,20 @@ object MeiliSearchResHelper {
     }
 
 
+    fun String.escapeForMeili(): String {
+        return this
+            .replace("\\", "\\\\")
+            .replace("'", "\\'")
+    }
+
     /**
-     * 입력값이 유효한지 검사합니다.
-     * 영문 대소문자, 숫자, 한글, 밑줄(_
-     * 및 대시(-)를 허용하며, * 한글자만 허용합니다.
-     * 공백은 밑줄(_)로 대체하여 검사합니다.
-     * @return 유효한 경우 true, 그렇지 않은 경우 false
+
      */
     fun String.validString(): Boolean {
 
         if (this == "*") return true
 
-        val regex = "^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣-_]*\$"
-
-        val target = this.replace(" ", "_")
-        return regex.toRegex().matches(target)
+        return true
     }
 
     /**
@@ -123,5 +122,23 @@ object MeiliSearchResHelper {
                 throw IllegalArgumentException("Input string does not match regex: $it")
             }
         }
+    }
+
+    fun filterText(key: String, value: String): String {
+        return "'$key' = '${value.escapeForMeili()}'"
+    }
+
+    fun filterTextIn(key: String, values: List<String>): String {
+        val escapedValues = values.joinToString(", ") { "'${it.escapeForMeili()}'" }
+        return "'$key' IN [$escapedValues]"
+    }
+
+    // >=
+    fun filterTextGte(key: String, value: String): String {
+        return "'$key' >= '${value.escapeForMeili()}'"
+    }
+
+    fun filterTextLte(key: String, value: String): String {
+        return "'$key' <= '${value.escapeForMeili()}'"
     }
 }

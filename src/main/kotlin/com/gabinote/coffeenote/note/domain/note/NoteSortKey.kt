@@ -13,10 +13,10 @@ enum class NoteSortKey(
     /**
      * 노트 작성일로 정렬
      */
-    CREATED_AT("createdAt"),
+    CREATED_DATE("createdDate"),
 
     /**
      * 노트 수정일로 정렬
      */
-    UPDATED_AT("updatedAt")
+    MODIFIED_DATE("modifiedDate")
 }

@@ -3,7 +3,7 @@ package com.gabinote.coffeenote.policy.domain.policy
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
-@Document(collection = "policy")
+@Document(collection = "policies")
 data class Policy(
     @Id
     var id: Object? = null,
