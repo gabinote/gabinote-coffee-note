@@ -2,8 +2,10 @@ package com.gabinote.coffeenote.testSupport.testUtil.data
 
 
 import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.bson.types.ObjectId
 import org.springframework.boot.test.context.TestComponent
@@ -17,7 +19,13 @@ class TestDataHelper(
     private val mongoTemplate: MongoTemplate,
 
     ) {
-    private val objectMapper: ObjectMapper = ObjectMapper()
+
+    private val objectMapper: ObjectMapper = ObjectMapper().apply {
+        this.registerModule(com.fasterxml.jackson.datatype.jsr310.JavaTimeModule())
+        this.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+        this.enable(DeserializationFeature.USE_LONG_FOR_INTS)
+    }
+
     fun setData(jsonFile: String) {
         val input = ClassPathResource(jsonFile).inputStream
         val root = objectMapper.readTree(input)
