@@ -139,6 +139,8 @@ kotlin {
 
 tasks.test {
     useJUnitPlatform()
+    systemProperty("user.timezone", "Asia/Seoul")
+    jvmArgs("-Duser.timezone=Asia/Seoul")
     systemProperty("mockk.stacktraces.on", "true")
     systemProperty("mockk.stacktraces.alignment", "left")
     jvmArgs(
