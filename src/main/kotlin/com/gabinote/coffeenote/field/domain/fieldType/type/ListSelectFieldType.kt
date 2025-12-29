@@ -15,6 +15,11 @@ import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
 abstract class ListSelectFieldType : FieldType() {
 
     /**
+     * 인덱싱에서 제외할지 여부
+     */
+    override val isExcludeIndexing: Boolean = true
+
+    /**
      * 목록 선택 필드가 지원하는 속성 키 집합
      * - values: 선택 가능한 옵션 목록
      * - allowAddValue: 사용자 정의 값 추가 허용 여부

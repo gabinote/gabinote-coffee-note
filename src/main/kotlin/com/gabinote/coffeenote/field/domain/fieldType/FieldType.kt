@@ -11,6 +11,8 @@ abstract class FieldType {
      */
     abstract val canDisplay: Boolean
 
+    abstract val isExcludeIndexing: Boolean
+
     /**
      * FieldType이 가질 수 있는 Attribute 키들
      * 각 필드 타입별로 지원하는 속성 키 집합
@@ -46,7 +48,7 @@ abstract class FieldType {
 
     private fun validateAttributeNotDuplicated(
         attributes: Set<Attribute>,
-        errors: MutableList<FieldTypeValidationResult>
+        errors: MutableList<FieldTypeValidationResult>,
     ) {
         val attributeKeys = attributes.map { it.key }
         val duplicatedKeys = attributeKeys.groupingBy { it }.eachCount().filter { it.value > 1 }.keys

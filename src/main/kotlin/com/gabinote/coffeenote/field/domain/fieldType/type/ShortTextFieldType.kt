@@ -15,6 +15,7 @@ class ShortTextFieldType : TextFieldType() {
      * 짧은 텍스트 필드 타입의 고유 키
      */
     override val key: FieldTypeKey = FieldTypeKey.SHORT_TEXT
+    override val isExcludeIndexing: Boolean = false
 
     /**
      * 짧은 텍스트 필드가 리스트 보기에서 표시될 수 있는지 여부

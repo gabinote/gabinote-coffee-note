@@ -24,6 +24,7 @@ class DropDownFieldType : ListSelectFieldType() {
      * true: 표시 가능, false: 표시 불가
      */
     override val canDisplay: Boolean = true
+    override val isExcludeIndexing: Boolean = false
 
     /**
      * 드롭다운 필드 값의 유효성 검사를 수행

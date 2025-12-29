@@ -1,6 +1,11 @@
 package com.gabinote.coffeenote.note.service.noteIndex
 
 import com.gabinote.coffeenote.common.util.time.TimeProvider
+import com.gabinote.coffeenote.common.util.uuid.UuidSource
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeFactory
+import com.gabinote.coffeenote.note.domain.note.Note
+import com.gabinote.coffeenote.note.domain.note.NoteDisplayField
+import com.gabinote.coffeenote.note.domain.note.NoteField
 import com.gabinote.coffeenote.note.domain.noteIndex.IndexDisplayField
 import com.gabinote.coffeenote.note.domain.noteIndex.NoteIndex
 import com.gabinote.coffeenote.note.domain.noteIndex.NoteIndexRepository
@@ -11,8 +16,11 @@ import com.gabinote.coffeenote.note.dto.noteIndex.service.NoteIndexResServiceDto
 import com.gabinote.coffeenote.note.dto.noteIndexDisplayField.service.IndexDisplayFieldResServiceDto
 import com.gabinote.coffeenote.note.mapping.noteIndex.NoteIndexMapper
 import com.gabinote.coffeenote.testSupport.testTemplate.ServiceTestTemplate
+import com.gabinote.coffeenote.testSupport.testUtil.data.field.TestFieldType
+import com.gabinote.coffeenote.testSupport.testUtil.data.field.TestFieldTypeExcludeIndexing
 import com.gabinote.coffeenote.testSupport.testUtil.time.TestTimeProvider
 import com.gabinote.coffeenote.testSupport.testUtil.uuid.TestUuidSource
+import com.meilisearch.sdk.model.TaskInfo
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.mockk.clearAllMocks
@@ -20,6 +28,7 @@ import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.verify
+import org.bson.types.ObjectId
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.SliceImpl
 
@@ -37,6 +46,12 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
     @MockK
     lateinit var timeProvider: TimeProvider
 
+    @MockK
+    lateinit var fieldTypeFactory: FieldTypeFactory
+
+    @MockK
+    lateinit var uuidSource: UuidSource
+
     init {
         beforeTest {
             clearAllMocks()
@@ -44,10 +59,12 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                 noteIndexRepository = noteIndexRepository,
                 noteIndexMapper = noteIndexMapper,
                 timeProvider = timeProvider,
+                fieldTypeFactory = fieldTypeFactory,
+                uuidSource = uuidSource
             )
         }
 
-        describe("[NoteIndex] NoteIndexService Test") {
+        describe("[Note] NoteIndexService Test") {
 
             describe("NoteIndexService.searchByCondition") {
                 context("검색 조건이 주어졌을 때") {
@@ -384,7 +401,7 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         result.content[0].id shouldBe "index-1"
                         result.content[0].title shouldBe "Date Filtered Note"
 
-                        verify(exactly = 4) {
+                        verify(exactly = 1) {
                             timeProvider.zoneOffset()
                         }
 
@@ -520,7 +537,115 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                     }
                 }
             }
+
+            describe("NoteIndexService.createFromNote") {
+                context("올바른 노트가 주어졌을 때") {
+                    val zoneOffset = TestTimeProvider().zoneOffset()
+                    val displayField = NoteDisplayField(
+                        name = "displayField",
+                        icon = "icon",
+                        values = setOf("v1"),
+                        order = 0
+                    )
+
+                    val needIndexField = NoteField(
+                        id = "field-included",
+                        name = "Included Field",
+                        icon = "icon",
+                        type = TestFieldType.key.name,
+                        attributes = emptySet(),
+                        order = 0,
+                        isDisplay = true,
+                        values = setOf("v1")
+                    )
+
+                    val excludeIndexField = NoteField(
+                        id = "field-excluded",
+                        name = "Excluded Field",
+                        icon = "icon",
+                        type = TestFieldTypeExcludeIndexing.key.name,
+                        attributes = emptySet(),
+                        order = 1,
+                        isDisplay = true,
+                        values = setOf("v2")
+                    )
+                    val note = Note(
+                        id = ObjectId.get(),
+                        externalId = TestUuidSource.UUID_STRING.toString(),
+                        title = "Create Note",
+                        thumbnail = null,
+                        createdDate = TestTimeProvider.testDateTime,
+                        modifiedDate = TestTimeProvider.testDateTime,
+                        fields = listOf(
+                            needIndexField,
+                            excludeIndexField
+                        ),
+                        displayFields = listOf(displayField),
+                        isOpen = false,
+                        owner = "test-owner",
+                        hash = "hash"
+                    )
+
+                    // 1. convertToDisplayFields
+                    val convertedDisplayField = IndexDisplayField(
+                        name = displayField.name,
+                        tag = displayField.icon,
+                        value = displayField.values.toList(),
+                        order = displayField.order
+                    )
+
+                    //2. convertToFilters
+                    beforeTest {
+                        every { fieldTypeFactory.getFieldType(needIndexField.type) } returns TestFieldType
+
+                        every { fieldTypeFactory.getFieldType(excludeIndexField.type) } returns TestFieldTypeExcludeIndexing
+                    }
+
+                    val expectedFilters = mapOf(
+                        "Included Field" to listOf("v1")
+                    )
+
+                    //3. noteIndex 생성
+                    beforeTest {
+                        every { timeProvider.zoneOffset() } returns zoneOffset
+                        every { uuidSource.generateUuid() } returns TestUuidSource.UUID_STRING
+                    }
+
+                    val expectedNoteIndex = NoteIndex(
+                        id = TestUuidSource.UUID_STRING.toString(),
+                        externalId = note.externalId!!,
+                        title = note.title,
+                        owner = note.owner,
+                        createdDate = TestTimeProvider.testEpochSecond,
+                        modifiedDate = TestTimeProvider.testEpochSecond,
+                        displayFields = listOf(
+                            convertedDisplayField,
+                        ),
+                        filters = expectedFilters
+                    )
+
+                    //4. 저장
+                    beforeTest {
+                        every {
+                            noteIndexRepository.save(expectedNoteIndex)
+                        } returns mockk<TaskInfo>()
+                    }
+
+                    it("인덱스가 저장되고, 제외 타입은 필터에 포함되지 않아야 한다") {
+
+                        noteIndexService.createFromNote(note)
+                        verify(exactly = 1) {
+                            fieldTypeFactory.getFieldType(needIndexField.type)
+                            fieldTypeFactory.getFieldType(excludeIndexField.type)
+                            timeProvider.zoneOffset()
+                            uuidSource.generateUuid()
+                            noteIndexRepository.save(expectedNoteIndex)
+                        }
+
+                    }
+                }
+            }
+
         }
     }
 }
-

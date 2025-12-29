@@ -29,6 +29,11 @@ class ScoreFieldType : FieldType() {
     override val canDisplay: Boolean = true
 
     /**
+     * 인덱싱에서 제외할지 여부
+     */
+    override val isExcludeIndexing: Boolean = true
+
+    /**
      * 점수 필드가 지원하는 속성 키 집합
      * - maxScore: 최대 점수 값 (3-10 사이 정수)
      */

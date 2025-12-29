@@ -1,17 +1,28 @@
 package com.gabinote.coffeenote.note.service.noteFieldIndex
 
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.data.FacetWithCount
+import com.gabinote.coffeenote.note.domain.note.Note
+import com.gabinote.coffeenote.note.domain.note.NoteDisplayField
+import com.gabinote.coffeenote.note.domain.note.NoteField
+import com.gabinote.coffeenote.note.domain.noteFieldIndex.NoteFieldIndex
 import com.gabinote.coffeenote.note.domain.noteFieldIndex.NoteFieldIndexRepository
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.service.NoteFieldNameFacetWithCountResServiceDto
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.service.NoteFieldValueFacetWithCountResServiceDto
 import com.gabinote.coffeenote.note.mapping.noteFieldIndex.NoteFieldIndexMapper
 import com.gabinote.coffeenote.testSupport.testTemplate.ServiceTestTemplate
+import com.gabinote.coffeenote.testSupport.testUtil.data.field.TestFieldType
+import com.gabinote.coffeenote.testSupport.testUtil.data.field.TestFieldTypeExcludeIndexing
+import com.gabinote.coffeenote.testSupport.testUtil.time.TestTimeProvider
+import com.gabinote.coffeenote.testSupport.testUtil.uuid.TestUuidSource
+import com.meilisearch.sdk.model.TaskInfo
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
 import io.mockk.verify
+import org.bson.types.ObjectId
 
 
 class NoteFieldIndexServiceTest : ServiceTestTemplate() {
@@ -24,16 +35,24 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
     @MockK
     lateinit var noteFieldIndexMapper: NoteFieldIndexMapper
 
+    @MockK
+    lateinit var uuidSource: com.gabinote.coffeenote.common.util.uuid.UuidSource
+
+    @MockK
+    lateinit var fieldTypeFactory: com.gabinote.coffeenote.field.domain.fieldType.FieldTypeFactory
+
     init {
         beforeTest {
             clearAllMocks()
             noteFieldIndexService = NoteFieldIndexService(
                 noteFieldIndexRepository = noteFieldIndexRepository,
                 noteFieldIndexMapper = noteFieldIndexMapper,
+                uuidSource = uuidSource,
+                fieldTypeFactory = fieldTypeFactory,
             )
         }
 
-        describe("[NoteFieldIndex] NoteFieldIndexService Test") {
+        describe("[Note] NoteFieldIndexService Test") {
 
             describe("NoteFieldIndexService.searchNoteFieldNameFacets") {
                 context("소유자와 쿼리가 주어졌을 때") {
@@ -278,7 +297,109 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
                     }
                 }
             }
+
+            describe("NoteFieldIndexService.createFromNote") {
+                context("올바른 Note 객체가 주어졌을 때") {
+
+                    val displayField = NoteDisplayField(
+                        name = "displayField",
+                        icon = "icon",
+                        values = setOf("v1"),
+                        order = 0
+                    )
+
+                    val needIndexField = NoteField(
+                        id = "field-included",
+                        name = "Included Field",
+                        icon = "icon",
+                        type = TestFieldType.key.name,
+                        attributes = emptySet(),
+                        order = 0,
+                        isDisplay = true,
+                        values = setOf("v1", "v2")
+                    )
+
+                    val excludeIndexField = NoteField(
+                        id = "field-excluded",
+                        name = "Excluded Field",
+                        icon = "icon",
+                        type = TestFieldTypeExcludeIndexing.key.name,
+                        attributes = emptySet(),
+                        order = 1,
+                        isDisplay = true,
+                        values = setOf("v2")
+                    )
+                    val note = Note(
+                        id = ObjectId.get(),
+                        externalId = TestUuidSource.UUID_STRING.toString(),
+                        title = "Create Note",
+                        thumbnail = null,
+                        createdDate = TestTimeProvider.testDateTime,
+                        modifiedDate = TestTimeProvider.testDateTime,
+                        fields = listOf(
+                            needIndexField,
+                            excludeIndexField
+                        ),
+                        displayFields = listOf(displayField),
+                        isOpen = false,
+                        owner = "test-owner",
+                        hash = "hash"
+                    )
+                    // 1. convertToNoteFieldIndex
+                    // 2. convertToNoteFieldIndexPerField
+                    beforeTest {
+                        every { fieldTypeFactory.getFieldType(needIndexField.type) } returns TestFieldType
+
+                        every { fieldTypeFactory.getFieldType(excludeIndexField.type) } returns TestFieldTypeExcludeIndexing
+                    }
+
+                    // 3. convertToNoteFieldIndexPerValue
+                    beforeTest {
+                        every { uuidSource.generateUuid() } returns TestUuidSource.UUID_STRING
+                    }
+                    val values = needIndexField.values.toList()
+                    val noteFieldIndex = NoteFieldIndex(
+                        id = TestUuidSource.UUID_STRING.toString(), // '테스트에서만' 동일한 UUID 반환 그러나 실제 운영에서는 랜덤 uuid 사용함에 주의
+                        noteId = note.externalId.toString(),
+                        name = needIndexField.name,
+                        value = values[0],
+                        owner = note.owner,
+                    )
+
+                    val secNoteFieldIndex = NoteFieldIndex(
+                        id = TestUuidSource.UUID_STRING.toString(), // '테스트에서만' 동일한 UUID 반환 그러나 실제 운영에서는 랜덤 uuid 사용함에 주의
+                        noteId = note.externalId.toString(),
+                        name = needIndexField.name,
+                        value = values[1],
+                        owner = note.owner,
+                    )
+
+                    val expected = listOf(noteFieldIndex, secNoteFieldIndex)
+
+                    // 4. noteFieldIndexRepository.saveAll
+                    beforeTest {
+                        every {
+                            noteFieldIndexRepository.saveAll(expected)
+                        } returns mockk<TaskInfo>()
+                    }
+
+                    it("색인 제외 타입을 제외한 노트가 변환되어 저장된다") {
+                        noteFieldIndexService.createFromNote(note)
+                        verify(exactly = 1) {
+                            fieldTypeFactory.getFieldType(needIndexField.type)
+                        }
+                        verify(exactly = 1) {
+                            fieldTypeFactory.getFieldType(excludeIndexField.type)
+                        }
+                        verify(exactly = 2) {
+                            uuidSource.generateUuid()
+                        }
+                        verify(exactly = 1) {
+                            noteFieldIndexRepository.saveAll(expected)
+                        }
+                    }
+                }
+            }
         }
     }
 }
-

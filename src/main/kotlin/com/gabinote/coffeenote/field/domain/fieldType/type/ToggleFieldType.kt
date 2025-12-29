@@ -29,6 +29,11 @@ class ToggleFieldType : FieldType() {
     override val canDisplay: Boolean = true
 
     /**
+     * 인덱싱에서 제외할지 여부
+     */
+    override val isExcludeIndexing: Boolean = true
+
+    /**
      * 토글 필드가 지원하는 속성 키 집합
      */
     override val fieldTypeAttributeKeys: Set<FieldTypeAttributeKey> = setOf()

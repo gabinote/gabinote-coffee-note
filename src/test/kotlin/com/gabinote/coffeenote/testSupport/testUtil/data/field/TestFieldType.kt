@@ -8,8 +8,10 @@ import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeValidationResult
 
 object TestFieldType : FieldType() {
     const val INVALID_VALUE = "thisisinvalidvalue"
+
     override val key: FieldTypeKey = FieldTypeKey.DROP_DOWN
     override val canDisplay: Boolean = true
+    override val isExcludeIndexing: Boolean = false
 
     override val fieldTypeAttributeKeys: Set<FieldTypeAttributeKey> = setOf(
         FieldTypeAttributeKey(key = "isValid", validationFunc = { value ->
