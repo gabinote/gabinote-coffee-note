@@ -2,8 +2,8 @@ package com.gabinote.coffeenote.testSupport.testTemplate
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.gabinote.coffeenote.testSupport.testConfig.common.UseTestContainers
-import com.gabinote.coffeenote.testSupport.testUtil.data.TestDataHelper
-import com.gabinote.coffeenote.testSupport.testUtil.data.meilisearch.TestMeiliSearchHelper
+import com.gabinote.coffeenote.testSupport.testUtil.database.TestDataHelper
+import com.gabinote.coffeenote.testSupport.testUtil.meilisearch.TestMeiliSearchHelper
 import com.gabinote.coffeenote.testSupport.testUtil.time.TestTimeProvider
 import com.gabinote.coffeenote.testSupport.testUtil.uuid.TestUuidSource
 import io.kotest.core.spec.style.FeatureSpec

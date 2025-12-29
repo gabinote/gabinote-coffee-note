@@ -4,7 +4,7 @@ package com.gabinote.coffeenote.testSupport.testTemplate
 import com.gabinote.coffeenote.common.config.MongodbConfig
 import com.gabinote.coffeenote.common.util.auditor.extId.ExternalIdListener
 import com.gabinote.coffeenote.testSupport.testConfig.db.UseTestDatabase
-import com.gabinote.coffeenote.testSupport.testUtil.data.TestDataHelper
+import com.gabinote.coffeenote.testSupport.testUtil.database.TestDataHelper
 import com.gabinote.coffeenote.testSupport.testUtil.time.TestTimeConfig
 import com.gabinote.coffeenote.testSupport.testUtil.uuid.TestUuidSource
 import io.kotest.core.spec.style.DescribeSpec

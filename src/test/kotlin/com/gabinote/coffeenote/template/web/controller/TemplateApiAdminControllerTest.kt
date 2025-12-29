@@ -40,7 +40,7 @@ class TemplateApiAdminControllerTest : TemplateControllerTest() {
     private lateinit var objectMapper: ObjectMapper
 
 
-    private val apiPrefix = "/api/v1/admin"
+    private val apiPrefix = "/admin/api/v1"
 
 
     init {

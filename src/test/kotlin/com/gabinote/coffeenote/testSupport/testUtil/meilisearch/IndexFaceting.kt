@@ -1,4 +1,4 @@
-package com.gabinote.coffeenote.testSupport.testUtil.data.meilisearch
+package com.gabinote.coffeenote.testSupport.testUtil.meilisearch
 
 import com.gabinote.coffeenote.common.util.json.annotation.JsonNoArg
 import com.meilisearch.sdk.model.FacetSortValue

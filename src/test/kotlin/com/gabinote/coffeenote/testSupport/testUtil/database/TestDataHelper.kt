@@ -1,9 +1,10 @@
-package com.gabinote.coffeenote.testSupport.testUtil.data
+package com.gabinote.coffeenote.testSupport.testUtil.database
 
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.bson.types.ObjectId
 import org.springframework.boot.test.context.TestComponent
@@ -19,7 +20,7 @@ class TestDataHelper(
     ) {
 
     private val objectMapper: ObjectMapper = ObjectMapper().apply {
-        this.registerModule(com.fasterxml.jackson.datatype.jsr310.JavaTimeModule())
+        this.registerModule(JavaTimeModule())
     }
 
     fun setData(jsonFile: String) {

@@ -3,7 +3,7 @@ package com.gabinote.coffeenote.testSupport.testTemplate
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.gabinote.coffeenote.common.config.JacksonConfig
 import com.gabinote.coffeenote.testSupport.testConfig.meiliSearch.UseTestMeiliSearch
-import com.gabinote.coffeenote.testSupport.testUtil.data.meilisearch.TestMeiliSearchHelper
+import com.gabinote.coffeenote.testSupport.testUtil.meilisearch.TestMeiliSearchHelper
 import com.meilisearch.sdk.Client
 import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.junit5.MockKExtension

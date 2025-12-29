@@ -1,5 +1,6 @@
 package com.gabinote.coffeenote.testSupport.testConfig.meiliSearch
 
+import com.gabinote.coffeenote.testSupport.testConfig.container.ContainerNetworkHelper
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.context.ApplicationContextInitializer
@@ -13,10 +14,14 @@ class MeiliSearchContainerInitializer : ApplicationContextInitializer<Configurab
 
     companion object {
         @JvmStatic
-        val meiliSearch = GenericContainer("getmeili/meilisearch:v1.22.2")
-            .withExposedPorts(7700)
-            .withEnv("MEILI_MASTER_KEY", "masterKey")
-            .withReuse(true)
+        val meiliSearch = GenericContainer("getmeili/meilisearch:v1.22.2").apply {
+            withNetwork(ContainerNetworkHelper.testNetwork)
+            withNetworkAliases("meilisearch")
+            withExposedPorts(7700)
+            withLabel("test-container", "meilisearch")
+            withEnv("MEILI_MASTER_KEY", "masterKey")
+            withReuse(true)
+        }
     }
 
     override fun initialize(context: ConfigurableApplicationContext) {

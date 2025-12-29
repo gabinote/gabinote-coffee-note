@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @Validated
-@RequestMapping("/api/v1/admin")
+@RequestMapping("/admin/api/v1")
 @RestController
 class TemplateAdminApiController(
     private val templateService: TemplateService,
@@ -27,7 +27,7 @@ class TemplateAdminApiController(
     fun createDefaultTemplate(
         @RequestBody
         @Valid
-        dto: TemplateCreateDefaultReqControllerDto
+        dto: TemplateCreateDefaultReqControllerDto,
     ): ResponseEntity<TemplateResControllerDto> {
         val reqDto = templateMapper.toCreateDefaultReqServiceDto(dto = dto)
         val data = templateService.createDefault(dto = reqDto)
@@ -42,7 +42,7 @@ class TemplateAdminApiController(
         externalId: UUID,
         @RequestBody
         @Valid
-        dto: TemplateUpdateDefaultReqControllerDto
+        dto: TemplateUpdateDefaultReqControllerDto,
     ): ResponseEntity<TemplateResControllerDto> {
         val reqDto = templateMapper.toUpdateDefaultReqServiceDto(dto = dto, externalId = externalId)
         val data = templateService.updateDefault(dto = reqDto)
@@ -54,7 +54,7 @@ class TemplateAdminApiController(
     @DeleteMapping("/template/default/{externalId}")
     fun deleteDefaultTemplate(
         @PathVariable
-        externalId: UUID
+        externalId: UUID,
     ): ResponseEntity<Void> {
         templateService.deleteDefault(externalId = externalId)
         return ResponseEntityHelper.noContent()
