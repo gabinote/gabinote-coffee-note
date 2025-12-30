@@ -8,6 +8,7 @@
       "owner": "user_alpha",
       "createdDate": 1731821801000,
       "modifiedDate": 1731821801000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "에티오피아"
@@ -56,6 +57,7 @@
       "owner": "user_alpha",
       "createdDate": 1731821802000,
       "modifiedDate": 1731821802000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "케냐"
@@ -107,6 +109,7 @@
       "owner": "user_alpha",
       "createdDate": 1731821803000,
       "modifiedDate": 1731821803000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "로스터리": [
           "스타벅스 리저브"
@@ -156,6 +159,7 @@
       "owner": "user_alpha",
       "createdDate": 1731821804000,
       "modifiedDate": 1731821804000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "콜롬비아"
@@ -208,6 +212,7 @@
       "owner": "user_alpha",
       "createdDate": 1731821805000,
       "modifiedDate": 1731821805000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "마신_날씨": [
           "비오는_날"
@@ -257,6 +262,7 @@
       "owner": "user_alpha",
       "createdDate": 1731821806000,
       "modifiedDate": 1731821806000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "콜롬비아"
@@ -306,6 +312,7 @@
       "owner": "user_alpha",
       "createdDate": 1731821807000,
       "modifiedDate": 1731821807000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "브라질"
@@ -354,6 +361,7 @@
       "owner": "user_alpha",
       "createdDate": 1731821808000,
       "modifiedDate": 1731821808000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "태그": [
           "디카페인"
@@ -402,6 +410,7 @@
       "owner": "user_alpha",
       "createdDate": 1731821809000,
       "modifiedDate": 1731821809000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "과테말라"
@@ -451,6 +460,7 @@
       "owner": "user_alpha",
       "createdDate": 1731821810000,
       "modifiedDate": 1731821810000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "파나마"
@@ -504,6 +514,7 @@
       "owner": "user_beta",
       "createdDate": 1731821811000,
       "modifiedDate": 1731821811000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "로스터리": [
           "프릳츠"
@@ -553,6 +564,7 @@
       "owner": "user_beta",
       "createdDate": 1731821812000,
       "modifiedDate": 1731821812000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "인도네시아"
@@ -602,6 +614,7 @@
       "owner": "user_beta",
       "createdDate": 1731821813000,
       "modifiedDate": 1731821813000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "추출_방식": [
           "에어로프레스"
@@ -653,6 +666,7 @@
       "owner": "user_beta",
       "createdDate": 1731821814000,
       "modifiedDate": 1731821814000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "코스타리카"
@@ -703,6 +717,7 @@
       "owner": "user_beta",
       "createdDate": 1731821815000,
       "modifiedDate": 1731821815000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "그라인더": [
           "바라짜"
@@ -751,6 +766,7 @@
       "owner": "user_beta",
       "createdDate": 1731821816000,
       "modifiedDate": 1731821816000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "카페_이름": [
           "블루보틀"
@@ -800,6 +816,7 @@
       "owner": "user_beta",
       "createdDate": 1731821817000,
       "modifiedDate": 1731821817000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "마신_날씨": [
           "흐림"
@@ -848,6 +865,7 @@
       "owner": "user_beta",
       "createdDate": 1731821818000,
       "modifiedDate": 1731821818000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "에티오피아"
@@ -897,6 +915,7 @@
       "owner": "user_beta",
       "createdDate": 1731821819000,
       "modifiedDate": 1731821819000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "콜롬비아"
@@ -945,6 +964,7 @@
       "owner": "user_beta",
       "createdDate": 1731821820000,
       "modifiedDate": 1731821820000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "태그": [
           "실패",
@@ -995,6 +1015,7 @@
       "owner": "user_gamma",
       "createdDate": 1731821821000,
       "modifiedDate": 1731821821000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "파나마"
@@ -1048,6 +1069,7 @@
       "owner": "user_gamma",
       "createdDate": 1731821822000,
       "modifiedDate": 1731821822000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "그라인더": [
           "펠로우"
@@ -1100,6 +1122,7 @@
       "owner": "user_gamma",
       "createdDate": 1731821823000,
       "modifiedDate": 1731821823000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "추출_방식": [
           "콜드브루"
@@ -1153,6 +1176,7 @@
       "owner": "user_gamma",
       "createdDate": 1731821824000,
       "modifiedDate": 1731821824000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "케냐"
@@ -1204,6 +1228,7 @@
       "owner": "user_gamma",
       "createdDate": 1731821825000,
       "modifiedDate": 1731821825000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "콜롬비아"
@@ -1257,6 +1282,7 @@
       "owner": "user_gamma",
       "createdDate": 1731821826000,
       "modifiedDate": 1731821826000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "브라질",
@@ -1310,6 +1336,7 @@
       "owner": "user_gamma",
       "createdDate": 1731821827000,
       "modifiedDate": 1731821827000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "카페_이름": [
           "% 아라비카"
@@ -1359,6 +1386,7 @@
       "owner": "user_gamma",
       "createdDate": 1731821828000,
       "modifiedDate": 1731821828000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "코스타리카"
@@ -1411,6 +1439,7 @@
       "owner": "user_gamma",
       "createdDate": 1731821829000,
       "modifiedDate": 1731821829000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "에티오피아"
@@ -1464,6 +1493,7 @@
       "owner": "user_gamma",
       "createdDate": 1731821830000,
       "modifiedDate": 1731821830000,
+      "synchronizedAt": 1731821810000,
       "filters": {
         "품종": [
           "블렌드"

@@ -1,5 +1,6 @@
 package com.gabinote.coffeenote.note.service.noteFieldIndex
 
+import com.gabinote.coffeenote.common.util.time.TimeProvider
 import com.gabinote.coffeenote.common.util.uuid.UuidSource
 import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeFactory
 import com.gabinote.coffeenote.note.domain.note.Note
@@ -17,6 +18,7 @@ class NoteFieldIndexService(
     private val noteFieldIndexMapper: NoteFieldIndexMapper,
     private val uuidSource: UuidSource,
     private val fieldTypeFactory: FieldTypeFactory,
+    private val timeProvider: TimeProvider,
 ) {
     fun searchNoteFieldNameFacets(
         owner: String,
@@ -95,12 +97,14 @@ class NoteFieldIndexService(
         value: String,
         owner: String,
     ): NoteFieldIndex {
+        val offset = timeProvider.zoneOffset()
         val noteFieldIndex = NoteFieldIndex(
             id = uuidSource.generateUuid().toString(),
             noteId = noteExtId,
             name = noteField.name,
             value = value,
             owner = owner,
+            synchronizedAt = timeProvider.now().toEpochSecond(offset),
         )
         return noteFieldIndex
     }

@@ -22,6 +22,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Slice
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 val logger = KotlinLogging.logger {}
@@ -94,6 +95,7 @@ class NoteService(
         }
     }
 
+    @Transactional
     fun create(dto: NoteCreateReqServiceDto): NoteResServiceDto {
         checkMaxNoteCount(dto.owner)
         val note = createNote(dto)

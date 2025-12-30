@@ -41,6 +41,9 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
     @MockK
     lateinit var fieldTypeFactory: com.gabinote.coffeenote.field.domain.fieldType.FieldTypeFactory
 
+    @MockK
+    lateinit var timeProvider: TestTimeProvider
+
     init {
         beforeTest {
             clearAllMocks()
@@ -49,6 +52,7 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
                 noteFieldIndexMapper = noteFieldIndexMapper,
                 uuidSource = uuidSource,
                 fieldTypeFactory = fieldTypeFactory,
+                timeProvider = timeProvider
             )
         }
 
@@ -356,6 +360,9 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
                     // 3. convertToNoteFieldIndexPerValue
                     beforeTest {
                         every { uuidSource.generateUuid() } returns TestUuidSource.UUID_STRING
+                        every { timeProvider.zoneOffset() } returns TestTimeProvider.testZoneOffset
+                        every { timeProvider.now() } returns TestTimeProvider.testDateTime
+
                     }
                     val values = needIndexField.values.toList()
                     val noteFieldIndex = NoteFieldIndex(
@@ -364,6 +371,7 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
                         name = needIndexField.name,
                         value = values[0],
                         owner = note.owner,
+                        synchronizedAt = TestTimeProvider.testEpochSecond
                     )
 
                     val secNoteFieldIndex = NoteFieldIndex(
@@ -372,6 +380,7 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
                         name = needIndexField.name,
                         value = values[1],
                         owner = note.owner,
+                        synchronizedAt = TestTimeProvider.testEpochSecond
                     )
 
                     val expected = listOf(noteFieldIndex, secNoteFieldIndex)
@@ -393,6 +402,7 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
                         }
                         verify(exactly = 2) {
                             uuidSource.generateUuid()
+                            timeProvider.now()
                         }
                         verify(exactly = 1) {
                             noteFieldIndexRepository.saveAll(expected)

@@ -6,4 +6,5 @@ data class NoteFieldIndex(
     val name: String,
     val value: String,
     val noteId: String,
+    val synchronizedAt: Long,
 )

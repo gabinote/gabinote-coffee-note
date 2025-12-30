@@ -1,7 +1,6 @@
 package com.gabinote.coffeenote.note.service.noteIndex
 
 import com.gabinote.coffeenote.common.util.time.TimeProvider
-import com.gabinote.coffeenote.common.util.uuid.UuidSource
 import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeFactory
 import com.gabinote.coffeenote.note.domain.note.Note
 import com.gabinote.coffeenote.note.domain.note.NoteDisplayField
@@ -49,8 +48,6 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
     @MockK
     lateinit var fieldTypeFactory: FieldTypeFactory
 
-    @MockK
-    lateinit var uuidSource: UuidSource
 
     init {
         beforeTest {
@@ -59,8 +56,7 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                 noteIndexRepository = noteIndexRepository,
                 noteIndexMapper = noteIndexMapper,
                 timeProvider = timeProvider,
-                fieldTypeFactory = fieldTypeFactory,
-                uuidSource = uuidSource
+                fieldTypeFactory = fieldTypeFactory
             )
         }
 
@@ -95,7 +91,8 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                                 order = 0
                             )
                         ),
-                        filters = mapOf("status" to listOf("active"))
+                        filters = mapOf("status" to listOf("active")),
+                        synchronizedAt = TestTimeProvider.testEpochSecond
                     )
 
                     val noteIndex2 = NoteIndex(
@@ -106,7 +103,8 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         createdDate = TestTimeProvider.testEpochSecond,
                         modifiedDate = TestTimeProvider.testEpochSecond,
                         displayFields = emptyList(),
-                        filters = emptyMap()
+                        filters = emptyMap(),
+                        synchronizedAt = TestTimeProvider.testEpochSecond
                     )
 
                     val noteIndexSlice = SliceImpl(
@@ -264,7 +262,8 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         createdDate = TestTimeProvider.testEpochSecond,
                         modifiedDate = TestTimeProvider.testEpochSecond,
                         displayFields = emptyList(),
-                        filters = mapOf("status" to listOf("active"))
+                        filters = mapOf("status" to listOf("active")),
+                        synchronizedAt = TestTimeProvider.testEpochSecond
                     )
 
                     val noteIndexSlice = SliceImpl(listOf(noteIndex), pageable, false)
@@ -351,7 +350,8 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         createdDate = TestTimeProvider.testEpochSecond,
                         modifiedDate = TestTimeProvider.testEpochSecond,
                         displayFields = emptyList(),
-                        filters = mapOf("status" to listOf("active"))
+                        filters = mapOf("status" to listOf("active")),
+                        synchronizedAt = TestTimeProvider.testEpochSecond
                     )
 
                     val noteIndexSlice = SliceImpl(listOf(noteIndex), pageable, false)
@@ -449,7 +449,8 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         createdDate = TestTimeProvider.testEpochSecond,
                         modifiedDate = TestTimeProvider.testEpochSecond,
                         displayFields = emptyList(),
-                        filters = emptyMap()
+                        filters = emptyMap(),
+                        synchronizedAt = TestTimeProvider.testEpochSecond
                     )
 
                     val noteIndex2 = NoteIndex(
@@ -460,7 +461,8 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         createdDate = TestTimeProvider.testEpochSecond,
                         modifiedDate = TestTimeProvider.testEpochSecond,
                         displayFields = emptyList(),
-                        filters = emptyMap()
+                        filters = emptyMap(),
+                        synchronizedAt = TestTimeProvider.testEpochSecond
                     )
 
                     val noteIndexSlice = SliceImpl(
@@ -540,7 +542,7 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
 
             describe("NoteIndexService.createFromNote") {
                 context("올바른 노트가 주어졌을 때") {
-                    val zoneOffset = TestTimeProvider().zoneOffset()
+                    val zoneOffset = TestTimeProvider.testZoneOffset
                     val displayField = NoteDisplayField(
                         name = "displayField",
                         icon = "icon",
@@ -608,11 +610,11 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                     //3. noteIndex 생성
                     beforeTest {
                         every { timeProvider.zoneOffset() } returns zoneOffset
-                        every { uuidSource.generateUuid() } returns TestUuidSource.UUID_STRING
+                        every { timeProvider.now() } returns TestTimeProvider.testDateTime
                     }
 
                     val expectedNoteIndex = NoteIndex(
-                        id = TestUuidSource.UUID_STRING.toString(),
+                        id = note.id.toString(),
                         externalId = note.externalId!!,
                         title = note.title,
                         owner = note.owner,
@@ -621,7 +623,8 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         displayFields = listOf(
                             convertedDisplayField,
                         ),
-                        filters = expectedFilters
+                        filters = expectedFilters,
+                        synchronizedAt = TestTimeProvider.testEpochSecond
                     )
 
                     //4. 저장
@@ -638,7 +641,7 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                             fieldTypeFactory.getFieldType(needIndexField.type)
                             fieldTypeFactory.getFieldType(excludeIndexField.type)
                             timeProvider.zoneOffset()
-                            uuidSource.generateUuid()
+                            timeProvider.now()
                             noteIndexRepository.save(expectedNoteIndex)
                         }
 

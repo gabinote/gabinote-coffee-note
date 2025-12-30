@@ -58,8 +58,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     IndexDisplayField(name = "등급", tag = "GRADE_TAG", value = listOf("G1"), order = 2)
                                 ),
                                 filters = mapOf(),
-
-                                ),
+                                synchronizedAt = 1731821810000
+                            ),
                             NoteIndex(
                                 id = "65571b111a00000000000002",
                                 externalId = "a1a1a1a1-0002-4002-8002-000000000002",
@@ -87,7 +87,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000003",
@@ -116,7 +117,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000004",
@@ -145,7 +147,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000005",
@@ -174,7 +177,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000006",
@@ -203,7 +207,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000007",
@@ -227,7 +232,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     ),
                                     IndexDisplayField(name = "바디감", tag = "BODY_TAG", value = listOf("무거움"), order = 2)
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000008",
@@ -256,7 +262,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000009",
@@ -285,7 +292,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000010",
@@ -309,7 +317,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     ),
                                     IndexDisplayField(name = "평점", tag = "RATING_TAG", value = listOf("5점"), order = 2)
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -386,7 +395,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -441,7 +451,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                 ),
                                 filters = mapOf(
                                     "향미" to listOf("<em>자몽</em>", "과일향", "산미"),
-                                )
+                                ),
+                                synchronizedAt = 1731821810000
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -496,7 +507,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                 ),
                                 filters = mapOf(
                                     "로스터리" to listOf("스타벅스 <em>리저브</em>"),
-                                )
+                                ),
+                                synchronizedAt = 1731821810000
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -559,7 +571,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                 ),
                                 filters = mapOf(
                                     "로스터리" to listOf("<em>스타벅스 리저브</em>"),
-                                )
+                                ),
+                                synchronizedAt = 1731821810000
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -619,7 +632,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                 ),
                                 filters = mapOf(
                                     "향미" to listOf("<em>와인</em>", "열대과일"),
-                                )
+                                ),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000007",
@@ -645,7 +659,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                 ),
                                 filters = mapOf(
                                     "향미" to listOf("<em>견과류</em>"),
-                                )
+                                ),
+                                synchronizedAt = 1731821810000
                             )
                         )
 
@@ -710,7 +725,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                 filters = mapOf(
                                     "로스터리" to listOf("<em>스타벅스 리저브</em>"),
                                     "향미" to listOf("<em>초콜릿</em>", "스모키"),
-                                )
+                                ),
+                                synchronizedAt = 1731821810000
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -772,7 +788,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                 filters = mapOf(
                                     "로스터리" to listOf("<em>스타벅스 리저브</em>"),
                                     "향미" to listOf("<em>초콜릿</em>", "스모키"),
-                                )
+                                ),
+                                synchronizedAt = 1731821810000
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -834,7 +851,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000006",
@@ -863,7 +881,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000007",
@@ -887,7 +906,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     ),
                                     IndexDisplayField(name = "바디감", tag = "BODY_TAG", value = listOf("무거움"), order = 2)
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000008",
@@ -916,7 +936,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000009",
@@ -945,7 +966,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000010",
@@ -969,7 +991,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     ),
                                     IndexDisplayField(name = "평점", tag = "RATING_TAG", value = listOf("5점"), order = 2)
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -1024,7 +1047,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     ),
                                     IndexDisplayField(name = "등급", tag = "GRADE_TAG", value = listOf("G1"), order = 2)
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000002",
@@ -1053,7 +1077,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000003",
@@ -1082,7 +1107,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000004",
@@ -1111,7 +1137,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000005",
@@ -1140,7 +1167,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -1200,7 +1228,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000007",
@@ -1224,7 +1253,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     ),
                                     IndexDisplayField(name = "바디감", tag = "BODY_TAG", value = listOf("무거움"), order = 2)
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000008",
@@ -1253,7 +1283,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000009",
@@ -1282,7 +1313,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000010",
@@ -1306,7 +1338,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     ),
                                     IndexDisplayField(name = "평점", tag = "RATING_TAG", value = listOf("5점"), order = 2)
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -1361,7 +1394,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     ),
                                     IndexDisplayField(name = "등급", tag = "GRADE_TAG", value = listOf("G1"), order = 2)
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000002",
@@ -1390,7 +1424,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000003",
@@ -1419,7 +1454,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000004",
@@ -1448,7 +1484,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -1508,7 +1545,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000004",
@@ -1537,7 +1575,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000005",
@@ -1566,7 +1605,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000006",
@@ -1595,7 +1635,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000007",
@@ -1619,7 +1660,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     ),
                                     IndexDisplayField(name = "바디감", tag = "BODY_TAG", value = listOf("무거움"), order = 2)
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -1679,7 +1721,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000003",
@@ -1708,7 +1751,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000004",
@@ -1737,7 +1781,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000005",
@@ -1766,7 +1811,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             ),
                             NoteIndex(
                                 id = "65571b111a00000000000006",
@@ -1795,7 +1841,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                         order = 2
                                     )
                                 ),
-                                filters = mapOf()
+                                filters = mapOf(),
+                                synchronizedAt = 1731821810000
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -1851,7 +1898,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                             "가공_방식" to listOf("워시드2"),
                             "추출_방식" to listOf("푸어오버2"),
                             "등급" to listOf("G12")
-                        )
+                        ),
+                        synchronizedAt = 1731821810000
                     )
 
                     it("NoteIndex를 저장하고, 저장된 NoteIndex를 검색할 수 있어야 한다") {
@@ -1896,7 +1944,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                             "가공_방식" to listOf("워시드2"),
                             "추출_방식" to listOf("푸어오버2"),
                             "등급" to listOf("G12")
-                        )
+                        ),
+                        synchronizedAt = 1731821810000
                     )
 
                     val noteIndex2 = NoteIndex(
@@ -1926,7 +1975,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                             "가공_방식" to listOf("워시드3"),
                             "추출_방식" to listOf("푸어오버3"),
                             "등급" to listOf("G13")
-                        )
+                        ),
+                        synchronizedAt = 1731821810000
                     )
 
                     val list = listOf(noteIndex, noteIndex2)

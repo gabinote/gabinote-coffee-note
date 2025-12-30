@@ -11,6 +11,7 @@ class TestTimeProvider : TimeProvider {
         val testDateTime = LocalDateTime.of(2002, 8, 28, 0, 0)
         val testDate = testDateTime.toLocalDate()
         val testEpochSecond = testDateTime.toEpochSecond(ZoneOffset.ofHours(9))
+        val testZoneOffset = ZoneOffset.ofHours(9)
     }
 
     override fun now(): LocalDateTime {

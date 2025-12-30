@@ -52,7 +52,8 @@ class NoteIndexMapperTest : MockkTestTemplate() {
                             displayField
                         ),
                         filters = filters,
-                        owner = "test-owner"
+                        owner = "test-owner",
+                        synchronizedAt = TestTimeProvider.testEpochSecond
                     )
                     val displayFieldResDto = mockk<IndexDisplayFieldResServiceDto>()
                     beforeTest {

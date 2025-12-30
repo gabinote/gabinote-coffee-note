@@ -12,6 +12,7 @@ data class NoteIndex(
     val modifiedDate: Long,
     val displayFields: List<IndexDisplayField> = emptyList(),
     var filters: Map<String, List<String>>,
+    val synchronizedAt: Long,
 ) {
     fun changeFilters(newFilters: Map<String, List<String>>) {
         this.filters = newFilters
