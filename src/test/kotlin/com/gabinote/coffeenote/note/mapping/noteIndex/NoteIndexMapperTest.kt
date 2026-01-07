@@ -43,8 +43,7 @@ class NoteIndexMapperTest : MockkTestTemplate() {
                     val displayField = mockk<IndexDisplayField>()
                     val filters = mockk<Map<String, List<String>>>()
                     val noteIndex = NoteIndex(
-                        id = "some-id",
-                        externalId = TestUuidSource.UUID_STRING.toString(),
+                        id = TestUuidSource.UUID_STRING.toString(),
                         title = "Test Note Index",
                         createdDate = TestTimeProvider.testEpochSecond,
                         modifiedDate = TestTimeProvider.testEpochSecond,
@@ -53,7 +52,8 @@ class NoteIndexMapperTest : MockkTestTemplate() {
                         ),
                         filters = filters,
                         owner = "test-owner",
-                        synchronizedAt = TestTimeProvider.testEpochSecond
+                        synchronizedAt = TestTimeProvider.testEpochSecond,
+                        noteHash = "test-hash"
                     )
                     val displayFieldResDto = mockk<IndexDisplayFieldResServiceDto>()
                     beforeTest {
@@ -68,7 +68,6 @@ class NoteIndexMapperTest : MockkTestTemplate() {
 
                     val expected = NoteIndexResServiceDto(
                         id = noteIndex.id,
-                        externalId = noteIndex.externalId,
                         title = noteIndex.title,
                         owner = noteIndex.owner,
                         createdDate = TestTimeProvider.testDateTime,
@@ -97,8 +96,7 @@ class NoteIndexMapperTest : MockkTestTemplate() {
                 context("NoteIndexResServiceDto가 주어지면 ") {
                     val displayFieldResDto = mockk<IndexDisplayFieldResServiceDto>()
                     val noteIndexResServiceDto = NoteIndexResServiceDto(
-                        id = "some-id",
-                        externalId = TestUuidSource.UUID_STRING.toString(),
+                        id = TestUuidSource.UUID_STRING.toString(),
                         title = "Test Note Index",
                         createdDate = TestTimeProvider.testDateTime,
                         modifiedDate = TestTimeProvider.testDateTime,
@@ -118,7 +116,7 @@ class NoteIndexMapperTest : MockkTestTemplate() {
                     }
 
                     val expected = NoteIndexResControllerDto(
-                        externalId = noteIndexResServiceDto.externalId,
+                        id = noteIndexResServiceDto.id,
                         title = noteIndexResServiceDto.title,
                         owner = noteIndexResServiceDto.owner,
                         createdDate = noteIndexResServiceDto.createdDate,

@@ -4,15 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class NoteIndex(
+    // Note의 external ID
     val id: String,
-    val externalId: String,
     var title: String,
     val owner: String,
     val createdDate: Long,
     val modifiedDate: Long,
     val displayFields: List<IndexDisplayField> = emptyList(),
     var filters: Map<String, List<String>>,
-    val synchronizedAt: Long,
+    var synchronizedAt: Long,
+    var noteHash: String,
 ) {
     fun changeFilters(newFilters: Map<String, List<String>>) {
         this.filters = newFilters
@@ -21,4 +22,5 @@ data class NoteIndex(
     fun changeTitle(newTitle: String) {
         this.title = newTitle
     }
+
 }

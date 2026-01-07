@@ -1,0 +1,89 @@
+{
+  "notes": [
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0001"
+      },
+      "externalId": "a1b2c3d4-e5f6-4789-0123-4567890abcde",
+      "title": "카페인 분석 노트: 에티오피아 예가체프",
+      "thumbnail": "https://images.example.com/thumbnails/coffee_yirgacheffe.jpg",
+      "createdDate": {
+        "$date": "2024-07-29T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T10:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_001",
+          "name": "원산지",
+          "icon": "globe",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "에티오피아"
+          ]
+        },
+        {
+          "_id": "field_002",
+          "name": "로스팅 정도",
+          "icon": "fire",
+          "type": "LONG_TEXT",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "라이트"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "원산지",
+          "icon": "globe",
+          "values": [
+            "에티오피아"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_alpha_1234",
+      "hash": "190ec684c1d1b32ea48603ca54f32dd1"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0002"
+      },
+      "externalId": "b2c3d4e5-f6a7-4890-1234-567890abcdef",
+      "title": "다른 노트",
+      "thumbnail": "https://images.example.com/thumbnails/other.jpg",
+      "createdDate": {
+        "$date": "2024-07-29T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T10:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_003",
+          "name": "카테고리",
+          "icon": "tag",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "테스트"
+          ]
+        }
+      ],
+      "displayFields": [],
+      "isOpen": true,
+      "owner": "user_alpha_1234",
+      "hash": "290ec684c1d1b32ea48603ca54f32dd2"
+    }
+  ]
+}

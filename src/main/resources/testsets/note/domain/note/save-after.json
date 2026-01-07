@@ -5,8 +5,12 @@
       "externalId": "a1b2c3d4-e5f6-4789-0123-4567890abcde",
       "title": "카페인 분석 노트: 에티오피아 예가체프",
       "thumbnail": "https://images.example.com/thumbnails/coffee_yirgacheffe.jpg",
-      "createdDate": "2024-07-29T10:00:00.123",
-      "modifiedDate": "2024-07-29T10:00:00.123",
+      "createdDate": {
+        "$date": "2024-07-29T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T10:00:00Z"
+      },
       "fields": [
         {
           "_id": "field_001",
@@ -61,8 +65,12 @@
       "externalId": "00000000-0000-0000-0000-000000000000",
       "title": "콜드브루 시음 기록",
       "thumbnail": "https://images.example.com/thumbnails/cold_brew_sample.png",
-      "createdDate": 1030460400000,
-      "modifiedDate": 1030460400000,
+      "createdDate": {
+        "$date": "2002-08-27T15:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2002-08-27T15:00:00Z"
+      },
       "fields": [
         {
           "_id": "field_005",

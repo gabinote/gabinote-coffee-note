@@ -2,13 +2,13 @@
   "uid": "noteIndex",
   "data": [
     {
-      "id": "65571b111a00000000000002",
-      "externalId": "a1a1a1a1-0002-4002-8002-000000000002",
+      "id": "a1a1a1a1-0002-4002-8002-000000000002",
       "title": "케냐 AA 아이스 드립",
       "owner": "user_alpha",
       "createdDate": 1731821802000,
       "modifiedDate": 1731821802000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash002",
       "filters": {
         "품종": [
           "케냐"

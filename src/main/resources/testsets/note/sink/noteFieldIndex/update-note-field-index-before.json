@@ -1,0 +1,24 @@
+{
+  "uid": "noteFieldIndex",
+  "data": [
+    {
+      "id": "field-index-old-001",
+      "owner": "user_alpha_1234",
+      "name": "원산지",
+      "value": "에티오피아",
+      "noteId": "b2c3d4e5-f6a7-4890-1234-567890abcdef",
+      "synchronizedAt": 1722273600123,
+      "noteHash": "290ec684c1d1b32ea48603ca54f32dd2"
+    },
+    {
+      "id": "field-index-old-002",
+      "owner": "user_alpha_1234",
+      "name": "로스팅 정도",
+      "value": "라이트",
+      "noteId": "b2c3d4e5-f6a7-4890-1234-567890abcdef",
+      "synchronizedAt": 1722273600123,
+      "noteHash": "290ec684c1d1b32ea48603ca54f32dd2"
+    }
+  ]
+}
+

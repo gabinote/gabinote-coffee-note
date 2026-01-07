@@ -11,6 +11,8 @@ import com.gabinote.coffeenote.note.dto.noteFieldIndex.service.NoteFieldNameFace
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.service.NoteFieldValueFacetWithCountResServiceDto
 import com.gabinote.coffeenote.note.mapping.noteFieldIndex.NoteFieldIndexMapper
 import org.springframework.stereotype.Service
+import java.util.*
+
 
 @Service
 class NoteFieldIndexService(
@@ -53,14 +55,24 @@ class NoteFieldIndexService(
         noteFieldIndexRepository.saveAll(noteIndex)
     }
 
+
+    fun deleteByNoteExtId(noteId: UUID) {
+        noteFieldIndexRepository.deleteAllByNoteId(noteId.toString())
+    }
+
+    fun deleteAllByOwner(owner: String) {
+        noteFieldIndexRepository.deleteAllByOwner(owner)
+    }
+
     private fun convertToNoteFieldIndex(note: Note): List<NoteFieldIndex> {
         val fields = note.fields
         val indexes = mutableListOf<NoteFieldIndex>()
         fields.forEach {
             val fieldIndexes = convertToNoteFieldIndexPerField(
                 noteField = it,
-                noteExtId = note.externalId.toString(),
+                noteExtId = note.externalId!!,
                 owner = note.owner,
+                noteHash = note.hash!!,
             )
             indexes.addAll(fieldIndexes)
         }
@@ -71,8 +83,10 @@ class NoteFieldIndexService(
     private fun convertToNoteFieldIndexPerField(
         noteField: NoteField,
         noteExtId: String,
+        noteHash: String,
         owner: String,
-    ): List<NoteFieldIndex> {
+
+        ): List<NoteFieldIndex> {
         if (isExcludeIndexingFieldType(noteField.type)) {
             return emptyList()
         }
@@ -84,7 +98,9 @@ class NoteFieldIndexService(
                 noteExtId = noteExtId,
                 owner = owner,
                 value = it,
-            )
+                noteHash = noteHash,
+
+                )
             res.add(noteFieldIndex)
         }
 
@@ -94,6 +110,7 @@ class NoteFieldIndexService(
     private fun convertToNoteFieldIndexPerValue(
         noteExtId: String,
         noteField: NoteField,
+        noteHash: String,
         value: String,
         owner: String,
     ): NoteFieldIndex {
@@ -105,12 +122,14 @@ class NoteFieldIndexService(
             value = value,
             owner = owner,
             synchronizedAt = timeProvider.now().toEpochSecond(offset),
+            noteHash = noteHash
         )
         return noteFieldIndex
     }
 
     private fun isExcludeIndexingFieldType(fieldTypeKey: String): Boolean {
-        val fieldType = fieldTypeFactory.getFieldType(fieldTypeKey)!!
+        val fieldType = fieldTypeFactory.getFieldType(fieldTypeKey)
+            ?: throw IllegalArgumentException("Invalid field type key: $fieldTypeKey")
         return fieldType.isExcludeIndexing
     }
 }

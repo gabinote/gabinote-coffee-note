@@ -5,8 +5,12 @@
       "externalId": "e5f6a7b8-c9d0-4123-8678-901234ef0123",
       "title": "Updated Note Title",
       "thumbnail": "https://example.com/updated.jpg",
-      "createdDate": 1704848400123,
-      "modifiedDate": 1030460400000,
+      "createdDate": {
+        "$date": "2024-01-10T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2002-08-27T15:00:00Z"
+      },
       "fields": [
         {
           "_id": "00000000-0000-0000-0000-000000000002",
@@ -33,8 +37,7 @@
       ],
       "isOpen": false,
       "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
-      "hash": "829b4499b850482c312fbb0bcfb40131"
+      "hash": "66f35e851736598a30e16eff91b5d28e"
     }
   ]
 }
-

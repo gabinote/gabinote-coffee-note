@@ -17,10 +17,11 @@ class DatabaseContainerInitializer : ApplicationContextInitializer<ConfigurableA
         @JvmStatic
         val database = MongoDBContainer(DockerImageName.parse("mongo:8.0.13")).apply {
             withNetwork(ContainerNetworkHelper.testNetwork)
-            withNetworkAliases("mongodb")
+            withNetworkAliases("mongo-db")
             withEnv("MONGO_REPLICA_SET_NAME", "rs0")
             withCommand("--bind_ip_all --replSet rs0")
             withLabel("test-container", "mongodb")
+            withEnv("TZ", "Asia/Seoul")
             withReuse(true)
         }
 

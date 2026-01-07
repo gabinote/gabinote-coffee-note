@@ -36,8 +36,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                         val pageable = PageRequest.of(0, 10)
                         val expectedNotes = listOf(
                             NoteIndex(
-                                id = "65571b111a00000000000001",
-                                externalId = "a1a1a1a1-0001-4001-8001-000000000001",
+                                id = "a1a1a1a1-0001-4001-8001-000000000001",
                                 title = "에티오피아 예가체프 G1 워시드",
                                 owner = "user_alpha",
                                 createdDate = 1731821801000,
@@ -58,11 +57,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     IndexDisplayField(name = "등급", tag = "GRADE_TAG", value = listOf("G1"), order = 2)
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash001"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000002",
-                                externalId = "a1a1a1a1-0002-4002-8002-000000000002",
+                                id = "a1a1a1a1-0002-4002-8002-000000000002",
                                 title = "케냐 AA 아이스 드립",
                                 owner = "user_alpha",
                                 createdDate = 1731821802000,
@@ -88,11 +87,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash002"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000003",
-                                externalId = "a1a1a1a1-0003-4003-8003-000000000003",
+                                id = "a1a1a1a1-0003-4003-8003-000000000003",
                                 title = "스타벅스 리저브 (에스프레소)",
                                 owner = "user_alpha",
                                 createdDate = 1731821803000,
@@ -118,11 +117,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash003"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000004",
-                                externalId = "a1a1a1a1-0004-4004-8004-000000000004",
+                                id = "a1a1a1a1-0004-4004-8004-000000000004",
                                 title = "코만단테 그라인더 테스트 (콜롬비아)",
                                 owner = "user_alpha",
                                 createdDate = 1731821804000,
@@ -148,11 +147,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash004"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000005",
-                                externalId = "a1a1a1a1-0005-4005-8005-000000000005",
+                                id = "a1a1a1a1-0005-4005-8005-000000000005",
                                 title = "비오는 날의 라떼",
                                 owner = "user_alpha",
                                 createdDate = 1731821805000,
@@ -178,11 +177,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash005"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000006",
-                                externalId = "a1a1a1a1-0006-4006-8006-000000000006",
+                                id = "a1a1a1a1-0006-4006-8006-000000000006",
                                 title = "콜롬비아 무산소 발효",
                                 owner = "user_alpha",
                                 createdDate = 1731821806000,
@@ -208,11 +207,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash006"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000007",
-                                externalId = "a1a1a1a1-0007-4007-8007-000000000007",
+                                id = "a1a1a1a1-0007-4007-8007-000000000007",
                                 title = "브라질 산토스 (프렌치 프레스)",
                                 owner = "user_alpha",
                                 createdDate = 1731821807000,
@@ -233,11 +232,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     IndexDisplayField(name = "바디감", tag = "BODY_TAG", value = listOf("무거움"), order = 2)
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash007"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000008",
-                                externalId = "a1a1a1a1-0008-4008-8008-000000000008",
+                                id = "a1a1a1a1-0008-4008-8008-000000000008",
                                 title = "디카페인 커피",
                                 owner = "user_alpha",
                                 createdDate = 1731821808000,
@@ -263,11 +262,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash008"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000009",
-                                externalId = "a1a1a1a1-0009-4009-8009-000000000009",
+                                id = "a1a1a1a1-0009-4009-8009-000000000009",
                                 title = "과테말라 안티구아 (90도)",
                                 owner = "user_alpha",
                                 createdDate = 1731821809000,
@@ -293,11 +292,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash009"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000010",
-                                externalId = "a1a1a1a1-0010-4010-8010-000000000010",
+                                id = "a1a1a1a1-0010-4010-8010-000000000010",
                                 title = "파나마 게이샤 스페셜티",
                                 owner = "user_alpha",
                                 createdDate = 1731821810000,
@@ -318,7 +317,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     IndexDisplayField(name = "평점", tag = "RATING_TAG", value = listOf("5점"), order = 2)
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash010"
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -369,8 +369,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                         val pageable = PageRequest.of(0, 10)
                         val expectedNotes = listOf(
                             NoteIndex(
-                                id = "65571b111a00000000000004",
-                                externalId = "a1a1a1a1-0004-4004-8004-000000000004",
+                                id = "a1a1a1a1-0004-4004-8004-000000000004",
                                 title = "코만단테 <em>그라인더</em> 테스트 (콜롬비아)",
                                 owner = "user_alpha",
                                 createdDate = 1731821804000,
@@ -396,7 +395,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash004"
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -423,8 +423,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                         val pageable = PageRequest.of(0, 10)
                         val expectedNotes = listOf(
                             NoteIndex(
-                                id = "65571b111a00000000000002",
-                                externalId = "a1a1a1a1-0002-4002-8002-000000000002",
+                                id = "a1a1a1a1-0002-4002-8002-000000000002",
                                 title = "케냐 AA 아이스 드립",
                                 owner = "user_alpha",
                                 createdDate = 1731821802000,
@@ -452,7 +451,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                 filters = mapOf(
                                     "향미" to listOf("<em>자몽</em>", "과일향", "산미"),
                                 ),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash002"
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -479,8 +479,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                         val pageable = PageRequest.of(0, 10)
                         val expectedNotes = listOf(
                             NoteIndex(
-                                id = "65571b111a00000000000003",
-                                externalId = "a1a1a1a1-0003-4003-8003-000000000003",
+                                id = "a1a1a1a1-0003-4003-8003-000000000003",
                                 title = "스타벅스 <em>리저브</em> (에스프레소)",
                                 owner = "user_alpha",
                                 createdDate = 1731821803000,
@@ -508,7 +507,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                 filters = mapOf(
                                     "로스터리" to listOf("스타벅스 <em>리저브</em>"),
                                 ),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash003"
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -543,8 +543,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                         val pageable = PageRequest.of(0, 10)
                         val expectedNotes = listOf(
                             NoteIndex(
-                                id = "65571b111a00000000000003",
-                                externalId = "a1a1a1a1-0003-4003-8003-000000000003",
+                                id = "a1a1a1a1-0003-4003-8003-000000000003",
                                 title = "스타벅스 리저브 (에스프레소)",
                                 owner = "user_alpha",
                                 createdDate = 1731821803000,
@@ -572,7 +571,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                 filters = mapOf(
                                     "로스터리" to listOf("<em>스타벅스 리저브</em>"),
                                 ),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash003"
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -604,8 +604,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                         val pageable = PageRequest.of(0, 10)
                         val expectedNotes = listOf(
                             NoteIndex(
-                                id = "65571b111a00000000000006",
-                                externalId = "a1a1a1a1-0006-4006-8006-000000000006",
+                                id = "a1a1a1a1-0006-4006-8006-000000000006",
                                 title = "콜롬비아 무산소 발효",
                                 owner = "user_alpha",
                                 createdDate = 1731821806000,
@@ -633,11 +632,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                 filters = mapOf(
                                     "향미" to listOf("<em>와인</em>", "열대과일"),
                                 ),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash006"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000007",
-                                externalId = "a1a1a1a1-0007-4007-8007-000000000007",
+                                id = "a1a1a1a1-0007-4007-8007-000000000007",
                                 title = "브라질 산토스 (프렌치 프레스)",
                                 owner = "user_alpha",
                                 createdDate = 1731821807000,
@@ -660,7 +659,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                 filters = mapOf(
                                     "향미" to listOf("<em>견과류</em>"),
                                 ),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash007"
                             )
                         )
 
@@ -670,6 +670,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                             false
                         )
                         it("해당 필터에 맞는 노트를 조회한다") {
+
                             val res = noteIndexRepository.searchNotesWithFilter(
                                 owner = validOwnerId,
                                 filters = filter,
@@ -696,8 +697,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                         val pageable = PageRequest.of(0, 10)
                         val expectedNotes = listOf(
                             NoteIndex(
-                                id = "65571b111a00000000000003",
-                                externalId = "a1a1a1a1-0003-4003-8003-000000000003",
+                                id = "a1a1a1a1-0003-4003-8003-000000000003",
                                 title = "스타벅스 리저브 (에스프레소)",
                                 owner = "user_alpha",
                                 createdDate = 1731821803000,
@@ -726,7 +726,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     "로스터리" to listOf("<em>스타벅스 리저브</em>"),
                                     "향미" to listOf("<em>초콜릿</em>", "스모키"),
                                 ),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash003"
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -759,8 +760,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                         val pageable = PageRequest.of(0, 10)
                         val expectedNotes = listOf(
                             NoteIndex(
-                                id = "65571b111a00000000000003",
-                                externalId = "a1a1a1a1-0003-4003-8003-000000000003",
+                                id = "a1a1a1a1-0003-4003-8003-000000000003",
                                 title = "스타벅스 리저브 (에스프레소)",
                                 owner = "user_alpha",
                                 createdDate = 1731821803000,
@@ -789,7 +789,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     "로스터리" to listOf("<em>스타벅스 리저브</em>"),
                                     "향미" to listOf("<em>초콜릿</em>", "스모키"),
                                 ),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash003"
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -825,8 +826,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                         val pageable = PageRequest.of(0, 10)
                         val expectedNotes = listOf(
                             NoteIndex(
-                                id = "65571b111a00000000000005",
-                                externalId = "a1a1a1a1-0005-4005-8005-000000000005",
+                                id = "a1a1a1a1-0005-4005-8005-000000000005",
                                 title = "비오는 날의 라떼",
                                 owner = "user_alpha",
                                 createdDate = 1731821805000,
@@ -852,11 +852,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash005"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000006",
-                                externalId = "a1a1a1a1-0006-4006-8006-000000000006",
+                                id = "a1a1a1a1-0006-4006-8006-000000000006",
                                 title = "콜롬비아 무산소 발효",
                                 owner = "user_alpha",
                                 createdDate = 1731821806000,
@@ -882,11 +882,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash006"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000007",
-                                externalId = "a1a1a1a1-0007-4007-8007-000000000007",
+                                id = "a1a1a1a1-0007-4007-8007-000000000007",
                                 title = "브라질 산토스 (프렌치 프레스)",
                                 owner = "user_alpha",
                                 createdDate = 1731821807000,
@@ -907,11 +907,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     IndexDisplayField(name = "바디감", tag = "BODY_TAG", value = listOf("무거움"), order = 2)
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash007"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000008",
-                                externalId = "a1a1a1a1-0008-4008-8008-000000000008",
+                                id = "a1a1a1a1-0008-4008-8008-000000000008",
                                 title = "디카페인 커피",
                                 owner = "user_alpha",
                                 createdDate = 1731821808000,
@@ -937,11 +937,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash008"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000009",
-                                externalId = "a1a1a1a1-0009-4009-8009-000000000009",
+                                id = "a1a1a1a1-0009-4009-8009-000000000009",
                                 title = "과테말라 안티구아 (90도)",
                                 owner = "user_alpha",
                                 createdDate = 1731821809000,
@@ -967,11 +967,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash009"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000010",
-                                externalId = "a1a1a1a1-0010-4010-8010-000000000010",
+                                id = "a1a1a1a1-0010-4010-8010-000000000010",
                                 title = "파나마 게이샤 스페셜티",
                                 owner = "user_alpha",
                                 createdDate = 1731821810000,
@@ -992,7 +992,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     IndexDisplayField(name = "평점", tag = "RATING_TAG", value = listOf("5점"), order = 2)
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash010"
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -1026,8 +1027,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                         val pageable = PageRequest.of(0, 10)
                         val expectedNotes = listOf(
                             NoteIndex(
-                                id = "65571b111a00000000000001",
-                                externalId = "a1a1a1a1-0001-4001-8001-000000000001",
+                                id = "a1a1a1a1-0001-4001-8001-000000000001",
                                 title = "에티오피아 예가체프 G1 워시드",
                                 owner = "user_alpha",
                                 createdDate = 1731821801000,
@@ -1048,11 +1048,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     IndexDisplayField(name = "등급", tag = "GRADE_TAG", value = listOf("G1"), order = 2)
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash001"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000002",
-                                externalId = "a1a1a1a1-0002-4002-8002-000000000002",
+                                id = "a1a1a1a1-0002-4002-8002-000000000002",
                                 title = "케냐 AA 아이스 드립",
                                 owner = "user_alpha",
                                 createdDate = 1731821802000,
@@ -1078,11 +1078,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash002"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000003",
-                                externalId = "a1a1a1a1-0003-4003-8003-000000000003",
+                                id = "a1a1a1a1-0003-4003-8003-000000000003",
                                 title = "스타벅스 리저브 (에스프레소)",
                                 owner = "user_alpha",
                                 createdDate = 1731821803000,
@@ -1108,11 +1108,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash003"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000004",
-                                externalId = "a1a1a1a1-0004-4004-8004-000000000004",
+                                id = "a1a1a1a1-0004-4004-8004-000000000004",
                                 title = "코만단테 그라인더 테스트 (콜롬비아)",
                                 owner = "user_alpha",
                                 createdDate = 1731821804000,
@@ -1138,11 +1138,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash004"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000005",
-                                externalId = "a1a1a1a1-0005-4005-8005-000000000005",
+                                id = "a1a1a1a1-0005-4005-8005-000000000005",
                                 title = "비오는 날의 라떼",
                                 owner = "user_alpha",
                                 createdDate = 1731821805000,
@@ -1168,7 +1168,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash005"
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -1202,8 +1203,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                         val pageable = PageRequest.of(0, 10)
                         val expectedNotes = listOf(
                             NoteIndex(
-                                id = "65571b111a00000000000006",
-                                externalId = "a1a1a1a1-0006-4006-8006-000000000006",
+                                id = "a1a1a1a1-0006-4006-8006-000000000006",
                                 title = "콜롬비아 무산소 발효",
                                 owner = "user_alpha",
                                 createdDate = 1731821806000,
@@ -1229,11 +1229,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash006"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000007",
-                                externalId = "a1a1a1a1-0007-4007-8007-000000000007",
+                                id = "a1a1a1a1-0007-4007-8007-000000000007",
                                 title = "브라질 산토스 (프렌치 프레스)",
                                 owner = "user_alpha",
                                 createdDate = 1731821807000,
@@ -1254,11 +1254,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     IndexDisplayField(name = "바디감", tag = "BODY_TAG", value = listOf("무거움"), order = 2)
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash007"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000008",
-                                externalId = "a1a1a1a1-0008-4008-8008-000000000008",
+                                id = "a1a1a1a1-0008-4008-8008-000000000008",
                                 title = "디카페인 커피",
                                 owner = "user_alpha",
                                 createdDate = 1731821808000,
@@ -1284,11 +1284,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash008"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000009",
-                                externalId = "a1a1a1a1-0009-4009-8009-000000000009",
+                                id = "a1a1a1a1-0009-4009-8009-000000000009",
                                 title = "과테말라 안티구아 (90도)",
                                 owner = "user_alpha",
                                 createdDate = 1731821809000,
@@ -1314,11 +1314,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash009"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000010",
-                                externalId = "a1a1a1a1-0010-4010-8010-000000000010",
+                                id = "a1a1a1a1-0010-4010-8010-000000000010",
                                 title = "파나마 게이샤 스페셜티",
                                 owner = "user_alpha",
                                 createdDate = 1731821810000,
@@ -1339,7 +1339,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     IndexDisplayField(name = "평점", tag = "RATING_TAG", value = listOf("5점"), order = 2)
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash010"
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -1373,8 +1374,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                         val pageable = PageRequest.of(0, 10)
                         val expectedNotes = listOf(
                             NoteIndex(
-                                id = "65571b111a00000000000001",
-                                externalId = "a1a1a1a1-0001-4001-8001-000000000001",
+                                id = "a1a1a1a1-0001-4001-8001-000000000001",
                                 title = "에티오피아 예가체프 G1 워시드",
                                 owner = "user_alpha",
                                 createdDate = 1731821801000,
@@ -1395,11 +1395,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     IndexDisplayField(name = "등급", tag = "GRADE_TAG", value = listOf("G1"), order = 2)
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash001"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000002",
-                                externalId = "a1a1a1a1-0002-4002-8002-000000000002",
+                                id = "a1a1a1a1-0002-4002-8002-000000000002",
                                 title = "케냐 AA 아이스 드립",
                                 owner = "user_alpha",
                                 createdDate = 1731821802000,
@@ -1425,11 +1425,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash002"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000003",
-                                externalId = "a1a1a1a1-0003-4003-8003-000000000003",
+                                id = "a1a1a1a1-0003-4003-8003-000000000003",
                                 title = "스타벅스 리저브 (에스프레소)",
                                 owner = "user_alpha",
                                 createdDate = 1731821803000,
@@ -1455,11 +1455,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash003"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000004",
-                                externalId = "a1a1a1a1-0004-4004-8004-000000000004",
+                                id = "a1a1a1a1-0004-4004-8004-000000000004",
                                 title = "코만단테 그라인더 테스트 (콜롬비아)",
                                 owner = "user_alpha",
                                 createdDate = 1731821804000,
@@ -1485,7 +1485,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash004"
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -1519,8 +1520,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                         val pageable = PageRequest.of(0, 10)
                         val expectedNotes = listOf(
                             NoteIndex(
-                                id = "65571b111a00000000000003",
-                                externalId = "a1a1a1a1-0003-4003-8003-000000000003",
+                                id = "a1a1a1a1-0003-4003-8003-000000000003",
                                 title = "스타벅스 리저브 (에스프레소)",
                                 owner = "user_alpha",
                                 createdDate = 1731821803000,
@@ -1546,11 +1546,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash003"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000004",
-                                externalId = "a1a1a1a1-0004-4004-8004-000000000004",
+                                id = "a1a1a1a1-0004-4004-8004-000000000004",
                                 title = "코만단테 그라인더 테스트 (콜롬비아)",
                                 owner = "user_alpha",
                                 createdDate = 1731821804000,
@@ -1576,11 +1576,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash004"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000005",
-                                externalId = "a1a1a1a1-0005-4005-8005-000000000005",
+                                id = "a1a1a1a1-0005-4005-8005-000000000005",
                                 title = "비오는 날의 라떼",
                                 owner = "user_alpha",
                                 createdDate = 1731821805000,
@@ -1606,11 +1606,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash005"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000006",
-                                externalId = "a1a1a1a1-0006-4006-8006-000000000006",
+                                id = "a1a1a1a1-0006-4006-8006-000000000006",
                                 title = "콜롬비아 무산소 발효",
                                 owner = "user_alpha",
                                 createdDate = 1731821806000,
@@ -1636,11 +1636,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash006"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000007",
-                                externalId = "a1a1a1a1-0007-4007-8007-000000000007",
+                                id = "a1a1a1a1-0007-4007-8007-000000000007",
                                 title = "브라질 산토스 (프렌치 프레스)",
                                 owner = "user_alpha",
                                 createdDate = 1731821807000,
@@ -1661,7 +1661,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     IndexDisplayField(name = "바디감", tag = "BODY_TAG", value = listOf("무거움"), order = 2)
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash007"
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -1695,8 +1696,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                         val pageable = PageRequest.of(0, 10)
                         val expectedNotes = listOf(
                             NoteIndex(
-                                id = "65571b111a00000000000002",
-                                externalId = "a1a1a1a1-0002-4002-8002-000000000002",
+                                id = "a1a1a1a1-0002-4002-8002-000000000002",
                                 title = "케냐 AA 아이스 드립",
                                 owner = "user_alpha",
                                 createdDate = 1731821802000,
@@ -1722,11 +1722,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash002"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000003",
-                                externalId = "a1a1a1a1-0003-4003-8003-000000000003",
+                                id = "a1a1a1a1-0003-4003-8003-000000000003",
                                 title = "스타벅스 리저브 (에스프레소)",
                                 owner = "user_alpha",
                                 createdDate = 1731821803000,
@@ -1752,11 +1752,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash003"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000004",
-                                externalId = "a1a1a1a1-0004-4004-8004-000000000004",
+                                id = "a1a1a1a1-0004-4004-8004-000000000004",
                                 title = "코만단테 그라인더 테스트 (콜롬비아)",
                                 owner = "user_alpha",
                                 createdDate = 1731821804000,
@@ -1782,11 +1782,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash004"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000005",
-                                externalId = "a1a1a1a1-0005-4005-8005-000000000005",
+                                id = "a1a1a1a1-0005-4005-8005-000000000005",
                                 title = "비오는 날의 라떼",
                                 owner = "user_alpha",
                                 createdDate = 1731821805000,
@@ -1812,11 +1812,11 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash005"
                             ),
                             NoteIndex(
-                                id = "65571b111a00000000000006",
-                                externalId = "a1a1a1a1-0006-4006-8006-000000000006",
+                                id = "a1a1a1a1-0006-4006-8006-000000000006",
                                 title = "콜롬비아 무산소 발효",
                                 owner = "user_alpha",
                                 createdDate = 1731821806000,
@@ -1842,7 +1842,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                                     )
                                 ),
                                 filters = mapOf(),
-                                synchronizedAt = 1731821810000
+                                synchronizedAt = 1731821810000,
+                                noteHash = "hash006"
                             )
                         )
                         val expected = SliceImpl<NoteIndex>(
@@ -1850,7 +1851,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                             pageable,
                             false
                         )
-                        it("시작 시간과 종료 시간 사이에 수정된 노트를 조회한다") {
+                        it("종료 시간 이전에 수정된 노트를 조회한다") {
                             val res = noteIndexRepository.searchNotesWithFilter(
                                 owner = validOwnerId,
                                 filters = emptyMap(),
@@ -1872,8 +1873,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                     testMeiliSearchHelper.insertData("$baseDataDir/save-before.json")
 
                     val noteIndex = NoteIndex(
-                        id = "65571b111a00000000000002",
-                        externalId = "a1a1a1a1-0001-4001-8001-000000000002",
+                        id = "a1a1a1a1-0001-4001-8001-000000000002",
                         title = "에티오피아 예가체프 G1 워시드2",
                         owner = "user_alpha",
                         createdDate = 1731821801000,
@@ -1899,7 +1899,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                             "추출_방식" to listOf("푸어오버2"),
                             "등급" to listOf("G12")
                         ),
-                        synchronizedAt = 1731821810000
+                        synchronizedAt = 1731821810000,
+                        noteHash = "hash002"
                     )
 
                     it("NoteIndex를 저장하고, 저장된 NoteIndex를 검색할 수 있어야 한다") {
@@ -1918,8 +1919,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                     testMeiliSearchHelper.insertData("$baseDataDir/save-all-before.json")
 
                     val noteIndex = NoteIndex(
-                        id = "65571b111a00000000000002",
-                        externalId = "a1a1a1a1-0001-4001-8001-000000000002",
+                        id = "a1a1a1a1-0001-4001-8001-000000000002",
                         title = "에티오피아 예가체프 G1 워시드2",
                         owner = "user_alpha",
                         createdDate = 1731821801000,
@@ -1945,12 +1945,12 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                             "추출_방식" to listOf("푸어오버2"),
                             "등급" to listOf("G12")
                         ),
-                        synchronizedAt = 1731821810000
+                        synchronizedAt = 1731821810000,
+                        noteHash = "hash002"
                     )
 
                     val noteIndex2 = NoteIndex(
-                        id = "65571b111a00000000000003",
-                        externalId = "a1a1a1a1-0001-4001-8001-000000000003",
+                        id = "a1a1a1a1-0001-4001-8001-000000000003",
                         title = "에티오피아 예가체프 G1 워시드3",
                         owner = "user_alpha",
                         createdDate = 1731821801000,
@@ -1976,7 +1976,8 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                             "추출_방식" to listOf("푸어오버3"),
                             "등급" to listOf("G13")
                         ),
-                        synchronizedAt = 1731821810000
+                        synchronizedAt = 1731821810000,
+                        noteHash = "hash003"
                     )
 
                     val list = listOf(noteIndex, noteIndex2)
@@ -1996,7 +1997,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                     useBaseIndex()
                     testMeiliSearchHelper.insertData("$baseDataDir/delete-before.json")
 
-                    val noteIndexId = "65571b111a00000000000001"
+                    val noteIndexId = "a1a1a1a1-0001-4001-8001-000000000001"
 
                     it("NoteIndex를 삭제하고, 삭제된 NoteIndex가 더 이상 검색되지 않아야 한다") {
 
@@ -2010,7 +2011,7 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
                     useBaseIndex()
                     testMeiliSearchHelper.insertData("$baseDataDir/delete-before.json")
 
-                    val noteIndexId = "65571b111a00000000000099"
+                    val noteIndexId = "a1a1a1a1-0099-4099-8099-000000000099"
 
                     it("그 어떤 노트도 삭제되지 않아야 한다") {
 
@@ -2020,38 +2021,6 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
 
                     }
                 }
-            }
-
-            describe("NoteIndexRepository.deleteAllByExternalId") {
-
-                context("올바른 NoteIndex의 externalId가 주어진 경우") {
-                    useBaseIndex()
-                    testMeiliSearchHelper.insertData("$baseDataDir/delete-externalId-before.json")
-
-                    val noteExternalId = "a1a1a1a1-0001-4001-8001-000000000001"
-
-                    it("해당 NoteIndex가 삭제된다.") {
-
-                        val taskInfo = noteIndexRepository.deleteAllByExternalId(noteExternalId)
-                        meiliSearchClient.waitForTask(taskInfo.taskUid)
-                        testMeiliSearchHelper.assertData("$baseDataDir/delete-externalId-after.json")
-                    }
-                }
-
-                context("존재하지 않는 NoteIndex의 externalId가 주어진 경우") {
-                    useBaseIndex()
-                    testMeiliSearchHelper.insertData("$baseDataDir/delete-externalId-before.json")
-
-                    val noteExternalId = "a1a1a1a1-0099-4099-8099-000000000099"
-
-                    it("그 어떤 노트도 삭제되지 않아야 한다") {
-
-                        val taskInfo = noteIndexRepository.deleteAllByExternalId(noteExternalId)
-                        meiliSearchClient.waitForTask(taskInfo.taskUid)
-                        testMeiliSearchHelper.assertData("$baseDataDir/delete-externalId-before.json")
-                    }
-                }
-
             }
 
             describe("NoteIndexRepository.deleteAllByOwner") {

@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.testSupport.testConfig.common
 
 import com.gabinote.coffeenote.testSupport.testConfig.db.DatabaseContainerInitializer
+import com.gabinote.coffeenote.testSupport.testConfig.debezium.DebeziumContainerInitializer
 import com.gabinote.coffeenote.testSupport.testConfig.meiliSearch.MeiliSearchContainerInitializer
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.test.context.ContextConfiguration
@@ -13,5 +14,5 @@ import java.lang.annotation.Inherited
 @Retention(AnnotationRetention.RUNTIME)
 @Inherited
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ContextConfiguration(initializers = [DatabaseContainerInitializer::class, MeiliSearchContainerInitializer::class])
+@ContextConfiguration(initializers = [DatabaseContainerInitializer::class, MeiliSearchContainerInitializer::class, DebeziumContainerInitializer::class])
 annotation class UseTestContainers

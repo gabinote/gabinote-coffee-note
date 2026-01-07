@@ -2,11 +2,13 @@ package com.gabinote.coffeenote.note.integration
 
 import com.gabinote.api.testSupport.testUtil.json.jsonBuilder
 import com.gabinote.coffeenote.testSupport.testTemplate.IntegrationTestTemplate
+import io.kotest.assertions.nondeterministic.eventually
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
 import org.hamcrest.Matchers.equalTo
 import org.hamcrest.Matchers.greaterThanOrEqualTo
+import kotlin.time.Duration.Companion.seconds
 
 class NoteApiIntegrationTest : IntegrationTestTemplate() {
 
@@ -20,7 +22,27 @@ class NoteApiIntegrationTest : IntegrationTestTemplate() {
         testMeiliSearchHelper.insertIndex("testsets/note/integration/note-field-index.json")
     }
 
+    private fun useIndexes() {
+        testMeiliSearchHelper.insertIndex(
+            "testsets/note/integration/note-index.json",
+            "testsets/note/integration/note-field-index.json"
+        )
+    }
+
+
     init {
+
+
+        beforeTest {
+            testDebeziumHelper.deleteAllConnectors()
+            testKafkaHelper.deleteAllTopics()
+        }
+
+        afterTest {
+            testDebeziumHelper.deleteAllConnectors()
+            testKafkaHelper.deleteAllTopics()
+        }
+
         feature("[Note] Note API Integration Test") {
 
             feature("[GET] /api/v1/notes/me") {
@@ -88,7 +110,7 @@ class NoteApiIntegrationTest : IntegrationTestTemplate() {
                         statusCode(200)
                         body("content.size()", greaterThanOrEqualTo(1))
                         //Origin에 Ethiopia가 포함
-                        body("content[0].external_id", equalTo("11111111-1111-4111-8111-111111111111"))
+                        body("content[0].id", equalTo("11111111-1111-4111-8111-111111111111"))
 
                     }
                 }
@@ -157,12 +179,18 @@ class NoteApiIntegrationTest : IntegrationTestTemplate() {
             feature("[POST] /api/v1/note/me") {
                 scenario("올바른 노트 생성 요청이 주어지면, 새로운 노트를 생성하여 반환해야 한다.") {
                     Given {
+
+                        testDataHelper.enablePreImages("notes")
                         testDataHelper.setData(
                             "/testsets/note/integration/post-api-v1-note-me-before.json"
                         )
                         testDataHelper.setData(
                             "/testsets/note/integration/policy.json"
                         )
+
+                        useIndexes()
+
+                        testDebeziumHelper.registerConnector("testsets/debezium/mongo-note-connector.json")
 
                         basePath(apiPrefix)
                         accept("application/json")
@@ -204,13 +232,33 @@ class NoteApiIntegrationTest : IntegrationTestTemplate() {
                         body("fields[0].name", equalTo("Coffee Name"))
                         body("fields[0].values[0]", equalTo("New Coffee"))
                     }
+
+                    eventually(15.seconds) {
+                        testMeiliSearchHelper.assertData(
+                            "/testsets/note/integration/post-api-v1-note-me-index-after.json",
+                            verbose = false
+                        )
+                        testMeiliSearchHelper.assertData(
+                            "/testsets/note/integration/post-api-v1-note-me-field-index-after.json",
+                            verbose = false
+                        )
+                    }
                 }
             }
 
             feature("[PUT] /api/v1/note/me/{externalId}") {
                 scenario("올바른 노트 수정 요청이 주어지면, 해당 노트를 수정하여 반환해야 한다.") {
                     Given {
+
                         testDataHelper.setData("/testsets/note/integration/put-api-v1-note-me-before.json")
+
+                        testDataHelper.enablePreImages("notes")
+                        useIndexes()
+                        testMeiliSearchHelper.insertData("/testsets/note/integration/put-api-v1-note-me-index-before.json")
+                        testMeiliSearchHelper.insertData("/testsets/note/integration/put-api-v1-note-me-field-index-before.json")
+
+                        testDebeziumHelper.registerConnector("testsets/debezium/mongo-note-connector.json")
+
                         basePath(apiPrefix)
                         accept("application/json")
                         header("X-Token-Sub", "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e")
@@ -251,13 +299,32 @@ class NoteApiIntegrationTest : IntegrationTestTemplate() {
                         body("fields[0].name", equalTo("Updated Field"))
                         body("fields[0].values[0]", equalTo("Updated Value"))
                     }
+
+                    eventually(15.seconds) {
+                        testMeiliSearchHelper.assertData(
+                            "/testsets/note/integration/put-api-v1-note-me-index-after.json",
+                            verbose = false
+                        )
+                        testMeiliSearchHelper.assertData(
+                            "/testsets/note/integration/put-api-v1-note-me-field-index-after.json",
+                            verbose = false
+                        )
+                    }
                 }
             }
 
             feature("[DELETE] /api/v1/note/me/{externalId}") {
                 scenario("올바른 자신의 노트 외부 ID를 제공하면, 해당 노트를 삭제한다.") {
                     Given {
+
+                        useIndexes()
+                        testMeiliSearchHelper.insertData("/testsets/note/integration/delete-api-v1-note-me-index-before.json")
+                        testMeiliSearchHelper.insertData("/testsets/note/integration/delete-api-v1-note-me-field-index-before.json")
                         testDataHelper.setData("/testsets/note/integration/delete-api-v1-note-me-before.json")
+
+                        testDataHelper.enablePreImages("notes")
+                        testDebeziumHelper.registerConnector("testsets/debezium/mongo-note-connector.json")
+
                         basePath(apiPrefix)
                         accept("application/json")
                         header("X-Token-Sub", "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e")
@@ -267,6 +334,17 @@ class NoteApiIntegrationTest : IntegrationTestTemplate() {
                     }.Then {
                         statusCode(204)
                         testDataHelper.assertData("/testsets/note/integration/delete-api-v1-note-me-after.json")
+                    }
+
+                    eventually(15.seconds) {
+                        testMeiliSearchHelper.assertData(
+                            "/testsets/note/integration/delete-api-v1-note-me-index-after.json",
+                            verbose = false
+                        )
+                        testMeiliSearchHelper.assertData(
+                            "/testsets/note/integration/delete-api-v1-note-me-field-index-after.json",
+                            verbose = false
+                        )
                     }
                 }
             }

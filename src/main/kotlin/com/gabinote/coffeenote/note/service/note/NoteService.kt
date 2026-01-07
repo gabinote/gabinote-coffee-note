@@ -127,6 +127,7 @@ class NoteService(
         noteRepository.deleteAllByOwner(owner)
     }
 
+
     private fun isChange(origin: Note, newNote: Note): Boolean {
         return origin.hash != newNote.hash || origin.isOpen != newNote.isOpen
     }

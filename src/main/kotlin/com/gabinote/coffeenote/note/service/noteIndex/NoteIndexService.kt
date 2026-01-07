@@ -15,6 +15,7 @@ import com.gabinote.coffeenote.note.dto.noteIndex.service.NoteIndexResServiceDto
 import com.gabinote.coffeenote.note.mapping.noteIndex.NoteIndexMapper
 import org.springframework.data.domain.Slice
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class NoteIndexService(
@@ -69,14 +70,21 @@ class NoteIndexService(
         noteIndexRepository.save(noteIndex)
     }
 
+    fun deleteByNoteId(noteId: UUID) {
+        noteIndexRepository.delete(noteId.toString())
+    }
+
+    fun deleteAllByOwner(owner: String) {
+        noteIndexRepository.deleteAllByOwner(owner)
+    }
+
     private fun convertToNoteIndex(note: Note): NoteIndex {
         val displayFields = convertToDisplayFields(note.displayFields)
         val filters = convertToFilters(note.fields)
 
         val offset = timeProvider.zoneOffset()
         return NoteIndex(
-            id = note.id!!.toString(),
-            externalId = note.externalId!!,
+            id = note.externalId!!,
             title = note.title,
             owner = note.owner,
             createdDate = note.createdDate!!.toEpochSecond(offset),
@@ -84,7 +92,9 @@ class NoteIndexService(
             displayFields = displayFields,
             filters = filters,
             synchronizedAt = timeProvider.now().toEpochSecond(offset),
-        )
+            noteHash = note.hash!!,
+
+            )
     }
 
     private fun convertToFilters(noteFields: List<NoteField>): Map<String, List<String>> {

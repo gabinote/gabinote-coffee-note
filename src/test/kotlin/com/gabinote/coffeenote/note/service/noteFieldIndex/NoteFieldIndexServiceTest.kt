@@ -1,6 +1,8 @@
 package com.gabinote.coffeenote.note.service.noteFieldIndex
 
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.data.FacetWithCount
+import com.gabinote.coffeenote.common.util.uuid.UuidSource
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeFactory
 import com.gabinote.coffeenote.note.domain.note.Note
 import com.gabinote.coffeenote.note.domain.note.NoteDisplayField
 import com.gabinote.coffeenote.note.domain.note.NoteField
@@ -36,10 +38,10 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
     lateinit var noteFieldIndexMapper: NoteFieldIndexMapper
 
     @MockK
-    lateinit var uuidSource: com.gabinote.coffeenote.common.util.uuid.UuidSource
+    lateinit var uuidSource: UuidSource
 
     @MockK
-    lateinit var fieldTypeFactory: com.gabinote.coffeenote.field.domain.fieldType.FieldTypeFactory
+    lateinit var fieldTypeFactory: FieldTypeFactory
 
     @MockK
     lateinit var timeProvider: TestTimeProvider
@@ -371,7 +373,8 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
                         name = needIndexField.name,
                         value = values[0],
                         owner = note.owner,
-                        synchronizedAt = TestTimeProvider.testEpochSecond
+                        synchronizedAt = TestTimeProvider.testEpochSecond,
+                        noteHash = "hash"
                     )
 
                     val secNoteFieldIndex = NoteFieldIndex(
@@ -380,7 +383,8 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
                         name = needIndexField.name,
                         value = values[1],
                         owner = note.owner,
-                        synchronizedAt = TestTimeProvider.testEpochSecond
+                        synchronizedAt = TestTimeProvider.testEpochSecond,
+                        noteHash = "hash"
                     )
 
                     val expected = listOf(noteFieldIndex, secNoteFieldIndex)
@@ -406,6 +410,46 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
                         }
                         verify(exactly = 1) {
                             noteFieldIndexRepository.saveAll(expected)
+                        }
+                    }
+                }
+            }
+
+            describe("NoteFieldIndexService.deleteByNoteExtId") {
+                context("유효한 노트 외부 ID가 주어졌을 때") {
+                    val noteExtId = TestUuidSource.UUID_STRING
+
+                    beforeTest {
+                        every {
+                            noteFieldIndexRepository.deleteAllByNoteId(noteExtId.toString())
+                        } returns mockk<TaskInfo>()
+                    }
+
+                    it("해당 노트의 모든 필드 인덱스를 삭제한다") {
+                        noteFieldIndexService.deleteByNoteExtId(noteExtId)
+
+                        verify(exactly = 1) {
+                            noteFieldIndexRepository.deleteAllByNoteId(noteExtId.toString())
+                        }
+                    }
+                }
+            }
+
+            describe("NoteFieldIndexService.deleteAllByOwner") {
+                context("유효한 owner가 주어졌을 때") {
+                    val owner = "test-owner"
+
+                    beforeTest {
+                        every {
+                            noteFieldIndexRepository.deleteAllByOwner(owner)
+                        } returns mockk<TaskInfo>()
+                    }
+
+                    it("해당 소유자의 모든 노트 필드 인덱스를 삭제한다") {
+                        noteFieldIndexService.deleteAllByOwner(owner)
+
+                        verify(exactly = 1) {
+                            noteFieldIndexRepository.deleteAllByOwner(owner)
                         }
                     }
                 }

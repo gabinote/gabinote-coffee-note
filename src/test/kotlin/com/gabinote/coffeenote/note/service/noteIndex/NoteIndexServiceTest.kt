@@ -76,9 +76,11 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         highlightTag = highlightTag
                     )
 
+                    val uuid1 = TestUuidSource.UUID_STRING.toString()
+                    val uuid2 = "00000000-0000-0000-0000-000000000001"
+
                     val noteIndex1 = NoteIndex(
-                        id = "index-1",
-                        externalId = TestUuidSource.UUID_STRING.toString(),
+                        id = uuid1,
                         title = "Test Note 1",
                         owner = owner,
                         createdDate = TestTimeProvider.testEpochSecond,
@@ -92,19 +94,20 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                             )
                         ),
                         filters = mapOf("status" to listOf("active")),
-                        synchronizedAt = TestTimeProvider.testEpochSecond
+                        synchronizedAt = TestTimeProvider.testEpochSecond,
+                        noteHash = "hash1"
                     )
 
                     val noteIndex2 = NoteIndex(
-                        id = "index-2",
-                        externalId = TestUuidSource.UUID_STRING.toString(),
+                        id = uuid2,
                         title = "Test Note 2",
                         owner = owner,
                         createdDate = TestTimeProvider.testEpochSecond,
                         modifiedDate = TestTimeProvider.testEpochSecond,
                         displayFields = emptyList(),
                         filters = emptyMap(),
-                        synchronizedAt = TestTimeProvider.testEpochSecond
+                        synchronizedAt = TestTimeProvider.testEpochSecond,
+                        noteHash = "hash2"
                     )
 
                     val noteIndexSlice = SliceImpl(
@@ -114,8 +117,7 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                     )
 
                     val dto1 = NoteIndexResServiceDto(
-                        id = "index-1",
-                        externalId = noteIndex1.externalId,
+                        id = uuid1,
                         title = "Test Note 1",
                         owner = owner,
                         createdDate = TestTimeProvider.testDateTime,
@@ -132,8 +134,7 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                     )
 
                     val dto2 = NoteIndexResServiceDto(
-                        id = "index-2",
-                        externalId = noteIndex2.externalId,
+                        id = uuid2,
                         title = "Test Note 2",
                         owner = owner,
                         createdDate = TestTimeProvider.testDateTime,
@@ -165,9 +166,9 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         val result = noteIndexService.searchByCondition(searchCondition)
 
                         result.content shouldHaveSize 2
-                        result.content[0].id shouldBe "index-1"
+                        result.content[0].id shouldBe uuid1
                         result.content[0].title shouldBe "Test Note 1"
-                        result.content[1].id shouldBe "index-2"
+                        result.content[1].id shouldBe uuid2
                         result.content[1].title shouldBe "Test Note 2"
                         result.hasNext() shouldBe false
 
@@ -254,23 +255,24 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         highlightTag = highlightTag
                     )
 
+                    val uuid1 = TestUuidSource.UUID_STRING.toString()
+
                     val noteIndex = NoteIndex(
-                        id = "index-1",
-                        externalId = TestUuidSource.UUID_STRING.toString(),
+                        id = uuid1,
                         title = "Filtered Note",
                         owner = owner,
                         createdDate = TestTimeProvider.testEpochSecond,
                         modifiedDate = TestTimeProvider.testEpochSecond,
                         displayFields = emptyList(),
                         filters = mapOf("status" to listOf("active")),
-                        synchronizedAt = TestTimeProvider.testEpochSecond
+                        synchronizedAt = TestTimeProvider.testEpochSecond,
+                        noteHash = "hash1"
                     )
 
                     val noteIndexSlice = SliceImpl(listOf(noteIndex), pageable, false)
 
                     val dto = NoteIndexResServiceDto(
-                        id = "index-1",
-                        externalId = noteIndex.externalId,
+                        id = uuid1,
                         title = "Filtered Note",
                         owner = owner,
                         createdDate = TestTimeProvider.testDateTime,
@@ -300,7 +302,7 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         val result = noteIndexService.filterByCondition(filterCondition)
 
                         result.content shouldHaveSize 1
-                        result.content[0].id shouldBe "index-1"
+                        result.content[0].id shouldBe uuid1
                         result.content[0].title shouldBe "Filtered Note"
 
                         verify(exactly = 1) {
@@ -342,23 +344,24 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         highlightTag = highlightTag
                     )
 
+                    val uuid1 = TestUuidSource.UUID_STRING.toString()
+
                     val noteIndex = NoteIndex(
-                        id = "index-1",
-                        externalId = TestUuidSource.UUID_STRING.toString(),
+                        id = uuid1,
                         title = "Date Filtered Note",
                         owner = owner,
                         createdDate = TestTimeProvider.testEpochSecond,
                         modifiedDate = TestTimeProvider.testEpochSecond,
                         displayFields = emptyList(),
                         filters = mapOf("status" to listOf("active")),
-                        synchronizedAt = TestTimeProvider.testEpochSecond
+                        synchronizedAt = TestTimeProvider.testEpochSecond,
+                        noteHash = "hash1"
                     )
 
                     val noteIndexSlice = SliceImpl(listOf(noteIndex), pageable, false)
 
                     val dto = NoteIndexResServiceDto(
-                        id = "index-1",
-                        externalId = noteIndex.externalId,
+                        id = uuid1,
                         title = "Date Filtered Note",
                         owner = owner,
                         createdDate = TestTimeProvider.testDateTime,
@@ -398,7 +401,7 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         val result = noteIndexService.filterByCondition(filterCondition)
 
                         result.content shouldHaveSize 1
-                        result.content[0].id shouldBe "index-1"
+                        result.content[0].id shouldBe uuid1
                         result.content[0].title shouldBe "Date Filtered Note"
 
                         verify(exactly = 1) {
@@ -441,28 +444,31 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         highlightTag = highlightTag
                     )
 
+                    val uuid1 = TestUuidSource.UUID_STRING.toString()
+                    val uuid2 = "00000000-0000-0000-0000-000000000001"
+
                     val noteIndex1 = NoteIndex(
-                        id = "index-1",
-                        externalId = TestUuidSource.UUID_STRING.toString(),
+                        id = uuid1,
                         title = "Note 1",
                         owner = owner,
                         createdDate = TestTimeProvider.testEpochSecond,
                         modifiedDate = TestTimeProvider.testEpochSecond,
                         displayFields = emptyList(),
                         filters = emptyMap(),
-                        synchronizedAt = TestTimeProvider.testEpochSecond
+                        synchronizedAt = TestTimeProvider.testEpochSecond,
+                        noteHash = "hash1"
                     )
 
                     val noteIndex2 = NoteIndex(
-                        id = "index-2",
-                        externalId = TestUuidSource.UUID_STRING.toString(),
+                        id = uuid2,
                         title = "Note 2",
                         owner = owner,
                         createdDate = TestTimeProvider.testEpochSecond,
                         modifiedDate = TestTimeProvider.testEpochSecond,
                         displayFields = emptyList(),
                         filters = emptyMap(),
-                        synchronizedAt = TestTimeProvider.testEpochSecond
+                        synchronizedAt = TestTimeProvider.testEpochSecond,
+                        noteHash = "hash2"
                     )
 
                     val noteIndexSlice = SliceImpl(
@@ -472,8 +478,7 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                     )
 
                     val dto1 = NoteIndexResServiceDto(
-                        id = "index-1",
-                        externalId = noteIndex1.externalId,
+                        id = uuid1,
                         title = "Note 1",
                         owner = owner,
                         createdDate = TestTimeProvider.testDateTime,
@@ -483,8 +488,7 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                     )
 
                     val dto2 = NoteIndexResServiceDto(
-                        id = "index-2",
-                        externalId = noteIndex2.externalId,
+                        id = uuid2,
                         title = "Note 2",
                         owner = owner,
                         createdDate = TestTimeProvider.testDateTime,
@@ -518,8 +522,8 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         val result = noteIndexService.filterByCondition(filterCondition)
 
                         result.content shouldHaveSize 2
-                        result.content[0].id shouldBe "index-1"
-                        result.content[1].id shouldBe "index-2"
+                        result.content[0].id shouldBe uuid1
+                        result.content[1].id shouldBe uuid2
                         result.hasNext() shouldBe true
 
                         verify(exactly = 1) {
@@ -571,9 +575,12 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                         isDisplay = true,
                         values = setOf("v2")
                     )
+
+                    val noteExternalId = TestUuidSource.UUID_STRING.toString()
+
                     val note = Note(
                         id = ObjectId.get(),
-                        externalId = TestUuidSource.UUID_STRING.toString(),
+                        externalId = noteExternalId,
                         title = "Create Note",
                         thumbnail = null,
                         createdDate = TestTimeProvider.testDateTime,
@@ -614,8 +621,7 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                     }
 
                     val expectedNoteIndex = NoteIndex(
-                        id = note.id.toString(),
-                        externalId = note.externalId!!,
+                        id = noteExternalId,
                         title = note.title,
                         owner = note.owner,
                         createdDate = TestTimeProvider.testEpochSecond,
@@ -624,7 +630,8 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                             convertedDisplayField,
                         ),
                         filters = expectedFilters,
-                        synchronizedAt = TestTimeProvider.testEpochSecond
+                        synchronizedAt = TestTimeProvider.testEpochSecond,
+                        noteHash = "hash"
                     )
 
                     //4. 저장
@@ -645,6 +652,46 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                             noteIndexRepository.save(expectedNoteIndex)
                         }
 
+                    }
+                }
+            }
+
+            describe("NoteIndexService.deleteByNoteId") {
+                context("유효한 노트 ID가 주어졌을 때") {
+                    val noteId = TestUuidSource.UUID_STRING
+
+                    beforeTest {
+                        every {
+                            noteIndexRepository.delete(noteId.toString())
+                        } returns mockk<TaskInfo>()
+                    }
+
+                    it("해당 노트의 인덱스를 삭제한다") {
+                        noteIndexService.deleteByNoteId(noteId)
+
+                        verify(exactly = 1) {
+                            noteIndexRepository.delete(noteId.toString())
+                        }
+                    }
+                }
+            }
+
+            describe("NoteIndexService.deleteAllByOwner") {
+                context("유효한 owner가 주어졌을 때") {
+                    val owner = "test-owner"
+
+                    beforeTest {
+                        every {
+                            noteIndexRepository.deleteAllByOwner(owner)
+                        } returns mockk<TaskInfo>()
+                    }
+
+                    it("해당 소유자의 모든 노트 인덱스를 삭제한다") {
+                        noteIndexService.deleteAllByOwner(owner)
+
+                        verify(exactly = 1) {
+                            noteIndexRepository.deleteAllByOwner(owner)
+                        }
                     }
                 }
             }

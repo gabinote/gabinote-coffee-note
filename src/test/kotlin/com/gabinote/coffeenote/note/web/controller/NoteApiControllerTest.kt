@@ -13,6 +13,8 @@ import com.gabinote.coffeenote.note.dto.note.controller.NoteUpdateReqControllerD
 import com.gabinote.coffeenote.note.dto.note.service.NoteListResServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteResServiceDto
 import com.gabinote.coffeenote.note.dto.noteField.controller.NoteFieldCreateReqControllerDto
+import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetListResControllerDto
+import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetWithCountResControllerDto
 import com.gabinote.coffeenote.note.dto.noteIndex.service.NoteIndexResServiceDto
 import com.gabinote.coffeenote.note.mapping.note.NoteMapper
 import com.gabinote.coffeenote.note.mapping.noteFieldIndex.NoteFieldIndexMapper
@@ -1180,17 +1182,17 @@ class NoteApiControllerTest : WebMvcTestTemplate() {
                     val fieldName = "test-field"
                     val query = "test"
                     val facetWithCount1 =
-                        com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetWithCountResControllerDto(
+                        NoteFieldValueFacetWithCountResControllerDto(
                             facet = "value1",
                             count = 5
                         )
                     val facetWithCount2 =
-                        com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetWithCountResControllerDto(
+                        NoteFieldValueFacetWithCountResControllerDto(
                             facet = "value2",
                             count = 10
                         )
                     val expected =
-                        com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetListResControllerDto(
+                        NoteFieldValueFacetListResControllerDto(
                             fieldName = fieldName,
                             facets = listOf(facetWithCount1, facetWithCount2)
                         )
@@ -1276,12 +1278,12 @@ class NoteApiControllerTest : WebMvcTestTemplate() {
                             val validFieldName = "테스트 필드_name-01"
                             val query = "test"
                             val facetWithCount =
-                                com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetWithCountResControllerDto(
+                                NoteFieldValueFacetWithCountResControllerDto(
                                     facet = "value1",
                                     count = 5
                                 )
                             val expected =
-                                com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetListResControllerDto(
+                                NoteFieldValueFacetListResControllerDto(
                                     fieldName = validFieldName,
                                     facets = listOf(facetWithCount)
                                 )
@@ -1319,7 +1321,7 @@ class NoteApiControllerTest : WebMvcTestTemplate() {
                     }
 
                     describe("실패케이스") {
-                      
+
 
                         context("fieldName이 50자를 초과하면") {
                             val longFieldName = "a".repeat(51)
@@ -1358,12 +1360,12 @@ class NoteApiControllerTest : WebMvcTestTemplate() {
                             val fieldName = "test-field"
                             val wildcardQuery = "*"
                             val facetWithCount =
-                                com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetWithCountResControllerDto(
+                                NoteFieldValueFacetWithCountResControllerDto(
                                     facet = "value1",
                                     count = 5
                                 )
                             val expected =
-                                com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetListResControllerDto(
+                                NoteFieldValueFacetListResControllerDto(
                                     fieldName = fieldName,
                                     facets = listOf(facetWithCount)
                                 )
@@ -1404,12 +1406,12 @@ class NoteApiControllerTest : WebMvcTestTemplate() {
                             val fieldName = "test-field"
                             val validQuery = "한글test123-_"
                             val facetWithCount =
-                                com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetWithCountResControllerDto(
+                                NoteFieldValueFacetWithCountResControllerDto(
                                     facet = "value1",
                                     count = 5
                                 )
                             val expected =
-                                com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetListResControllerDto(
+                                NoteFieldValueFacetListResControllerDto(
                                     fieldName = fieldName,
                                     facets = listOf(facetWithCount)
                                 )

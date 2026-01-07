@@ -1,11 +1,8 @@
 package com.gabinote.coffeenote.outbox.service
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.gabinote.coffeenote.note.event.noteCreated.NoteCreateEventHelper
-import com.gabinote.coffeenote.note.event.noteCreated.NoteCreatedEvent
 import com.gabinote.coffeenote.outbox.domain.OutBox
 import com.gabinote.coffeenote.outbox.domain.OutBoxRepository
-import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
 
 @Service
@@ -22,15 +19,15 @@ class OutBoxService(
         )
         outBoxRepository.save(outBox)
     }
-
-    fun createNoteCreated(noteId: ObjectId) {
-        val noteCreatedEvent = NoteCreatedEvent(noteId = noteId.toString())
-        create(
-            eventType = NoteCreateEventHelper.NOTE_CREATED_TOPIC,
-            payload = noteCreatedEvent,
-        )
-
-    }
+//
+//    fun createNoteCreated(noteId: ObjectId) {
+//        val noteCreatedEvent = NoteCreatedEvent(noteId = noteId.toString())
+//        create(
+//            eventType = NoteCreateEventHelper.NOTE_CREATED_TOPIC,
+//            payload = noteCreatedEvent,
+//        )
+//
+//    }
 
 
 }

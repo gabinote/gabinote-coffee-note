@@ -7,7 +7,8 @@
       "name": "브루잉 방법",
       "value": "하리오 V60",
       "noteId": "65321a0b1f2e3d4c5a6b7c81",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0002-4000-8000-000000000006",
@@ -15,7 +16,8 @@
       "name": "원두 사용량",
       "value": "20g",
       "noteId": "65321a0b1f2e3d4c5a6b7c81",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0002-4000-8000-000000000007",
@@ -23,7 +25,8 @@
       "name": "물 온도",
       "value": "92°C",
       "noteId": "65321a0b1f2e3d4c5a6b7c81",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0002-4000-8000-000000000008",
@@ -31,7 +34,8 @@
       "name": "총 추출 시간",
       "value": "2분 30초",
       "noteId": "65321a0b1f2e3d4c5a6b7c81",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0003-4000-8000-000000000009",
@@ -39,7 +43,8 @@
       "name": "원두명",
       "value": "콜롬비아 후일라 수프리모",
       "noteId": "65321a0b1f2e3d4c5a6b7c82",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0003-4000-8000-000000000010",
@@ -47,7 +52,8 @@
       "name": "로스터리",
       "value": "프릳츠 커피 컴퍼니",
       "noteId": "65321a0b1f2e3d4c5a6b7c82",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0003-4000-8000-000000000011",
@@ -55,7 +61,8 @@
       "name": "테이스팅 노트",
       "value": "견과류, 다크 초콜릿, 캐러멜, 부드러운 산미",
       "noteId": "65321a0b1f2e3d4c5a6b7c82",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0003-4000-8000-000000000012",
@@ -63,7 +70,8 @@
       "name": "추천",
       "value": "데일리 아메리카노 또는 라떼 베이스로 적합",
       "noteId": "65321a0b1f2e3d4c5a6b7c82",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0004-4000-8000-000000000013",
@@ -71,7 +79,8 @@
       "name": "원두명",
       "value": "케냐 AA",
       "noteId": "65321a0b1f2e3d4c5a6b7c83",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0004-4000-8000-000000000014",
@@ -79,7 +88,8 @@
       "name": "가공방식",
       "value": "더블 워시드 (Double Washed)",
       "noteId": "65321a0b1f2e3d4c5a6b7c83",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0004-4000-8000-000000000015",
@@ -87,7 +97,8 @@
       "name": "향미",
       "value": "블랙커런트, 자몽, 토마토, 쥬시한 산미",
       "noteId": "65321a0b1f2e3d4c5a6b7c83",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0004-4000-8000-000000000016",
@@ -95,7 +106,8 @@
       "name": "바디감",
       "value": "미디엄",
       "noteId": "65321a0b1f2e3d4c5a6b7c83",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0005-4000-8000-000000000017",
@@ -103,7 +115,8 @@
       "name": "추출 머신",
       "value": "브레빌 870",
       "noteId": "65321a0b1f2e3d4c5a6b7c84",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0005-4000-8000-000000000018",
@@ -111,7 +124,8 @@
       "name": "원두 (에스프레소)",
       "value": "일리카 클라시코",
       "noteId": "65321a0b1f2e3d4c5a6b7c84",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0005-4000-8000-000000000019",
@@ -119,7 +133,8 @@
       "name": "도징",
       "value": "18g",
       "noteId": "65321a0b1f2e3d4c5a6b7c84",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     },
     {
       "id": "a1b2c3d4-0005-4000-8000-000000000020",
@@ -127,7 +142,8 @@
       "name": "추출 시간",
       "value": "25초",
       "noteId": "65321a0b1f2e3d4c5a6b7c84",
-      "synchronizedAt": 1731821801000
+      "synchronizedAt": 1731821801000,
+      "noteHash": "hash001"
     }
   ]
 }

@@ -46,10 +46,10 @@ class TestMeiliSearchHelper(
     }
 
 
-    fun assertData(vararg fileNames: String) {
+    fun assertData(vararg fileNames: String, verbose: Boolean = true) {
         fileNames.forEach { fileName ->
-            logger.debug { "validate file: $fileName" }
-            validatePerFile(fileName)
+            if (verbose) logger.debug { "validate file: $fileName" }
+            validatePerFile(fileName, verbose)
         }
     }
 
@@ -62,11 +62,11 @@ class TestMeiliSearchHelper(
         }
     }
 
-    private fun validatePerFile(fileName: String) {
+    private fun validatePerFile(fileName: String, verbose: Boolean = true) {
         val validationSet = parseToDataTestSet(fileName)
-        logger.info { "Validation set: $validationSet" }
+        if (verbose) logger.info { "Validation set: $validationSet" }
 
-        val actualData = getAllDocuments(validationSet.uid)
+        val actualData = getAllDocuments(validationSet.uid, verbose)
         compareData(expected = validationSet.data, actual = actualData)
     }
 
@@ -201,13 +201,13 @@ class TestMeiliSearchHelper(
         }
     }
 
-    private fun getAllDocuments(uid: String): List<Map<String, Any>> {
+    private fun getAllDocuments(uid: String, verbose: Boolean = true): List<Map<String, Any>> {
         val index = meiliSearchClient.getIndex(uid)
         val searchRequest = SearchRequest("*").apply {
             limit = 1000
         }
         val searchRes = index.search(searchRequest)
-        logger.debug { "Search result hits: ${searchRes.hits}" }
+        if (verbose) logger.debug { "Search result hits: ${searchRes.hits}" }
         return searchRes.hits
     }
 }

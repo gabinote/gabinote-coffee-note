@@ -13,7 +13,6 @@ object NoteIndexTestDataHelper {
 
     fun createTestNoteIndexResServiceDto(
         id: String = UUID.randomUUID().toString(),
-        externalId: String = UUID.randomUUID().toString(),
         title: String = "테스트 노트 인덱스",
         owner: String = "test-owner",
         createdDate: LocalDateTime = LocalDateTime.now(),
@@ -24,7 +23,6 @@ object NoteIndexTestDataHelper {
         filters: Map<String, List<String>> = emptyMap(),
     ) = NoteIndexResServiceDto(
         id = id,
-        externalId = externalId,
         title = title,
         owner = owner,
         createdDate = createdDate,
@@ -34,7 +32,7 @@ object NoteIndexTestDataHelper {
     )
 
     fun createTestNoteIndexResControllerDto(
-        externalId: String = UUID.randomUUID().toString(),
+        id: String = UUID.randomUUID().toString(),
         title: String = "테스트 노트 인덱스",
         owner: String = "test-owner",
         createdDate: LocalDateTime = LocalDateTime.now(),
@@ -44,7 +42,7 @@ object NoteIndexTestDataHelper {
         ),
         filters: Map<String, List<String>> = emptyMap(),
     ) = NoteIndexResControllerDto(
-        externalId = externalId,
+        id = id,
         title = title,
         owner = owner,
         createdDate = createdDate,

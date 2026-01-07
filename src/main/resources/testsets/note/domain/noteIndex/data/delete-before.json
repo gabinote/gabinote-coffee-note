@@ -2,13 +2,13 @@
   "uid": "noteIndex",
   "data": [
     {
-      "id": "65571b111a00000000000001",
-      "externalId": "a1a1a1a1-0001-4001-8001-000000000001",
+      "id": "a1a1a1a1-0001-4001-8001-000000000001",
       "title": "에티오피아 예가체프 G1 워시드",
       "owner": "user_alpha",
       "createdDate": 1731821801000,
       "modifiedDate": 1731821801000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash001",
       "filters": {
         "품종": [
           "에티오피아"
@@ -51,13 +51,13 @@
       ]
     },
     {
-      "id": "65571b111a00000000000002",
-      "externalId": "a1a1a1a1-0002-4002-8002-000000000002",
+      "id": "a1a1a1a1-0002-4002-8002-000000000002",
       "title": "케냐 AA 아이스 드립",
       "owner": "user_alpha",
       "createdDate": 1731821802000,
       "modifiedDate": 1731821802000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash002",
       "filters": {
         "품종": [
           "케냐"
@@ -97,6 +97,58 @@
           "tag": "FLAVOR_NOTE_TAG",
           "value": [
             "자몽, 과일향, 산미"
+          ],
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "a1a1a1a1-0003-4003-8003-000000000003",
+      "title": "스타벅스 리저브 (에스프레소)",
+      "owner": "user_alpha",
+      "createdDate": 1731821803000,
+      "modifiedDate": 1731821803000,
+      "synchronizedAt": 1731821810000,
+      "noteHash": "hash003",
+      "filters": {
+        "품종": [
+          "콜롬비아"
+        ],
+        "로스팅_포인트": [
+          "다크"
+        ],
+        "향미": [
+          "초콜릿",
+          "견과류",
+          "스파이스"
+        ],
+        "태그": [
+          "겨울",
+          "핫"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "품종",
+          "tag": "BEAN_COUNTRY_TAG",
+          "value": [
+            "콜롬비아"
+          ],
+          "order": 0
+        },
+        {
+          "name": "로스팅_포인트",
+          "tag": "ROAST_LEVEL_TAG",
+          "value": [
+            "다크"
+          ],
+          "order": 1
+        },
+        {
+          "name": "향미",
+          "tag": "FLAVOR_NOTE_TAG",
+          "value": [
+            "초콜릿, 견과류, 스파이스"
           ],
           "order": 2
         }

@@ -172,7 +172,8 @@ class NoteFieldIndexRepositoryTest : MeiliSearchTestTemplate() {
                         name = "신규 필드",
                         value = "신규 값",
                         noteId = "65321a0b1f2e3d4c5a6b7c80",
-                        synchronizedAt = 1731821801000
+                        synchronizedAt = 1731821801000,
+                        noteHash = "hash001"
                     )
                     it("노트 필드 인덱스를 저장한다") {
 
@@ -196,7 +197,8 @@ class NoteFieldIndexRepositoryTest : MeiliSearchTestTemplate() {
                         name = "신규 필드1",
                         value = "신규 값1",
                         noteId = "65321a0b1f2e3d4c5a6b7c80",
-                        synchronizedAt = 1731821801000
+                        synchronizedAt = 1731821801000,
+                        noteHash = "hash001"
                     )
                     val noteFieldIndex2 = NoteFieldIndex(
                         id = "a1b2c3d4-0001-4000-8000-000000000004",
@@ -204,7 +206,8 @@ class NoteFieldIndexRepositoryTest : MeiliSearchTestTemplate() {
                         name = "신규 필드2",
                         value = "신규 값2",
                         noteId = "65321a0b1f2e3d4c5a6b7c80",
-                        synchronizedAt = 1731821801000
+                        synchronizedAt = 1731821801000,
+                        noteHash = "hash001"
                     )
                     it("모든 노트 필드 인덱스를 저장한다") {
 

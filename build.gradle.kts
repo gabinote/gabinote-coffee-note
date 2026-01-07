@@ -11,7 +11,7 @@ plugins {
     id("org.hidetake.swagger.generator") version "2.18.2"
     id("jacoco")
 }
-
+val springCloudVersion = "2025.0.0"
 group = "com.gabinote"
 version = "0.0.1-SNAPSHOT"
 description = "gabi-coffeenote"
@@ -29,6 +29,7 @@ java {
 dependencyManagement {
     imports {
         mavenBom("org.testcontainers:testcontainers-bom:2.0.2")
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
     }
 }
 
@@ -129,6 +130,9 @@ dependencies {
     //for hashing
     // https://mvnrepository.com/artifact/com.google.guava/guava
     implementation("com.google.guava:guava:33.5.0-jre")
+
+    // circuit breaker
+    implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
 }
 
 kotlin {

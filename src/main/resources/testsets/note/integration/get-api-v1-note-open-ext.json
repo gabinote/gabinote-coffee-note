@@ -7,8 +7,12 @@
       "externalId": "d4e5f6a7-b8c9-4012-8567-890123def012",
       "title": "Open Coffee Note",
       "thumbnail": "https://example.com/thumbnail3.jpg",
-      "createdDate": "2024-01-07T10:00:00.123",
-      "modifiedDate": "2024-01-08T10:00:00.123",
+      "createdDate": {
+        "$date": "2024-01-07T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-01-08T10:00:00Z"
+      },
       "fields": [
         {
           "_id": "field-1",
@@ -39,4 +43,3 @@
     }
   ]
 }
-

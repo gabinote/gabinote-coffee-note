@@ -1,5 +1,6 @@
 package com.gabinote.coffeenote.note.domain.note
 
+//import com.gabinote.coffeenote.common.util.debezium.json.deserializer.MongoDateDeserializer
 import com.gabinote.coffeenote.common.util.auditor.extId.ExternalId
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.CreatedDate
@@ -10,6 +11,7 @@ import java.time.LocalDateTime
 
 @Document(collection = "notes")
 data class Note(
+
     @Id
     var id: ObjectId? = null,
 

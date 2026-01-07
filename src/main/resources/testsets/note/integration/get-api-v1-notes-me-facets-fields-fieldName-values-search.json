@@ -6,21 +6,24 @@
       "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
       "name": "Origin",
       "value": "Ethiopia",
-      "noteId": "note-1"
+      "noteId": "note-1",
+      "noteHash": "hash001"
     },
     {
       "id": "value-index-2",
       "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
       "name": "Origin",
       "value": "Ethiopian Highlands",
-      "noteId": "note-2"
+      "noteId": "note-2",
+      "noteHash": "hash001"
     },
     {
       "id": "value-index-3",
       "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
       "name": "Origin",
       "value": "East Africa Ethiopia",
-      "noteId": "note-3"
+      "noteId": "note-3",
+      "noteHash": "hash001"
     }
   ]
 }

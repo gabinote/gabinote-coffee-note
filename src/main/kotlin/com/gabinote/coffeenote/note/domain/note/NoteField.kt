@@ -1,8 +1,11 @@
 package com.gabinote.coffeenote.note.domain.note
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
 
 data class NoteField(
+
+    @JsonProperty("_id")
     var id: String,
 
     var name: String,

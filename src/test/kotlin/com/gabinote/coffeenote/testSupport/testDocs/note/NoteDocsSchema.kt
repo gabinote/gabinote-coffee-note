@@ -51,7 +51,7 @@ object NoteDocsSchema {
     val noteResponseSchema: Array<FieldDescriptor> = noteFields
 
     private val noteIndexFields: Array<FieldDescriptor> = arrayOf(
-        fieldWithPath("external_id").type(SimpleType.STRING).description("노트 외부 ID"),
+        fieldWithPath("id").type(SimpleType.STRING).description("노트 외부 ID"),
         fieldWithPath("title").type(SimpleType.STRING).description("노트 제목"),
         fieldWithPath("owner").type(SimpleType.STRING).description("노트 소유자 ID"),
         fieldWithPath("created_date").type(SimpleType.STRING).description("노트 생성 일시"),

@@ -7,8 +7,12 @@
       "externalId": "a1b2c3d4-e5f6-4789-0123-4567890abcde",
       "title": "카페인 분석 노트: 에티오피아 예가체프",
       "thumbnail": "https://images.example.com/thumbnails/coffee_yirgacheffe.jpg",
-      "createdDate": "2024-07-29T10:00:00.123",
-      "modifiedDate": "2024-07-29T10:00:00.123",
+      "createdDate": {
+        "$date": "2024-07-29T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T10:00:00Z"
+      },
       "fields": [
         {
           "_id": "field_001",
@@ -65,8 +69,12 @@
       "externalId": "b2c3d4e5-f6a7-4890-1234-567890abcdef",
       "title": "핸드드립 레시피: 케냐 AA",
       "thumbnail": null,
-      "createdDate": "2024-07-28T15:30:00.456",
-      "modifiedDate": "2024-07-29T11:05:20.789",
+      "createdDate": {
+        "$date": "2024-07-28T15:30:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T11:05:20Z"
+      },
       "fields": [
         {
           "_id": "field_003",
@@ -121,8 +129,12 @@
       "externalId": "c3d4e5f6-a7b8-4901-2345-67890abcdef0",
       "title": "콜드브루 시음 기록",
       "thumbnail": "https://images.example.com/thumbnails/cold_brew_sample.png",
-      "createdDate": "2024-07-27T08:10:55.000",
-      "modifiedDate": "2024-07-27T08:10:55.000",
+      "createdDate": {
+        "$date": "2024-07-27T08:10:55Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-27T08:10:55Z"
+      },
       "fields": [
         {
           "_id": "field_005",
@@ -197,8 +209,12 @@
       "externalId": "d4e5f6a7-b8c9-4012-3456-7890abcdef01",
       "title": "하와이안 코나 농장 방문기",
       "thumbnail": "https://images.example.com/thumbnails/hawaii_kona.jpg",
-      "createdDate": "2024-07-26T20:45:10.500",
-      "modifiedDate": "2024-07-29T12:00:00.000",
+      "createdDate": {
+        "$date": "2024-07-26T20:45:10Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T12:00:00Z"
+      },
       "fields": [
         {
           "_id": "field_007",
@@ -246,8 +262,12 @@
       "externalId": "e5f6a7b8-c9d0-4123-4567-890abcdef012",
       "title": "드립백 제작 실험 기록",
       "thumbnail": null,
-      "createdDate": "2024-07-25T11:22:33.666",
-      "modifiedDate": "2024-07-25T11:22:33.666",
+      "createdDate": {
+        "$date": "2024-07-25T11:22:33Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-25T11:22:33Z"
+      },
       "fields": [
         {
           "_id": "field_009",
@@ -304,8 +324,12 @@
       "externalId": "f6a7b8c9-d0e1-4234-5678-90abcdef0123",
       "title": "블렌딩 노트: 스모키 카라멜",
       "thumbnail": "https://images.example.com/thumbnails/blending_smoke.jpg",
-      "createdDate": "2024-07-24T18:00:00.000",
-      "modifiedDate": "2024-07-29T13:40:00.000",
+      "createdDate": {
+        "$date": "2024-07-24T18:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T13:40:00Z"
+      },
       "fields": [
         {
           "_id": "field_011",
@@ -368,8 +392,12 @@
       "externalId": "01234567-890a-4bcd-ef01-234567890abc",
       "title": "에스프레소 추출 최적화",
       "thumbnail": "https://images.example.com/thumbnails/espresso_opt.jpg",
-      "createdDate": "2024-07-23T09:30:00.000",
-      "modifiedDate": "2024-07-23T09:30:00.000",
+      "createdDate": {
+        "$date": "2024-07-23T09:30:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-23T09:30:00Z"
+      },
       "fields": [
         {
           "_id": "field_013",
@@ -439,8 +467,12 @@
       "externalId": "12345678-90ab-cdef-0123-4567890abcde",
       "title": "카페 방문 리뷰: 서울 M 카페",
       "thumbnail": null,
-      "createdDate": "2024-07-22T14:00:00.000",
-      "modifiedDate": "2024-07-29T14:55:00.000",
+      "createdDate": {
+        "$date": "2024-07-22T14:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T14:55:00Z"
+      },
       "fields": [
         {
           "_id": "field_015",
@@ -496,8 +528,12 @@
       "externalId": "23456789-0abc-def0-1234-567890abcdef",
       "title": "최신 커피 머신 비교",
       "thumbnail": "https://images.example.com/thumbnails/new_machine_comp.png",
-      "createdDate": "2024-07-21T17:45:00.000",
-      "modifiedDate": "2024-07-21T17:45:00.000",
+      "createdDate": {
+        "$date": "2024-07-21T17:45:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-21T17:45:00Z"
+      },
       "fields": [
         {
           "_id": "field_017",
@@ -552,8 +588,12 @@
       "externalId": "34567890-abcd-ef01-2345-67890abcdef0",
       "title": "브루잉 물 레시피",
       "thumbnail": null,
-      "createdDate": "2024-07-20T10:20:00.000",
-      "modifiedDate": "2024-07-29T15:30:00.000",
+      "createdDate": {
+        "$date": "2024-07-20T10:20:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T15:30:00Z"
+      },
       "fields": [
         {
           "_id": "field_019",
@@ -627,8 +667,12 @@
       "externalId": "4567890a-bcde-f012-3456-7890abcdef01",
       "title": "파나마 게이샤 심층 분석",
       "thumbnail": "https://images.example.com/thumbnails/panama_geisha.jpg",
-      "createdDate": "2024-07-19T06:00:00.000",
-      "modifiedDate": "2024-07-19T06:00:00.000",
+      "createdDate": {
+        "$date": "2024-07-19T06:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-19T06:00:00Z"
+      },
       "fields": [
         {
           "_id": "field_021",
@@ -685,8 +729,12 @@
       "externalId": "567890ab-cdef-0123-4567-890abcdef012",
       "title": "브라질 산토스 맛 평가",
       "thumbnail": null,
-      "createdDate": "2024-07-18T22:15:00.000",
-      "modifiedDate": "2024-07-29T16:45:00.000",
+      "createdDate": {
+        "$date": "2024-07-18T22:15:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T16:45:00Z"
+      },
       "fields": [
         {
           "_id": "field_023",
@@ -741,8 +789,12 @@
       "externalId": "67890abc-def0-1234-5678-90abcdef0123",
       "title": "집에서 만드는 플랫 화이트",
       "thumbnail": "https://images.example.com/thumbnails/flat_white.jpg",
-      "createdDate": "2024-07-17T13:40:00.000",
-      "modifiedDate": "2024-07-17T13:40:00.000",
+      "createdDate": {
+        "$date": "2024-07-17T13:40:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-17T13:40:00Z"
+      },
       "fields": [
         {
           "_id": "field_025",
@@ -799,8 +851,12 @@
       "externalId": "7890abcd-ef01-2345-6789-0abcdef01234",
       "title": "카페 컨셉 기획 (비공개)",
       "thumbnail": null,
-      "createdDate": "2024-07-16T16:00:00.000",
-      "modifiedDate": "2024-07-29T18:00:00.000",
+      "createdDate": {
+        "$date": "2024-07-16T16:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T18:00:00Z"
+      },
       "fields": [
         {
           "_id": "field_027",
@@ -849,8 +905,12 @@
       "externalId": "890abcde-f012-3456-7890-abcdef012345",
       "title": "커피 생두 수입 절차 요약",
       "thumbnail": "https://images.example.com/thumbnails/import_summary.jpg",
-      "createdDate": "2024-07-15T10:00:00.000",
-      "modifiedDate": "2024-07-15T10:00:00.000",
+      "createdDate": {
+        "$date": "2024-07-15T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-15T10:00:00Z"
+      },
       "fields": [
         {
           "_id": "field_029",
@@ -906,8 +966,12 @@
       "externalId": "90abcdef-0123-4567-890a-bcdef0123456",
       "title": "새로운 커피 품종 연구",
       "thumbnail": null,
-      "createdDate": "2024-07-14T11:00:00.000",
-      "modifiedDate": "2024-07-29T19:20:00.000",
+      "createdDate": {
+        "$date": "2024-07-14T11:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T19:20:00Z"
+      },
       "fields": [
         {
           "_id": "field_031",
@@ -970,8 +1034,12 @@
       "externalId": "a0a1a2a3-b4b5-c6c7-d8d9-e0e1e2e3e4e5",
       "title": "워터 디스펜서 정기 점검",
       "thumbnail": null,
-      "createdDate": "2024-07-13T09:00:00.000",
-      "modifiedDate": "2024-07-13T09:00:00.000",
+      "createdDate": {
+        "$date": "2024-07-13T09:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-13T09:00:00Z"
+      },
       "fields": [
         {
           "_id": "field_033",
@@ -1030,8 +1098,12 @@
       "externalId": "b1b2b3b4-c5c6-d7d8-e9e0-f1f2f3f4f5f6",
       "title": "카페 메뉴 개발: 시즌 한정",
       "thumbnail": "https://images.example.com/thumbnails/seasonal_menu.png",
-      "createdDate": "2024-07-12T14:30:00.000",
-      "modifiedDate": "2024-07-29T20:40:00.000",
+      "createdDate": {
+        "$date": "2024-07-12T14:30:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T20:40:00Z"
+      },
       "fields": [
         {
           "_id": "field_035",
@@ -1096,8 +1168,12 @@
       "externalId": "c2c3c4c5-d6d7-e8e9-f0f1-g2g3g4g5g6g7",
       "title": "코스타리카 타라주 커핑 기록",
       "thumbnail": null,
-      "createdDate": "2024-07-11T18:00:00.000",
-      "modifiedDate": "2024-07-11T18:00:00.000",
+      "createdDate": {
+        "$date": "2024-07-11T18:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-11T18:00:00Z"
+      },
       "fields": [
         {
           "_id": "field_037",
@@ -1152,8 +1228,12 @@
       "externalId": "d3d4d5d6-e7e8-f9f0-g1g2-h3h4h5h6h7h8",
       "title": "카페 장비 유지보수 스케줄",
       "thumbnail": "https://images.example.com/thumbnails/maintenance_schedule.jpg",
-      "createdDate": "2024-07-10T08:30:00.000",
-      "modifiedDate": "2024-07-29T21:55:00.000",
+      "createdDate": {
+        "$date": "2024-07-10T08:30:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T21:55:00Z"
+      },
       "fields": [
         {
           "_id": "field_039",
@@ -1209,8 +1289,12 @@
       "externalId": "e4e5e6e7-f8f9-g0g1-h2h3-i4i5i6i7i8i9",
       "title": "드립커피 추출 변수 기록",
       "thumbnail": null,
-      "createdDate": "2024-07-09T12:12:12.000",
-      "modifiedDate": "2024-07-09T12:12:12.000",
+      "createdDate": {
+        "$date": "2024-07-09T12:12:12Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-09T12:12:12Z"
+      },
       "fields": [
         {
           "_id": "field_041",
@@ -1267,8 +1351,12 @@
       "externalId": "f5f6f7f8-g9g0-h1h2-i3i4-j5j6j7j8j9j0",
       "title": "카페 창업 예상 지출",
       "thumbnail": "https://images.example.com/thumbnails/startup_cost.png",
-      "createdDate": "2024-07-08T15:00:00.000",
-      "modifiedDate": "2024-07-29T23:10:00.000",
+      "createdDate": {
+        "$date": "2024-07-08T15:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T23:10:00Z"
+      },
       "fields": [
         {
           "_id": "field_043",
@@ -1331,8 +1419,12 @@
       "externalId": "1a2b3c4d-5e6f-7a8b-9c0d-e1f2a3b4c5d6",
       "title": "에어로프레스 레시피: 인버티드",
       "thumbnail": null,
-      "createdDate": "2024-07-07T11:00:00.000",
-      "modifiedDate": "2024-07-07T11:00:00.000",
+      "createdDate": {
+        "$date": "2024-07-07T11:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-07T11:00:00Z"
+      },
       "fields": [
         {
           "_id": "field_045",
@@ -1404,8 +1496,12 @@
       "externalId": "2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
       "title": "베트남 코피 루왁 관련 기사 스크랩",
       "thumbnail": "https://images.example.com/thumbnails/kopi_luwak.jpg",
-      "createdDate": "2024-07-06T09:40:00.000",
-      "modifiedDate": "2024-07-29T10:30:00.000",
+      "createdDate": {
+        "$date": "2024-07-06T09:40:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T10:30:00Z"
+      },
       "fields": [
         {
           "_id": "field_047",
@@ -1453,8 +1549,12 @@
       "externalId": "3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
       "title": "카페 직원 교육 내용 정리",
       "thumbnail": null,
-      "createdDate": "2024-07-05T16:20:00.000",
-      "modifiedDate": "2024-07-05T16:20:00.000",
+      "createdDate": {
+        "$date": "2024-07-05T16:20:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-05T16:20:00Z"
+      },
       "fields": [
         {
           "_id": "field_049",
@@ -1519,8 +1619,12 @@
       "externalId": "4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f90",
       "title": "이달의 커피 원두 재고 현황",
       "thumbnail": "https://images.example.com/thumbnails/stock_status.jpg",
-      "createdDate": "2024-07-04T10:00:00.000",
-      "modifiedDate": "2024-07-29T11:45:00.000",
+      "createdDate": {
+        "$date": "2024-07-04T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T11:45:00Z"
+      },
       "fields": [
         {
           "_id": "field_051",
@@ -1583,8 +1687,12 @@
       "externalId": "5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f90a1",
       "title": "에어로프레스 대회 레시피",
       "thumbnail": null,
-      "createdDate": "2024-07-03T17:30:00.000",
-      "modifiedDate": "2024-07-03T17:30:00.000",
+      "createdDate": {
+        "$date": "2024-07-03T17:30:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-03T17:30:00Z"
+      },
       "fields": [
         {
           "_id": "field_053",
@@ -1647,8 +1755,12 @@
       "externalId": "6f7a8b9c-0d1e-2f3a-4b5c-6d7e8f90a1b2",
       "title": "라떼 아트 패턴 연습",
       "thumbnail": "https://images.example.com/thumbnails/latte_art_rosetta.jpg",
-      "createdDate": "2024-07-02T13:00:00.000",
-      "modifiedDate": "2024-07-29T13:00:00.000",
+      "createdDate": {
+        "$date": "2024-07-02T13:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T13:00:00Z"
+      },
       "fields": [
         {
           "_id": "field_055",
@@ -1696,8 +1808,12 @@
       "externalId": "7a8b9c0d-1e2f-3a4b-5c6d-7e8f90a1b2c3",
       "title": "루왁 커피의 진실: 윤리적 문제",
       "thumbnail": null,
-      "createdDate": "2024-07-01T08:50:00.000",
-      "modifiedDate": "2024-07-01T08:50:00.000",
+      "createdDate": {
+        "$date": "2024-07-01T08:50:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-01T08:50:00Z"
+      },
       "fields": [
         {
           "_id": "field_057",
@@ -1756,8 +1872,12 @@
       "externalId": "8b9c0d1e-2f3a-4b5c-6d7e-8f90a1b2c3d4",
       "title": "카페 머그컵 디자인 선정",
       "thumbnail": "https://images.example.com/thumbnails/mug_design.png",
-      "createdDate": "2024-06-30T14:10:00.000",
-      "modifiedDate": "2024-07-29T14:40:00.000",
+      "createdDate": {
+        "$date": "2024-06-30T14:10:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T14:40:00Z"
+      },
       "fields": [
         {
           "_id": "field_059",
@@ -1820,8 +1940,12 @@
       "externalId": "9c0d1e2f-3a4b-5c6d-7e8f-90a1b2c3d4e5",
       "title": "브루잉 커피 정량화 실험",
       "thumbnail": null,
-      "createdDate": "2024-06-29T19:55:00.000",
-      "modifiedDate": "2024-06-29T19:55:00.000",
+      "createdDate": {
+        "$date": "2024-06-29T19:55:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-06-29T19:55:00Z"
+      },
       "fields": [
         {
           "_id": "field_061",
@@ -1869,8 +1993,12 @@
       "externalId": "d0e1f2g3-h4i5-j6k7-l8m9-n0o1p2q3r4s5",
       "title": "로스팅 프로파일 기록: 시티",
       "thumbnail": "https://images.example.com/thumbnails/roast_profile_city.jpg",
-      "createdDate": "2024-06-28T10:00:00.000",
-      "modifiedDate": "2024-07-29T16:00:00.000",
+      "createdDate": {
+        "$date": "2024-06-28T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T16:00:00Z"
+      },
       "fields": [
         {
           "_id": "field_063",

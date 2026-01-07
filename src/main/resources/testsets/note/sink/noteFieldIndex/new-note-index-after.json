@@ -1,0 +1,15 @@
+{
+  "uid": "noteFieldIndex",
+  "data": [
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "owner": "user_alpha_1234",
+      "name": "원산지",
+      "value": "에티오피아",
+      "noteId": "a1b2c3d4-e5f6-4789-0123-4567890abcde",
+      "synchronizedAt": 1030460400,
+      "noteHash": "190ec684c1d1b32ea48603ca54f32dd1"
+    }
+  ]
+}
+

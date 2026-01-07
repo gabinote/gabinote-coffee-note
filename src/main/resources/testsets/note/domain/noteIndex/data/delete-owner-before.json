@@ -2,13 +2,14 @@
   "uid": "noteIndex",
   "data": [
     {
-      "id": "65571b111a00000000000001",
-      "externalId": "a1a1a1a1-0001-4001-8001-000000000001",
+      "id": "a1a1a1a1-0001-4001-8001-000000000001",
       "title": "에티오피아 예가체프 G1 워시드",
       "owner": "user_alpha",
       "createdDate": 1731821801000,
       "modifiedDate": 1731821801000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
+      "noteHash": "hash001",
       "filters": {
         "품종": [
           "에티오피아"
@@ -51,13 +52,14 @@
       ]
     },
     {
-      "id": "65571b111a00000000000002",
-      "externalId": "a1a1a1a1-0002-4002-8002-000000000002",
+      "id": "a1a1a1a1-0002-4002-8002-000000000002",
       "title": "케냐 AA 아이스 드립",
       "owner": "user_alpha",
       "createdDate": 1731821802000,
       "modifiedDate": 1731821802000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
+      "noteHash": "hash002",
       "filters": {
         "품종": [
           "케냐"
@@ -103,13 +105,14 @@
       ]
     },
     {
-      "id": "65571b111a00000000000003",
-      "externalId": "a1a1a1a1-0003-4003-8003-000000000003",
+      "id": "a1a1a1a1-0003-4003-8003-000000000003",
       "title": "스타벅스 리저브 (에스프레소)",
       "owner": "user_alpha",
       "createdDate": 1731821803000,
       "modifiedDate": 1731821803000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
+      "noteHash": "hash003",
       "filters": {
         "로스터리": [
           "스타벅스 리저브"
@@ -153,13 +156,13 @@
       ]
     },
     {
-      "id": "65571b111a00000000000004",
-      "externalId": "a1a1a1a1-0004-4004-8004-000000000004",
+      "id": "a1a1a1a1-0004-4004-8004-000000000004",
       "title": "코만단테 그라인더 테스트 (콜롬비아)",
       "owner": "user_alpha",
       "createdDate": 1731821804000,
       "modifiedDate": 1731821804000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "콜롬비아"
@@ -206,13 +209,13 @@
       ]
     },
     {
-      "id": "65571b111a00000000000005",
-      "externalId": "a1a1a1a1-0005-4005-8005-000000000005",
+      "id": "a1a1a1a1-0005-4005-8005-000000000005",
       "title": "비오는 날의 라떼",
       "owner": "user_alpha",
       "createdDate": 1731821805000,
       "modifiedDate": 1731821805000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "마신_날씨": [
           "비오는_날"
@@ -256,13 +259,13 @@
       ]
     },
     {
-      "id": "65571b111a00000000000006",
-      "externalId": "a1a1a1a1-0006-4006-8006-000000000006",
+      "id": "a1a1a1a1-0006-4006-8006-000000000006",
       "title": "콜롬비아 무산소 발효",
       "owner": "user_alpha",
       "createdDate": 1731821806000,
       "modifiedDate": 1731821806000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "콜롬비아"
@@ -306,13 +309,13 @@
       ]
     },
     {
-      "id": "65571b111a00000000000007",
-      "externalId": "a1a1a1a1-0007-4007-8007-000000000007",
+      "id": "a1a1a1a1-0007-4007-8007-000000000007",
       "title": "브라질 산토스 (프렌치 프레스)",
       "owner": "user_alpha",
       "createdDate": 1731821807000,
       "modifiedDate": 1731821807000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "브라질"
@@ -355,13 +358,13 @@
       ]
     },
     {
-      "id": "65571b111a00000000000008",
-      "externalId": "a1a1a1a1-0008-4008-8008-000000000008",
+      "id": "a1a1a1a1-0008-4008-8008-000000000008",
       "title": "디카페인 커피",
       "owner": "user_alpha",
       "createdDate": 1731821808000,
       "modifiedDate": 1731821808000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "태그": [
           "디카페인"
@@ -404,13 +407,13 @@
       ]
     },
     {
-      "id": "65571b111a00000000000009",
-      "externalId": "a1a1a1a1-0009-4009-8009-000000000009",
+      "id": "a1a1a1a1-0009-4009-8009-000000000009",
       "title": "과테말라 안티구아 (90도)",
       "owner": "user_alpha",
       "createdDate": 1731821809000,
       "modifiedDate": 1731821809000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "과테말라"
@@ -454,13 +457,13 @@
       ]
     },
     {
-      "id": "65571b111a00000000000010",
-      "externalId": "a1a1a1a1-0010-4010-8010-000000000010",
+      "id": "a1a1a1a1-0010-4010-8010-000000000010",
       "title": "파나마 게이샤 스페셜티",
       "owner": "user_alpha",
       "createdDate": 1731821810000,
       "modifiedDate": 1731821810000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "파나마"
@@ -508,13 +511,13 @@
       ]
     },
     {
-      "id": "65571b111b00000000000011",
-      "externalId": "b1b1b1b1-0001-4001-8001-000000000001",
+      "id": "b1b1b1b1-0001-4001-8001-000000000001",
       "title": "프릳츠 '잘되어가시나' 블렌드",
       "owner": "user_beta",
       "createdDate": 1731821811000,
       "modifiedDate": 1731821811000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "로스터리": [
           "프릳츠"
@@ -558,13 +561,13 @@
       ]
     },
     {
-      "id": "65571b111b00000000000012",
-      "externalId": "b1b1b1b1-0002-4002-8002-000000000002",
+      "id": "b1b1b1b1-0002-4002-8002-000000000002",
       "title": "인도네시아 만델링 (다크 로스트)",
       "owner": "user_beta",
       "createdDate": 1731821812000,
       "modifiedDate": 1731821812000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "인도네시아"
@@ -608,13 +611,13 @@
       ]
     },
     {
-      "id": "65571b111b00000000000013",
-      "externalId": "b1b1b1b1-0003-4003-8003-000000000003",
+      "id": "b1b1b1b1-0003-4003-8003-000000000003",
       "title": "에어로프레스 챔피언 레시피",
       "owner": "user_beta",
       "createdDate": 1731821813000,
       "modifiedDate": 1731821813000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "추출_방식": [
           "에어로프레스"
@@ -660,13 +663,13 @@
       ]
     },
     {
-      "id": "65571b111b00000000000014",
-      "externalId": "b1b1b1b1-0004-4004-8004-000000000004",
+      "id": "b1b1b1b1-0004-4004-8004-000000000004",
       "title": "코스타리카 허니 프로세스",
       "owner": "user_beta",
       "createdDate": 1731821814000,
       "modifiedDate": 1731821814000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "코스타리카"
@@ -711,13 +714,13 @@
       ]
     },
     {
-      "id": "65571b111b00000000000015",
-      "externalId": "b1b1b1b1-0005-4005-8005-000000000005",
+      "id": "b1b1b1b1-0005-4005-8005-000000000005",
       "title": "바라짜 그라인더 첫 사용",
       "owner": "user_beta",
       "createdDate": 1731821815000,
       "modifiedDate": 1731821815000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "그라인더": [
           "바라짜"
@@ -760,13 +763,13 @@
       ]
     },
     {
-      "id": "65571b111b00000000000016",
-      "externalId": "b1b1b1b1-0006-4006-8006-000000000006",
+      "id": "b1b1b1b1-0006-4006-8006-000000000006",
       "title": "블루보틀 콜드브루",
       "owner": "user_beta",
       "createdDate": 1731821816000,
       "modifiedDate": 1731821816000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "카페_이름": [
           "블루보틀"
@@ -810,13 +813,13 @@
       ]
     },
     {
-      "id": "65571b111b00000000000017",
-      "externalId": "b1b1b1b1-0007-4007-8007-000000000007",
+      "id": "b1b1b1b1-0007-4007-8007-000000000007",
       "title": "흐린 날의 핸드드립",
       "owner": "user_beta",
       "createdDate": 1731821817000,
       "modifiedDate": 1731821817000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "마신_날씨": [
           "흐림"
@@ -859,13 +862,13 @@
       ]
     },
     {
-      "id": "65571b111b00000000000018",
-      "externalId": "b1b1b1b1-0008-4008-8008-000000000008",
+      "id": "b1b1b1b1-0008-4008-8008-000000000008",
       "title": "에티오피아 시다모 내추럴",
       "owner": "user_beta",
       "createdDate": 1731821818000,
       "modifiedDate": 1731821818000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "에티오피아"
@@ -909,13 +912,13 @@
       ]
     },
     {
-      "id": "65571b111b00000000000019",
-      "externalId": "b1b1b1b1-0009-4009-8009-000000000009",
+      "id": "b1b1b1b1-0009-4009-8009-000000000009",
       "title": "콜롬비아 디카페인 (온라인 구매)",
       "owner": "user_beta",
       "createdDate": 1731821819000,
       "modifiedDate": 1731821819000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "콜롬비아"
@@ -958,13 +961,13 @@
       ]
     },
     {
-      "id": "65571b111b00000000000020",
-      "externalId": "b1b1b1b1-0010-4010-8010-000000000020",
+      "id": "b1b1b1b1-0010-4010-8010-000000000020",
       "title": "실패한 추출 기록",
       "owner": "user_beta",
       "createdDate": 1731821820000,
       "modifiedDate": 1731821820000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "태그": [
           "실패",
@@ -1009,13 +1012,13 @@
       ]
     },
     {
-      "id": "65571b111c00000000000021",
-      "externalId": "c1c1c1c1-0001-4001-8001-000000000001",
+      "id": "c1c1c1c1-0001-4001-8001-000000000001",
       "title": "파나마 게이샤 워시드 (95도)",
       "owner": "user_gamma",
       "createdDate": 1731821821000,
       "modifiedDate": 1731821821000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "파나마"
@@ -1063,13 +1066,13 @@
       ]
     },
     {
-      "id": "65571b111c00000000000022",
-      "externalId": "c1c1c1c1-0002-4002-8002-000000000002",
+      "id": "c1c1c1c1-0002-4002-8002-000000000002",
       "title": "펠로우 오드 그라인더 (브라질)",
       "owner": "user_gamma",
       "createdDate": 1731821822000,
       "modifiedDate": 1731821822000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "그라인더": [
           "펠로우"
@@ -1116,13 +1119,13 @@
       ]
     },
     {
-      "id": "65571b111c00000000000023",
-      "externalId": "c1c1c1c1-0003-4003-8003-000000000003",
+      "id": "c1c1c1c1-0003-4003-8003-000000000003",
       "title": "콜드브루 레시피 (에티오피아)",
       "owner": "user_gamma",
       "createdDate": 1731821823000,
       "modifiedDate": 1731821823000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "추출_방식": [
           "콜드브루"
@@ -1170,13 +1173,13 @@
       ]
     },
     {
-      "id": "65571b111c00000000000024",
-      "externalId": "c1c1c1c1-0004-4004-8004-000000000004",
+      "id": "c1c1c1c1-0004-4004-8004-000000000004",
       "title": "케냐 키암부 워시드 (테일러커피)",
       "owner": "user_gamma",
       "createdDate": 1731821824000,
       "modifiedDate": 1731821824000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "케냐"
@@ -1222,13 +1225,13 @@
       ]
     },
     {
-      "id": "65571b111c00000000000025",
-      "externalId": "c1c1c1c1-0005-4005-8005-000000000005",
+      "id": "c1c1c1c1-0005-4005-8005-000000000005",
       "title": "콜롬비아 핑크버번",
       "owner": "user_gamma",
       "createdDate": 1731821825000,
       "modifiedDate": 1731821825000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "콜롬비아"
@@ -1276,13 +1279,13 @@
       ]
     },
     {
-      "id": "65571b111c00000000000026",
-      "externalId": "c1c1c1c1-0006-4006-8006-000000000006",
+      "id": "c1c1c1c1-0006-4006-8006-000000000006",
       "title": "하우스 블렌드 에스프레소",
       "owner": "user_gamma",
       "createdDate": 1731821826000,
       "modifiedDate": 1731821826000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "브라질",
@@ -1330,13 +1333,13 @@
       ]
     },
     {
-      "id": "65571b111c00000000000027",
-      "externalId": "c1c1c1c1-0007-4007-8007-000000000007",
+      "id": "c1c1c1c1-0007-4007-8007-000000000007",
       "title": "% 아라비카 방문",
       "owner": "user_gamma",
       "createdDate": 1731821827000,
       "modifiedDate": 1731821827000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "카페_이름": [
           "% 아라비카"
@@ -1380,13 +1383,13 @@
       ]
     },
     {
-      "id": "65571b111c00000000000028",
-      "externalId": "c1c1c1c1-0008-4008-8008-000000000008",
+      "id": "c1c1c1c1-0008-4008-8008-000000000008",
       "title": "코스타리카 따라주 SHB",
       "owner": "user_gamma",
       "createdDate": 1731821828000,
       "modifiedDate": 1731821828000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "코스타리카"
@@ -1433,13 +1436,13 @@
       ]
     },
     {
-      "id": "65571b111c00000000000029",
-      "externalId": "c1c1c1c1-0009-4009-8009-000000000009",
+      "id": "c1c1c1c1-0009-4009-8009-000000000009",
       "title": "에티오피아 구지 내추럴 (라이트)",
       "owner": "user_gamma",
       "createdDate": 1731821829000,
       "modifiedDate": 1731821829000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "에티오피아"
@@ -1487,13 +1490,13 @@
       ]
     },
     {
-      "id": "65571b111c00000000000030",
-      "externalId": "c1c1c1c1-0010-4010-8010-000000000030",
+      "id": "c1c1c1c1-0010-4010-8010-000000000030",
       "title": "모닝 커피 (블렌드)",
       "owner": "user_gamma",
       "createdDate": 1731821830000,
       "modifiedDate": 1731821830000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash010",
       "filters": {
         "품종": [
           "블렌드"

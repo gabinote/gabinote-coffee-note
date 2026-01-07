@@ -125,10 +125,6 @@ class NoteIndexRepository(
         return index.deleteDocument(noteIndexUid)
     }
 
-    fun deleteAllByExternalId(externalId: String): TaskInfo {
-        val filter = filterText("externalId", externalId)
-        return index.deleteDocumentsByFilter(filter)
-    }
 
     fun deleteAllByOwner(owner: String): TaskInfo {
         val filter = filterText("owner", owner)

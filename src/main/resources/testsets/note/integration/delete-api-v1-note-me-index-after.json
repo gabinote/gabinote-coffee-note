@@ -1,0 +1,29 @@
+{
+  "uid": "noteIndex",
+  "data": [
+    {
+      "id": "f6a7b8c9-d0e1-4234-8789-012345f01235",
+      "title": "No Note Title",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522f",
+      "hash": "0d94254a853ed9de08ff9e4f956ad1fc",
+      "createdDate": 1704848400123,
+      "modifiedDate": 1704848400123,
+      "filters": {
+        "No Delete Field": [
+          "No Delete Value"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "No Delete Field",
+          "tag": "edit",
+          "value": [
+            "No Delete Value"
+          ],
+          "order": 0
+        }
+      ]
+    }
+  ]
+}
+

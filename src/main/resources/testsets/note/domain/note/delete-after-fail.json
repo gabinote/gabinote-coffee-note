@@ -5,8 +5,12 @@
       "externalId": "a1b2c3d4-e5f6-4789-0123-4567890abcde",
       "title": "카페인 분석 노트: 에티오피아 예가체프",
       "thumbnail": "https://images.example.com/thumbnails/coffee_yirgacheffe.jpg",
-      "createdDate": "2024-07-29T10:00:00.123",
-      "modifiedDate": "2024-07-29T10:00:00.123",
+      "createdDate": {
+        "$date": "2024-07-29T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T10:00:00Z"
+      },
       "fields": [
         {
           "_id": "field_001",
@@ -61,8 +65,12 @@
       "externalId": "b2c3d4e5-f6a7-4890-1234-567890abcdef",
       "title": "핸드드립 레시피: 케냐 AA",
       "thumbnail": null,
-      "createdDate": "2024-07-28T15:30:00.456",
-      "modifiedDate": "2024-07-29T11:05:20.789",
+      "createdDate": {
+        "$date": "2024-07-28T15:30:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T11:05:20Z"
+      },
       "fields": [
         {
           "_id": "field_003",
@@ -115,8 +123,12 @@
       "externalId": "c3d4e5f6-a7b8-4901-2345-67890abcdef0",
       "title": "콜드브루 시음 기록",
       "thumbnail": "https://images.example.com/thumbnails/cold_brew_sample.png",
-      "createdDate": "2024-07-27T08:10:55.000",
-      "modifiedDate": "2024-07-27T08:10:55.000",
+      "createdDate": {
+        "$date": "2024-07-27T08:10:55Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-27T08:10:55Z"
+      },
       "fields": [
         {
           "_id": "field_005",
@@ -189,8 +201,12 @@
       "externalId": "d4e5f6a7-b8c9-4012-3456-7890abcdef01",
       "title": "하와이안 코나 농장 방문기",
       "thumbnail": "https://images.example.com/thumbnails/hawaii_kona.jpg",
-      "createdDate": "2024-07-26T20:45:10.500",
-      "modifiedDate": "2024-07-29T12:00:00.000",
+      "createdDate": {
+        "$date": "2024-07-26T20:45:10Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T12:00:00Z"
+      },
       "fields": [
         {
           "_id": "field_007",

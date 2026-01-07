@@ -2,13 +2,13 @@
   "uid": "noteIndex",
   "data": [
     {
-      "id": "65571b111a00000000000001",
-      "externalId": "a1a1a1a1-0001-4001-8001-000000000001",
+      "id": "a1a1a1a1-0001-4001-8001-000000000001",
       "title": "에티오피아 예가체프 G1 워시드",
       "owner": "user_alpha",
       "createdDate": 1731821801000,
       "modifiedDate": 1731821801000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash001",
       "filters": {
         "품종": [
           "에티오피아"
@@ -51,13 +51,13 @@
       ]
     },
     {
-      "id": "65571b111a00000000000002",
-      "externalId": "a1a1a1a1-0001-4001-8001-000000000002",
+      "id": "a1a1a1a1-0001-4001-8001-000000000002",
       "title": "에티오피아 예가체프 G1 워시드2",
       "owner": "user_alpha",
       "createdDate": 1731821801000,
       "modifiedDate": 1731821801000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash002",
       "filters": {
         "품종": [
           "에티오피아2"
@@ -100,13 +100,13 @@
       ]
     },
     {
-      "id": "65571b111a00000000000003",
-      "externalId": "a1a1a1a1-0001-4001-8001-000000000003",
+      "id": "a1a1a1a1-0001-4001-8001-000000000003",
       "title": "에티오피아 예가체프 G1 워시드3",
       "owner": "user_alpha",
       "createdDate": 1731821801000,
       "modifiedDate": 1731821801000,
       "synchronizedAt": 1731821810000,
+      "noteHash": "hash003",
       "filters": {
         "품종": [
           "에티오피아3"

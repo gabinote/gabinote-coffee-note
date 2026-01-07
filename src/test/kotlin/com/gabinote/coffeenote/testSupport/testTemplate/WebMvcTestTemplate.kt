@@ -2,6 +2,7 @@ package com.gabinote.coffeenote.testSupport.testTemplate
 
 
 import com.gabinote.coffeenote.testSupport.testConfig.jackson.UseJackson
+import com.gabinote.coffeenote.testSupport.testUtil.time.TestTimeProvider
 import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.junit5.MockKExtension
 import org.junit.jupiter.api.extension.ExtendWith
@@ -19,6 +20,7 @@ import org.springframework.test.annotation.DirtiesContext
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Import(
     WebMvcTestTemplate.FilterConfig::class,
+    TestTimeProvider::class,
 )
 @ExtendWith(MockKExtension::class)
 abstract class WebMvcTestTemplate : DescribeSpec() {

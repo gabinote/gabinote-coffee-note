@@ -5,7 +5,6 @@ import java.time.LocalDateTime
 
 data class NoteIndexResServiceDto(
     val id: String,
-    val externalId: String,
     var title: String,
     val owner: String,
     val createdDate: LocalDateTime,

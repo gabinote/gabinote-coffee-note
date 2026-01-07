@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class NoteIndexResControllerDto(
-    val externalId: String,
+    val id: String,
     var title: String,
     val owner: String,
     val createdDate: LocalDateTime,
