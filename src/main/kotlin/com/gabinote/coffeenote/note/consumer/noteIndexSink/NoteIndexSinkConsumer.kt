@@ -8,18 +8,23 @@ import com.gabinote.coffeenote.note.consumer.ConsumerHelper
 import com.gabinote.coffeenote.note.consumer.noteIndexSink.data.BeforeAfterNote
 import com.gabinote.coffeenote.note.domain.note.Note
 import com.gabinote.coffeenote.note.event.noteCreated.NoteCreateEventHelper.NOTE_CHANGE_TOPIC
+import com.gabinote.coffeenote.note.event.noteCreated.NoteCreateEventHelper.NOTE_CHANGE_TOPIC_DLT
 import com.gabinote.coffeenote.note.event.noteCreated.NoteCreateEventHelper.NOTE_FIELD_INDEX_GROUP_ID
 import com.gabinote.coffeenote.note.event.noteCreated.NoteCreateEventHelper.NOTE_INDEX_GROUP_ID
-import com.gabinote.coffeenote.note.event.userWithdraw.UserWithdrawEventHelper
-import com.gabinote.coffeenote.note.service.note.NoteService
 import com.gabinote.coffeenote.note.service.noteFieldIndex.NoteFieldIndexService
 import com.gabinote.coffeenote.note.service.noteIndex.NoteIndexService
 import com.gabinote.coffeenote.note.util.convert.noteChangeMessage.NoteChangeMessageConvertHelper
+import com.meilisearch.sdk.exceptions.MeilisearchApiException
+import com.meilisearch.sdk.exceptions.MeilisearchCommunicationException
 import io.github.oshai.kotlinlogging.KotlinLogging
+import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.kafka.support.Acknowledgment
 import org.springframework.stereotype.Component
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 import java.util.*
+import java.util.concurrent.TimeoutException
 
 private val logger = KotlinLogging.logger {}
 
@@ -28,7 +33,6 @@ class NoteIndexSinkConsumer(
     private val objectMapper: ObjectMapper,
     private val noteIndexService: NoteIndexService,
     private val noteFieldIndexService: NoteFieldIndexService,
-    private val noteService: NoteService,
     private val consumerHelper: ConsumerHelper,
     private val noteChangeMessageConvertHelper: NoteChangeMessageConvertHelper,
 ) {
@@ -38,29 +42,89 @@ class NoteIndexSinkConsumer(
         topics = [NOTE_CHANGE_TOPIC],
         groupId = NOTE_INDEX_GROUP_ID,
     )
-    fun sinkNoteIndex(message: String?, ack: Acknowledgment) {
+    fun sinkNoteIndex(record: ConsumerRecord<String, String>, ack: Acknowledgment) {
+        val message = record.value()
         logger.debug { "Received message for sinkNoteIndex: $message" }
-        message ?: run {
-            logger.warn { "Received null message for sinkNoteFieldIndex, skipping." }
+
+        if (message.isNullOrBlank()) {
+            logger.warn { "Received null/empty message, skipping." }
             ack.acknowledge()
             return
         }
-        runCatching {
+
+        try {
             val changeMessage = parseMessage(message)
             val noteChangeInfo = parseBeforeAfter(changeMessage)
+
             when (changeMessage.op) {
                 DebeziumOperation.CREATE -> upsertNoteIndex(noteChangeInfo)
                 DebeziumOperation.UPDATE -> updateNoteIndex(noteChangeInfo)
                 DebeziumOperation.DELETE -> deleteNoteIndex(noteChangeInfo)
                 else -> logger.warn { "Unsupported Debezium operation: ${changeMessage.op}" }
             }
-        }.onFailure { e ->
-            failbackSinkNoteIndex(message, e)
+
+            ack.acknowledge()
+
+        } catch (e: Exception) {
+            if (isMeiliSearchConnectionError(e)) {
+                logger.warn { "Transient error detected (Backoff initiated): ${e.message}" }
+                throw e
+            } else {
+                logger.error(e) { "Fatal error detected (Sent to DLQ): ${e.message}" }
+                failbackSink(
+                    record,
+                    e,
+                    NOTE_CHANGE_TOPIC_DLT
+                )
+                ack.acknowledge()
+            }
         }
-        ack.acknowledge()
     }
 
-    fun updateNoteIndex(message: BeforeAfterNote) {
+
+    @KafkaListener(
+        topics = [NOTE_CHANGE_TOPIC],
+        groupId = NOTE_FIELD_INDEX_GROUP_ID,
+    )
+    fun sinkNoteFieldIndex(record: ConsumerRecord<String, String>, ack: Acknowledgment) {
+        val message = record.value()
+        logger.debug { "Received message for sinkNoteFieldIndex: $message" }
+
+        if (message.isNullOrBlank()) {
+            logger.warn { "Received null or empty message for sinkNoteFieldIndex, skipping." }
+            ack.acknowledge()
+            return
+        }
+
+        try {
+            val changeMessage = parseMessage(message)
+            val noteChangeInfo = parseBeforeAfter(changeMessage)
+
+            when (changeMessage.op) {
+                DebeziumOperation.CREATE -> upsertNoteFieldIndex(noteChangeInfo)
+                DebeziumOperation.UPDATE -> updateNoteFieldIndex(noteChangeInfo)
+                DebeziumOperation.DELETE -> deleteNoteFieldIndex(noteChangeInfo)
+                else -> logger.warn { "Unsupported Debezium operation: ${changeMessage.op}" }
+            }
+            ack.acknowledge()
+
+        } catch (e: Exception) {
+            if (isMeiliSearchConnectionError(e)) {
+                logger.warn(e) { "Transient error detected in sinkNoteFieldIndex. Initiating Backoff. Error: ${e.message}" }
+                throw e
+            } else {
+                logger.error(e) { "Fatal error detected in sinkNoteFieldIndex. Sending to DLQ and skipping. Error: ${e.message}" }
+                failbackSink(
+                    record,
+                    e,
+                    NOTE_CHANGE_TOPIC_DLT
+                )
+                ack.acknowledge()
+            }
+        }
+    }
+
+    private fun updateNoteIndex(message: BeforeAfterNote) {
         checkIsUpdated(before = message.before, after = message.after).let { isUpdated ->
             if (!isUpdated) {
                 logger.debug { "Note field index not updated for note=${message.after ?: "none"}, skipping." }
@@ -71,47 +135,20 @@ class NoteIndexSinkConsumer(
     }
 
     // 신규 노트 인덱스 생성 혹은 기존 노트 인덱스 업데이트
-    fun upsertNoteIndex(message: BeforeAfterNote) {
+    private fun upsertNoteIndex(message: BeforeAfterNote) {
         val note = message.after ?: throw IllegalArgumentException("parsed note after is null")
         logger.debug { "Upsert note index for note externalId=${note.externalId} Note=$note" }
         noteIndexService.createFromNote(note)
     }
 
-    fun deleteNoteIndex(message: BeforeAfterNote) {
+    private fun deleteNoteIndex(message: BeforeAfterNote) {
         val note = message.before ?: throw IllegalArgumentException("parsed note before is null")
         val noteId = note.externalId
         logger.debug { "Delete note index for note externalId=${noteId}" }
         noteIndexService.deleteByNoteId(UUID.fromString(noteId))
     }
 
-
-    @KafkaListener(
-        topics = [NOTE_CHANGE_TOPIC],
-        groupId = NOTE_FIELD_INDEX_GROUP_ID,
-    )
-    fun sinkNoteFieldIndex(message: String?, ack: Acknowledgment) {
-        logger.debug { "Received message for sinkNoteFieldIndex: $message" }
-        message ?: run {
-            logger.warn { "Received null message for sinkNoteFieldIndex, skipping." }
-            ack.acknowledge()
-            return
-        }
-        runCatching {
-            val changeMessage = parseMessage(message)
-            val noteChangeInfo = parseBeforeAfter(changeMessage)
-            when (changeMessage.op) {
-                DebeziumOperation.CREATE -> upsertNoteFieldIndex(noteChangeInfo)
-                DebeziumOperation.UPDATE -> updateNoteFieldIndex(noteChangeInfo)
-                DebeziumOperation.DELETE -> deleteNoteFieldIndex(noteChangeInfo)
-                else -> logger.warn { "Unsupported Debezium operation: ${changeMessage.op}" }
-            }
-        }.onFailure { e ->
-            failbackSinkNoteFieldIndex(message, e)
-        }
-        ack.acknowledge()
-    }
-
-    fun updateNoteFieldIndex(message: BeforeAfterNote) {
+    private fun updateNoteFieldIndex(message: BeforeAfterNote) {
         checkIsUpdated(before = message.before, after = message.after).let { isUpdated ->
             if (!isUpdated) {
                 logger.debug { "Note field index not updated for note=${message.after ?: "none"}, skipping." }
@@ -121,7 +158,7 @@ class NoteIndexSinkConsumer(
         upsertNoteFieldIndex(message)
     }
 
-    fun upsertNoteFieldIndex(message: BeforeAfterNote) {
+    private fun upsertNoteFieldIndex(message: BeforeAfterNote) {
         val note = message.after ?: throw IllegalArgumentException("parsed note after is null")
         logger.debug { "Upsert note field index for note externalId=${note.externalId} Note=$note" }
         val noteId = note.externalId
@@ -129,7 +166,7 @@ class NoteIndexSinkConsumer(
         noteFieldIndexService.createFromNote(note)
     }
 
-    fun deleteNoteFieldIndex(message: BeforeAfterNote) {
+    private fun deleteNoteFieldIndex(message: BeforeAfterNote) {
         val note = message.before ?: throw IllegalArgumentException("parsed note before is null")
         val noteId = note.externalId
         logger.debug { "Delete note field index for note externalId=${noteId}" }
@@ -141,22 +178,16 @@ class NoteIndexSinkConsumer(
         return before.hash != after.hash
     }
 
-    private fun failbackSinkNoteIndex(message: String, exception: Throwable) {
-        logger.error(exception) { "failed to sink note index. cannot parse message. message = $message" }
+    private fun failbackSink(record: ConsumerRecord<String, String>, exception: Throwable, dltTopic: String) {
+        logger.error(exception) { "failed to sink note index. cannot parse message. message = ${record.value()}" }
         runCatching {
-            consumerHelper.sendToDlq(message, UserWithdrawEventHelper.USER_WITHDRAW_EVENT_TYPE_DLQ)
+            consumerHelper.sendToDlq(
+                record,
+                dltTopic,
+                exception
+            )
         }.onFailure { e ->
-            logger.error(e) { "Retry failed to send to DLQ for message = $message" }
-        }
-    }
-
-
-    private fun failbackSinkNoteFieldIndex(message: String, exception: Throwable) {
-        logger.error(exception) { "failed to sink note field index. cannot parse message. message = $message" }
-        runCatching {
-            consumerHelper.sendToDlq(message, UserWithdrawEventHelper.USER_WITHDRAW_EVENT_TYPE_DLQ)
-        }.onFailure { e ->
-            logger.error(e) { "Retry failed to send to DLQ for message = $message" }
+            logger.error(e) { "Retry failed to send to DLQ for message = ${record.value()}" }
         }
     }
 
@@ -180,5 +211,27 @@ class NoteIndexSinkConsumer(
         return BeforeAfterNote(before = before, after = after)
     }
 
+    private fun isMeiliSearchConnectionError(e: Throwable): Boolean {
+        return when (e) {
+            // DNS, 타임아웃, 연결 거부
+            is MeilisearchCommunicationException -> true
+
+            is MeilisearchApiException -> {
+
+                val type = e.type
+                // https://www.meilisearch.com/docs/reference/errors/overview#errors
+                // 5xx 에러 type들
+                return type == "internal" || type == "system"
+            }
+
+            // java 내장 예외들
+            is ConnectException,
+            is SocketTimeoutException,
+            is TimeoutException,
+                -> true
+
+            else -> false
+        }
+    }
 
 }

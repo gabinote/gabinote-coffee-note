@@ -72,6 +72,7 @@ class TestDataHelper(
 
         root.properties().forEach { (collection, nodes) ->
             mongoTemplate.dropCollection(collection)
+            mongoTemplate.createCollection(collection)
 
             nodes.forEach { doc ->
                 val map = toMongoMap(doc)

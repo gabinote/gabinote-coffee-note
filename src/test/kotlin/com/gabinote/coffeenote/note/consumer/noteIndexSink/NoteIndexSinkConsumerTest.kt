@@ -3,11 +3,18 @@ package com.gabinote.coffeenote.note.consumer.noteIndexSink
 import com.gabinote.coffeenote.common.util.debezium.enums.DebeziumOperation
 import com.gabinote.coffeenote.note.domain.note.Note
 import com.gabinote.coffeenote.note.event.noteCreated.NoteCreateEventHelper.NOTE_CHANGE_TOPIC
+import com.gabinote.coffeenote.note.event.noteCreated.NoteCreateEventHelper.NOTE_CHANGE_TOPIC_DLT
+import com.gabinote.coffeenote.testSupport.testConfig.meiliSearch.MeiliSearchContainerInitializer
 import com.gabinote.coffeenote.testSupport.testTemplate.IntegrationTestTemplate
 import com.gabinote.coffeenote.testSupport.testUtil.debezium.TestDebeziumDataHelper.createChangeMessage
+import io.github.oshai.kotlinlogging.KotlinLogging
 import io.kotest.assertions.nondeterministic.eventually
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
+
+
+private val logger = KotlinLogging.logger {}
 
 class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
     private val baseData = "/testsets/note/sink/"
@@ -394,6 +401,7 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                         }
                     }
                 }
+
             }
 
             feature("NoteUserWithdrawConsumer.sinkNoteFieldIndex") {
@@ -693,6 +701,50 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                                 verbose = false
                             )
                         }
+                    }
+                }
+            }
+
+
+            feature("dlq 테스트 ") {
+                scenario("MeiliSearch 연결 오류가 발생할 때, DLQ로 전송되어야 한다.") {
+                    testDataHelper.setData("${baseData}/noteIndex/new-note.json")
+                    testMeiliSearchHelper.insertIndex("${baseData}/noteIndex/note-index.json")
+                    testDebeziumHelper.registerConnector("testsets/debezium/mongo-note-connector.json")
+
+                    // MeiliSearch 연결 차단 시뮬레이션
+                    MeiliSearchContainerInitializer.meiliSearch.stop()
+
+                    // 새롭게 생성된 Note
+                    val newNoteId = "66a7b2a60e0a514d2a1c0002"
+                    val newNoteNode = objectMapper.createObjectNode().apply {
+                        putObject("_id").put("\$oid", "66a7b2a60e0a514d2a1c0002")
+                        put("externalId", "b2c3d4e5-f6a7-4890-1234-567890abcdef")
+                        put("title", "핸드드립 레시피: 케냐 AA")
+                        putNull("thumbnail")
+                        putObject("createdDate").put("\$date", "2024-07-28T15:30:00Z")
+                        putObject("modifiedDate").put("\$date", "2024-07-29T11:05:20Z")
+                    }
+                    // 해당 노트 생성 메시지 발행
+                    val changeEvent = createChangeMessage<Note>(
+                        before = null,
+                        after = newNoteNode.toString(),
+                        op = DebeziumOperation.CREATE
+                    )
+
+                    testKafkaHelper.sendMessage(
+                        topic = NOTE_CHANGE_TOPIC,
+                        key = newNoteId,
+                        value = objectMapper.writeValueAsString(changeEvent)
+                    )
+
+                    // DLQ에 메시지가 전송되었는지 검증
+                    eventually(30.seconds) {
+                        val dlqMessages = testKafkaHelper.getMessages(
+                            topic = NOTE_CHANGE_TOPIC_DLT,
+                        )
+                        logger.debug { "DLQ Messages: $dlqMessages" }
+                        dlqMessages.size shouldBe 2
                     }
                 }
             }

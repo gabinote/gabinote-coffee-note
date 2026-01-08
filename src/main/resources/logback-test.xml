@@ -19,7 +19,7 @@
     <logger name="org.apache.kafka.clients.NetworkClient" level="OFF"/>
     <logger name="org.springframework.kafka" level="WARN"/>
     <logger name="io.debezium" level="WARN"/>
-
+    <logger name="org.mongodb.driver" level="INFO"/>
     <root level="debug">
         <appender-ref ref="CONSOLE"/>
     </root>

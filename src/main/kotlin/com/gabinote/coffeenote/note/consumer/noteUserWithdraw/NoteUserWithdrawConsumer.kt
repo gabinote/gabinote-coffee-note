@@ -4,10 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.gabinote.coffeenote.note.consumer.ConsumerHelper
 import com.gabinote.coffeenote.note.event.userWithdraw.UserWithdrawEvent
 import com.gabinote.coffeenote.note.event.userWithdraw.UserWithdrawEventHelper
-import com.gabinote.coffeenote.note.service.noteFieldIndex.NoteFieldIndexService
-import com.gabinote.coffeenote.note.service.noteIndex.NoteIndexService
+import com.gabinote.coffeenote.note.event.userWithdraw.WithdrawProcess
 import com.gabinote.coffeenote.note.service.noteUserWithdraw.NoteUserWithdrawService
 import io.github.oshai.kotlinlogging.KotlinLogging
+import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.kafka.support.Acknowledgment
 import org.springframework.stereotype.Component
@@ -19,19 +19,24 @@ class NoteUserWithdrawConsumer(
     private val objectMapper: ObjectMapper,
     private val noteUserWithdrawService: NoteUserWithdrawService,
     private val consumerHelper: ConsumerHelper,
-    private val noteFieldIndexService: NoteFieldIndexService,
-    private val noteIndexService: NoteIndexService,
 ) {
     @KafkaListener(
         topics = [UserWithdrawEventHelper.USER_WITHDRAW_EVENT_TYPE],
         groupId = UserWithdrawEventHelper.USER_WITHDRAW_NOTE_DELETE_GROUP,
     )
-    fun deleteWithdrawUserNotes(message: String, ack: Acknowledgment) {
+    fun deleteWithdrawUserNotes(record: ConsumerRecord<String, String>, ack: Acknowledgment) {
+        val message = record.value()
+        logger.debug { "get deleteWithdrawUserNotes message $message" }
+        if (message.isNullOrBlank()) {
+            logger.warn { "Received null/empty message, skipping." }
+            ack.acknowledge()
+            return
+        }
         runCatching {
             val uid = getUidFromMessage(message)
             noteUserWithdrawService.deleteAllNotesByWithdrawUser(uid)
         }.onFailure { e ->
-            failback(message, e)
+            failback(record, WithdrawProcess.NOTE_DELETE, e)
         }
         ack.acknowledge()
     }
@@ -40,12 +45,19 @@ class NoteUserWithdrawConsumer(
         topics = [UserWithdrawEventHelper.USER_WITHDRAW_EVENT_TYPE],
         groupId = UserWithdrawEventHelper.USER_WITHDRAW_NOTE_INDEX_DELETE_GROUP,
     )
-    fun deleteWithdrawUserNoteIndexes(message: String, ack: Acknowledgment) {
+    fun deleteWithdrawUserNoteIndexes(record: ConsumerRecord<String, String>, ack: Acknowledgment) {
+        val message = record.value()
+        logger.debug { "get deleteWithdrawUserNoteIndexes message $message" }
+        if (message.isNullOrBlank()) {
+            logger.warn { "Received null/empty message, skipping." }
+            ack.acknowledge()
+            return
+        }
         runCatching {
             val owner = getUidFromMessage(message)
-            noteIndexService.deleteAllByOwner(owner)
+            noteUserWithdrawService.deleteAllNoteIndexesByWithdrawUser(owner)
         }.onFailure { e ->
-            failback(message, e)
+            failback(record, WithdrawProcess.NOTE_INDEX_DELETE, e)
         }
         ack.acknowledge()
     }
@@ -54,23 +66,37 @@ class NoteUserWithdrawConsumer(
         topics = [UserWithdrawEventHelper.USER_WITHDRAW_EVENT_TYPE],
         groupId = UserWithdrawEventHelper.USER_WITHDRAW_NOTE_FIELD_INDEX_DELETE_GROUP,
     )
-    fun deleteWithdrawUserNoteFieldIndexes(message: String, ack: Acknowledgment) {
+    fun deleteWithdrawUserNoteFieldIndexes(record: ConsumerRecord<String, String>, ack: Acknowledgment) {
+        val message = record.value()
+        logger.debug { "get deleteWithdrawUserNoteFieldIndexes message $message" }
+        if (message.isNullOrBlank()) {
+            logger.warn { "Received null/empty message, skipping." }
+            ack.acknowledge()
+            return
+        }
         runCatching {
             val owner = getUidFromMessage(message)
-            noteFieldIndexService.deleteAllByOwner(owner)
+            noteUserWithdrawService.deleteAllNoteFieldsIndexesByWithdrawUser(owner)
         }.onFailure { e ->
-            failback(message, e)
+            failback(record, WithdrawProcess.NOTE_FIELD_INDEX_DELETE, e)
         }
         ack.acknowledge()
     }
 
 
-    private fun failback(message: String, exception: Throwable) {
-        logger.error(exception) { "failed to delete notes for withdrawn user. cannot parse message. message = $message" }
+    private fun failback(record: ConsumerRecord<String, String>, process: WithdrawProcess, exception: Throwable) {
+        logger.error(exception) { "failed to ${process.value} for withdrawn user. cannot parse message. message = ${record.value()}" }
         runCatching {
-            consumerHelper.sendToDlq(message, UserWithdrawEventHelper.USER_WITHDRAW_EVENT_TYPE_DLQ)
+            consumerHelper.sendToDlq(
+                record,
+                UserWithdrawEventHelper.USER_WITHDRAW_EVENT_TYPE_DLQ,
+                exception
+            )
+
+            noteUserWithdrawService.createDeleteNoteFailHistory(getUidFromMessage(record.value()), process)
+
         }.onFailure { e ->
-            logger.error(e) { "Retry failed to send to DLQ for message = $message" }
+            logger.error(e) { "Retry failed to send to DLQ for message = ${record.value()}" }
         }
     }
 

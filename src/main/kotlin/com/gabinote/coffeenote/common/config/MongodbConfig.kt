@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.auditing.DateTimeProvider
 import org.springframework.data.mongodb.MongoDatabaseFactory
+import org.springframework.data.mongodb.MongoTransactionManager
 import org.springframework.data.mongodb.config.EnableMongoAuditing
 import org.springframework.data.mongodb.core.convert.DbRefResolver
 import org.springframework.data.mongodb.core.convert.DefaultDbRefResolver
@@ -31,6 +32,11 @@ class MongodbConfig(
         converter.setTypeMapper(DefaultMongoTypeMapper(null))
 
         return converter
+    }
+
+    @Bean
+    fun transactionManager(dbFactory: MongoDatabaseFactory): MongoTransactionManager {
+        return MongoTransactionManager(dbFactory)
     }
 
     @Bean

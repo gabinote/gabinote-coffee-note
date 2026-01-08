@@ -53,6 +53,17 @@ class TestMeiliSearchHelper(
         }
     }
 
+
+    fun checkConnection(): Boolean {
+        runCatching {
+            meiliSearchClient.health()
+        }.onFailure {
+            logger.error { "MeiliSearch connection failed: ${it.message}" }
+            return false
+        }
+        return true
+    }
+
     private fun cleanDatabase() {
         logger.info { "Cleaning database..." }
         val indexes = meiliSearchClient.indexes
@@ -210,4 +221,6 @@ class TestMeiliSearchHelper(
         if (verbose) logger.debug { "Search result hits: ${searchRes.hits}" }
         return searchRes.hits
     }
+
+
 }
