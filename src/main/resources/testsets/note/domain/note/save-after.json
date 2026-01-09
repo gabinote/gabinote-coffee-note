@@ -58,7 +58,8 @@
       ],
       "isOpen": true,
       "owner": "target",
-      "hash": "6a6a201de94067a489892244de3514a1"
+      "hash": "6a6a201de94067a489892244de3514a1",
+      "status": "ACTIVE"
     },
     {
       "_id": "$anyObject()",
@@ -136,7 +137,8 @@
       ],
       "isOpen": true,
       "owner": "user_gamma_9012",
-      "hash": "test-hash"
+      "hash": "test-hash",
+      "status": "ACTIVE"
     }
   ]
 }

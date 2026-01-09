@@ -76,7 +76,8 @@
       ],
       "isOpen": true,
       "owner": "target",
-      "hash": "updated-hash"
+      "hash": "updated-hash",
+      "status": "ACTIVE"
     },
     {
       "_id": "$anyObject()",
@@ -134,7 +135,8 @@
       ],
       "isOpen": false,
       "owner": "user_beta_5678",
-      "hash": "4721d089299694e08bce17db7bb33c6b"
+      "hash": "4721d089299694e08bce17db7bb33c6b",
+      "status": "ACTIVE"
     }
   ]
 }

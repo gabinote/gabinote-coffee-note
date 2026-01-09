@@ -51,7 +51,8 @@
       ],
       "isOpen": true,
       "owner": "user_alpha_1234",
-      "hash": "190ec684c1d1b32ea48603ca54f32dd1"
+      "hash": "190ec684c1d1b32ea48603ca54f32dd1",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -83,7 +84,8 @@
       "displayFields": [],
       "isOpen": true,
       "owner": "user_alpha_1234",
-      "hash": "290ec684c1d1b32ea48603ca54f32dd2"
+      "hash": "290ec684c1d1b32ea48603ca54f32dd2",
+      "status": "ACTIVE"
     }
   ]
 }

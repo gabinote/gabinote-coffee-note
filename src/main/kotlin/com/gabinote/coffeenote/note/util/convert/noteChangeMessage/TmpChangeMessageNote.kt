@@ -3,6 +3,7 @@ package com.gabinote.coffeenote.note.util.convert.noteChangeMessage
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.gabinote.coffeenote.note.domain.note.NoteDisplayField
 import com.gabinote.coffeenote.note.domain.note.NoteField
+import com.gabinote.coffeenote.note.domain.note.NoteStatus
 import org.bson.types.ObjectId
 
 data class TmpChangeMessageNote(
@@ -18,4 +19,5 @@ data class TmpChangeMessageNote(
     var isOpen: Boolean = false,
     var owner: String,
     var hash: String,
+    val status: NoteStatus,
 )

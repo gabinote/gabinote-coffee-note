@@ -1,5 +1,9 @@
-package com.gabinote.coffeenote.note.service.noteSink
-
+//package com.gabinote.coffeenote.note.service.noteSink
+//
+//import com.gabinote.coffeenote.note.service.note.NoteService
+//import com.gabinote.coffeenote.note.service.noteFieldIndex.NoteFieldIndexService
+//import com.gabinote.coffeenote.note.service.noteIndex.NoteIndexService
+//
 //@Service
 //class NoteSinkService(
 //    private val noteService: NoteService,

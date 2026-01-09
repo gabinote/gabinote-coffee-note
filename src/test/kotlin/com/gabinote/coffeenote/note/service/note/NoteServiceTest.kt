@@ -2,10 +2,7 @@ package com.gabinote.coffeenote.note.service.note
 
 import com.gabinote.coffeenote.common.util.exception.service.ResourceNotFound
 import com.gabinote.coffeenote.common.util.exception.service.ResourceQuotaLimit
-import com.gabinote.coffeenote.note.domain.note.Note
-import com.gabinote.coffeenote.note.domain.note.NoteDisplayField
-import com.gabinote.coffeenote.note.domain.note.NoteField
-import com.gabinote.coffeenote.note.domain.note.NoteRepository
+import com.gabinote.coffeenote.note.domain.note.*
 import com.gabinote.coffeenote.note.dto.note.service.NoteListResServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteResServiceDto
 import com.gabinote.coffeenote.note.mapping.note.NoteMapper
@@ -154,6 +151,8 @@ class NoteServiceTest : ServiceTestTemplate() {
                     }
                 }
             }
+
+
 
             describe("NoteService.getByExternalId") {
                 context("올바른 전략과 함께 존재하는 Note externalId가 주어지면,") {
@@ -320,7 +319,11 @@ class NoteServiceTest : ServiceTestTemplate() {
 
                     beforeTest {
                         every {
-                            noteRepository.findAllByOwner(owner = testRequestor, pageable = testPageable)
+                            noteRepository.findAllByOwnerAndStatus(
+                                owner = testRequestor,
+                                pageable = testPageable,
+                                status = NoteStatus.ACTIVE
+                            )
                         } returns slicedNote
 
                         every {
@@ -338,7 +341,11 @@ class NoteServiceTest : ServiceTestTemplate() {
                         res.content[0] shouldBe noteRes
 
                         verify(exactly = 1) {
-                            noteRepository.findAllByOwner(owner = testRequestor, pageable = testPageable)
+                            noteRepository.findAllByOwnerAndStatus(
+                                owner = testRequestor,
+                                pageable = testPageable,
+                                status = NoteStatus.ACTIVE
+                            )
                         }
 
                         verify(exactly = 1) {
@@ -842,6 +849,74 @@ class NoteServiceTest : ServiceTestTemplate() {
                         verify(exactly = 1) {
                             noteRepository.delete(existingNote)
                         }
+                    }
+                }
+
+                context("본인 소유가 아닌 노트 externalId가 주어지면,") {
+                    val owner = "test-owner"
+                    val existingNoteExternalId = TestUuidSource.UUID_STRING
+
+                    // 기존 노트 조회
+                    val existingNote = createTestNote(externalId = existingNoteExternalId.toString(), owner = "doh")
+                    beforeTest {
+                        every {
+                            noteRepository.findByExternalId(existingNoteExternalId.toString())
+                        } returns existingNote
+                    }
+                    it("ResourceNotFound 예외를 던진다.") {
+                        val ex = assertThrows<ResourceNotFound> {
+                            noteService.deleteByExternalId(
+                                externalId = existingNoteExternalId,
+                                owner = owner
+                            )
+                        }
+
+                        ex.name shouldBe "Note"
+                        ex.identifier shouldBe existingNoteExternalId.toString()
+                        ex.identifierType shouldBe "externalId"
+
+                        verify(exactly = 1) {
+                            noteRepository.findByExternalId(existingNoteExternalId.toString())
+                        }
+                    }
+                }
+            }
+
+            describe("NoteService.softDeleteByExternalId") {
+                context("본인 소유인 노트 externalId가 주어지면,") {
+                    val owner = "test-owner"
+                    val existingNoteExternalId = TestUuidSource.UUID_STRING
+
+                    // 기존 노트 조회
+                    val existingNote = createTestNote(externalId = existingNoteExternalId.toString(), owner = owner)
+                    beforeTest {
+                        every {
+                            noteRepository.findByExternalId(existingNoteExternalId.toString())
+                        } returns existingNote
+                    }
+
+                    existingNote.wipeData()
+
+                    beforeTest {
+                        every {
+                            noteRepository.save(existingNote)
+                        } returns existingNote
+                    }
+
+                    it("해당 externalId에 맞는 Note를 소프트 삭제한다.") {
+                        noteService.softDeleteByExternalId(
+                            externalId = existingNoteExternalId,
+                            owner = owner
+                        )
+
+                        verify(exactly = 1) {
+                            noteRepository.findByExternalId(existingNoteExternalId.toString())
+                        }
+
+                        verify(exactly = 1) {
+                            noteRepository.save(existingNote)
+                        }
+
                     }
                 }
 

@@ -227,7 +227,11 @@ class NoteApiController(
 
     @DeleteMapping("/note/me/{externalId}")
     fun deleteMyNoteByExternalId(@PathVariable externalId: UUID): ResponseEntity<Void> {
-        noteService.deleteByExternalId(
+//        noteService.deleteByExternalId(
+//            externalId = externalId,
+//            owner = userContext.uid
+//        )
+        noteService.softDeleteByExternalId(
             externalId = externalId,
             owner = userContext.uid
         )

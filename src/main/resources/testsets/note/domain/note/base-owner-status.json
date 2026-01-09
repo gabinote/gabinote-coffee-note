@@ -59,8 +59,8 @@
         }
       ],
       "isOpen": true,
-      "owner": "target",
-      "hash": "14d89da7df2cede931296b9f3a58609a",
+      "owner": "user_alpha_1234",
+      "hash": "190ec684c1d1b32ea48603ca54f32dd1",
       "status": "ACTIVE"
     },
     {
@@ -120,8 +120,89 @@
         }
       ],
       "isOpen": false,
-      "owner": "user_beta_5678",
-      "hash": "4721d089299694e08bce17db7bb33c6b",
+      "owner": "user_alpha_1234",
+      "hash": "cf9c1ef54fd2af552cca2e4f443d1d7f",
+      "status": "DELETED"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0003"
+      },
+      "externalId": "c3d4e5f6-a7b8-4901-2345-67890abcdef0",
+      "title": "콜드브루 시음 기록",
+      "thumbnail": "https://images.example.com/thumbnails/cold_brew_sample.png",
+      "createdDate": {
+        "$date": "2024-07-27T08:10:55Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-27T08:10:55Z"
+      },
+      "fields": [
+        {
+          "_id": "field_005",
+          "name": "산미",
+          "icon": "lemon",
+          "type": "RATING",
+          "attributes": [
+            {
+              "key": "max",
+              "value": [
+                "5"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "4"
+          ]
+        },
+        {
+          "_id": "field_006",
+          "name": "플레이버 노트",
+          "icon": "flavor",
+          "type": "MULTI_SELECT",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "초콜릿",
+                "견과류",
+                "베리",
+                "꽃"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "초콜릿",
+            "견과류"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "산미",
+          "icon": "lemon",
+          "values": [
+            "4"
+          ],
+          "order": 1
+        },
+        {
+          "name": "플레이버 노트",
+          "icon": "flavor",
+          "values": [
+            "초콜릿",
+            "견과류"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_gamma_9012",
+      "hash": "6a6a706e32b1c4aa0966c28a056b0d11",
       "status": "ACTIVE"
     }
   ]

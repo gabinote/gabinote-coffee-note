@@ -60,7 +60,8 @@
       ],
       "isOpen": true,
       "owner": "user_alpha_1234",
-      "hash": "190ec684c1d1b32ea48603ca54f32dd1"
+      "hash": "190ec684c1d1b32ea48603ca54f32dd1",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -120,7 +121,8 @@
       ],
       "isOpen": false,
       "owner": "user_beta_5678",
-      "hash": "cf9c1ef54fd2af552cca2e4f443d1d7f"
+      "hash": "cf9c1ef54fd2af552cca2e4f443d1d7f",
+      "status": "ACTIVE"
     }
   ]
 }

@@ -18,7 +18,7 @@ class NoteRepositoryTest : RepositoryTestTemplate() {
 
     init {
         describe("[Note] NoteRepositoryTest") {
-            describe("NoteRepositoryTest.findByExternalId") {
+            describe("NoteRepository.findByExternalId") {
                 context("유효한 externalId가 주어지면") {
                     useBaseData()
                     val validExternalId = "a1b2c3d4-e5f6-4789-0123-4567890abcde"
@@ -40,7 +40,7 @@ class NoteRepositoryTest : RepositoryTestTemplate() {
                 }
             }
 
-            describe("NoteRepositoryTest.findAllByOwner") {
+            describe("NoteRepository.findAllByOwner") {
                 context("유효한 owner 가 주어지면") {
                     useBaseData()
                     val validOwnerId = "user_g7h8_3790"
@@ -64,7 +64,34 @@ class NoteRepositoryTest : RepositoryTestTemplate() {
                 }
             }
 
-            describe("NoteRepositoryTest.countByOwner") {
+            describe("NoteRepository.findAllByOwnerAndStatus") {
+                context("유효한 owner 와 status 가 주어지면") {
+                    testDataHelper.setData("$baseDataDir/base-owner-status.json")
+                    val validOwnerId = "user_g7h8_3790"
+                    val status = NoteStatus.ACTIVE
+                    val testPageable = createPageable()
+                    it("해당 ownerId와 status를 가진 Note 리스트를 반환한다") {
+                        val res = noteRepository.findAllByOwnerAndStatus(validOwnerId, status, testPageable)
+                        res.forEach {
+                            it.owner shouldBe validOwnerId
+                            it.status shouldBe status
+                        }
+                    }
+                }
+
+                context("노트가 없는 owner 가 주어지면") {
+                    useBaseData()
+                    val ownerIdWithNoNotes = "owner-0000"
+                    val status = NoteStatus.ACTIVE
+                    val testPageable = createPageable()
+                    it("빈 리스트를 반환한다") {
+                        val res = noteRepository.findAllByOwnerAndStatus(ownerIdWithNoNotes, status, testPageable)
+                        res.content.size shouldBe 0
+                    }
+                }
+            }
+
+            describe("NoteRepository.countByOwner") {
                 context("유효한 owner 가 주어지면") {
                     useBaseData()
                     val validOwnerId = "user_g7h8_3790"
@@ -84,7 +111,7 @@ class NoteRepositoryTest : RepositoryTestTemplate() {
                 }
             }
 
-            describe("NoteRepositoryTest.deleteAllByOwner") {
+            describe("NoteRepository.deleteAllByOwner") {
                 context("유효한 owner 가 주어지면") {
                     testDataHelper.setData("$baseDataDir/delete-before.json")
                     val validOwnerId = "target"
@@ -104,7 +131,7 @@ class NoteRepositoryTest : RepositoryTestTemplate() {
                 }
             }
 
-            describe("NoteRepositoryTest.save(신규)") {
+            describe("NoteRepository.save(신규)") {
                 context("신규 Note가 주어지면") {
                     testDataHelper.setData("$baseDataDir/save-before.json")
                     it("Note를 저장한다") {
@@ -159,7 +186,7 @@ class NoteRepositoryTest : RepositoryTestTemplate() {
                 }
             }
 
-            describe("NoteRepositoryTest.save(수정)") {
+            describe("NoteRepository.save(수정)") {
                 context("기존 Note가 주어지면") {
                     testDataHelper.setData("$baseDataDir/update-before.json")
                     val existingNote = noteRepository.findByExternalId("a1b2c3d4-e5f6-4789-0123-4567890abcde")!!

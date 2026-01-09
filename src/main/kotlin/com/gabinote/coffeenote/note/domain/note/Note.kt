@@ -39,6 +39,8 @@ data class Note(
 
     var hash: String? = null,
 
+    var status: NoteStatus = NoteStatus.ACTIVE,
+
     ) {
     fun changeField(fields: List<NoteField>) {
         this.fields = fields
@@ -70,5 +72,20 @@ data class Note(
         this.displayFields = newNote.displayFields
     }
 
+    fun changeStatus(newStatus: NoteStatus) {
+        this.status = newStatus
+    }
+
+    /**
+     * 노트 데이터 삭제 (soft delete)
+     */
+    fun wipeData() {
+        this.title = ""
+        this.thumbnail = null
+        this.fields = emptyList()
+        this.displayFields = emptyList()
+        this.isOpen = false
+        changeStatus(NoteStatus.DELETED)
+    }
 
 }

@@ -2852,7 +2852,7 @@ class NoteApiControllerTest : WebMvcTestTemplate() {
                     beforeTest {
                         every { userContext.uid } returns requestor
                         every {
-                            noteService.deleteByExternalId(
+                            noteService.softDeleteByExternalId(
                                 externalId = externalId,
                                 owner = requestor
                             )
@@ -2885,7 +2885,7 @@ class NoteApiControllerTest : WebMvcTestTemplate() {
 
                         verify(exactly = 1) {
                             userContext.uid
-                            noteService.deleteByExternalId(
+                            noteService.softDeleteByExternalId(
                                 externalId = externalId,
                                 owner = requestor
                             )

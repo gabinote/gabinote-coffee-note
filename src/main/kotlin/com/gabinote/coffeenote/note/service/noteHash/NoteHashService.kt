@@ -11,7 +11,7 @@ class NoteHashService(
     private val hashHelper: HashHelper,
     private val objectMapper: ObjectMapper,
 ) {
-    val exclude = setOf("id", "externalId", "hash", "createdDate", "modifiedDate", "isOpen")
+    val exclude = setOf("id", "externalId", "hash", "createdDate", "modifiedDate", "isOpen", "status")
     fun create(note: Note): String {
         val noteMap: MutableMap<String, Any?> = objectMapper.convertValue(
             note,

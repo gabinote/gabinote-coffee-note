@@ -76,7 +76,8 @@
       ],
       "isOpen": true,
       "owner": "non_target",
-      "hash": "d8e40a0e522a978126c59d70a322bbb5"
+      "hash": "d8e40a0e522a978126c59d70a322bbb5",
+      "status": "ACTIVE"
     },
     {
       "_id": "$anyObject()",
@@ -127,7 +128,8 @@
       ],
       "isOpen": true,
       "owner": "non_target",
-      "hash": "68fa8be20ea244eace3581333574fcb0"
+      "hash": "68fa8be20ea244eace3581333574fcb0",
+      "status": "ACTIVE"
     }
   ]
 }

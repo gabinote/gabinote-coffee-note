@@ -7,6 +7,7 @@ import com.gabinote.coffeenote.common.util.debezium.response.ChangeMessage
 import com.gabinote.coffeenote.note.consumer.ConsumerHelper
 import com.gabinote.coffeenote.note.consumer.noteIndexSink.data.BeforeAfterNote
 import com.gabinote.coffeenote.note.domain.note.Note
+import com.gabinote.coffeenote.note.domain.note.NoteStatus
 import com.gabinote.coffeenote.note.event.noteCreated.NoteCreateEventHelper.NOTE_CHANGE_TOPIC
 import com.gabinote.coffeenote.note.event.noteCreated.NoteCreateEventHelper.NOTE_CHANGE_TOPIC_DLT
 import com.gabinote.coffeenote.note.event.noteCreated.NoteCreateEventHelper.NOTE_FIELD_INDEX_GROUP_ID
@@ -59,7 +60,7 @@ class NoteIndexSinkConsumer(
             when (changeMessage.op) {
                 DebeziumOperation.CREATE -> upsertNoteIndex(noteChangeInfo)
                 DebeziumOperation.UPDATE -> updateNoteIndex(noteChangeInfo)
-                DebeziumOperation.DELETE -> deleteNoteIndex(noteChangeInfo)
+//                DebeziumOperation.DELETE -> deleteNoteIndex(noteChangeInfo)
                 else -> logger.warn { "Unsupported Debezium operation: ${changeMessage.op}" }
             }
 
@@ -103,7 +104,7 @@ class NoteIndexSinkConsumer(
             when (changeMessage.op) {
                 DebeziumOperation.CREATE -> upsertNoteFieldIndex(noteChangeInfo)
                 DebeziumOperation.UPDATE -> updateNoteFieldIndex(noteChangeInfo)
-                DebeziumOperation.DELETE -> deleteNoteFieldIndex(noteChangeInfo)
+//                DebeziumOperation.DELETE -> deleteNoteFieldIndex(noteChangeInfo)
                 else -> logger.warn { "Unsupported Debezium operation: ${changeMessage.op}" }
             }
             ack.acknowledge()
@@ -125,12 +126,21 @@ class NoteIndexSinkConsumer(
     }
 
     private fun updateNoteIndex(message: BeforeAfterNote) {
-        checkIsUpdated(before = message.before, after = message.after).let { isUpdated ->
-            if (!isUpdated) {
-                logger.debug { "Note field index not updated for note=${message.after ?: "none"}, skipping." }
+        when {
+            checkIsDeleted(message) -> {
+                logger.debug { "Deleted note index note=${message.after}" }
+                deleteNoteIndex(message)
                 return
             }
-            upsertNoteIndex(message)
+
+            checkIsNotUpdated(before = message.before, after = message.after) -> {
+                logger.debug { "Note index not updated for note=${message.after ?: "none"}, skipping." }
+                return
+            }
+
+            else -> {
+                upsertNoteIndex(message)
+            }
         }
     }
 
@@ -141,6 +151,11 @@ class NoteIndexSinkConsumer(
         noteIndexService.createFromNote(note)
     }
 
+    private fun checkIsDeleted(message: BeforeAfterNote): Boolean {
+        val after = message.after ?: throw IllegalArgumentException("parsed note after is null")
+        return after.status == NoteStatus.DELETED
+    }
+
     private fun deleteNoteIndex(message: BeforeAfterNote) {
         val note = message.before ?: throw IllegalArgumentException("parsed note before is null")
         val noteId = note.externalId
@@ -149,13 +164,22 @@ class NoteIndexSinkConsumer(
     }
 
     private fun updateNoteFieldIndex(message: BeforeAfterNote) {
-        checkIsUpdated(before = message.before, after = message.after).let { isUpdated ->
-            if (!isUpdated) {
-                logger.debug { "Note field index not updated for note=${message.after ?: "none"}, skipping." }
+        when {
+            checkIsDeleted(message) -> {
+                logger.debug { "Deleted note index note=${message.after}" }
+                deleteNoteFieldIndex(message)
                 return
             }
+
+            checkIsNotUpdated(before = message.before, after = message.after) -> {
+                logger.debug { "Note index not updated for note=${message.after ?: "none"}, skipping." }
+                return
+            }
+
+            else -> {
+                upsertNoteFieldIndex(message)
+            }
         }
-        upsertNoteFieldIndex(message)
     }
 
     private fun upsertNoteFieldIndex(message: BeforeAfterNote) {
@@ -173,9 +197,9 @@ class NoteIndexSinkConsumer(
         noteFieldIndexService.deleteByNoteExtId(UUID.fromString(noteId))
     }
 
-    private fun checkIsUpdated(before: Note?, after: Note?): Boolean {
+    private fun checkIsNotUpdated(before: Note?, after: Note?): Boolean {
         if (before == null || after == null) throw IllegalArgumentException("update operation must have both before and after note. before=$before, after=$after")
-        return before.hash != after.hash
+        return before.hash == after.hash
     }
 
     private fun failbackSink(record: ConsumerRecord<String, String>, exception: Throwable, dltTopic: String) {

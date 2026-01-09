@@ -2,6 +2,7 @@ package com.gabinote.coffeenote.note.consumer.noteIndexSink
 
 import com.gabinote.coffeenote.common.util.debezium.enums.DebeziumOperation
 import com.gabinote.coffeenote.note.domain.note.Note
+import com.gabinote.coffeenote.note.domain.note.NoteStatus
 import com.gabinote.coffeenote.note.event.noteCreated.NoteCreateEventHelper.NOTE_CHANGE_TOPIC
 import com.gabinote.coffeenote.note.event.noteCreated.NoteCreateEventHelper.NOTE_CHANGE_TOPIC_DLT
 import com.gabinote.coffeenote.testSupport.testConfig.meiliSearch.MeiliSearchContainerInitializer
@@ -33,7 +34,7 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
 
         feature("[Note] NoteIndexSinkConsumer 테스트") {
 
-            feature("NoteUserWithdrawConsumer.sinkNoteIndex") {
+            feature("NoteIndexSinkConsumer.sinkNoteIndex") {
                 feature("Create operation 테스트") {
                     scenario("Note 가 새롭게 생성되어 $NOTE_CHANGE_TOPIC 토픽에 메시지가 발행될 때, 해당 Note 의 색인 정보가 생성되어야 한다.") {
                         testDataHelper.setData("${baseData}/noteIndex/new-note.json")
@@ -49,7 +50,7 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                             putNull("thumbnail")
                             putObject("createdDate").put("\$date", "2024-07-28T15:30:00Z")
                             putObject("modifiedDate").put("\$date", "2024-07-29T11:05:20Z")
-
+                            put("status", NoteStatus.ACTIVE.name)
                             putArray("fields").apply {
                                 addObject().apply {
                                     put("_id", "field_003")
@@ -141,7 +142,7 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                             putNull("thumbnail")
                             putObject("createdDate").put("\$date", "2024-07-28T15:30:00Z")
                             putObject("modifiedDate").put("\$date", "2024-07-29T11:05:20Z")
-
+                            put("status", NoteStatus.ACTIVE.name)
                             putArray("fields").apply {
                                 addObject().apply {
                                     put("_id", "field_003")
@@ -234,7 +235,7 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                             putNull("thumbnail")
                             putObject("createdDate").put("\$date", "2024-07-28T15:30:00Z")
                             putObject("modifiedDate").put("\$date", "2024-07-29T11:05:20Z")
-
+                            put("status", NoteStatus.ACTIVE.name)
                             putArray("fields").apply {
                                 addObject().apply {
                                     put("_id", "field_003")
@@ -325,7 +326,7 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                             put("thumbnail", "https://images.example.com/thumbnails/coffee_yirgacheffe.jpg")
                             putObject("createdDate").put("\$date", "2024-07-29T10:00:00Z")
                             putObject("modifiedDate").put("\$date", "2024-07-29T10:00:00Z")
-
+                            put("status", NoteStatus.ACTIVE.name)
                             putArray("fields").apply {
                                 // 첫 번째 필드: 원산지
                                 addObject().apply {
@@ -378,11 +379,15 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                             put("hash", "190ec684c1d1b32ea48603ca54f32dd1")
                         }
 
+                        val deleteNote = existingNote.deepCopy().apply {
+                            put("status", NoteStatus.DELETED.name)
+                        }
+
                         // 해당 노트 삭제  메시지 발행
                         val changeEvent = createChangeMessage<Note>(
                             before = existingNote.toString(),
-                            after = null,
-                            op = DebeziumOperation.DELETE
+                            after = deleteNote.toString(),
+                            op = DebeziumOperation.UPDATE
                         )
 
                         testKafkaHelper.sendMessage(
@@ -404,7 +409,7 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
 
             }
 
-            feature("NoteUserWithdrawConsumer.sinkNoteFieldIndex") {
+            feature("NoteIndexSinkConsumer.sinkNoteFieldIndex") {
                 feature("Create operation 테스트") {
                     scenario("Note 가 새롭게 생성되어 $NOTE_CHANGE_TOPIC 토픽에 메시지가 발행될 때, 해당 Note 의 필드 색인 정보가 생성되어야 한다.") {
                         testDataHelper.setData("${baseData}/noteFieldIndex/new-note.json")
@@ -422,7 +427,7 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                             put("thumbnail", "https://images.example.com/thumbnails/coffee_yirgacheffe.jpg")
                             putObject("createdDate").put("\$date", "2024-07-29T10:00:00Z")
                             putObject("modifiedDate").put("\$date", "2024-07-29T10:00:00Z")
-
+                            put("status", NoteStatus.ACTIVE.name)
                             putArray("fields").apply {
                                 addObject().apply {
                                     put("_id", "field_001")
@@ -505,7 +510,7 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                             put("thumbnail", "https://images.example.com/thumbnails/updated.jpg")
                             putObject("createdDate").put("\$date", "2024-07-29T10:00:00Z")
                             putObject("modifiedDate").put("\$date", "2024-07-29T10:00:00Z")
-
+                            put("status", NoteStatus.ACTIVE.name)
                             putArray("fields").apply {
                                 addObject().apply {
                                     put("_id", "field_001")
@@ -589,7 +594,7 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                             put("thumbnail", "https://images.example.com/thumbnails/updated.jpg")
                             putObject("createdDate").put("\$date", "2024-07-29T10:00:00Z")
                             putObject("modifiedDate").put("\$date", "2024-07-29T10:00:00Z")
-
+                            put("status", NoteStatus.ACTIVE.name)
                             putArray("fields").apply {
                                 addObject().apply {
                                     put("_id", "field_001")
@@ -672,7 +677,7 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                             put("thumbnail", "https://images.example.com/thumbnails/coffee_yirgacheffe.jpg")
                             putObject("createdDate").put("\$date", "2024-07-29T10:00:00Z")
                             putObject("modifiedDate").put("\$date", "2024-07-29T10:00:00Z")
-
+                            put("status", NoteStatus.ACTIVE.name)
                             putArray("fields") // 빈 배열 생성
                             putArray("displayFields") // 빈 배열 생성
 
@@ -681,11 +686,15 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                             put("hash", "190ec684c1d1b32ea48603ca54f32dd1")
                         }
 
+                        val deleteNote = existingNote.deepCopy().apply {
+                            put("status", NoteStatus.DELETED.name)
+                        }
+
                         // 해당 노트 삭제 메시지 발행
                         val changeEvent = createChangeMessage<Note>(
                             before = existingNote.toString(),
-                            after = null,
-                            op = DebeziumOperation.DELETE
+                            after = deleteNote.toString(),
+                            op = DebeziumOperation.UPDATE
                         )
 
                         testKafkaHelper.sendMessage(

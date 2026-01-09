@@ -58,7 +58,8 @@
       ],
       "isOpen": true,
       "owner": "target",
-      "hash": "5c4e58051306afa5b2dbb95b6e689a11"
+      "hash": "5c4e58051306afa5b2dbb95b6e689a11",
+      "status": "ACTIVE"
     },
     {
       "_id": "$anyObject()",
@@ -116,7 +117,8 @@
       ],
       "isOpen": false,
       "owner": "target",
-      "hash": "ca8d2579673cc3c01331c5487b73efaa"
+      "hash": "ca8d2579673cc3c01331c5487b73efaa",
+      "status": "ACTIVE"
     },
     {
       "_id": "$anyObject()",
@@ -194,7 +196,8 @@
       ],
       "isOpen": true,
       "owner": "non_target",
-      "hash": "d8e40a0e522a978126c59d70a322bbb5"
+      "hash": "d8e40a0e522a978126c59d70a322bbb5",
+      "status": "ACTIVE"
     },
     {
       "_id": "$anyObject()",
@@ -245,7 +248,8 @@
       ],
       "isOpen": true,
       "owner": "non_target",
-      "hash": "68fa8be20ea244eace3581333574fcb0"
+      "hash": "68fa8be20ea244eace3581333574fcb0",
+      "status": "ACTIVE"
     }
   ]
 }

@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.note.service.note.strategy
 
 import com.gabinote.coffeenote.common.util.exception.service.ResourceNotFound
+import com.gabinote.coffeenote.note.domain.note.NoteStatus
 import com.gabinote.coffeenote.testSupport.testTemplate.ServiceTestTemplate
 import com.gabinote.coffeenote.testSupport.testUtil.data.note.NoteTestDataHelper
 import io.kotest.matchers.shouldBe
@@ -81,6 +82,23 @@ class GetNoteByExternalIdStrategyTest : ServiceTestTemplate() {
                                 ex.identifierType shouldBe "externalId"
                             }
                         }
+
+                        context("DELETE 상태의 노트가 주어지면") {
+                            val requestor = "anyUser"
+                            val note = NoteTestDataHelper.createTestNote(
+                                isOpen = true,
+                                status = NoteStatus.DELETED
+                            )
+                            it("ResourceNotFound 예외가 발생한다.") {
+                                val ex = assertThrows<ResourceNotFound> {
+                                    openStrategy.validate(requestor, note)
+                                }
+
+                                ex.name shouldBe "Opened Note"
+                                ex.identifier shouldBe note.externalId.toString()
+                                ex.identifierType shouldBe "externalId"
+                            }
+                        }
                     }
 
                 }
@@ -108,6 +126,23 @@ class GetNoteByExternalIdStrategyTest : ServiceTestTemplate() {
                         context("소유자가 아닌 사용자가 요청자인 노트가 주어지면") {
                             val requestor = "otherUser"
                             val note = NoteTestDataHelper.createTestNote(owner = "ownerUser")
+                            it("ResourceNotFound 예외가 발생한다.") {
+                                val ex = assertThrows<ResourceNotFound> {
+                                    ownedStrategy.validate(requestor, note)
+                                }
+
+                                ex.name shouldBe "Owned Note"
+                                ex.identifier shouldBe note.externalId.toString()
+                                ex.identifierType shouldBe "externalId"
+                            }
+                        }
+
+                        context("DELETE 상태의 노트가 주어지면") {
+                            val requestor = "anyUser"
+                            val note = NoteTestDataHelper.createTestNote(
+                                isOpen = true,
+                                status = NoteStatus.DELETED
+                            )
                             it("ResourceNotFound 예외가 발생한다.") {
                                 val ex = assertThrows<ResourceNotFound> {
                                     ownedStrategy.validate(requestor, note)

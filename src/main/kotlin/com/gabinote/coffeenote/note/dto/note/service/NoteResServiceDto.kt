@@ -1,5 +1,6 @@
 package com.gabinote.coffeenote.note.dto.note.service
 
+import com.gabinote.coffeenote.note.domain.note.NoteStatus
 import com.gabinote.coffeenote.note.dto.noteDisplayField.service.NoteDisplayFieldResServiceDto
 import com.gabinote.coffeenote.note.dto.noteField.service.NoteFieldResServiceDto
 import org.bson.types.ObjectId
@@ -25,4 +26,8 @@ data class NoteResServiceDto(
     var isOpen: Boolean,
 
     var owner: String,
+
+    var status: NoteStatus,
+
+    var hash: String,
 )

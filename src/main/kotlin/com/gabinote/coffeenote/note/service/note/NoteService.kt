@@ -4,6 +4,7 @@ import com.gabinote.coffeenote.common.util.exception.service.ResourceNotFound
 import com.gabinote.coffeenote.common.util.exception.service.ResourceQuotaLimit
 import com.gabinote.coffeenote.note.domain.note.Note
 import com.gabinote.coffeenote.note.domain.note.NoteRepository
+import com.gabinote.coffeenote.note.domain.note.NoteStatus
 import com.gabinote.coffeenote.note.dto.note.service.NoteCreateReqServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteListResServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteResServiceDto
@@ -89,7 +90,8 @@ class NoteService(
     }
 
     fun getAllByOwner(owner: String, pageable: Pageable): Slice<NoteListResServiceDto> {
-        val notes = noteRepository.findAllByOwner(owner = owner, pageable = pageable)
+        val notes =
+            noteRepository.findAllByOwnerAndStatus(owner = owner, pageable = pageable, status = NoteStatus.ACTIVE)
         return notes.map { note ->
             noteMapper.toListResServiceDto(note)
         }
@@ -125,6 +127,13 @@ class NoteService(
 
     fun deleteAllByOwner(owner: String) {
         noteRepository.deleteAllByOwner(owner)
+    }
+
+    fun softDeleteByExternalId(externalId: UUID, owner: String) {
+        val existsNote = fetchByExternalId(externalId)
+        checkOwnership(existsNote, owner)
+        existsNote.wipeData()
+        noteRepository.save(existsNote)
     }
 
 

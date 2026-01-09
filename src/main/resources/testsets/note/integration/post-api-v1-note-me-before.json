@@ -39,7 +39,8 @@
       ],
       "isOpen": true,
       "owner": "aa16262f-c79b-4e9b-9b0d-abcbffbaeb1c",
-      "hash": "hash123"
+      "hash": "hash123",
+      "status": "ACTIVE"
     }
   ]
 }

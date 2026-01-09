@@ -34,6 +34,7 @@ interface NoteMapper {
     @Mapping(target = "modifiedDate", ignore = true)
     @Mapping(target = "fields", expression = "java(java.util.Collections.emptyList())")
     @Mapping(target = "displayFields", expression = "java(java.util.Collections.emptyList())")
+    @Mapping(target = "status", constant = "ACTIVE")
     fun toNote(dto: NoteCreateReqServiceDto): Note
 
     fun toCreateReqServiceDto(dto: NoteUpdateReqServiceDto): NoteCreateReqServiceDto

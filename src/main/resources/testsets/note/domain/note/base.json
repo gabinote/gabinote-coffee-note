@@ -60,7 +60,8 @@
       ],
       "isOpen": true,
       "owner": "user_alpha_1234",
-      "hash": "190ec684c1d1b32ea48603ca54f32dd1"
+      "hash": "190ec684c1d1b32ea48603ca54f32dd1",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -120,7 +121,8 @@
       ],
       "isOpen": false,
       "owner": "user_beta_5678",
-      "hash": "cf9c1ef54fd2af552cca2e4f443d1d7f"
+      "hash": "cf9c1ef54fd2af552cca2e4f443d1d7f",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -200,7 +202,8 @@
       ],
       "isOpen": true,
       "owner": "user_gamma_9012",
-      "hash": "6a6a706e32b1c4aa0966c28a056b0d11"
+      "hash": "6a6a706e32b1c4aa0966c28a056b0d11",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -253,7 +256,8 @@
       ],
       "isOpen": true,
       "owner": "user_delta_3456",
-      "hash": "bf4d95fad7594e44cb326ff4f1130542"
+      "hash": "bf4d95fad7594e44cb326ff4f1130542",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -315,7 +319,8 @@
       ],
       "isOpen": false,
       "owner": "user_epsilon_7890",
-      "hash": "71f07be43fe763de4d896a3ffb41fa43"
+      "hash": "71f07be43fe763de4d896a3ffb41fa43",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -383,7 +388,8 @@
       ],
       "isOpen": true,
       "owner": "user_zeta_1357",
-      "hash": "18837c415121d537bcf750e75c64b9ad"
+      "hash": "18837c415121d537bcf750e75c64b9ad",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -458,7 +464,8 @@
       ],
       "isOpen": false,
       "owner": "user_eta_2468",
-      "hash": "bf19a549041ff5676a527025f1c592cb"
+      "hash": "bf19a549041ff5676a527025f1c592cb",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -519,7 +526,8 @@
       ],
       "isOpen": true,
       "owner": "user_theta_3690",
-      "hash": "34f42bdccbf360fd71d030d27d129238"
+      "hash": "34f42bdccbf360fd71d030d27d129238",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -579,7 +587,8 @@
       ],
       "isOpen": false,
       "owner": "user_iota_4801",
-      "hash": "c3a6924430d01eb96f45922c2ac2729e"
+      "hash": "c3a6924430d01eb96f45922c2ac2729e",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -658,7 +667,8 @@
       ],
       "isOpen": true,
       "owner": "user_kappa_5912",
-      "hash": "e045cec678b306977d6bbd76e37a7d89"
+      "hash": "e045cec678b306977d6bbd76e37a7d89",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -720,7 +730,8 @@
       ],
       "isOpen": true,
       "owner": "user_lambda_6023",
-      "hash": "e6369aefd59d42d6f3d3e2427ea95ade"
+      "hash": "e6369aefd59d42d6f3d3e2427ea95ade",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -780,7 +791,8 @@
       ],
       "isOpen": true,
       "owner": "user_mu_7134",
-      "hash": "f622717bfddd8bbdd3e9cecb5e986180"
+      "hash": "f622717bfddd8bbdd3e9cecb5e986180",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -842,7 +854,8 @@
       ],
       "isOpen": true,
       "owner": "user_nu_8245",
-      "hash": "6c638a382bbe94379df0d4a6b6eb11ef"
+      "hash": "6c638a382bbe94379df0d4a6b6eb11ef",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -896,7 +909,8 @@
       "displayFields": [],
       "isOpen": false,
       "owner": "user_xi_9356",
-      "hash": "379786795b593f48291d56394dbe5751"
+      "hash": "379786795b593f48291d56394dbe5751",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -957,7 +971,8 @@
       ],
       "isOpen": true,
       "owner": "user_omicron_0467",
-      "hash": "037440068b0c576e8babfaa65d6c19f8"
+      "hash": "037440068b0c576e8babfaa65d6c19f8",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1025,7 +1040,8 @@
       ],
       "isOpen": true,
       "owner": "user_pi_1578",
-      "hash": "109856500a90f4c8015e6d566f9d45c7"
+      "hash": "109856500a90f4c8015e6d566f9d45c7",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1089,7 +1105,8 @@
       ],
       "isOpen": false,
       "owner": "user_rho_2689",
-      "hash": "dabeb8baf9ea2a66a0ce563ca9548116"
+      "hash": "dabeb8baf9ea2a66a0ce563ca9548116",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1159,7 +1176,8 @@
       ],
       "isOpen": true,
       "owner": "user_sigma_3790",
-      "hash": "bea1f9ec70b6820a8e99f62615e623a0"
+      "hash": "bea1f9ec70b6820a8e99f62615e623a0",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1219,7 +1237,8 @@
       ],
       "isOpen": true,
       "owner": "user_tau_4801",
-      "hash": "4e437bc8835d072fc340458173436745"
+      "hash": "4e437bc8835d072fc340458173436745",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1280,7 +1299,8 @@
       ],
       "isOpen": false,
       "owner": "user_upsilon_5912",
-      "hash": "8e9b9dde0afac5599e66230906516500"
+      "hash": "8e9b9dde0afac5599e66230906516500",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1342,7 +1362,8 @@
       ],
       "isOpen": true,
       "owner": "user_phi_6023",
-      "hash": "8c53390806283e2188702e05718266a4"
+      "hash": "8c53390806283e2188702e05718266a4",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1410,7 +1431,8 @@
       ],
       "isOpen": false,
       "owner": "user_chi_7134",
-      "hash": "10684bf4fc73147b5ed8e3496f43f63f"
+      "hash": "10684bf4fc73147b5ed8e3496f43f63f",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1487,7 +1509,8 @@
       ],
       "isOpen": true,
       "owner": "user_psi_8245",
-      "hash": "b9371dd939647cbd6496de98f288b270"
+      "hash": "b9371dd939647cbd6496de98f288b270",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1540,7 +1563,8 @@
       ],
       "isOpen": true,
       "owner": "user_omega_9356",
-      "hash": "2deea3311f426d733be25b4a1b984cad"
+      "hash": "2deea3311f426d733be25b4a1b984cad",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1610,7 +1634,8 @@
       ],
       "isOpen": false,
       "owner": "user_a1b2_0467",
-      "hash": "43d2e8c8fafcf673246ee436cae096a8"
+      "hash": "43d2e8c8fafcf673246ee436cae096a8",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1678,7 +1703,8 @@
       ],
       "isOpen": true,
       "owner": "user_c3d4_1578",
-      "hash": "c6914340d8f434dd2aa26377ed5da50a"
+      "hash": "c6914340d8f434dd2aa26377ed5da50a",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1746,7 +1772,8 @@
       ],
       "isOpen": true,
       "owner": "user_e5f6_2689",
-      "hash": "80cfa5cf9c52d7900d2fdb9d9ba1599a"
+      "hash": "80cfa5cf9c52d7900d2fdb9d9ba1599a",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1799,7 +1826,8 @@
       ],
       "isOpen": true,
       "owner": "user_g7h8_3790",
-      "hash": "43aad9f70e2e5f8c85d9989450c2cdd1"
+      "hash": "43aad9f70e2e5f8c85d9989450c2cdd1",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1863,7 +1891,8 @@
       ],
       "isOpen": false,
       "owner": "user_i9j0_4801",
-      "hash": "30a8d6bb3357ff2e22d848aab84d4d35"
+      "hash": "30a8d6bb3357ff2e22d848aab84d4d35",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1931,7 +1960,8 @@
       ],
       "isOpen": true,
       "owner": "user_k1l2_5912",
-      "hash": "c337158535cef09b2c4e832dd10100eb"
+      "hash": "c337158535cef09b2c4e832dd10100eb",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -1984,7 +2014,8 @@
       ],
       "isOpen": true,
       "owner": "user_m3n4_6023",
-      "hash": "79dc5dd35791e1a2e256d0b176311ae6"
+      "hash": "79dc5dd35791e1a2e256d0b176311ae6",
+      "status": "ACTIVE"
     },
     {
       "_id": {
@@ -2052,7 +2083,8 @@
       ],
       "isOpen": true,
       "owner": "user_z9y8_7134",
-      "hash": "6ce8491e9890921f074b7870c5a0b4db"
+      "hash": "6ce8491e9890921f074b7870c5a0b4db",
+      "status": "ACTIVE"
     }
   ]
 }

@@ -3,6 +3,7 @@ package com.gabinote.coffeenote.note.mapping.note
 import com.gabinote.coffeenote.note.domain.note.Note
 import com.gabinote.coffeenote.note.domain.note.NoteDisplayField
 import com.gabinote.coffeenote.note.domain.note.NoteField
+import com.gabinote.coffeenote.note.domain.note.NoteStatus
 import com.gabinote.coffeenote.note.domain.note.vo.NoteOwnedItem
 import com.gabinote.coffeenote.note.dto.note.controller.NoteCreateReqControllerDto
 import com.gabinote.coffeenote.note.dto.note.controller.NoteListResControllerDto
@@ -101,6 +102,8 @@ class NoteMapperTest : MockkTestTemplate() {
                         displayFields = listOf(expectedDisplayField),
                         isOpen = note.isOpen,
                         owner = note.owner,
+                        status = note.status,
+                        hash = note.hash!!,
                     )
 
                     it("NoteResServiceDto로 변환되어야 한다.") {
@@ -143,6 +146,8 @@ class NoteMapperTest : MockkTestTemplate() {
                         displayFields = emptyList(),
                         isOpen = note.isOpen,
                         owner = note.owner,
+                        status = note.status,
+                        hash = note.hash!!,
                     )
 
                     it("빈 필드들을 가진 NoteResServiceDto로 변환되어야 한다.") {
@@ -171,7 +176,8 @@ class NoteMapperTest : MockkTestTemplate() {
                         modifiedDate = TestTimeProvider.testDateTime,
                         displayFields = listOf(displayField),
                         isOpen = true,
-                        owner = "test-owner"
+                        owner = "test-owner",
+                        status = NoteStatus.ACTIVE,
                     )
 
                     val displayFieldRes = mockk<NoteDisplayFieldResServiceDto>()
@@ -220,7 +226,9 @@ class NoteMapperTest : MockkTestTemplate() {
                         fields = listOf(field),
                         displayFields = listOf(displayField),
                         isOpen = true,
-                        owner = "test-owner"
+                        owner = "test-owner",
+                        status = NoteStatus.ACTIVE,
+                        hash = NoteHashTestDataHelper.TEST_HASH
                     )
 
                     val fieldRes = mockk<NoteFieldResControllerDto>()
@@ -271,7 +279,9 @@ class NoteMapperTest : MockkTestTemplate() {
                         fields = listOf(),
                         displayFields = listOf(),
                         isOpen = true,
-                        owner = "test-owner"
+                        owner = "test-owner",
+                        status = NoteStatus.ACTIVE,
+                        hash = NoteHashTestDataHelper.TEST_HASH
                     )
 
                     val expected = NoteResControllerDto(
@@ -398,7 +408,8 @@ class NoteMapperTest : MockkTestTemplate() {
                         modifiedDate = null,
                         id = null,
                         externalId = null,
-                        hash = null
+                        hash = null,
+                        status = NoteStatus.ACTIVE,
                     )
 
                     it("Note 엔티티로 변환되어야 한다.") {

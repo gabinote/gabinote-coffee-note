@@ -3,6 +3,7 @@ package com.gabinote.coffeenote.testSupport.testUtil.data.note
 import com.gabinote.coffeenote.note.domain.note.Note
 import com.gabinote.coffeenote.note.domain.note.NoteDisplayField
 import com.gabinote.coffeenote.note.domain.note.NoteField
+import com.gabinote.coffeenote.note.domain.note.NoteStatus
 import com.gabinote.coffeenote.note.domain.note.vo.NoteOwnedItem
 import com.gabinote.coffeenote.note.dto.note.controller.NoteCreateReqControllerDto
 import com.gabinote.coffeenote.note.dto.note.controller.NoteListResControllerDto
@@ -40,6 +41,7 @@ object NoteTestDataHelper {
         isOpen: Boolean = false,
         owner: String = "test-owner",
         hash: String = NoteHashTestDataHelper.TEST_HASH,
+        status: NoteStatus = NoteStatus.ACTIVE,
     ) = Note(
         id = id,
         externalId = externalId,
@@ -51,7 +53,8 @@ object NoteTestDataHelper {
         displayFields = displayFields,
         isOpen = isOpen,
         owner = owner,
-        hash = hash
+        hash = hash,
+        status = status,
     )
 
     fun createTestNoteCreateReqControllerDto(
@@ -169,6 +172,8 @@ object NoteTestDataHelper {
         displayFields = displayFields,
         isOpen = isOpen,
         owner = owner,
+        status = NoteStatus.ACTIVE,
+        hash = NoteHashTestDataHelper.TEST_HASH,
     )
 
     fun createTestNoteListResServiceDto(
@@ -239,6 +244,7 @@ object NoteTestDataHelper {
         displayFields = displayFields,
         isOpen = isOpen,
         owner = owner,
+        status = NoteStatus.ACTIVE,
     )
 
 }

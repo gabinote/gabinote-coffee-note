@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.note.domain.note.vo
 
 import com.gabinote.coffeenote.note.domain.note.NoteDisplayField
+import com.gabinote.coffeenote.note.domain.note.NoteStatus
 import org.bson.types.ObjectId
 import java.time.LocalDateTime
 
@@ -21,4 +22,6 @@ data class NoteOwnedItem(
     var isOpen: Boolean = false,
 
     var owner: String,
+
+    var status: NoteStatus,
 )

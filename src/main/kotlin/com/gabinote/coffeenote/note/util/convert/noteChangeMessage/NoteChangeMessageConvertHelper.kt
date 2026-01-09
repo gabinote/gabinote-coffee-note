@@ -4,8 +4,12 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.gabinote.coffeenote.common.util.debezium.json.parser.MongoDateParser
 import com.gabinote.coffeenote.note.domain.note.Note
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
+
+
+private val logger = KotlinLogging.logger {}
 
 /**
  * Debezium Change Message의 Note JSON을 Note 도메인으로 변환하는 헬퍼 클래스
@@ -22,6 +26,7 @@ class NoteChangeMessageConvertHelper(
         jsonString: String,
     ): Note {
         val tmpNote = objectMapper.readValue(jsonString, TmpChangeMessageNote::class.java)
+
         val node = objectMapper.readTree(jsonString)
         val createdDate = parseDateTime(node, "createdDate")
         val modifiedDate = parseDateTime(node, "modifiedDate")
@@ -52,6 +57,7 @@ class NoteChangeMessageConvertHelper(
             hash = tmp.hash,
             createdDate = createdDate,
             modifiedDate = modifiedDate,
+            status = tmp.status,
         )
 
     }
