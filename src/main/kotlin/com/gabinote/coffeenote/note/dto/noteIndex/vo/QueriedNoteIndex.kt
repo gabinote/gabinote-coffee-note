@@ -1,4 +1,4 @@
-package com.gabinote.coffeenote.note.domain.noteIndex.vo
+package com.gabinote.coffeenote.note.dto.noteIndex.vo
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty

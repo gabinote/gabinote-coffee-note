@@ -2,10 +2,13 @@ package com.gabinote.coffeenote.note.domain.noteFieldIndex
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelper.filterText
+import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelper.filterTextIn
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelper.searchFacetWithName
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelper.validationInput
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.data.FacetWithCount
+import com.gabinote.coffeenote.note.dto.noteFieldIndex.vo.NoteFieldIndexNoteIdHash
 import com.meilisearch.sdk.Client
+import com.meilisearch.sdk.SearchRequest
 import com.meilisearch.sdk.model.TaskInfo
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.stereotype.Repository
@@ -58,6 +61,19 @@ class NoteFieldIndexRepository(
         )
     }
 
+    fun findAllByNoteIds(noteIds: List<String>): List<NoteFieldIndexNoteIdHash> {
+        val filter = listOf(
+            filterTextIn("noteId", noteIds)
+        )
+        val attributesToRetrieve = listOf("id", "noteId", "name", "value", "fieldId")
+        val req = SearchRequest("*").apply {
+            this.filter = filter.toTypedArray()
+            this.attributesToRetrieve = attributesToRetrieve.toTypedArray()
+        }
+        val res = index.search(req)
+        return convertToNoteFieldNoteIdHash(res.hits)
+    }
+
     //TODO: 중복 로직 리팩토링
     fun save(noteFieldIndex: NoteFieldIndex): TaskInfo {
         val jsonString = objectMapper.writeValueAsString(noteFieldIndex)
@@ -81,6 +97,12 @@ class NoteFieldIndexRepository(
     fun deleteAllByOwner(owner: String): TaskInfo {
         val filter = filterText("owner", owner)
         return index.deleteDocumentsByFilter(filter)
+    }
+
+    private fun convertToNoteFieldNoteIdHash(hit: List<Map<String, Any>>): List<NoteFieldIndexNoteIdHash> {
+        return hit.map {
+            objectMapper.convertValue(it, NoteFieldIndexNoteIdHash::class.java)
+        }
     }
 
 

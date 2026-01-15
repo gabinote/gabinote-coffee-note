@@ -1,0 +1,122 @@
+{
+  "notes": [
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0010"
+      },
+      "externalId": "b1b2c3d4-e5f6-4789-0123-4567890abcd1",
+      "title": "Major Sink 테스트 노트 1 - 인덱스 없는 노트",
+      "thumbnail": "https://images.example.com/thumbnails/major1.jpg",
+      "createdDate": {
+        "$date": "2002-08-26T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2002-08-26T10:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_010",
+          "name": "브루잉 방식",
+          "icon": "coffee",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "핸드드립"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "브루잉 방식",
+          "icon": "coffee",
+          "values": [
+            "핸드드립"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_major_sink_1",
+      "hash": "major_sink_hash_001",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0011"
+      },
+      "externalId": "b1b2c3d4-e5f6-4789-0123-4567890abcd2",
+      "title": "Major Sink 테스트 노트 2 - 삭제된 노트(인덱스 남음)",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2002-08-26T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2002-08-26T10:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_011",
+          "name": "물 온도",
+          "icon": "temp",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "93"
+          ]
+        }
+      ],
+      "displayFields": [],
+      "isOpen": false,
+      "owner": "user_major_sink_2",
+      "hash": "major_sink_hash_002",
+      "status": "DELETED"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0012"
+      },
+      "externalId": "b1b2c3d4-e5f6-4789-0123-4567890abcd3",
+      "title": "Major Sink 테스트 노트 3 - 해쉬 다른 노트",
+      "thumbnail": "https://images.example.com/thumbnails/major3.jpg",
+      "createdDate": {
+        "$date": "2002-08-26T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2002-08-26T10:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_012",
+          "name": "그라인더 세팅2",
+          "icon": "gear",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "18"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "그라인더 세팅2",
+          "icon": "gear",
+          "values": [
+            "18"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_major_sink_3",
+      "hash": "major_sink_hash_003_updated",
+      "status": "ACTIVE"
+    }
+  ]
+}
+

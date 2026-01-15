@@ -1,0 +1,22 @@
+{
+  "uid": "noteFieldIndex",
+  "data": [
+    {
+      "id": "field-index-minor-002-1",
+      "noteId": "a1b2c3d4-e5f6-4789-0123-4567890abcd2",
+      "fieldId": "field_003",
+      "name": "추출 온도",
+      "value": "92",
+      "owner": "user_minor_sink_2"
+    },
+    {
+      "id": "field-index-minor-003-1",
+      "noteId": "a1b2c3d4-e5f6-4789-0123-4567890abcd3",
+      "fieldId": "field_004",
+      "name": "원두 종류",
+      "value": "아라비카",
+      "owner": "user_minor_sink_3"
+    }
+  ]
+}
+

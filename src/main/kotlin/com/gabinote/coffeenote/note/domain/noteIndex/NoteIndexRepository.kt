@@ -6,8 +6,9 @@ import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelp
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelper.filterTextIn
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelper.searchAsPage
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.MeiliSearchResHelper.validationInput
-import com.gabinote.coffeenote.note.domain.noteIndex.vo.DateRangeFilter
-import com.gabinote.coffeenote.note.domain.noteIndex.vo.QueriedNoteIndex
+import com.gabinote.coffeenote.note.dto.noteIndex.vo.DateRangeFilter
+import com.gabinote.coffeenote.note.dto.noteIndex.vo.NoteIndexIdHash
+import com.gabinote.coffeenote.note.dto.noteIndex.vo.QueriedNoteIndex
 import com.meilisearch.sdk.Client
 import com.meilisearch.sdk.Index
 import com.meilisearch.sdk.SearchRequest
@@ -131,6 +132,20 @@ class NoteIndexRepository(
         return index.deleteDocumentsByFilter(filter)
     }
 
+    fun findAllByIds(ids: List<String>): List<NoteIndexIdHash> {
+        val filter = listOf(
+            filterTextIn("id", ids)
+        )
+        val attributesToRetrieve = listOf("id", "noteHash")
+        val req = SearchRequest("*").apply {
+            this.filter = filter.toTypedArray()
+            this.attributesToRetrieve = attributesToRetrieve.toTypedArray()
+        }
+        logger.debug { "Search Request for findAllByIds: $req" }
+        val res = index.search(req)
+        return convertToNoteIndexIdHash(res.hits)
+    }
+
 
     /**
      * NoteIndexRepository 전역에서 사용하는 SearchRequest 설정 메서드
@@ -155,6 +170,7 @@ class NoteIndexRepository(
             this.highlightPreTag = globalHighlightPreTag
             this.highlightPostTag = globalHighlightPostTag
             this.showMatchesPosition = globalShowMatchesPosition
+
         }
     }
 
@@ -228,6 +244,12 @@ class NoteIndexRepository(
             noteIndexes.add(formatted)
         }
         return noteIndexes
+    }
+
+    private fun convertToNoteIndexIdHash(hit: List<Map<String, Any>>): List<NoteIndexIdHash> {
+        return hit.map {
+            objectMapper.convertValue(it, NoteIndexIdHash::class.java)
+        }
     }
 
     private fun convertToNoteIndexes(

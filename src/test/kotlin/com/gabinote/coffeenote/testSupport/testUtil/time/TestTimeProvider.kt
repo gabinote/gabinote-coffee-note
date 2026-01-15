@@ -15,6 +15,7 @@ class TestTimeProvider : TimeProvider {
     }
 
     override fun now(): LocalDateTime {
+        ZoneId.of("UTC")
         return testDateTime
     }
 

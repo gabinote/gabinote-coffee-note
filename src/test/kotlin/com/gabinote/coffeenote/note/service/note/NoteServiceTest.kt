@@ -5,6 +5,7 @@ import com.gabinote.coffeenote.common.util.exception.service.ResourceQuotaLimit
 import com.gabinote.coffeenote.note.domain.note.*
 import com.gabinote.coffeenote.note.dto.note.service.NoteListResServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteResServiceDto
+import com.gabinote.coffeenote.note.dto.note.vo.NoteExtIdHash
 import com.gabinote.coffeenote.note.mapping.note.NoteMapper
 import com.gabinote.coffeenote.note.service.note.strategy.GetNoteByExternalIdStrategyFactory
 import com.gabinote.coffeenote.note.service.note.strategy.GetNoteByExternalIdStrategyType
@@ -22,6 +23,7 @@ import com.gabinote.coffeenote.testSupport.testUtil.data.note.NoteTestDataHelper
 import com.gabinote.coffeenote.testSupport.testUtil.data.note.NoteTestDataHelper.createTestOwnedItem
 import com.gabinote.coffeenote.testSupport.testUtil.page.TestPageableUtil.createPageable
 import com.gabinote.coffeenote.testSupport.testUtil.page.TestSliceUtil.toSlice
+import com.gabinote.coffeenote.testSupport.testUtil.time.TestTimeProvider
 import com.gabinote.coffeenote.testSupport.testUtil.uuid.TestUuidSource
 import io.kotest.matchers.shouldBe
 import io.mockk.clearAllMocks
@@ -965,6 +967,100 @@ class NoteServiceTest : ServiceTestTemplate() {
 
                         verify(exactly = 1) {
                             noteRepository.deleteAllByOwner(owner)
+                        }
+                    }
+                }
+            }
+
+            describe("NoteService.getAllNoteExtIdHashWithBetweenModifiedDate") {
+                context("수정일자 기준으로 특정 기간 내의 모든 노트를 조회하면,") {
+                    val startDate = TestTimeProvider.testDateTime
+                    val endDate = TestTimeProvider.testDateTime
+                    val pageable = createPageable()
+
+                    beforeTest {
+                        every {
+                            noteRepository.findAllByModifiedDateBetween(
+                                startDate = startDate,
+                                endDate = endDate,
+                                pageable = pageable,
+                                type = NoteExtIdHash::class.java
+                            )
+                        } returns listOf()
+                    }
+
+                    it("해당 기간에 수정된 모든 노트의 externalId와 hash를 반환한다.") {
+                        noteService.getAllNoteExtIdHashWithBetweenModifiedDate(
+                            startDate = startDate,
+                            endDate = endDate,
+                            pageable = pageable
+                        )
+
+                        verify(exactly = 1) {
+                            noteRepository.findAllByModifiedDateBetween(
+                                startDate = startDate,
+                                endDate = endDate,
+                                pageable = pageable,
+                                type = NoteExtIdHash::class.java
+                            )
+                        }
+                    }
+                }
+
+            }
+
+            describe("NoteService.getCountWithBetweenModifiedDate") {
+                context("수정일자 기준으로 특정 기간 내의 모든 노트를 조회하면,") {
+                    val startDate = TestTimeProvider.testDateTime
+                    val endDate = TestTimeProvider.testDateTime
+
+                    beforeTest {
+                        every {
+                            noteRepository.countAllByModifiedDateBetween(
+                                startDate = startDate,
+                                endDate = endDate,
+                            )
+                        } returns 2
+                    }
+
+                    it("해당 기간에 수정된 모든 노트의 갯수를 반환한다.") {
+                        noteService.getCountWithBetweenModifiedDate(
+                            startDate = startDate,
+                            endDate = endDate
+                        )
+
+                        verify(exactly = 1) {
+                            noteRepository.countAllByModifiedDateBetween(
+                                startDate = startDate,
+                                endDate = endDate,
+                            )
+                        }
+                    }
+                }
+
+            }
+
+            describe("NoteService.getCountBeforeModifiedDate") {
+                context("수정일자 기준으로 특정 일자 이전의 모든 노트를 조회하면,") {
+                    val beforeDate = TestTimeProvider.testDateTime
+
+                    beforeTest {
+                        every {
+                            noteRepository.countAllByModifiedDateBefore(
+                                beforeDate = beforeDate
+                            )
+                        } returns 2
+                    }
+
+                    it("해당 일자 이전에 수정된 모든 노트의 externalId와 hash를 반환한다.") {
+                        noteService.getCountBeforeModifiedDate(
+                            beforeDate = beforeDate
+                        )
+
+                        verify(exactly = 1) {
+                            noteRepository.countAllByModifiedDateBefore(
+                                beforeDate = beforeDate
+                            )
                         }
                     }
                 }

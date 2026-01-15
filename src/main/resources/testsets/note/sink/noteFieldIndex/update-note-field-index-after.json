@@ -8,7 +8,8 @@
       "value": "케냐",
       "noteId": "b2c3d4e5-f6a7-4890-1234-567890abcdef",
       "synchronizedAt": 1030460400,
-      "noteHash": "390ec684c1d1b32ea48603ca54f32dd3"
+      "noteHash": "390ec684c1d1b32ea48603ca54f32dd3",
+      "fieldId": "field_001"
     },
     {
       "id": "00000000-0000-0000-0000-000000000001",
@@ -17,7 +18,8 @@
       "value": "미디엄",
       "noteId": "b2c3d4e5-f6a7-4890-1234-567890abcdef",
       "synchronizedAt": 1030460400,
-      "noteHash": "390ec684c1d1b32ea48603ca54f32dd3"
+      "noteHash": "390ec684c1d1b32ea48603ca54f32dd3",
+      "fieldId": "field_002"
     }
   ]
 }

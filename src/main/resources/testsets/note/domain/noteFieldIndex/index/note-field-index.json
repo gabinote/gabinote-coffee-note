@@ -6,7 +6,8 @@
       "name",
       "value",
       "owner",
-      "noteId"
+      "noteId",
+      "fieldId"
     ],
     "searchableAttributes": [
       "*"

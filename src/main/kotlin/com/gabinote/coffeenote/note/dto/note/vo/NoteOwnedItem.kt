@@ -1,4 +1,4 @@
-package com.gabinote.coffeenote.note.domain.note.vo
+package com.gabinote.coffeenote.note.dto.note.vo
 
 import com.gabinote.coffeenote.note.domain.note.NoteDisplayField
 import com.gabinote.coffeenote.note.domain.note.NoteStatus

@@ -8,10 +8,11 @@ import com.gabinote.coffeenote.note.domain.note.NoteField
 import com.gabinote.coffeenote.note.domain.noteIndex.IndexDisplayField
 import com.gabinote.coffeenote.note.domain.noteIndex.NoteIndex
 import com.gabinote.coffeenote.note.domain.noteIndex.NoteIndexRepository
-import com.gabinote.coffeenote.note.domain.noteIndex.vo.DateRangeFilter
 import com.gabinote.coffeenote.note.dto.noteIndex.domain.NoteFilterCondition
 import com.gabinote.coffeenote.note.dto.noteIndex.domain.NoteSearchCondition
 import com.gabinote.coffeenote.note.dto.noteIndex.service.NoteIndexResServiceDto
+import com.gabinote.coffeenote.note.dto.noteIndex.vo.DateRangeFilter
+import com.gabinote.coffeenote.note.dto.noteIndex.vo.NoteIndexIdHash
 import com.gabinote.coffeenote.note.mapping.noteIndex.NoteIndexMapper
 import org.springframework.data.domain.Slice
 import org.springframework.stereotype.Service
@@ -61,6 +62,11 @@ class NoteIndexService(
         return indexes.map {
             noteIndexMapper.toResServiceDto(it)
         }
+
+    }
+    
+    fun getAllByIds(noteIds: List<String>): List<NoteIndexIdHash> {
+        return noteIndexRepository.findAllByIds(noteIds)
 
     }
 

@@ -1,0 +1,36 @@
+{
+  "uid": "noteFieldIndex",
+  "data": [
+    {
+      "id": "00000000-0000-0000-0000-000000000001",
+      "noteId": "a1b2c3d4-e5f6-4789-0123-4567890abcd1",
+      "fieldId": "field_001",
+      "name": "원산지",
+      "value": "에티오피아",
+      "owner": "user_minor_sink_1",
+      "synchronizedAt": 1030460400,
+      "noteHash": "minor_sink_hash_001"
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000002",
+      "noteId": "a1b2c3d4-e5f6-4789-0123-4567890abcd1",
+      "fieldId": "field_002",
+      "name": "로스팅 정도",
+      "value": "라이트",
+      "owner": "user_minor_sink_1",
+      "synchronizedAt": 1030460400,
+      "noteHash": "minor_sink_hash_001"
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000003",
+      "noteId": "a1b2c3d4-e5f6-4789-0123-4567890abcd3",
+      "fieldId": "field_004",
+      "name": "원두 종류",
+      "value": "아라비카-업데이트됨",
+      "owner": "user_minor_sink_3",
+      "synchronizedAt": 1030460400,
+      "noteHash": "minor_sink_hash_003_updated"
+    }
+  ]
+}
+

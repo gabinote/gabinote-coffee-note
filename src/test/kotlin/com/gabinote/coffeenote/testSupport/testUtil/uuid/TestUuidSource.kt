@@ -14,6 +14,8 @@ class TestUuidSource : UuidSource {
 
     private val uuidQueue: Queue<UUID> = LinkedList()
 
+    private var isEnabledRNG: Boolean = false
+
     /**
      * 테스트용 큐모드 활성화 메소드
      * 큐모드를 활성화 하고, 미리 정의된 UUID 리스트를 큐에 담음.
@@ -28,6 +30,14 @@ class TestUuidSource : UuidSource {
     fun disableQueueMode() {
         isEnabledQueueMode = false
         uuidQueue.clear()
+    }
+
+    fun enableRNGMode() {
+        isEnabledRNG = true
+    }
+
+    fun disableRNGMode() {
+        isEnabledRNG = false
     }
 
     /**
@@ -52,6 +62,8 @@ class TestUuidSource : UuidSource {
     override fun generateUuid(): UUID {
         return if (isEnabledQueueMode) {
             uuidQueue.poll() ?: throw IllegalStateException("UUID queue is empty")
+        } else if (isEnabledRNG) {
+            UUID.randomUUID()
         } else {
             UUID_STRING
         }

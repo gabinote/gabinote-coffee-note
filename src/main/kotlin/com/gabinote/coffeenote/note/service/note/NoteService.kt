@@ -9,6 +9,8 @@ import com.gabinote.coffeenote.note.dto.note.service.NoteCreateReqServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteListResServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteResServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteUpdateReqServiceDto
+import com.gabinote.coffeenote.note.dto.note.vo.NoteExtIdHash
+import com.gabinote.coffeenote.note.dto.note.vo.NoteOnlyField
 import com.gabinote.coffeenote.note.mapping.note.NoteMapper
 import com.gabinote.coffeenote.note.service.note.strategy.GetNoteByExternalIdStrategyFactory
 import com.gabinote.coffeenote.note.service.note.strategy.GetNoteByExternalIdStrategyType
@@ -24,6 +26,7 @@ import org.springframework.data.domain.Slice
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDateTime
 import java.util.*
 
 private val logger = KotlinLogging.logger {}
@@ -65,6 +68,73 @@ class NoteService(
         val strategy = getNoteByExternalIdStrategyFactory.getStrategy(strategyType)
         strategy.validate(requestor = requestor, note = note)
         return noteMapper.toNoteResServiceDto(note)
+    }
+
+    fun getAllNoteExtIdHashWithBetweenModifiedDate(
+        startDate: LocalDateTime,
+        endDate: LocalDateTime,
+        pageable: Pageable,
+    ): List<NoteExtIdHash> {
+        return noteRepository.findAllByModifiedDateBetween(
+            startDate = startDate,
+            endDate = endDate,
+            pageable = pageable,
+            type = NoteExtIdHash::class.java
+        )
+    }
+
+    fun getAllNoteFieldsWithBetweenModifiedDate(
+        startDate: LocalDateTime,
+        endDate: LocalDateTime,
+        pageable: Pageable,
+    ): List<NoteOnlyField> {
+        return noteRepository.findAllByModifiedDateBetween(
+            startDate = startDate,
+            endDate = endDate,
+            pageable = pageable,
+            type = NoteOnlyField::class.java
+        )
+    }
+
+    fun getCountWithBetweenModifiedDate(
+        startDate: LocalDateTime,
+        endDate: LocalDateTime,
+    ): Long {
+        return noteRepository.countAllByModifiedDateBetween(
+            startDate = startDate,
+            endDate = endDate,
+        )
+    }
+
+    fun getAllNoteExtIdHashBeforeModifiedDate(
+        beforeDate: LocalDateTime,
+        pageable: Pageable,
+    ): List<NoteExtIdHash> {
+        return noteRepository.findAllByModifiedDateBefore(
+            beforeDate = beforeDate,
+            pageable = pageable,
+            type = NoteExtIdHash::class.java
+        )
+    }
+
+    fun getAllNoteFieldsBeforeModifiedDate(
+        beforeDate: LocalDateTime,
+        pageable: Pageable,
+    ): List<NoteOnlyField> {
+        return noteRepository.findAllByModifiedDateBefore(
+            beforeDate = beforeDate,
+            pageable = pageable,
+            type = NoteOnlyField::class.java
+        )
+    }
+
+
+    fun getCountBeforeModifiedDate(
+        beforeDate: LocalDateTime,
+    ): Long {
+        return noteRepository.countAllByModifiedDateBefore(
+            beforeDate = beforeDate
+        )
     }
 
     fun getOpenByExternalId(

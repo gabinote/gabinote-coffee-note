@@ -10,6 +10,7 @@ import com.gabinote.coffeenote.note.domain.noteFieldIndex.NoteFieldIndex
 import com.gabinote.coffeenote.note.domain.noteFieldIndex.NoteFieldIndexRepository
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.service.NoteFieldNameFacetWithCountResServiceDto
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.service.NoteFieldValueFacetWithCountResServiceDto
+import com.gabinote.coffeenote.note.dto.noteFieldIndex.vo.NoteFieldIndexNoteIdHash
 import com.gabinote.coffeenote.note.mapping.noteFieldIndex.NoteFieldIndexMapper
 import com.gabinote.coffeenote.testSupport.testTemplate.ServiceTestTemplate
 import com.gabinote.coffeenote.testSupport.testUtil.data.field.TestFieldType
@@ -374,7 +375,8 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
                         value = values[0],
                         owner = note.owner,
                         synchronizedAt = TestTimeProvider.testEpochSecond,
-                        noteHash = "hash"
+                        noteHash = "hash",
+                        fieldId = "field-included",
                     )
 
                     val secNoteFieldIndex = NoteFieldIndex(
@@ -384,7 +386,8 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
                         value = values[1],
                         owner = note.owner,
                         synchronizedAt = TestTimeProvider.testEpochSecond,
-                        noteHash = "hash"
+                        noteHash = "hash",
+                        fieldId = "field-included",
                     )
 
                     val expected = listOf(noteFieldIndex, secNoteFieldIndex)
@@ -450,6 +453,48 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
 
                         verify(exactly = 1) {
                             noteFieldIndexRepository.deleteAllByOwner(owner)
+                        }
+                    }
+                }
+            }
+
+            describe("NoteFieldIndexService.getAllByNoteIds") {
+                context("노트 ID 목록이 주어졌을 때") {
+                    val noteIds = listOf(
+                        TestUuidSource.UUID_STRING.toString(),
+                        "00000000-0000-0000-0000-000000000002"
+                    )
+
+                    val expected = listOf(
+                        NoteFieldIndexNoteIdHash(
+                            noteId = noteIds[0],
+                            value = "some-val",
+                            name = "some-name",
+                            fieldId = "field_001",
+                            id = TestUuidSource.UUID_STRING.toString(),
+                        ),
+                        NoteFieldIndexNoteIdHash(
+                            noteId = noteIds[1],
+                            value = "other-val",
+                            name = "other-name",
+                            fieldId = "field_001",
+                            id = "00000000-0000-0000-0000-000000000003",
+                        )
+                    )
+
+                    beforeTest {
+                        every {
+                            noteFieldIndexRepository.findAllByNoteIds(noteIds)
+                        } returns expected
+                    }
+
+                    it("해당 노트 ID들의 NoteFieldIndexNoteIdHash 목록을 반환한다") {
+                        val result = noteFieldIndexService.getAllByNoteIds(noteIds)
+
+                        result shouldBe expected
+
+                        verify(exactly = 1) {
+                            noteFieldIndexRepository.findAllByNoteIds(noteIds)
                         }
                     }
                 }

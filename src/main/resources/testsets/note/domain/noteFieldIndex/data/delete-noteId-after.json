@@ -6,6 +6,7 @@
       "owner": "barista_park_02",
       "name": "브루잉 방법",
       "value": "하리오 V60",
+      "fieldId": "field-005",
       "noteId": "65321a0b1f2e3d4c5a6b7c81",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -15,6 +16,7 @@
       "owner": "barista_park_02",
       "name": "원두 사용량",
       "value": "20g",
+      "fieldId": "field-006",
       "noteId": "65321a0b1f2e3d4c5a6b7c81",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -24,6 +26,7 @@
       "owner": "barista_park_02",
       "name": "물 온도",
       "value": "92°C",
+      "fieldId": "field-007",
       "noteId": "65321a0b1f2e3d4c5a6b7c81",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -33,6 +36,7 @@
       "owner": "barista_park_02",
       "name": "총 추출 시간",
       "value": "2분 30초",
+      "fieldId": "field-008",
       "noteId": "65321a0b1f2e3d4c5a6b7c81",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -42,6 +46,7 @@
       "owner": "home_cafe_lee_03",
       "name": "원두명",
       "value": "콜롬비아 후일라 수프리모",
+      "fieldId": "field-001",
       "noteId": "65321a0b1f2e3d4c5a6b7c82",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -51,6 +56,7 @@
       "owner": "home_cafe_lee_03",
       "name": "로스터리",
       "value": "프릳츠 커피 컴퍼니",
+      "fieldId": "field-002",
       "noteId": "65321a0b1f2e3d4c5a6b7c82",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -60,6 +66,7 @@
       "owner": "home_cafe_lee_03",
       "name": "테이스팅 노트",
       "value": "견과류, 다크 초콜릿, 캐러멜, 부드러운 산미",
+      "fieldId": "field-009",
       "noteId": "65321a0b1f2e3d4c5a6b7c82",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -69,6 +76,7 @@
       "owner": "home_cafe_lee_03",
       "name": "추천",
       "value": "데일리 아메리카노 또는 라떼 베이스로 적합",
+      "fieldId": "field-010",
       "noteId": "65321a0b1f2e3d4c5a6b7c82",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -78,6 +86,7 @@
       "owner": "barista_park_02",
       "name": "원두명",
       "value": "케냐 AA",
+      "fieldId": "field-001",
       "noteId": "65321a0b1f2e3d4c5a6b7c83",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -87,6 +96,7 @@
       "owner": "barista_park_02",
       "name": "가공방식",
       "value": "더블 워시드 (Double Washed)",
+      "fieldId": "field-003",
       "noteId": "65321a0b1f2e3d4c5a6b7c83",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -96,6 +106,7 @@
       "owner": "barista_park_02",
       "name": "향미",
       "value": "블랙커런트, 자몽, 토마토, 쥬시한 산미",
+      "fieldId": "field-004",
       "noteId": "65321a0b1f2e3d4c5a6b7c83",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -105,6 +116,7 @@
       "owner": "barista_park_02",
       "name": "바디감",
       "value": "미디엄",
+      "fieldId": "field-011",
       "noteId": "65321a0b1f2e3d4c5a6b7c83",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -114,6 +126,7 @@
       "owner": "user_coffee_lover_01",
       "name": "추출 머신",
       "value": "브레빌 870",
+      "fieldId": "field-012",
       "noteId": "65321a0b1f2e3d4c5a6b7c84",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -123,6 +136,7 @@
       "owner": "user_coffee_lover_01",
       "name": "원두 (에스프레소)",
       "value": "일리카 클라시코",
+      "fieldId": "field-013",
       "noteId": "65321a0b1f2e3d4c5a6b7c84",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -132,6 +146,7 @@
       "owner": "user_coffee_lover_01",
       "name": "도징",
       "value": "18g",
+      "fieldId": "field-014",
       "noteId": "65321a0b1f2e3d4c5a6b7c84",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"
@@ -141,6 +156,7 @@
       "owner": "user_coffee_lover_01",
       "name": "추출 시간",
       "value": "25초",
+      "fieldId": "field-015",
       "noteId": "65321a0b1f2e3d4c5a6b7c84",
       "synchronizedAt": 1731821801000,
       "noteHash": "hash001"

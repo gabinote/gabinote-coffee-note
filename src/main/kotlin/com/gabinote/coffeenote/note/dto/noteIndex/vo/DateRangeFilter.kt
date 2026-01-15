@@ -1,4 +1,4 @@
-package com.gabinote.coffeenote.note.domain.noteIndex.vo
+package com.gabinote.coffeenote.note.dto.noteIndex.vo
 
 data class DateRangeFilter(
     val startDate: Long?,

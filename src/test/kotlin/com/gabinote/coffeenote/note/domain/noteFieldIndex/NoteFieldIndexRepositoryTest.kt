@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.note.domain.noteFieldIndex
 
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.data.FacetWithCount
+import com.gabinote.coffeenote.note.dto.noteFieldIndex.vo.NoteFieldIndexNoteIdHash
 import com.gabinote.coffeenote.testSupport.testTemplate.MeiliSearchTestTemplate
 import com.gabinote.coffeenote.testSupport.testUtil.validation.ListHelper.isSameElements
 import io.kotest.matchers.shouldBe
@@ -173,7 +174,8 @@ class NoteFieldIndexRepositoryTest : MeiliSearchTestTemplate() {
                         value = "신규 값",
                         noteId = "65321a0b1f2e3d4c5a6b7c80",
                         synchronizedAt = 1731821801000,
-                        noteHash = "hash001"
+                        noteHash = "hash001",
+                        fieldId = "field_001"
                     )
                     it("노트 필드 인덱스를 저장한다") {
 
@@ -198,7 +200,8 @@ class NoteFieldIndexRepositoryTest : MeiliSearchTestTemplate() {
                         value = "신규 값1",
                         noteId = "65321a0b1f2e3d4c5a6b7c80",
                         synchronizedAt = 1731821801000,
-                        noteHash = "hash001"
+                        noteHash = "hash001",
+                        fieldId = "field_001"
                     )
                     val noteFieldIndex2 = NoteFieldIndex(
                         id = "a1b2c3d4-0001-4000-8000-000000000004",
@@ -207,7 +210,8 @@ class NoteFieldIndexRepositoryTest : MeiliSearchTestTemplate() {
                         value = "신규 값2",
                         noteId = "65321a0b1f2e3d4c5a6b7c80",
                         synchronizedAt = 1731821801000,
-                        noteHash = "hash001"
+                        noteHash = "hash001",
+                        fieldId = "field_001"
                     )
                     it("모든 노트 필드 인덱스를 저장한다") {
 
@@ -310,6 +314,90 @@ class NoteFieldIndexRepositoryTest : MeiliSearchTestTemplate() {
                 }
             }
 
+            describe("NoteFieldIndexRepository.findAllByNoteIds") {
+                context("존재하는 노트 ID 목록이 주어지면") {
+
+                    useBaseData()
+                    val noteIds = listOf("65321a0b1f2e3d4c5a6b7c80", "65321a0b1f2e3d4c5a6b7c81")
+                    val excepted = listOf(
+                        NoteFieldIndexNoteIdHash(
+                            id = "a1b2c3d4-0001-4000-8000-000000000001",
+                            noteId = "65321a0b1f2e3d4c5a6b7c80",
+                            name = "원두명",
+                            value = "에티오피아 예가체프 G1 코체레",
+                            fieldId = "field-001"
+                        ),
+                        NoteFieldIndexNoteIdHash(
+                            id = "a1b2c3d4-0001-4000-8000-000000000002",
+                            noteId = "65321a0b1f2e3d4c5a6b7c80",
+                            name = "로스터리",
+                            value = "커피 리브레",
+                            fieldId = "field-002"
+                        ),
+                        NoteFieldIndexNoteIdHash(
+                            id = "a1b2c3d4-0001-4000-8000-000000000003",
+                            noteId = "65321a0b1f2e3d4c5a6b7c80",
+                            name = "가공방식",
+                            value = "워시드 (Washed)",
+                            fieldId = "field-003"
+                        ),
+                        NoteFieldIndexNoteIdHash(
+                            id = "a1b2c3d4-0001-4000-8000-000000000004",
+                            noteId = "65321a0b1f2e3d4c5a6b7c80",
+                            name = "향미",
+                            value = "자스민, 베르가못, 복숭아, 밝은 산미",
+                            fieldId = "field-004"
+                        ),
+                        NoteFieldIndexNoteIdHash(
+                            id = "a1b2c3d4-0002-4000-8000-000000000005",
+                            noteId = "65321a0b1f2e3d4c5a6b7c81",
+                            name = "브루잉 방법",
+                            value = "하리오 V60",
+                            fieldId = "field-005"
+                        ),
+                        NoteFieldIndexNoteIdHash(
+                            id = "a1b2c3d4-0002-4000-8000-000000000006",
+                            noteId = "65321a0b1f2e3d4c5a6b7c81",
+                            name = "원두 사용량",
+                            value = "20g",
+                            fieldId = "field-006"
+                        ),
+                        NoteFieldIndexNoteIdHash(
+                            id = "a1b2c3d4-0002-4000-8000-000000000007",
+                            noteId = "65321a0b1f2e3d4c5a6b7c81",
+                            name = "물 온도",
+                            value = "92°C",
+                            fieldId = "field-007"
+                        ),
+                        NoteFieldIndexNoteIdHash(
+                            id = "a1b2c3d4-0002-4000-8000-000000000008",
+                            noteId = "65321a0b1f2e3d4c5a6b7c81",
+                            name = "총 추출 시간",
+                            value = "2분 30초",
+                            fieldId = "field-008"
+                        )
+                    )
+                    it("해당 노트 ID 들과 연관된 모든 노트 필드 인덱스의 노트 ID 및 해시 목록을 반환한다") {
+
+                        val res = noteFieldIndexRepository.findAllByNoteIds(noteIds)
+
+                        res shouldBe excepted
+                    }
+                }
+
+                context("존재하지 않는 노트 ID 목록이 주어지면") {
+
+                    useBaseData()
+                    val noteIds = listOf("not_exist_note_id_01", "not_exist_note_id_02")
+                    val excepted = emptyList<NoteFieldIndexNoteIdHash>()
+                    it("빈 노트 필드 인덱스의 노트 ID 및 해시 목록을 반환한다") {
+
+                        val res = noteFieldIndexRepository.findAllByNoteIds(noteIds)
+
+                        res shouldBe excepted
+                    }
+                }
+            }
         }
     }
 

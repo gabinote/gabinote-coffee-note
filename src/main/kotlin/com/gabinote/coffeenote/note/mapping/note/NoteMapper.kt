@@ -1,7 +1,6 @@
 package com.gabinote.coffeenote.note.mapping.note
 
 import com.gabinote.coffeenote.note.domain.note.Note
-import com.gabinote.coffeenote.note.domain.note.vo.NoteOwnedItem
 import com.gabinote.coffeenote.note.dto.note.controller.NoteCreateReqControllerDto
 import com.gabinote.coffeenote.note.dto.note.controller.NoteListResControllerDto
 import com.gabinote.coffeenote.note.dto.note.controller.NoteResControllerDto
@@ -10,6 +9,7 @@ import com.gabinote.coffeenote.note.dto.note.service.NoteCreateReqServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteListResServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteResServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteUpdateReqServiceDto
+import com.gabinote.coffeenote.note.dto.note.vo.NoteOwnedItem
 import com.gabinote.coffeenote.note.mapping.noteDisplayField.NoteDisplayFieldMapper
 import com.gabinote.coffeenote.note.mapping.noteField.NoteFieldMapper
 import org.mapstruct.Mapper

@@ -4,7 +4,6 @@ import com.gabinote.coffeenote.note.domain.note.Note
 import com.gabinote.coffeenote.note.domain.note.NoteDisplayField
 import com.gabinote.coffeenote.note.domain.note.NoteField
 import com.gabinote.coffeenote.note.domain.note.NoteStatus
-import com.gabinote.coffeenote.note.domain.note.vo.NoteOwnedItem
 import com.gabinote.coffeenote.note.dto.note.controller.NoteCreateReqControllerDto
 import com.gabinote.coffeenote.note.dto.note.controller.NoteListResControllerDto
 import com.gabinote.coffeenote.note.dto.note.controller.NoteResControllerDto
@@ -13,6 +12,7 @@ import com.gabinote.coffeenote.note.dto.note.service.NoteCreateReqServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteListResServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteResServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteUpdateReqServiceDto
+import com.gabinote.coffeenote.note.dto.note.vo.NoteOwnedItem
 import com.gabinote.coffeenote.note.dto.noteDisplayField.controller.NoteDisplayFieldResControllerDto
 import com.gabinote.coffeenote.note.dto.noteDisplayField.service.NoteDisplayFieldResServiceDto
 import com.gabinote.coffeenote.note.dto.noteField.controller.NoteFieldCreateReqControllerDto

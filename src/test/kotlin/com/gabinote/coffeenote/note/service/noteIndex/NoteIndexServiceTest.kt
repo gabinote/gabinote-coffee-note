@@ -8,10 +8,11 @@ import com.gabinote.coffeenote.note.domain.note.NoteField
 import com.gabinote.coffeenote.note.domain.noteIndex.IndexDisplayField
 import com.gabinote.coffeenote.note.domain.noteIndex.NoteIndex
 import com.gabinote.coffeenote.note.domain.noteIndex.NoteIndexRepository
-import com.gabinote.coffeenote.note.domain.noteIndex.vo.DateRangeFilter
 import com.gabinote.coffeenote.note.dto.noteIndex.domain.NoteFilterCondition
 import com.gabinote.coffeenote.note.dto.noteIndex.domain.NoteSearchCondition
 import com.gabinote.coffeenote.note.dto.noteIndex.service.NoteIndexResServiceDto
+import com.gabinote.coffeenote.note.dto.noteIndex.vo.DateRangeFilter
+import com.gabinote.coffeenote.note.dto.noteIndex.vo.NoteIndexIdHash
 import com.gabinote.coffeenote.note.dto.noteIndexDisplayField.service.IndexDisplayFieldResServiceDto
 import com.gabinote.coffeenote.note.mapping.noteIndex.NoteIndexMapper
 import com.gabinote.coffeenote.testSupport.testTemplate.ServiceTestTemplate
@@ -696,6 +697,41 @@ class NoteIndexServiceTest : ServiceTestTemplate() {
                 }
             }
 
+            describe("NoteIndexService.getAllByIds") {
+
+                context("유효한 노트 ID 리스트가 주어졌을 때") {
+                    val validIds = listOf(
+                        TestUuidSource.UUID_STRING.toString(),
+                        "00000000-0000-0000-0000-000000000001"
+                    )
+
+                    val expected = listOf(
+                        NoteIndexIdHash(
+                            id = validIds[0],
+                            noteHash = "hash1"
+                        ),
+                        NoteIndexIdHash(
+                            id = validIds[1],
+                            noteHash = "hash2"
+                        )
+                    )
+
+                    beforeTest {
+                        every {
+                            noteIndexRepository.findAllByIds(validIds)
+                        } returns expected
+                    }
+
+                    it("해당 노트 인덱스 리스트를 반환한다") {
+                        val result = noteIndexService.getAllByIds(validIds)
+
+                        result shouldBe expected
+                        verify(exactly = 1) {
+                            noteIndexRepository.findAllByIds(validIds)
+                        }
+                    }
+                }
+            }
         }
     }
 }

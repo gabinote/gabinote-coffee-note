@@ -105,7 +105,8 @@ class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
                         every {
                             withdrawProcessHistoryService.create(
                                 uid = uid,
-                                process = WithdrawProcess.NOTE_INDEX_DELETE
+                                process = WithdrawProcess.NOTE_INDEX_DELETE,
+                                isPassed = true
                             )
                         } just runs
                     }
@@ -119,7 +120,8 @@ class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
                         verify(exactly = 1) {
                             withdrawProcessHistoryService.create(
                                 uid = uid,
-                                process = WithdrawProcess.NOTE_INDEX_DELETE
+                                process = WithdrawProcess.NOTE_INDEX_DELETE,
+                                isPassed = true
                             )
                         }
                     }
@@ -135,7 +137,8 @@ class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
                         every {
                             withdrawProcessHistoryService.create(
                                 uid = uid,
-                                process = WithdrawProcess.NOTE_FIELD_INDEX_DELETE
+                                process = WithdrawProcess.NOTE_FIELD_INDEX_DELETE,
+                                isPassed = true
                             )
                         } just runs
                     }
@@ -149,7 +152,8 @@ class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
                         verify(exactly = 1) {
                             withdrawProcessHistoryService.create(
                                 uid = uid,
-                                process = WithdrawProcess.NOTE_FIELD_INDEX_DELETE
+                                process = WithdrawProcess.NOTE_FIELD_INDEX_DELETE,
+                                isPassed = true
                             )
                         }
                     }

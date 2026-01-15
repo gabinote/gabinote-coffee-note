@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.note.domain.noteIndex
 
-import com.gabinote.coffeenote.note.domain.noteIndex.vo.DateRangeFilter
+import com.gabinote.coffeenote.note.dto.noteIndex.vo.DateRangeFilter
+import com.gabinote.coffeenote.note.dto.noteIndex.vo.NoteIndexIdHash
 import com.gabinote.coffeenote.testSupport.testTemplate.MeiliSearchTestTemplate
 import io.kotest.matchers.shouldBe
 import org.springframework.beans.factory.annotation.Autowired
@@ -2053,6 +2054,39 @@ class NoteIndexRepositoryTest : MeiliSearchTestTemplate() {
 
                 }
 
+            }
+
+            describe("NoteIndexRepository.findAllByIds") {
+                context("올바른 NoteIndex의 id 리스트가 주어진 경우") {
+                    useBaseIndex()
+                    useBaseData()
+
+                    val noteIndexIds = listOf(
+                        "a1a1a1a1-0001-4001-8001-000000000001",
+                        "a1a1a1a1-0002-4002-8002-000000000002",
+                        "a1a1a1a1-0003-4003-8003-000000000003"
+                    )
+
+                    val expected = listOf(
+                        NoteIndexIdHash(
+                            id = "a1a1a1a1-0001-4001-8001-000000000001",
+                            noteHash = "hash001"
+                        ),
+                        NoteIndexIdHash(
+                            id = "a1a1a1a1-0002-4002-8002-000000000002",
+                            noteHash = "hash002"
+                        ),
+                        NoteIndexIdHash(
+                            id = "a1a1a1a1-0003-4003-8003-000000000003",
+                            noteHash = "hash003"
+                        )
+                    )
+
+                    it("NoteIndex의 id와 해시 값을 조회한다") {
+                        val res = noteIndexRepository.findAllByIds(noteIndexIds)
+                        res shouldBe expected
+                    }
+                }
             }
         }
     }

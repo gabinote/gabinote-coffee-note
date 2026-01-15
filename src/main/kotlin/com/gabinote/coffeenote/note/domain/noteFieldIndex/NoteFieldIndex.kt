@@ -6,7 +6,7 @@ data class NoteFieldIndex(
     val owner: String,
     val name: String,
     val value: String,
-
+    val fieldId: String,
     // 노트의 external id
     val noteId: String,
     val synchronizedAt: Long,

@@ -9,6 +9,7 @@ import com.gabinote.coffeenote.note.domain.noteFieldIndex.NoteFieldIndex
 import com.gabinote.coffeenote.note.domain.noteFieldIndex.NoteFieldIndexRepository
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.service.NoteFieldNameFacetWithCountResServiceDto
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.service.NoteFieldValueFacetWithCountResServiceDto
+import com.gabinote.coffeenote.note.dto.noteFieldIndex.vo.NoteFieldIndexNoteIdHash
 import com.gabinote.coffeenote.note.mapping.noteFieldIndex.NoteFieldIndexMapper
 import org.springframework.stereotype.Service
 import java.util.*
@@ -62,6 +63,10 @@ class NoteFieldIndexService(
 
     fun deleteAllByOwner(owner: String) {
         noteFieldIndexRepository.deleteAllByOwner(owner)
+    }
+
+    fun getAllByNoteIds(noteIds: List<String>): List<NoteFieldIndexNoteIdHash> {
+        return noteFieldIndexRepository.findAllByNoteIds(noteIds)
     }
 
     private fun convertToNoteFieldIndex(note: Note): List<NoteFieldIndex> {
@@ -122,7 +127,8 @@ class NoteFieldIndexService(
             value = value,
             owner = owner,
             synchronizedAt = timeProvider.now().toEpochSecond(offset),
-            noteHash = noteHash
+            noteHash = noteHash,
+            fieldId = noteField.id,
         )
         return noteFieldIndex
     }

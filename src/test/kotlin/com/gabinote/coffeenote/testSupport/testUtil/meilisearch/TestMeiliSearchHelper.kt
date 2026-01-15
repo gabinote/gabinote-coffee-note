@@ -93,6 +93,7 @@ class TestMeiliSearchHelper(
 
         for ((key, value) in expectedMap) {
             val actualValue = actualMap[key] ?: throw AssertionError("Key '$key' not found in actual data")
+
             actualValue shouldBe value
         }
 

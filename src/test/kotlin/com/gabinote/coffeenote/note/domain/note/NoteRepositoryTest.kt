@@ -1,12 +1,17 @@
 package com.gabinote.coffeenote.note.domain.note
 
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
+import com.gabinote.coffeenote.note.dto.note.vo.NoteExtIdHash
+import com.gabinote.coffeenote.note.dto.note.vo.NoteOnlyField
 import com.gabinote.coffeenote.testSupport.testTemplate.RepositoryTestTemplate
 import com.gabinote.coffeenote.testSupport.testUtil.data.note.NoteHashTestDataHelper
 import com.gabinote.coffeenote.testSupport.testUtil.page.TestPageableUtil.createPageable
+import io.github.oshai.kotlinlogging.KotlinLogging
 import io.kotest.matchers.shouldBe
 import org.springframework.beans.factory.annotation.Autowired
 import java.time.LocalDateTime
+
+private val logger = KotlinLogging.logger {}
 
 class NoteRepositoryTest : RepositoryTestTemplate() {
 
@@ -238,6 +243,182 @@ class NoteRepositoryTest : RepositoryTestTemplate() {
                     }
                 }
             }
+            describe("NoteRepository.findAllByModifiedDateBetween(NoteExtIdHash)") {
+                context("유효한 시작일과 종료일이 주어지면") {
+                    useBaseData()
+                    val startDate = LocalDateTime.parse("2024-07-29T19:00:00")
+
+                    val endDate = LocalDateTime.parse("2024-07-30T00:00:00")
+                    val testPageable = createPageable()
+                    it("해당 기간 내에 수정된 Note 리스트를 반환한다") {
+                        val res = noteRepository.findAllByModifiedDateBetween(
+                            startDate, endDate, testPageable,
+                            type = NoteExtIdHash::class.java
+                        )
+                        res.forEach {
+                            it.externalId.isNotEmpty() shouldBe true
+                            it.hash.isNotEmpty() shouldBe true
+                        }
+                        res.size shouldBe 8
+                    }
+                }
+
+                context("범위 내 노트가 없으면") {
+                    useBaseData()
+                    val startDate = LocalDateTime.parse("2025-01-01T00:00:00")
+                    val endDate = LocalDateTime.parse("2025-01-31T23:59:59")
+                    val testPageable = createPageable()
+                    it("빈 리스트를 반환한다") {
+                        val res = noteRepository.findAllByModifiedDateBetween(
+                            startDate, endDate, testPageable,
+                            type = NoteExtIdHash::class.java
+                        )
+                        res.size shouldBe 0
+                    }
+                }
+            }
+            describe("NoteRepository.findAllByModifiedDateBetween(NoteOnlyField)") {
+                context("유효한 시작일과 종료일이 주어지면") {
+                    useBaseData()
+                    val startDate = LocalDateTime.parse("2024-07-29T19:00:00")
+
+                    val endDate = LocalDateTime.parse("2024-07-30T00:00:00")
+                    val testPageable = createPageable()
+                    it("해당 기간 내에 수정된 Note 리스트를 반환한다") {
+                        val res = noteRepository.findAllByModifiedDateBetween(
+                            startDate, endDate, testPageable,
+                            type = NoteOnlyField::class.java
+                        )
+                        logger.debug { "found ${res.map { it.externalId }}" }
+                        res.forEach {
+                            it.externalId.isNotEmpty() shouldBe true
+                        }
+                        res.size shouldBe 8
+                    }
+                }
+
+                context("범위 내 노트가 없으면") {
+                    useBaseData()
+                    val startDate = LocalDateTime.parse("2025-01-01T00:00:00")
+                    val endDate = LocalDateTime.parse("2025-01-31T23:59:59")
+                    val testPageable = createPageable()
+                    it("빈 리스트를 반환한다") {
+                        val res = noteRepository.findAllByModifiedDateBetween(
+                            startDate, endDate, testPageable,
+                            type = NoteOnlyField::class.java
+                        )
+                        res.size shouldBe 0
+                    }
+                }
+            }
+
+            describe("NoteRepository.countAllByModifiedDateBetween") {
+                context("유효한 시작일과 종료일이 주어지면") {
+                    useBaseData()
+                    val startDate = LocalDateTime.parse("2024-07-29T19:00:00")
+
+                    val endDate = LocalDateTime.parse("2024-07-30T00:00:00")
+                    it("해당 기간 내에 수정된 Note 개수를 반환한다") {
+                        val res = noteRepository.countAllByModifiedDateBetween(startDate, endDate)
+                        res shouldBe 8L
+                    }
+                }
+
+                context("범위 내 노트가 없으면") {
+                    useBaseData()
+                    val startDate = LocalDateTime.parse("2025-01-01T00:00:00")
+                    val endDate = LocalDateTime.parse("2025-01-31T23:59:59")
+                    it("0을 반환한다") {
+                        val res = noteRepository.countAllByModifiedDateBetween(startDate, endDate)
+                        res shouldBe 0L
+                    }
+                }
+            }
+
+            describe("NoteRepository.findAllByModifiedDateBefore(NoteExtIdHash)") {
+                context("유효한 기준일이 주어지면") {
+                    useBaseData()
+                    val beforeDate = LocalDateTime.parse("2024-07-10T00:00:00")
+                    val testPageable = createPageable()
+                    it("해당 기준일 이전에 수정된 Note 리스트를 반환한다") {
+                        val res = noteRepository.findAllByModifiedDateBefore(
+                            beforeDate, testPageable,
+                            type = NoteExtIdHash::class.java
+                        )
+                        res.forEach {
+                            it.externalId.isNotEmpty() shouldBe true
+                            it.hash.isNotEmpty() shouldBe true
+                        }
+                        res.size shouldBe 6
+                    }
+                }
+
+                context("기준일 이전에 수정된 노트가 없으면") {
+                    useBaseData()
+                    val beforeDate = LocalDateTime.parse("2024-06-01T00:00:00")
+                    val testPageable = createPageable()
+                    it("빈 리스트를 반환한다") {
+                        val res = noteRepository.findAllByModifiedDateBefore(
+                            beforeDate, testPageable,
+                            type = NoteExtIdHash::class.java
+                        )
+                        res.size shouldBe 0
+                    }
+                }
+            }
+
+            describe("NoteRepository.findAllByModifiedDateBefore(NoteOnlyField)") {
+                context("유효한 기준일이 주어지면") {
+                    useBaseData()
+                    val beforeDate = LocalDateTime.parse("2024-07-10T00:00:00")
+                    val testPageable = createPageable()
+                    it("해당 기준일 이전에 수정된 Note 리스트를 반환한다") {
+                        val res = noteRepository.findAllByModifiedDateBefore(
+                            beforeDate, testPageable,
+                            type = NoteOnlyField::class.java
+                        )
+                        res.forEach {
+                            it.externalId.isNotEmpty() shouldBe true
+
+                        }
+                        res.size shouldBe 6
+                    }
+                }
+
+                context("기준일 이전에 수정된 노트가 없으면") {
+                    useBaseData()
+                    val beforeDate = LocalDateTime.parse("2024-06-01T00:00:00")
+                    val testPageable = createPageable()
+                    it("빈 리스트를 반환한다") {
+                        val res = noteRepository.findAllByModifiedDateBefore(
+                            beforeDate, testPageable,
+                            type = NoteOnlyField::class.java
+                        )
+                        res.size shouldBe 0
+                    }
+                }
+            }
+
+            describe("NoteRepository.countAllByModifiedDateBefore") {
+                context("유효한 기준일이 주어지면") {
+                    useBaseData()
+                    val beforeDate = LocalDateTime.parse("2024-07-10T00:00:00")
+                    it("해당 기준일 이전에 수정된 Note 리스트를 반환한다") {
+                        val res = noteRepository.countAllByModifiedDateBefore(beforeDate)
+                        res shouldBe 6L
+                    }
+                }
+
+                context("기준일 이전에 수정된 노트가 없으면") {
+                    useBaseData()
+                    val beforeDate = LocalDateTime.parse("2024-06-01T00:00:00")
+                    it("0을 반환한다") {
+                        val res = noteRepository.countAllByModifiedDateBefore(beforeDate)
+                        res shouldBe 0
+                    }
+                }
+            }
         }
+
     }
 }

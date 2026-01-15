@@ -2,9 +2,6 @@ spring:
   config:
     activate:
       on-profile: test
-
-
-
   main:
     allow-bean-definition-overriding: true
 
@@ -29,6 +26,25 @@ spring:
       auto-offset-reset: earliest
     listener:
       ack-mode: MANUAL_IMMEDIATE
+
 logging:
   config: classpath:logback-test.xml
 
+
+gabinote:
+  note:
+    sink:
+      note-index:
+        minor:
+          cron: "0 0 * * * *"
+          batch-size: 1000
+        major:
+          cron: "0 0 3 * * *"
+          batch-size: 1000
+      note-field-index:
+        minor:
+          cron: "0 0 * * * *"
+          batch-size: 100
+        major:
+          cron: "0 0 3 * * *"
+          batch-size: 100
