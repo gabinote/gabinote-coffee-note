@@ -48,3 +48,7 @@ gabinote:
         major:
           cron: "0 0 3 * * *"
           batch-size: 100
+
+  common:
+    gateway:
+      secret: "test-gateway-secret"
