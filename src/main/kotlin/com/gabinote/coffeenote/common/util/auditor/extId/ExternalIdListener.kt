@@ -6,9 +6,14 @@ import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent
 import org.springframework.stereotype.Component
 import org.springframework.util.ReflectionUtils
 
+/**
+ * MongoDB 엔티티의 ExternalId 어노테이션이 붙은 필드에 대해
+ * 저장 전에 UUID 값을 자동으로 설정하는 리스너
+ * @see ExternalId
+ */
 @Component
 class ExternalIdListener(
-    private val uuidSource: UuidSource
+    private val uuidSource: UuidSource,
 ) : AbstractMongoEventListener<Any>() {
     override fun onBeforeConvert(event: BeforeConvertEvent<Any>) {
         val source = event.source

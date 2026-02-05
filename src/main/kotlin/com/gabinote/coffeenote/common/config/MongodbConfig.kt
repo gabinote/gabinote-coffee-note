@@ -39,6 +39,7 @@ class MongodbConfig(
         return MongoTransactionManager(dbFactory)
     }
 
+
     @Bean
     fun auditingDateTimeProvider(): DateTimeProvider {
         return DateTimeProvider { Optional.of(timeProvider.now()) }

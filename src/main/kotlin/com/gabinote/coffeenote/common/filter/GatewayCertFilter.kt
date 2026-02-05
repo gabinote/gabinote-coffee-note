@@ -11,6 +11,13 @@ import org.springframework.web.filter.OncePerRequestFilter
 
 private val logger = KotlinLogging.logger {}
 
+/**
+ * 게이트웨이 인증 필터
+ * 모든 API 요청에 대해 게이트웨이에서 설정한 시크릿 헤더(X-Gateway-Secret)를 검증
+ * 시크릿이 일치하지 않으면 403 Forbidden 응답 반환
+ *
+ * @property gatewaySecret 게이트웨이 시크릿 값 (gabinote.common.gateway.secret)
+ */
 @Profile("!test")
 @Component
 class GatewayCertFilter(

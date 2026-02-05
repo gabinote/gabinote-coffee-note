@@ -4,7 +4,6 @@ package com.gabinote.coffeenote.common.domain.base
  * 모든 도메인 엔티티의 기본 클래스
  * ID 필드와 기본적인 equals/hashCode 구현을 제공
  * @param T ID 필드의 타입
- * @author 황준서
  */
 abstract class BaseEntity<T>(
     /**

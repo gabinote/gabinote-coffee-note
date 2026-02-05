@@ -10,7 +10,6 @@ import java.time.Clock
 /**
  * 시간 관련 설정 클래스
  * 애플리케이션 전체에서 사용할 시간 관련 빈을 구성
- * @author 황준서
  */
 @Profile("!test")
 @Configuration

@@ -7,6 +7,10 @@ import org.springframework.stereotype.Component
 import java.time.Instant
 import java.time.LocalDateTime
 
+/**
+ * MongoDB 날짜 형식 파서
+ * Debezium이 MongoDB 날짜를 JSON으로 변환할 때 사용하는 다양한 형식을 파싱
+ */
 @Component
 class MongoDateParser(
     private val timeProvider: TimeProvider,
@@ -20,14 +24,17 @@ class MongoDateParser(
         return parseDateTime(node)
     }
 
+
     /**
-     * JSON 노드에서 날짜/시간 필드를 파싱
+     * MongoDB 날짜 형식 파싱
      * 지원 형식:
-     * 1. {"$date": 1696543200000} (숫자 타임스탬프)
-     * 2. {"$date": "1696543200000"} (문자열 타임스탬프)
-     * 3. {"$date": "2023-10-05T12:00:00Z"} (ISO-8601 문자열 - Relaxed Mode)
-     * 4. 1696543200000 (직접 숫자 타임스탬프)
-     * 5. "2023-10-05T12:00:00" (직접 ISO-8601 문자열)
+     * - 숫자형 밀리초 타임스탬프: 1696543200000
+     * - 문자열형 밀리초 타임스탬프: "169654320
+     * - 문자열형 ISO-8601: "2023-10-05T12:00:00Z"
+     * - $date 래퍼 사용 가능: { "$date": 1696543200000 } 또는 { "$date": "2023-10-05T12:00:00Z" }
+     * @param node 파싱할 JsonNode
+     * @return 파싱된 LocalDateTime 객체
+     * @throws IllegalArgumentException 지원하지 않는 형식일 경우 발생
      */
     fun parseDateTime(node: JsonNode): LocalDateTime {
         // 1. $date 래퍼가 있으면 벗겨내고, 없으면 노드 자체를 사용
@@ -58,14 +65,18 @@ class MongoDateParser(
         }
     }
 
-    // [헬퍼] 타임스탬프(Long) -> LocalDateTime 변환
+    /**
+     * 밀리초 타임스탬프(Long) -> LocalDateTime 변환
+     */
     private fun millisToLocalDateTime(millis: Long): LocalDateTime {
         return Instant.ofEpochMilli(millis)
             .atZone(timeProvider.zoneOffset()) // timeProvider의 Zone 정보 사용
             .toLocalDateTime()
     }
 
-    // [헬퍼] ISO 문자열(String) -> LocalDateTime 변환
+    /**
+     * ISO-8601 문자열 -> LocalDateTime 변환
+     */
     private fun isoToLocalDateTime(isoString: String): LocalDateTime {
         // MongoDB Relaxed Mode는 보통 "2023-10-05T12:00:00Z" 처럼 UTC(Z)가 붙어서 옴
         // 따라서 Instant.parse로 안전하게 파싱 후 TimeProvider의 Zone으로 변환

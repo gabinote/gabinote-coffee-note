@@ -12,7 +12,6 @@ import java.time.format.DateTimeFormatter
 /**
  * Jackson JSON 라이브러리 설정 클래스
  * JSON 변환 관련 설정 및 커스터마이징을 담당
- * @author 황준서
  */
 @Configuration
 class JacksonConfig() {

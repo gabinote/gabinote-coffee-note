@@ -9,6 +9,9 @@ import com.gabinote.coffeenote.common.util.debezium.enums.DebeziumOperation
 import com.gabinote.coffeenote.common.util.debezium.json.deserializer.DebeziumOperationDeserializer
 import com.gabinote.coffeenote.common.util.debezium.json.serializer.DebeziumOperationSerializer
 
+/**
+ * Debezium Change Event 메시지의 페이로드를 나타내는 데이터 클래스
+ */
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ChangeMessage(

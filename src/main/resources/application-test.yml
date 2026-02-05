@@ -1,13 +1,14 @@
 spring:
   config:
+
     activate:
       on-profile: test
   main:
     allow-bean-definition-overriding: true
-
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
 
   autoconfigure:
     exclude:
@@ -26,6 +27,9 @@ spring:
       auto-offset-reset: earliest
     listener:
       ack-mode: MANUAL_IMMEDIATE
+  cloud:
+    config:
+      enabled: false
 
 logging:
   config: classpath:logback-test.xml
