@@ -1,0 +1,46 @@
+{
+  "notes": [
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea46"
+      },
+      "externalId": "f6a7b8c9-d0e1-4234-8789-012345f01234",
+      "title": "Delete Note Title",
+      "thumbnail": "https://example.com/updated.jpg",
+      "createdDate": {
+        "$date": "2024-01-10T01:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-01-02T10:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "00000000-0000-0000-0000-000000000002",
+          "name": "Delete Field",
+          "icon": "edit",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 0,
+          "isDisplay": true,
+          "values": [
+            "Delete Value"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "Delete Field",
+          "icon": "edit",
+          "values": [
+            "Delete Value"
+          ],
+          "order": 0
+        }
+      ],
+      "isOpen": false,
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "hash": "0d94254a853ed9de08ff9e4f956ad1fa",
+      "status": "ACTIVE"
+    }
+  ]
+}

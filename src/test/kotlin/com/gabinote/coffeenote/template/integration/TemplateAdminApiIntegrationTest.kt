@@ -8,7 +8,7 @@ import io.restassured.module.kotlin.extensions.When
 import org.hamcrest.Matchers.equalTo
 
 class TemplateAdminApiIntegrationTest : IntegrationTestTemplate() {
-    override val apiPrefix: String = "/api/v1/admin"
+    override val apiPrefix: String = "/admin/api/v1"
 
     init {
         feature("[Template] Template Admin API Integration Test") {

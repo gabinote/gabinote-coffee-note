@@ -1,0 +1,24 @@
+{
+  "uid": "noteIndex",
+  "primaryKey": "id",
+  "config": {
+    "filterableAttributes": [
+      "id",
+      "externalId",
+      "owner",
+      "createdDate",
+      "modifiedDate",
+      "filters",
+      "title"
+    ],
+    "searchableAttributes": [
+      "*"
+    ],
+    "faceting": {
+      "maxValuesPerFacet": 100,
+      "sortFacetValuesBy": {
+        "*": "alpha"
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "uid": "noteIndex",
+  "data": [
+    {
+      "id": "b2c3d4e5-f6a7-4890-1234-567890abcdef",
+      "title": "핸드드립 레시피: 케냐 AA",
+      "owner": "user_beta_5678",
+      "createdDate": 1722180600,
+      "modifiedDate": 1722251120,
+      "synchronizedAt": 1030460400,
+      "noteHash": "Updated content",
+      "filters": {
+        "추출 온도": [
+          "100"
+        ],
+        "총 추출 시간": [
+          "03:20"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "추출 온도123",
+          "tag": "temp",
+          "value": [
+            "100"
+          ],
+          "order": 1
+        }
+      ]
+    }
+  ]
+}

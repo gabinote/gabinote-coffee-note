@@ -1,0 +1,32 @@
+{
+  "uid": "noteIndex",
+  "data": [
+    {
+      "id": "a1b2c3d4-e5f6-4789-0123-4567890abcde",
+      "title": "카페인 분석 노트: 에티오피아 예가체프",
+      "owner": "user_alpha_1234",
+      "createdDate": 1722148200,
+      "modifiedDate": 1722218720,
+      "synchronizedAt": 1030460400,
+      "noteHash": "cf9c1ef54fd2af552cca2e4f443d1d7f",
+      "filters": {
+        "추출 온도": [
+          "92"
+        ],
+        "총 추출 시간": [
+          "03:15"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "추출 온도",
+          "tag": "temp",
+          "value": [
+            "92"
+          ],
+          "order": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "uid": "noteFieldIndex",
+  "data": [
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "name": "Coffee Name",
+      "value": "New Coffee",
+      "fieldId": "00000000-0000-0000-0000-000000000001",
+      "noteId": "00000000-0000-0000-0000-000000000000",
+      "noteHash": "ea5bd6e889c5699e59590b6ddd2b8e76",
+      "synchronizedAt": 1030460400
+    }
+  ]
+}
+

@@ -46,7 +46,7 @@ class GlobalExceptionAdvice {
     @ExceptionHandler(ConversionFailedException::class)
     fun handleConversionFailedException(
         ex: ConversionFailedException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val httpStatus = HttpStatus.BAD_REQUEST
@@ -83,7 +83,7 @@ class GlobalExceptionAdvice {
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleMethodArgumentNotValidException(
         ex: MethodArgumentNotValidException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val httpStatus = HttpStatus.BAD_REQUEST
@@ -92,6 +92,7 @@ class GlobalExceptionAdvice {
         val serverDetails = ex.bindingResult.fieldErrors.map {
             "${it.field}: ${it.defaultMessage} (rejected value: ${it.rejectedValue})"
         }
+
 
         val log = ErrorLog(
             requestId = requestId,
@@ -125,7 +126,7 @@ class GlobalExceptionAdvice {
     @ExceptionHandler(BindException::class)
     fun handleBindException(
         ex: BindException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val httpStatus = HttpStatus.BAD_REQUEST
@@ -168,7 +169,7 @@ class GlobalExceptionAdvice {
     @ExceptionHandler(MissingServletRequestParameterException::class)
     fun handleMissingServletRequestParameterException(
         ex: MissingServletRequestParameterException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val httpStatus = HttpStatus.BAD_REQUEST
@@ -206,7 +207,7 @@ class GlobalExceptionAdvice {
     @ExceptionHandler(MethodArgumentTypeMismatchException::class)
     fun handleMethodArgumentTypeMismatchException(
         ex: MethodArgumentTypeMismatchException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val httpStatus = HttpStatus.BAD_REQUEST
@@ -244,7 +245,7 @@ class GlobalExceptionAdvice {
     @ExceptionHandler(HttpMessageNotReadableException::class)
     fun handleHttpMessageNotReadableException(
         ex: HttpMessageNotReadableException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val httpStatus = HttpStatus.BAD_REQUEST
@@ -288,7 +289,7 @@ class GlobalExceptionAdvice {
     @ExceptionHandler(HttpRequestMethodNotSupportedException::class)
     fun handleHttpRequestMethodNotSupportedException(
         ex: HttpRequestMethodNotSupportedException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val httpStatus = HttpStatus.METHOD_NOT_ALLOWED
@@ -328,7 +329,7 @@ class GlobalExceptionAdvice {
     @ExceptionHandler(HttpMediaTypeNotSupportedException::class)
     fun handleHttpMediaTypeNotSupportedException(
         ex: HttpMediaTypeNotSupportedException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val httpStatus = HttpStatus.UNSUPPORTED_MEDIA_TYPE
@@ -368,7 +369,7 @@ class GlobalExceptionAdvice {
     @ExceptionHandler(NoResourceFoundException::class)
     fun handleNoResourceFoundException(
         ex: NoResourceFoundException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val httpStatus = HttpStatus.NOT_FOUND
@@ -405,7 +406,7 @@ class GlobalExceptionAdvice {
     @ExceptionHandler(NoHandlerFoundException::class)
     fun handleNoHandlerFoundException(
         ex: NoHandlerFoundException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val httpStatus = HttpStatus.NOT_FOUND
@@ -443,7 +444,7 @@ class GlobalExceptionAdvice {
     @ExceptionHandler(HandlerMethodValidationException::class, ConstraintViolationException::class)
     fun handleValidationExceptions(
         ex: Exception,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val httpStatus = HttpStatus.BAD_REQUEST
@@ -493,7 +494,7 @@ class GlobalExceptionAdvice {
     @ExceptionHandler(Exception::class)
     fun handleException(
         ex: Exception,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val httpStatus = HttpStatus.INTERNAL_SERVER_ERROR

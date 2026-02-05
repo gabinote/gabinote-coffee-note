@@ -21,6 +21,7 @@ class LongTextFieldType : TextFieldType() {
      * true: 표시 가능, false: 표시 불가
      */
     override val canDisplay: Boolean = false
+    override val isExcludeIndexing: Boolean = true
 
     /**
      * 긴 텍스트 필드의 최대 길이 (10000자)

@@ -1,0 +1,54 @@
+{
+  "uid": "noteIndex",
+  "data": [
+    {
+      "id": "a1b2c3d4-e5f6-4789-0123-4567890abcd2",
+      "title": "Minor Sink 테스트 노트 2 - 삭제된 노트(인덱스 남음)",
+      "owner": "user_minor_sink_2",
+      "createdDate": 1030456200,
+      "modifiedDate": 1030456200,
+      "synchronizedAt": 1030460400,
+      "noteHash": "minor_sink_hash_002",
+      "filters": {
+        "추출 온도": [
+          "92"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "추출 온도",
+          "tag": "temp",
+          "value": [
+            "92"
+          ],
+          "order": 1
+        }
+      ]
+    },
+    {
+      "id": "a1b2c3d4-e5f6-4789-0123-4567890abcd3",
+      "title": "Minor Sink 테스트 노트 3 - 해시 불일치 노트",
+      "owner": "user_minor_sink_3",
+      "createdDate": 1030456200,
+      "modifiedDate": 1030456200,
+      "synchronizedAt": 1030460400,
+      "noteHash": "minor_sink_hash_003_old",
+      "filters": {
+        "원두 종류": [
+          "아라비카"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "원두 종류",
+          "tag": "bean",
+          "value": [
+            "아라비카"
+          ],
+          "order": 1
+        }
+      ]
+    }
+  ]
+}
+

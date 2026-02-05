@@ -1,0 +1,56 @@
+{
+  "uid": "noteIndex",
+  "data": [
+    {
+      "id": "a1b2c3d4-e5f6-4789-0123-4567890abcd1",
+      "title": "Minor Sink 테스트 노트 1 - 인덱스 없는 신규 노트",
+      "owner": "user_minor_sink_1",
+      "createdDate": 1030459800,
+      "modifiedDate": 1030459740,
+      "synchronizedAt": 1030460400,
+      "noteHash": "minor_sink_hash_001",
+      "filters": {
+        "원산지": [
+          "에티오피아"
+        ],
+        "로스팅 정도": [
+          "라이트"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "원산지",
+          "tag": "globe",
+          "value": [
+            "에티오피아"
+          ],
+          "order": 1
+        }
+      ]
+    },
+    {
+      "id": "a1b2c3d4-e5f6-4789-0123-4567890abcd3",
+      "title": "Minor Sink 테스트 노트 3 - 해시 불일치 노트",
+      "owner": "user_minor_sink_3",
+      "createdDate": 1030459800,
+      "modifiedDate": 1030459740,
+      "synchronizedAt": 1030460400,
+      "noteHash": "minor_sink_hash_003_updated",
+      "filters": {
+        "원두 종류": [
+          "아라비카-업데이트됨"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "원두 종류",
+          "tag": "bean",
+          "value": [
+            "아라비카-업데이트됨"
+          ],
+          "order": 1
+        }
+      ]
+    }
+  ]
+}

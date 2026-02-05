@@ -1,0 +1,103 @@
+{
+  "uid": "noteIndex",
+  "data": [
+    {
+      "id": "a1a1a1a1-0001-4001-8001-000000000001",
+      "title": "에티오피아 예가체프 G1 워시드",
+      "owner": "user_alpha",
+      "createdDate": 1731821801000,
+      "modifiedDate": 1731821801000,
+      "synchronizedAt": 1731821810000,
+      "noteHash": "hash001",
+      "filters": {
+        "품종": [
+          "에티오피아"
+        ],
+        "가공_방식": [
+          "워시드"
+        ],
+        "추출_방식": [
+          "푸어오버"
+        ],
+        "등급": [
+          "G1"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "품종",
+          "tag": "BEAN_COUNTRY_TAG",
+          "value": [
+            "에티오피아"
+          ],
+          "order": 0
+        },
+        {
+          "name": "가공_방식",
+          "tag": "PROCESS_METHOD_TAG",
+          "value": [
+            "워시드"
+          ],
+          "order": 1
+        },
+        {
+          "name": "등급",
+          "tag": "GRADE_TAG",
+          "value": [
+            "G1"
+          ],
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "a1a1a1a1-0001-4001-8001-000000000002",
+      "title": "에티오피아 예가체프 G1 워시드2",
+      "owner": "user_alpha",
+      "createdDate": 1731821801000,
+      "modifiedDate": 1731821801000,
+      "synchronizedAt": 1731821810000,
+      "noteHash": "hash002",
+      "filters": {
+        "품종": [
+          "에티오피아2"
+        ],
+        "가공_방식": [
+          "워시드2"
+        ],
+        "추출_방식": [
+          "푸어오버2"
+        ],
+        "등급": [
+          "G12"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "품종",
+          "tag": "BEAN_COUNTRY_TAG",
+          "value": [
+            "에티오피아"
+          ],
+          "order": 0
+        },
+        {
+          "name": "가공_방식",
+          "tag": "PROCESS_METHOD_TAG",
+          "value": [
+            "워시드"
+          ],
+          "order": 1
+        },
+        {
+          "name": "등급",
+          "tag": "GRADE_TAG",
+          "value": [
+            "G1"
+          ],
+          "order": 2
+        }
+      ]
+    }
+  ]
+}

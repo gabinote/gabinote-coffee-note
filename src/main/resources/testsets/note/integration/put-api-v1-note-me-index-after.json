@@ -1,0 +1,30 @@
+{
+  "uid": "noteIndex",
+  "data": [
+    {
+      "id": "e5f6a7b8-c9d0-4123-8678-901234ef0123",
+      "title": "Updated Note Title",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "noteHash": "66f35e851736598a30e16eff91b5d28e",
+      "createdDate": 1704880800,
+      "modifiedDate": 1030460400,
+      "filters": {
+        "Updated Field": [
+          "Updated Value"
+        ]
+      },
+      "synchronizedAt": 1030460400,
+      "displayFields": [
+        {
+          "name": "Updated Field",
+          "tag": "edit",
+          "value": [
+            "Updated Value"
+          ],
+          "order": 0
+        }
+      ]
+    }
+  ]
+}
+

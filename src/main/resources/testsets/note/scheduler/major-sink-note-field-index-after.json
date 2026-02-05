@@ -1,0 +1,26 @@
+{
+  "uid": "noteFieldIndex",
+  "data": [
+    {
+      "id": "00000000-0000-0000-0000-000000000002",
+      "noteId": "b1b2c3d4-e5f6-4789-0123-4567890abcd1",
+      "fieldId": "field_010",
+      "name": "브루잉 방식",
+      "value": "핸드드립",
+      "owner": "user_major_sink_1",
+      "synchronizedAt": 1030460400,
+      "noteHash": "major_sink_hash_001"
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000001",
+      "noteId": "b1b2c3d4-e5f6-4789-0123-4567890abcd3",
+      "fieldId": "field_012",
+      "name": "그라인더 세팅2",
+      "value": "18",
+      "owner": "user_major_sink_3",
+      "synchronizedAt": 1030460400,
+      "noteHash": "major_sink_hash_003_updated"
+    }
+  ]
+}
+

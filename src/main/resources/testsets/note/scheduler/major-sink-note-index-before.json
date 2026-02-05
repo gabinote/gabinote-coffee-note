@@ -1,0 +1,45 @@
+{
+  "uid": "noteIndex",
+  "data": [
+    {
+      "id": "b1b2c3d4-e5f6-4789-0123-4567890abcd2",
+      "title": "Major Sink 테스트 노트 2 - 삭제된 노트(인덱스 남음)",
+      "owner": "user_major_sink_2",
+      "createdDate": 1030352400,
+      "modifiedDate": 1030352400,
+      "synchronizedAt": 1030460400,
+      "noteHash": "major_sink_hash_002",
+      "filters": {
+        "물 온도": [
+          "93"
+        ]
+      },
+      "displayFields": []
+    },
+    {
+      "id": "b1b2c3d4-e5f6-4789-0123-4567890abcd3",
+      "title": "Major Sink 테스트 노트 3 - 정상 동기화된 노트",
+      "owner": "user_major_sink_3",
+      "createdDate": 1030352400,
+      "modifiedDate": 1030352400,
+      "synchronizedAt": 1030460400,
+      "noteHash": "major_sink_hash_003",
+      "filters": {
+        "그라인더 세팅": [
+          "18"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "그라인더 세팅",
+          "tag": "gear",
+          "value": [
+            "18"
+          ],
+          "order": 1
+        }
+      ]
+    }
+  ]
+}
+

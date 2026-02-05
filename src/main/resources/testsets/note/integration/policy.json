@@ -1,0 +1,18 @@
+{
+  "policies": [
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea43"
+      },
+      "key": "NOTE_MAX_COUNT_PER_DEFAULT_USER",
+      "value": "1000"
+    },
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea45"
+      },
+      "key": "NOTE_MAX_DISPLAYED_FIELD_COUNT",
+      "value": "10"
+    }
+  ]
+}

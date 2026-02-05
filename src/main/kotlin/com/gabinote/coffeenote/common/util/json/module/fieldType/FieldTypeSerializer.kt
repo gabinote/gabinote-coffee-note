@@ -11,8 +11,9 @@ class FieldTypeSerializer : JsonSerializer<FieldType>() {
     override fun serialize(
         value: FieldType,
         gen: JsonGenerator,
-        serializers: SerializerProvider
+        serializers: SerializerProvider,
     ) {
+
         gen.writeString(value.getKeyString())
     }
 }

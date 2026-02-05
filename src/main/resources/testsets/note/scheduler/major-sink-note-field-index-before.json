@@ -1,0 +1,22 @@
+{
+  "uid": "noteFieldIndex",
+  "data": [
+    {
+      "id": "field-index-major-002-1",
+      "noteId": "b1b2c3d4-e5f6-4789-0123-4567890abcd2",
+      "fieldId": "field_011",
+      "name": "물 온도",
+      "value": "93",
+      "owner": "user_major_sink_2"
+    },
+    {
+      "id": "field-index-major-003-1",
+      "noteId": "b1b2c3d4-e5f6-4789-0123-4567890abcd3",
+      "fieldId": "field_012",
+      "name": "그라인더 세팅",
+      "value": "18",
+      "owner": "user_major_sink_3"
+    }
+  ]
+}
+

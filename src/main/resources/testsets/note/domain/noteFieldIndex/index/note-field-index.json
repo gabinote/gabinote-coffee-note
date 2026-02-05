@@ -1,0 +1,24 @@
+{
+  "uid": "noteFieldIndex",
+  "primaryKey": "id",
+  "config": {
+    "filterableAttributes": [
+      "name",
+      "value",
+      "owner",
+      "noteId",
+      "fieldId"
+    ],
+    "searchableAttributes": [
+      "*"
+    ],
+    "faceting": {
+      "maxValuesPerFacet": 100,
+      "sortFacetValuesBy": {
+        "*": "alpha",
+        "name": "count",
+        "value": "count"
+      }
+    }
+  }
+}

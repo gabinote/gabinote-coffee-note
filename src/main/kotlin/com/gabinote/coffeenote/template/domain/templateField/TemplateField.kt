@@ -30,6 +30,7 @@ data class TemplateField(
     /**
      * 필드 속성 집합
      */
+    //TODO 일관성 있게 Attribute 분리하기
     var attributes: Set<Attribute> = emptySet(),
 
     /**
@@ -43,7 +44,7 @@ data class TemplateField(
      * true: 표시, false: 숨김
      */
     @JvmField
-    var isDisplay: Boolean = true
+    var isDisplay: Boolean = true,
 ) {
     fun changeAttributes(newAttributes: Set<Attribute>) {
         this.attributes = newAttributes

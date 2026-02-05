@@ -1,11 +1,11 @@
 package com.gabinote.coffeenote.testSupport.testConfig.db
 
 
+import com.gabinote.coffeenote.testSupport.testConfig.container.ContainerNetworkHelper
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
-
 import org.testcontainers.containers.MongoDBContainer
 import org.testcontainers.utility.DockerImageName
 
@@ -16,10 +16,15 @@ class DatabaseContainerInitializer : ApplicationContextInitializer<ConfigurableA
     companion object {
         @JvmStatic
         val database = MongoDBContainer(DockerImageName.parse("mongo:8.0.13")).apply {
+            withNetwork(ContainerNetworkHelper.testNetwork)
+            withNetworkAliases("mongo-db")
             withEnv("MONGO_REPLICA_SET_NAME", "rs0")
             withCommand("--bind_ip_all --replSet rs0")
+            withLabel("test-container", "mongodb")
+            withEnv("TZ", "Asia/Seoul")
             withReuse(true)
         }
+
     }
 
     override fun initialize(context: ConfigurableApplicationContext) {

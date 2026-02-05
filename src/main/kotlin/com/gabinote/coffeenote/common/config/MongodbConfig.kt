@@ -1,13 +1,48 @@
 package com.gabinote.coffeenote.common.config
 
+import com.gabinote.coffeenote.common.util.time.TimeProvider
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.data.auditing.DateTimeProvider
+import org.springframework.data.mongodb.MongoDatabaseFactory
+import org.springframework.data.mongodb.MongoTransactionManager
 import org.springframework.data.mongodb.config.EnableMongoAuditing
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
+import org.springframework.data.mongodb.core.convert.DbRefResolver
+import org.springframework.data.mongodb.core.convert.DefaultDbRefResolver
+import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper
+import org.springframework.data.mongodb.core.convert.MappingMongoConverter
+import org.springframework.data.mongodb.core.mapping.MongoMappingContext
+import java.util.*
 
-/**
- * MongoDB 설정 클래스
- * MongoDB 감사 및 리포지토리 활성화를 담당
- * @author 황준서
- */
-@EnableMongoAuditing
-@EnableMongoRepositories
-class MongodbConfig
+
+@Configuration
+@EnableMongoAuditing(dateTimeProviderRef = "auditingDateTimeProvider")
+class MongodbConfig(
+    private val timeProvider: TimeProvider,
+) {
+
+    @Bean
+    fun mappingMongoConverter(
+        mongoDatabaseFactory: MongoDatabaseFactory,
+        mongoMappingContext: MongoMappingContext,
+    ): MappingMongoConverter {
+        val dbRefResolver: DbRefResolver = DefaultDbRefResolver(mongoDatabaseFactory)
+        val converter = MappingMongoConverter(dbRefResolver, mongoMappingContext)
+
+        converter.setTypeMapper(DefaultMongoTypeMapper(null))
+
+        return converter
+    }
+
+    @Bean
+    fun transactionManager(dbFactory: MongoDatabaseFactory): MongoTransactionManager {
+        return MongoTransactionManager(dbFactory)
+    }
+
+
+    @Bean
+    fun auditingDateTimeProvider(): DateTimeProvider {
+        return DateTimeProvider { Optional.of(timeProvider.now()) }
+    }
+
+}

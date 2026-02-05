@@ -5,10 +5,19 @@ import com.gabinote.coffeenote.common.dto.sort.controller.SortResControllerDto
 import org.springframework.data.domain.Slice
 import org.springframework.stereotype.Component
 
+/**
+ * 슬라이스 매핑을 담당하는 컴포넌트
+ * Slice<T>를 SlicedResControllerDto<T>로 변환하는 기능 제공
+ */
 @Component
 class SliceMapper {
 
-    // Page<User>를 PageResponse<UserDto>로 변환하는 메서드
+    /*
+    * Slice<T>를 SlicedResControllerDto<T>로 변환
+    * @param T 슬라이스 내 항목의 타입
+    * @param slice 변환할 Slice<T> 객체
+    * @return 변환된 SlicedResControllerDto<T> 객체
+     */
     fun <T> toSlicedResponse(slice: Slice<T>): SlicedResControllerDto<T> {
         return SlicedResControllerDto(
             content = slice.content,

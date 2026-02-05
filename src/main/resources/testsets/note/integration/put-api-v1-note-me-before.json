@@ -1,0 +1,46 @@
+{
+  "notes": [
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea45"
+      },
+      "externalId": "e5f6a7b8-c9d0-4123-8678-901234ef0123",
+      "title": "Original Note Title",
+      "thumbnail": "https://example.com/original.jpg",
+      "createdDate": {
+        "$date": "2024-01-10T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-01-10T10:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field-original",
+          "name": "Original Field",
+          "icon": "note",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "Original Value"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "Original Field",
+          "icon": "note",
+          "values": [
+            "Original Value"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "hash": "hashORIG",
+      "status": "ACTIVE"
+    }
+  ]
+}

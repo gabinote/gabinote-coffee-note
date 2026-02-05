@@ -1,0 +1,13 @@
+{
+  "uid": "noteFieldIndex",
+  "data": [
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "owner": "user_beta_5678",
+      "name": "Original Field",
+      "value": "Original Value",
+      "noteId": "e5f6a7b8-c9d0-4123-8678-901234ef0123",
+      "noteHash": "hashORIG"
+    }
+  ]
+}

@@ -1,15 +1,17 @@
 package com.gabinote.coffeenote.common.config
 
+import com.gabinote.coffeenote.common.util.time.DefaultTimeProvider
 import com.gabinote.coffeenote.common.util.time.TimeProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import java.time.Clock
 
 /**
  * 시간 관련 설정 클래스
  * 애플리케이션 전체에서 사용할 시간 관련 빈을 구성
- * @author 황준서
  */
+@Profile("!test")
 @Configuration
 class TimeConfig {
 
@@ -25,7 +27,7 @@ class TimeConfig {
      */
     @Bean
     fun timeHelper(): TimeProvider {
-        return TimeProvider(clock)
+        return DefaultTimeProvider(clock)
     }
 
 }

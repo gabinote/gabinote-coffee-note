@@ -1,0 +1,30 @@
+{
+  "uid": "noteIndex",
+  "data": [
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "title": "New Coffee Note",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "noteHash": "ea5bd6e889c5699e59590b6ddd2b8e76",
+      "createdDate": 1030460400,
+      "modifiedDate": 1030460400,
+      "synchronizedAt": 1030460400,
+      "filters": {
+        "Coffee Name": [
+          "New Coffee"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "Coffee Name",
+          "tag": "coffee",
+          "value": [
+            "New Coffee"
+          ],
+          "order": 0
+        }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,41 @@
+{
+  "withdraw_process_histories": [
+    {
+      "_id": "$anyObject()",
+      "uid": "user_beta_5678",
+      "requestId": {
+        "$oid": "6524fa9a9e3d9b1a5c8b4001"
+      },
+      "isPassed": true,
+      "processedAt": {
+        "$date": "2002-08-27T15:00:00Z"
+      },
+      "process": "NOTE_DELETE"
+    },
+    {
+      "_id": "$anyObject()",
+      "uid": "user_beta_5678",
+      "requestId": {
+        "$oid": "6524fa9a9e3d9b1a5c8b4001"
+      },
+      "isPassed": true,
+      "processedAt": {
+        "$date": "2002-08-27T15:00:00Z"
+      },
+      "process": "NOTE_INDEX_DELETE"
+    },
+    {
+      "_id": "$anyObject()",
+      "uid": "user_beta_5678",
+      "requestId": {
+        "$oid": "6524fa9a9e3d9b1a5c8b4001"
+      },
+      "isPassed": true,
+      "processedAt": {
+        "$date": "2002-08-27T15:00:00Z"
+      },
+      "process": "NOTE_FIELD_INDEX_DELETE"
+    }
+  ]
+}
+

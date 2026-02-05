@@ -3,6 +3,7 @@ package com.gabinote.coffeenote.common.web.advice
 import com.gabinote.coffeenote.common.util.exception.service.ResourceDuplicate
 import com.gabinote.coffeenote.common.util.exception.service.ResourceNotFound
 import com.gabinote.coffeenote.common.util.exception.service.ResourceNotValid
+import com.gabinote.coffeenote.common.util.exception.service.ServerError
 import com.gabinote.coffeenote.common.util.log.ErrorLog
 import com.gabinote.coffeenote.common.web.advice.ExceptionAdviceHelper.getRequestId
 import com.gabinote.coffeenote.common.web.advice.ExceptionAdviceHelper.problemDetail
@@ -35,7 +36,7 @@ class ServiceExceptionAdvice {
     @ExceptionHandler(ResourceNotFound::class)
     fun handleResourceNotFound(
         ex: ResourceNotFound,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val status = HttpStatus.NOT_FOUND
@@ -67,7 +68,7 @@ class ServiceExceptionAdvice {
     @ExceptionHandler(ResourceDuplicate::class)
     fun handleResourceDuplicate(
         ex: ResourceDuplicate,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val status = HttpStatus.CONFLICT
@@ -98,7 +99,7 @@ class ServiceExceptionAdvice {
     @ExceptionHandler(ResourceNotValid::class)
     fun handleResourceNotValid(
         ex: ResourceNotValid,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ProblemDetail> {
         val requestId = getRequestId(request)
         val status = HttpStatus.BAD_REQUEST
@@ -119,6 +120,33 @@ class ServiceExceptionAdvice {
             message = ex.logMessage
         )
         logger.info { log.toString() }
+        return ResponseEntity(problemDetail, status)
+    }
+
+    @ExceptionHandler(ServerError::class)
+    fun handleServerError(
+        ex: ServerError,
+        request: HttpServletRequest,
+    ): ResponseEntity<ProblemDetail> {
+        val requestId = getRequestId(request)
+        val status = HttpStatus.INTERNAL_SERVER_ERROR
+
+        val problemDetail = problemDetail(
+            status = status,
+            title = "Server Error",
+            detail = ex.errorMessage,
+            requestId = requestId
+        )
+
+        val log = ErrorLog(
+            requestId = requestId,
+            method = request.method,
+            path = request.requestURI,
+            status = status,
+            error = "ServerError",
+            message = ex.logMessage
+        )
+        logger.error { log.toString() }
         return ResponseEntity(problemDetail, status)
     }
 

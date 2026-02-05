@@ -1,0 +1,29 @@
+{
+  "uid": "noteIndex",
+  "data": [
+    {
+      "id": "e5f6a7b8-c9d0-4123-8678-901234ef0123",
+      "title": "Original Note Title",
+      "owner": "user_beta_5678",
+      "noteHash": "hashORIG",
+      "createdDate": 1704848400123,
+      "modifiedDate": 1704848400123,
+      "filters": {
+        "Original Field": [
+          "Original Value"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "Original Field",
+          "tag": "note",
+          "value": [
+            "Original Value"
+          ],
+          "order": 0
+        }
+      ]
+    }
+  ]
+}
+

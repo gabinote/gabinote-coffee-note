@@ -1,21 +1,58 @@
 spring:
   config:
+
     activate:
       on-profile: test
-
   main:
     allow-bean-definition-overriding: true
-
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
 
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
       - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
       - org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration
+  kafka:
+    producer:
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+      auto-offset-reset: earliest
+    listener:
+      ack-mode: MANUAL_IMMEDIATE
+  cloud:
+    config:
+      enabled: false
 
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-test.xml
 
+
+gabinote:
+  note:
+    sink:
+      note-index:
+        minor:
+          cron: "0 0 * * * *"
+          batch-size: 1000
+        major:
+          cron: "0 0 3 * * *"
+          batch-size: 1000
+      note-field-index:
+        minor:
+          cron: "0 0 * * * *"
+          batch-size: 100
+        major:
+          cron: "0 0 3 * * *"
+          batch-size: 100
+
+  common:
+    gateway:
+      secret: "test-gateway-secret"

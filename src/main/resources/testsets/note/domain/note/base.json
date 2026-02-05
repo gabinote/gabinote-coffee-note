@@ -1,0 +1,2090 @@
+{
+  "notes": [
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0001"
+      },
+      "externalId": "a1b2c3d4-e5f6-4789-0123-4567890abcde",
+      "title": "카페인 분석 노트: 에티오피아 예가체프",
+      "thumbnail": "https://images.example.com/thumbnails/coffee_yirgacheffe.jpg",
+      "createdDate": {
+        "$date": "2024-07-29T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T10:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_001",
+          "name": "원산지",
+          "icon": "globe",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "에티오피아"
+          ]
+        },
+        {
+          "_id": "field_002",
+          "name": "로스팅 정도",
+          "icon": "fire",
+          "type": "RADIO",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "라이트",
+                "미디엄",
+                "다크"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "라이트"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "원산지",
+          "icon": "globe",
+          "values": [
+            "에티오피아"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_alpha_1234",
+      "hash": "190ec684c1d1b32ea48603ca54f32dd1",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0002"
+      },
+      "externalId": "b2c3d4e5-f6a7-4890-1234-567890abcdef",
+      "title": "핸드드립 레시피: 케냐 AA",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-07-28T15:30:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T11:05:20Z"
+      },
+      "fields": [
+        {
+          "_id": "field_003",
+          "name": "추출 온도",
+          "icon": "temp",
+          "type": "NUMBER",
+          "attributes": [
+            {
+              "key": "unit",
+              "value": [
+                "℃"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "92"
+          ]
+        },
+        {
+          "_id": "field_004",
+          "name": "총 추출 시간",
+          "icon": "clock",
+          "type": "DURATION",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "03:15"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "추출 온도",
+          "icon": "temp",
+          "values": [
+            "92"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": false,
+      "owner": "user_beta_5678",
+      "hash": "cf9c1ef54fd2af552cca2e4f443d1d7f",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0003"
+      },
+      "externalId": "c3d4e5f6-a7b8-4901-2345-67890abcdef0",
+      "title": "콜드브루 시음 기록",
+      "thumbnail": "https://images.example.com/thumbnails/cold_brew_sample.png",
+      "createdDate": {
+        "$date": "2024-07-27T08:10:55Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-27T08:10:55Z"
+      },
+      "fields": [
+        {
+          "_id": "field_005",
+          "name": "산미",
+          "icon": "lemon",
+          "type": "RATING",
+          "attributes": [
+            {
+              "key": "max",
+              "value": [
+                "5"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "4"
+          ]
+        },
+        {
+          "_id": "field_006",
+          "name": "플레이버 노트",
+          "icon": "flavor",
+          "type": "MULTI_SELECT",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "초콜릿",
+                "견과류",
+                "베리",
+                "꽃"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "초콜릿",
+            "견과류"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "산미",
+          "icon": "lemon",
+          "values": [
+            "4"
+          ],
+          "order": 1
+        },
+        {
+          "name": "플레이버 노트",
+          "icon": "flavor",
+          "values": [
+            "초콜릿",
+            "견과류"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_gamma_9012",
+      "hash": "6a6a706e32b1c4aa0966c28a056b0d11",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0004"
+      },
+      "externalId": "d4e5f6a7-b8c9-4012-3456-7890abcdef01",
+      "title": "하와이안 코나 농장 방문기",
+      "thumbnail": "https://images.example.com/thumbnails/hawaii_kona.jpg",
+      "createdDate": {
+        "$date": "2024-07-26T20:45:10Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T12:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_007",
+          "name": "방문일",
+          "icon": "calendar",
+          "type": "DATE",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "2024-05-15"
+          ]
+        },
+        {
+          "_id": "field_008",
+          "name": "특이사항",
+          "icon": "memo",
+          "type": "LONG_TEXT",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "농장주와 직접 인터뷰 진행. 습도가 매우 높았음."
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "방문일",
+          "icon": "calendar",
+          "values": [
+            "2024-05-15"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_delta_3456",
+      "hash": "bf4d95fad7594e44cb326ff4f1130542",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0005"
+      },
+      "externalId": "e5f6a7b8-c9d0-4123-4567-890abcdef012",
+      "title": "드립백 제작 실험 기록",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-07-25T11:22:33Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-25T11:22:33Z"
+      },
+      "fields": [
+        {
+          "_id": "field_009",
+          "name": "그라인딩 굵기",
+          "icon": "grinder",
+          "type": "DROP_DOWN",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "중간",
+                "약간 굵게",
+                "매우 굵게"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "약간 굵게"
+          ]
+        },
+        {
+          "_id": "field_010",
+          "name": "사진 자료",
+          "icon": "image",
+          "type": "URL",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "https://photos.example.com/dripbag_test.zip"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "그라인딩 굵기",
+          "icon": "grinder",
+          "values": [
+            "약간 굵게"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": false,
+      "owner": "user_epsilon_7890",
+      "hash": "71f07be43fe763de4d896a3ffb41fa43",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0006"
+      },
+      "externalId": "f6a7b8c9-d0e1-4234-5678-90abcdef0123",
+      "title": "블렌딩 노트: 스모키 카라멜",
+      "thumbnail": "https://images.example.com/thumbnails/blending_smoke.jpg",
+      "createdDate": {
+        "$date": "2024-07-24T18:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T13:40:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_011",
+          "name": "블렌딩 비율",
+          "icon": "ratio",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "브라질 60, 인도네시아 40"
+          ]
+        },
+        {
+          "_id": "field_012",
+          "name": "최종 점수",
+          "icon": "star",
+          "type": "RATING",
+          "attributes": [
+            {
+              "key": "max",
+              "value": [
+                "10"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "7"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "블렌딩 비율",
+          "icon": "ratio",
+          "values": [
+            "브라질 60, 인도네시아 40"
+          ],
+          "order": 1
+        },
+        {
+          "name": "최종 점수",
+          "icon": "star",
+          "values": [
+            "7"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_zeta_1357",
+      "hash": "18837c415121d537bcf750e75c64b9ad",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0007"
+      },
+      "externalId": "01234567-890a-4bcd-ef01-234567890abc",
+      "title": "에스프레소 추출 최적화",
+      "thumbnail": "https://images.example.com/thumbnails/espresso_opt.jpg",
+      "createdDate": {
+        "$date": "2024-07-23T09:30:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-23T09:30:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_013",
+          "name": "투입량",
+          "icon": "weight",
+          "type": "NUMBER",
+          "attributes": [
+            {
+              "key": "unit",
+              "value": [
+                "g"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "18"
+          ]
+        },
+        {
+          "_id": "field_014",
+          "name": "추출량",
+          "icon": "cup",
+          "type": "NUMBER",
+          "attributes": [
+            {
+              "key": "unit",
+              "value": [
+                "ml"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "36"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "투입량",
+          "icon": "weight",
+          "values": [
+            "18"
+          ],
+          "order": 1
+        },
+        {
+          "name": "추출량",
+          "icon": "cup",
+          "values": [
+            "36"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": false,
+      "owner": "user_eta_2468",
+      "hash": "bf19a549041ff5676a527025f1c592cb",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0008"
+      },
+      "externalId": "12345678-90ab-cdef-0123-4567890abcde",
+      "title": "카페 방문 리뷰: 서울 M 카페",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-07-22T14:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T14:55:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_015",
+          "name": "방문 장소",
+          "icon": "location",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "서울 M 카페"
+          ]
+        },
+        {
+          "_id": "field_016",
+          "name": "재방문 의사",
+          "icon": "check",
+          "type": "BOOLEAN",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "true"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "방문 장소",
+          "icon": "location",
+          "values": [
+            "서울 M 카페"
+          ],
+          "order": 1
+        },
+        {
+          "name": "재방문 의사",
+          "icon": "check",
+          "values": [
+            "true"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_theta_3690",
+      "hash": "34f42bdccbf360fd71d030d27d129238",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0009"
+      },
+      "externalId": "23456789-0abc-def0-1234-567890abcdef",
+      "title": "최신 커피 머신 비교",
+      "thumbnail": "https://images.example.com/thumbnails/new_machine_comp.png",
+      "createdDate": {
+        "$date": "2024-07-21T17:45:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-21T17:45:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_017",
+          "name": "머신 모델명",
+          "icon": "machine",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "Slayer 1그룹"
+          ]
+        },
+        {
+          "_id": "field_018",
+          "name": "가격대",
+          "icon": "money",
+          "type": "NUMBER",
+          "attributes": [
+            {
+              "key": "currency",
+              "value": [
+                "KRW"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "18000000"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "머신 모델명",
+          "icon": "machine",
+          "values": [
+            "Slayer 1그룹"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": false,
+      "owner": "user_iota_4801",
+      "hash": "c3a6924430d01eb96f45922c2ac2729e",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c000a"
+      },
+      "externalId": "34567890-abcd-ef01-2345-67890abcdef0",
+      "title": "브루잉 물 레시피",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-07-20T10:20:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T15:30:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_019",
+          "name": "경도 (TDS)",
+          "icon": "water",
+          "type": "NUMBER",
+          "attributes": [
+            {
+              "key": "unit",
+              "value": [
+                "ppm"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "120"
+          ]
+        },
+        {
+          "_id": "field_020",
+          "name": "사용 미네랄",
+          "icon": "chemical",
+          "type": "MULTI_SELECT",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "탄산수소나트륨",
+                "염화칼슘",
+                "황산마그네슘"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "탄산수소나트륨",
+            "황산마그네슘"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "경도 (TDS)",
+          "icon": "water",
+          "values": [
+            "120"
+          ],
+          "order": 1
+        },
+        {
+          "name": "사용 미네랄",
+          "icon": "chemical",
+          "values": [
+            "탄산수소나트륨",
+            "황산마그네슘"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_kappa_5912",
+      "hash": "e045cec678b306977d6bbd76e37a7d89",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c000b"
+      },
+      "externalId": "4567890a-bcde-f012-3456-7890abcdef01",
+      "title": "파나마 게이샤 심층 분석",
+      "thumbnail": "https://images.example.com/thumbnails/panama_geisha.jpg",
+      "createdDate": {
+        "$date": "2024-07-19T06:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-19T06:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_021",
+          "name": "프로세싱",
+          "icon": "process",
+          "type": "RADIO",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "워시드",
+                "내추럴",
+                "허니"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "워시드"
+          ]
+        },
+        {
+          "_id": "field_022",
+          "name": "구매처 URL",
+          "icon": "link",
+          "type": "URL",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "https://store.example.com/geisha_order"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "프로세싱",
+          "icon": "process",
+          "values": [
+            "워시드"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_lambda_6023",
+      "hash": "e6369aefd59d42d6f3d3e2427ea95ade",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c000c"
+      },
+      "externalId": "567890ab-cdef-0123-4567-890abcdef012",
+      "title": "브라질 산토스 맛 평가",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-07-18T22:15:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T16:45:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_023",
+          "name": "바디감",
+          "icon": "body",
+          "type": "RATING",
+          "attributes": [
+            {
+              "key": "max",
+              "value": [
+                "5"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "3"
+          ]
+        },
+        {
+          "_id": "field_024",
+          "name": "구입 날짜",
+          "icon": "calendar",
+          "type": "DATE",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "2024-07-10"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "바디감",
+          "icon": "body",
+          "values": [
+            "3"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_mu_7134",
+      "hash": "f622717bfddd8bbdd3e9cecb5e986180",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c000d"
+      },
+      "externalId": "67890abc-def0-1234-5678-90abcdef0123",
+      "title": "집에서 만드는 플랫 화이트",
+      "thumbnail": "https://images.example.com/thumbnails/flat_white.jpg",
+      "createdDate": {
+        "$date": "2024-07-17T13:40:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-17T13:40:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_025",
+          "name": "우유 종류",
+          "icon": "milk",
+          "type": "DROP_DOWN",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "일반",
+                "오트",
+                "아몬드"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "오트"
+          ]
+        },
+        {
+          "_id": "field_026",
+          "name": "레시피 메모",
+          "icon": "memo",
+          "type": "LONG_TEXT",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "우유 거품을 얇게 내는 것이 핵심."
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "우유 종류",
+          "icon": "milk",
+          "values": [
+            "오트"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_nu_8245",
+      "hash": "6c638a382bbe94379df0d4a6b6eb11ef",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c000e"
+      },
+      "externalId": "7890abcd-ef01-2345-6789-0abcdef01234",
+      "title": "카페 컨셉 기획 (비공개)",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-07-16T16:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T18:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_027",
+          "name": "인테리어 키워드",
+          "icon": "design",
+          "type": "MULTI_SELECT",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "미니멀",
+                "인더스트리얼",
+                "빈티지"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": false,
+          "values": [
+            "미니멀",
+            "빈티지"
+          ]
+        },
+        {
+          "_id": "field_028",
+          "name": "예상 오픈일",
+          "icon": "calendar",
+          "type": "DATE",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "2025-03-01"
+          ]
+        }
+      ],
+      "displayFields": [],
+      "isOpen": false,
+      "owner": "user_xi_9356",
+      "hash": "379786795b593f48291d56394dbe5751",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c000f"
+      },
+      "externalId": "890abcde-f012-3456-7890-abcdef012345",
+      "title": "커피 생두 수입 절차 요약",
+      "thumbnail": "https://images.example.com/thumbnails/import_summary.jpg",
+      "createdDate": {
+        "$date": "2024-07-15T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-15T10:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_029",
+          "name": "HS 코드",
+          "icon": "code",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "0901.11.0000"
+          ]
+        },
+        {
+          "_id": "field_030",
+          "name": "통관 완료 여부",
+          "icon": "check",
+          "type": "BOOLEAN",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "true"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "HS 코드",
+          "icon": "code",
+          "values": [
+            "0901.11.0000"
+          ],
+          "order": 1
+        },
+        {
+          "name": "통관 완료 여부",
+          "icon": "check",
+          "values": [
+            "true"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_omicron_0467",
+      "hash": "037440068b0c576e8babfaa65d6c19f8",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0010"
+      },
+      "externalId": "90abcdef-0123-4567-890a-bcdef0123456",
+      "title": "새로운 커피 품종 연구",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-07-14T11:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T19:20:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_031",
+          "name": "품종명",
+          "icon": "leaf",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "Centroamericano"
+          ]
+        },
+        {
+          "_id": "field_032",
+          "name": "재배 고도",
+          "icon": "mountain",
+          "type": "NUMBER",
+          "attributes": [
+            {
+              "key": "unit",
+              "value": [
+                "m"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "1800"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "품종명",
+          "icon": "leaf",
+          "values": [
+            "Centroamericano"
+          ],
+          "order": 1
+        },
+        {
+          "name": "재배 고도",
+          "icon": "mountain",
+          "values": [
+            "1800"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_pi_1578",
+      "hash": "109856500a90f4c8015e6d566f9d45c7",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0011"
+      },
+      "externalId": "a0a1a2a3-b4b5-c6c7-d8d9-e0e1e2e3e4e5",
+      "title": "워터 디스펜서 정기 점검",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-07-13T09:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-13T09:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_033",
+          "name": "점검 항목",
+          "icon": "wrench",
+          "type": "MULTI_SELECT",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "필터 교체",
+                "누수 확인",
+                "온도 설정"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "필터 교체",
+            "온도 설정"
+          ]
+        },
+        {
+          "_id": "field_034",
+          "name": "점검 사진",
+          "icon": "image",
+          "type": "URL",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "https://photos.example.com/dispenser_check_202407.jpg"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "점검 항목",
+          "icon": "wrench",
+          "values": [
+            "필터 교체",
+            "온도 설정"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": false,
+      "owner": "user_rho_2689",
+      "hash": "dabeb8baf9ea2a66a0ce563ca9548116",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0012"
+      },
+      "externalId": "b1b2b3b4-c5c6-d7d8-e9e0-f1f2f3f4f5f6",
+      "title": "카페 메뉴 개발: 시즌 한정",
+      "thumbnail": "https://images.example.com/thumbnails/seasonal_menu.png",
+      "createdDate": {
+        "$date": "2024-07-12T14:30:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T20:40:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_035",
+          "name": "시즌",
+          "icon": "season",
+          "type": "RADIO",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "봄",
+                "여름",
+                "가을",
+                "겨울"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "가을"
+          ]
+        },
+        {
+          "_id": "field_036",
+          "name": "제조 난이도",
+          "icon": "difficulty",
+          "type": "RATING",
+          "attributes": [
+            {
+              "key": "max",
+              "value": [
+                "3"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "2"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "시즌",
+          "icon": "season",
+          "values": [
+            "가을"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_sigma_3790",
+      "hash": "bea1f9ec70b6820a8e99f62615e623a0",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0013"
+      },
+      "externalId": "c2c3c4c5-d6d7-e8e9-f0f1-g2g3g4g5g6g7",
+      "title": "코스타리카 타라주 커핑 기록",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-07-11T18:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-11T18:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_037",
+          "name": "클린컵",
+          "icon": "clean",
+          "type": "RATING",
+          "attributes": [
+            {
+              "key": "max",
+              "value": [
+                "5"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "5"
+          ]
+        },
+        {
+          "_id": "field_038",
+          "name": "커핑 날짜",
+          "icon": "calendar",
+          "type": "DATE",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "2024-07-09"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "클린컵",
+          "icon": "clean",
+          "values": [
+            "5"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_tau_4801",
+      "hash": "4e437bc8835d072fc340458173436745",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0014"
+      },
+      "externalId": "d3d4d5d6-e7e8-f9f0-g1g2-h3h4h5h6h7h8",
+      "title": "카페 장비 유지보수 스케줄",
+      "thumbnail": "https://images.example.com/thumbnails/maintenance_schedule.jpg",
+      "createdDate": {
+        "$date": "2024-07-10T08:30:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T21:55:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_039",
+          "name": "장비명",
+          "icon": "gear",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "그라인더 (Mazzer Major)"
+          ]
+        },
+        {
+          "_id": "field_040",
+          "name": "다음 청소일",
+          "icon": "calendar",
+          "type": "DATE",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "2024-08-01"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "장비명",
+          "icon": "gear",
+          "values": [
+            "그라인더 (Mazzer Major)"
+          ],
+          "order": 1
+        },
+        {
+          "name": "다음 청소일",
+          "icon": "calendar",
+          "values": [
+            "2024-08-01"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": false,
+      "owner": "user_upsilon_5912",
+      "hash": "8e9b9dde0afac5599e66230906516500",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0015"
+      },
+      "externalId": "e4e5e6e7-f8f9-g0g1-h2h3-i4i5i6i7i8i9",
+      "title": "드립커피 추출 변수 기록",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-07-09T12:12:12Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-09T12:12:12Z"
+      },
+      "fields": [
+        {
+          "_id": "field_041",
+          "name": "브루잉 기구",
+          "icon": "tool",
+          "type": "DROP_DOWN",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "V60",
+                "칼리타",
+                "케멕스"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "V60"
+          ]
+        },
+        {
+          "_id": "field_042",
+          "name": "물줄기 속도",
+          "icon": "speed",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "매우 느림"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "브루잉 기구",
+          "icon": "tool",
+          "values": [
+            "V60"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_phi_6023",
+      "hash": "8c53390806283e2188702e05718266a4",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0016"
+      },
+      "externalId": "f5f6f7f8-g9g0-h1h2-i3i4-j5j6j7j8j9j0",
+      "title": "카페 창업 예상 지출",
+      "thumbnail": "https://images.example.com/thumbnails/startup_cost.png",
+      "createdDate": {
+        "$date": "2024-07-08T15:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T23:10:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_043",
+          "name": "항목",
+          "icon": "list",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "인테리어 비용"
+          ]
+        },
+        {
+          "_id": "field_044",
+          "name": "금액",
+          "icon": "money",
+          "type": "NUMBER",
+          "attributes": [
+            {
+              "key": "currency",
+              "value": [
+                "KRW"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "30000000"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "항목",
+          "icon": "list",
+          "values": [
+            "인테리어 비용"
+          ],
+          "order": 1
+        },
+        {
+          "name": "금액",
+          "icon": "money",
+          "values": [
+            "30000000"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": false,
+      "owner": "user_chi_7134",
+      "hash": "10684bf4fc73147b5ed8e3496f43f63f",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0017"
+      },
+      "externalId": "1a2b3c4d-5e6f-7a8b-9c0d-e1f2a3b4c5d6",
+      "title": "에어로프레스 레시피: 인버티드",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-07-07T11:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-07T11:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_045",
+          "name": "추출 압력",
+          "icon": "pressure",
+          "type": "RATING",
+          "attributes": [
+            {
+              "key": "max",
+              "value": [
+                "5"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "4"
+          ]
+        },
+        {
+          "_id": "field_046",
+          "name": "분쇄도",
+          "icon": "grinder",
+          "type": "DROP_DOWN",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "매우 고움",
+                "고움",
+                "중간"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "고움"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "추출 압력",
+          "icon": "pressure",
+          "values": [
+            "4"
+          ],
+          "order": 1
+        },
+        {
+          "name": "분쇄도",
+          "icon": "grinder",
+          "values": [
+            "고움"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_psi_8245",
+      "hash": "b9371dd939647cbd6496de98f288b270",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0018"
+      },
+      "externalId": "2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+      "title": "베트남 코피 루왁 관련 기사 스크랩",
+      "thumbnail": "https://images.example.com/thumbnails/kopi_luwak.jpg",
+      "createdDate": {
+        "$date": "2024-07-06T09:40:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T10:30:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_047",
+          "name": "정보 출처",
+          "icon": "news",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "XX 경제 신문"
+          ]
+        },
+        {
+          "_id": "field_048",
+          "name": "기사 URL",
+          "icon": "link",
+          "type": "URL",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "http://news.example.com/luwak_article"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "정보 출처",
+          "icon": "news",
+          "values": [
+            "XX 경제 신문"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_omega_9356",
+      "hash": "2deea3311f426d733be25b4a1b984cad",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0019"
+      },
+      "externalId": "3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+      "title": "카페 직원 교육 내용 정리",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-07-05T16:20:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-05T16:20:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_049",
+          "name": "교육 주제",
+          "icon": "lecture",
+          "type": "RADIO",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "고객 응대",
+                "머신 사용법",
+                "재고 관리"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "고객 응대"
+          ]
+        },
+        {
+          "_id": "field_050",
+          "name": "교육 시간",
+          "icon": "clock",
+          "type": "DURATION",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "02:30"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "교육 주제",
+          "icon": "lecture",
+          "values": [
+            "고객 응대"
+          ],
+          "order": 1
+        },
+        {
+          "name": "교육 시간",
+          "icon": "clock",
+          "values": [
+            "02:30"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": false,
+      "owner": "user_a1b2_0467",
+      "hash": "43d2e8c8fafcf673246ee436cae096a8",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c001a"
+      },
+      "externalId": "4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f90",
+      "title": "이달의 커피 원두 재고 현황",
+      "thumbnail": "https://images.example.com/thumbnails/stock_status.jpg",
+      "createdDate": {
+        "$date": "2024-07-04T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T11:45:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_051",
+          "name": "원두명",
+          "icon": "bean",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "콜롬비아 수프리모"
+          ]
+        },
+        {
+          "_id": "field_052",
+          "name": "남은 양",
+          "icon": "weight",
+          "type": "NUMBER",
+          "attributes": [
+            {
+              "key": "unit",
+              "value": [
+                "kg"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "15"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "원두명",
+          "icon": "bean",
+          "values": [
+            "콜롬비아 수프리모"
+          ],
+          "order": 1
+        },
+        {
+          "name": "남은 양",
+          "icon": "weight",
+          "values": [
+            "15"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_c3d4_1578",
+      "hash": "c6914340d8f434dd2aa26377ed5da50a",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c001b"
+      },
+      "externalId": "5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f90a1",
+      "title": "에어로프레스 대회 레시피",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-07-03T17:30:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-03T17:30:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_053",
+          "name": "커피 양",
+          "icon": "weight",
+          "type": "NUMBER",
+          "attributes": [
+            {
+              "key": "unit",
+              "value": [
+                "g"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "30"
+          ]
+        },
+        {
+          "_id": "field_054",
+          "name": "추출 방식",
+          "icon": "tool",
+          "type": "DROP_DOWN",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "Standard",
+                "Inverted"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "Inverted"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "커피 양",
+          "icon": "weight",
+          "values": [
+            "30"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_e5f6_2689",
+      "hash": "80cfa5cf9c52d7900d2fdb9d9ba1599a",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c001c"
+      },
+      "externalId": "6f7a8b9c-0d1e-2f3a-4b5c-6d7e8f90a1b2",
+      "title": "라떼 아트 패턴 연습",
+      "thumbnail": "https://images.example.com/thumbnails/latte_art_rosetta.jpg",
+      "createdDate": {
+        "$date": "2024-07-02T13:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T13:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_055",
+          "name": "패턴 종류",
+          "icon": "art",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "로제타"
+          ]
+        },
+        {
+          "_id": "field_056",
+          "name": "성공 여부",
+          "icon": "check",
+          "type": "BOOLEAN",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "true"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "패턴 종류",
+          "icon": "art",
+          "values": [
+            "로제타"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_g7h8_3790",
+      "hash": "43aad9f70e2e5f8c85d9989450c2cdd1",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c001d"
+      },
+      "externalId": "7a8b9c0d-1e2f-3a4b-5c6d-7e8f90a1b2c3",
+      "title": "루왁 커피의 진실: 윤리적 문제",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-07-01T08:50:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-01T08:50:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_057",
+          "name": "관련 주제",
+          "icon": "topic",
+          "type": "MULTI_SELECT",
+          "attributes": [
+            {
+              "key": "options",
+              "value": [
+                "윤리",
+                "동물 복지",
+                "가격"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "윤리",
+            "동물 복지"
+          ]
+        },
+        {
+          "_id": "field_058",
+          "name": "개인 의견",
+          "icon": "opinion",
+          "type": "LONG_TEXT",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "사향고양이의 강제 사육은 지양해야 함."
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "관련 주제",
+          "icon": "topic",
+          "values": [
+            "윤리",
+            "동물 복지"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": false,
+      "owner": "user_i9j0_4801",
+      "hash": "30a8d6bb3357ff2e22d848aab84d4d35",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c001e"
+      },
+      "externalId": "8b9c0d1e-2f3a-4b5c-6d7e-8f90a1b2c3d4",
+      "title": "카페 머그컵 디자인 선정",
+      "thumbnail": "https://images.example.com/thumbnails/mug_design.png",
+      "createdDate": {
+        "$date": "2024-06-30T14:10:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T14:40:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_059",
+          "name": "색상",
+          "icon": "color",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "매트 블랙"
+          ]
+        },
+        {
+          "_id": "field_060",
+          "name": "선호도",
+          "icon": "star",
+          "type": "RATING",
+          "attributes": [
+            {
+              "key": "max",
+              "value": [
+                "5"
+              ]
+            }
+          ],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "5"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "색상",
+          "icon": "color",
+          "values": [
+            "매트 블랙"
+          ],
+          "order": 1
+        },
+        {
+          "name": "선호도",
+          "icon": "star",
+          "values": [
+            "5"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_k1l2_5912",
+      "hash": "c337158535cef09b2c4e832dd10100eb",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c001f"
+      },
+      "externalId": "9c0d1e2f-3a4b-5c6d-7e8f-90a1b2c3d4e5",
+      "title": "브루잉 커피 정량화 실험",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2024-06-29T19:55:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-06-29T19:55:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_061",
+          "name": "브루잉 비율",
+          "icon": "ratio",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "1:16"
+          ]
+        },
+        {
+          "_id": "field_062",
+          "name": "재현 가능성",
+          "icon": "check",
+          "type": "BOOLEAN",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": false,
+          "values": [
+            "true"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "브루잉 비율",
+          "icon": "ratio",
+          "values": [
+            "1:16"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_m3n4_6023",
+      "hash": "79dc5dd35791e1a2e256d0b176311ae6",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0020"
+      },
+      "externalId": "d0e1f2g3-h4i5-j6k7-l8m9-n0o1p2q3r4s5",
+      "title": "로스팅 프로파일 기록: 시티",
+      "thumbnail": "https://images.example.com/thumbnails/roast_profile_city.jpg",
+      "createdDate": {
+        "$date": "2024-06-28T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-07-29T16:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_063",
+          "name": "1차 크랙 온도",
+          "icon": "temp",
+          "type": "NUMBER",
+          "attributes": [
+            {
+              "key": "unit",
+              "value": [
+                "℃"
+              ]
+            }
+          ],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "198"
+          ]
+        },
+        {
+          "_id": "field_064",
+          "name": "DTR",
+          "icon": "dtr",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "20%"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "1차 크랙 온도",
+          "icon": "temp",
+          "values": [
+            "198"
+          ],
+          "order": 1
+        },
+        {
+          "name": "DTR",
+          "icon": "dtr",
+          "values": [
+            "20%"
+          ],
+          "order": 2
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_z9y8_7134",
+      "hash": "6ce8491e9890921f074b7870c5a0b4db",
+      "status": "ACTIVE"
+    }
+  ]
+}

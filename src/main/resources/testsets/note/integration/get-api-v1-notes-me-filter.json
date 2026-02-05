@@ -1,0 +1,74 @@
+{
+  "uid": "noteIndex",
+  "data": [
+    {
+      "id": "33333333-3333-4333-8333-333333333333",
+      "title": "Filterable Coffee Note 1",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "noteHash": "hash001",
+      "createdDate": 1704355200000,
+      "modifiedDate": 1704441600000,
+      "filters": {
+        "Origin": [
+          "Ethiopia"
+        ],
+        "Roast Level": [
+          "Medium"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "Origin",
+          "tag": "ORIGIN_TAG",
+          "value": [
+            "Ethiopia"
+          ],
+          "order": 1
+        },
+        {
+          "name": "Roast Level",
+          "tag": "ROAST_LEVEL_TAG",
+          "value": [
+            "Medium"
+          ],
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "44444444-4444-4444-8444-444444444444",
+      "title": "Filterable Coffee Note 2",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "createdDate": 1704528000000,
+      "modifiedDate": 1704528000000,
+      "noteHash": "hash001",
+      "filters": {
+        "Origin": [
+          "Colombia"
+        ],
+        "Roast Level": [
+          "Dark"
+        ]
+      },
+      "displayFields": [
+        {
+          "name": "Origin",
+          "tag": "ORIGIN_TAG",
+          "value": [
+            "Colombia"
+          ],
+          "order": 1
+        },
+        {
+          "name": "Roast Level",
+          "tag": "ROAST_LEVEL_TAG",
+          "value": [
+            "Dark"
+          ],
+          "order": 2
+        }
+      ]
+    }
+  ]
+}
+

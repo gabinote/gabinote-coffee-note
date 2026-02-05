@@ -1,0 +1,46 @@
+{
+  "notes": [
+    {
+      "_id": {
+        "$oid": "68ae99e280cfdf6c2614ea43"
+      },
+      "externalId": "d4e5f6a7-b8c9-4012-8567-890123def012",
+      "title": "Open Coffee Note",
+      "thumbnail": "https://example.com/thumbnail3.jpg",
+      "createdDate": {
+        "$date": "2024-01-07T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2024-01-08T10:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field-1",
+          "name": "Coffee Type",
+          "icon": "bean",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "Arabica"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "Coffee Type",
+          "icon": "bean",
+          "values": [
+            "Arabica"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "695b8482-c259-4493-82e2-8988599d21e9",
+      "hash": "hashABC",
+      "status": "ACTIVE"
+    }
+  ]
+}

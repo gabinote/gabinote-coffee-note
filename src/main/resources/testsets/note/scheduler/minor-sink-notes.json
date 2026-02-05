@@ -1,0 +1,165 @@
+{
+  "notes": [
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0001"
+      },
+      "externalId": "a1b2c3d4-e5f6-4789-0123-4567890abcd1",
+      "title": "Minor Sink 테스트 노트 1 - 인덱스 없는 신규 노트",
+      "thumbnail": "https://images.example.com/thumbnails/note1.jpg",
+      "createdDate": {
+        "$date": "2002-08-27T14:50:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2002-08-27T14:49:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_001",
+          "name": "원산지",
+          "icon": "globe",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "에티오피아"
+          ]
+        },
+        {
+          "_id": "field_002",
+          "name": "로스팅 정도",
+          "icon": "fire",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 2,
+          "isDisplay": true,
+          "values": [
+            "라이트"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "원산지",
+          "icon": "globe",
+          "values": [
+            "에티오피아"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": true,
+      "owner": "user_minor_sink_1",
+      "hash": "minor_sink_hash_001",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0002"
+      },
+      "externalId": "a1b2c3d4-e5f6-4789-0123-4567890abcd2",
+      "title": "Minor Sink 테스트 노트 2 - 삭제된 노트(인덱스 남음)",
+      "thumbnail": null,
+      "createdDate": {
+        "$date": "2002-08-27T14:50:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2002-08-27T14:49:00Z"
+      },
+      "fields": [
+      ],
+      "displayFields": [
+      ],
+      "isOpen": false,
+      "owner": "user_minor_sink_2",
+      "hash": "minor_sink_hash_002",
+      "status": "DELETED"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0003"
+      },
+      "externalId": "a1b2c3d4-e5f6-4789-0123-4567890abcd3",
+      "title": "Minor Sink 테스트 노트 3 - 해시 불일치 노트",
+      "thumbnail": "https://images.example.com/thumbnails/note3.jpg",
+      "createdDate": {
+        "$date": "2002-08-27T14:50:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2002-08-27T14:49:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_004",
+          "name": "원두 종류",
+          "icon": "bean",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "아라비카-업데이트됨"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "원두 종류",
+          "icon": "bean",
+          "values": [
+            "아라비카-업데이트됨"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": false,
+      "owner": "user_minor_sink_3",
+      "hash": "minor_sink_hash_003_updated",
+      "status": "ACTIVE"
+    },
+    {
+      "_id": {
+        "$oid": "66a7b2a60e0a514d2a1c0004"
+      },
+      "externalId": "a1b2c3d4-e5f6-4789-0123-4567890abcd4",
+      "title": "Minor Sink 테스트 노트 4 - 시작 범위 보다 늦은 수정 일자",
+      "thumbnail": "https://images.example.com/thumbnails/note3.jpg",
+      "createdDate": {
+        "$date": "2002-08-27T14:50:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2002-08-28T14:50:00Z"
+      },
+      "fields": [
+        {
+          "_id": "field_004",
+          "name": "원두 종류",
+          "icon": "bean",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 1,
+          "isDisplay": true,
+          "values": [
+            "아라비카-업데이트됨"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "원두 종류",
+          "icon": "bean",
+          "values": [
+            "아라비카-업데이트됨"
+          ],
+          "order": 1
+        }
+      ],
+      "isOpen": false,
+      "owner": "user_minor_sink_3",
+      "hash": "minor_sink_hash_003_updated",
+      "status": "ACTIVE"
+    }
+  ]
+}
+

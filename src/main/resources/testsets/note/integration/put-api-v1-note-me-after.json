@@ -1,0 +1,44 @@
+{
+  "notes": [
+    {
+      "_id": "$anyObject()",
+      "externalId": "e5f6a7b8-c9d0-4123-8678-901234ef0123",
+      "title": "Updated Note Title",
+      "thumbnail": "https://example.com/updated.jpg",
+      "createdDate": {
+        "$date": "2024-01-10T10:00:00Z"
+      },
+      "modifiedDate": {
+        "$date": "2002-08-27T15:00:00Z"
+      },
+      "fields": [
+        {
+          "_id": "00000000-0000-0000-0000-000000000002",
+          "name": "Updated Field",
+          "icon": "edit",
+          "type": "SHORT_TEXT",
+          "attributes": [],
+          "order": 0,
+          "isDisplay": true,
+          "values": [
+            "Updated Value"
+          ]
+        }
+      ],
+      "displayFields": [
+        {
+          "name": "Updated Field",
+          "icon": "edit",
+          "values": [
+            "Updated Value"
+          ],
+          "order": 0
+        }
+      ],
+      "isOpen": false,
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "hash": "66f35e851736598a30e16eff91b5d28e",
+      "status": "ACTIVE"
+    }
+  ]
+}
