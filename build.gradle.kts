@@ -83,8 +83,6 @@ dependencies {
 
     // database
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
     // https://mvnrepository.com/artifact/com.meilisearch.sdk/meilisearch-java
     implementation("com.meilisearch.sdk:meilisearch-java:0.16.1") {
         exclude(group = "com.vaadin.external.google", module = "android-json")
