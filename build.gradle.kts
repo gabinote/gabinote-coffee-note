@@ -134,6 +134,11 @@ dependencies {
 
     implementation("org.springframework.cloud:spring-cloud-starter-config")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+    // Source: https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus
+    implementation("io.micrometer:micrometer-registry-prometheus")
+
+
 }
 
 kotlin {
