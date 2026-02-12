@@ -304,10 +304,8 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                             )
                         }
                     }
-                }
 
-                feature("Delete operation 테스트") {
-                    scenario("Note가 삭제되어 $NOTE_CHANGE_TOPIC 토픽에 메시지가 발행될 때, 해당 Note의 색인 정보가 삭제되어야 한다.") {
+                    scenario("Note가 삭제되어(Soft Delete) $NOTE_CHANGE_TOPIC 토픽에 메시지가 발행될 때, 해당 Note의 색인 정보가 삭제되어야 한다.") {
 
                         // 데이터베이스에 노트가 삭제된 상황을 가정함.
                         testDataHelper.setData("${baseData}/noteIndex/delete-note.json")
@@ -388,6 +386,103 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                             before = existingNote.toString(),
                             after = deleteNote.toString(),
                             op = DebeziumOperation.UPDATE
+                        )
+
+                        testKafkaHelper.sendMessage(
+                            topic = NOTE_CHANGE_TOPIC,
+                            key = existingNoteId,
+                            value = objectMapper.writeValueAsString(changeEvent)
+                        )
+                        delay(5.seconds)
+
+                        // MeiliSearch 에 색인 정보가 업데이트되었는지 검증
+                        eventually(15.seconds) {
+                            testMeiliSearchHelper.assertData(
+                                "$baseData/noteIndex/delete-note-index-after.json",
+                                verbose = false
+                            )
+                        }
+                    }
+                }
+
+                feature("Delete operation 테스트") {
+                    scenario("Note가 완전히 삭제되어 $NOTE_CHANGE_TOPIC 토픽에 메시지가 발행될 때, 해당 Note의 색인 정보가 삭제되어야 한다.") {
+                        // 데이터베이스에 노트가 삭제된 상황을 가정함.
+                        testDataHelper.setData("${baseData}/noteIndex/delete-note.json")
+                        testMeiliSearchHelper.insertIndex("${baseData}/noteIndex/note-index.json")
+
+                        // 여기에는 삭제된 노트가 들어있음.
+                        testMeiliSearchHelper.insertData("${baseData}/noteIndex/delete-note-index.json")
+                        testDebeziumHelper.registerConnector("testsets/debezium/mongo-note-connector.json")
+
+                        // 기존에 존재하는 Note
+                        val existingNoteId = "66a7b2a60e0a514d2a1c0001"
+                        val existingNote = objectMapper.createObjectNode().apply {
+                            putObject("_id").put("\$oid", existingNoteId)
+                            put("externalId", "a1b2c3d4-e5f6-4789-0123-4567890abcde")
+                            put("title", "카페인 분석 노트: 에티오피아 예가체프")
+                            put("thumbnail", "https://images.example.com/thumbnails/coffee_yirgacheffe.jpg")
+                            putObject("createdDate").put("\$date", "2024-07-29T10:00:00Z")
+                            putObject("modifiedDate").put("\$date", "2024-07-29T10:00:00Z")
+                            put("status", NoteStatus.ACTIVE.name)
+                            putArray("fields").apply {
+                                // 첫 번째 필드: 원산지
+                                addObject().apply {
+                                    put("_id", "field_001")
+                                    put("name", "원산지")
+                                    put("icon", "globe")
+                                    put("type", "SHORT_TEXT")
+                                    putArray("attributes") // 빈 배열
+                                    put("order", 1)
+                                    put("isDisplay", true)
+                                    putArray("values").add("에티오피아")
+                                }
+
+                                // 두 번째 필드: 로스팅 정도 (RADIO 타입, attributes 있음)
+                                addObject().apply {
+                                    put("_id", "field_002")
+                                    put("name", "로스팅 정도")
+                                    put("icon", "fire")
+                                    put("type", "RADIO")
+
+                                    // attributes 내부 구조 처리
+                                    putArray("attributes").apply {
+                                        addObject().apply {
+                                            put("key", "options")
+                                            putArray("value").apply {
+                                                add("라이트")
+                                                add("미디엄")
+                                                add("다크")
+                                            }
+                                        }
+                                    }
+
+                                    put("order", 2)
+                                    put("isDisplay", true)
+                                    putArray("values").add("라이트")
+                                }
+                            }
+
+                            putArray("displayFields").apply {
+                                addObject().apply {
+                                    put("name", "원산지")
+                                    put("icon", "globe")
+                                    putArray("values").add("에티오피아")
+                                    put("order", 1)
+                                }
+                            }
+
+                            put("isOpen", true)
+                            put("owner", "user_alpha_1234")
+                            put("hash", "190ec684c1d1b32ea48603ca54f32dd1")
+                        }
+
+
+                        // 해당 노트 삭제  메시지 발행
+                        val changeEvent = createChangeMessage<Note>(
+                            before = existingNote.toString(),
+                            after = null,
+                            op = DebeziumOperation.DELETE
                         )
 
                         testKafkaHelper.sendMessage(
@@ -655,10 +750,8 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                             )
                         }
                     }
-                }
 
-                feature("Delete operation 테스트") {
-                    scenario("Note가 삭제되어 $NOTE_CHANGE_TOPIC 토픽에 메시지가 발행될 때, 해당 Note의 필드 색인 정보가 삭제되어야 한다.") {
+                    scenario("Note가 삭제되어(Soft Delete) $NOTE_CHANGE_TOPIC 토픽에 메시지가 발행될 때, 해당 Note의 필드 색인 정보가 삭제되어야 한다.") {
 
                         // 데이터베이스에 노트가 삭제된 상황을 가정함.
                         testDataHelper.setData("${baseData}/noteFieldIndex/delete-note.json")
@@ -695,6 +788,59 @@ class NoteIndexSinkConsumerTest : IntegrationTestTemplate() {
                             before = existingNote.toString(),
                             after = deleteNote.toString(),
                             op = DebeziumOperation.UPDATE
+                        )
+
+                        testKafkaHelper.sendMessage(
+                            topic = NOTE_CHANGE_TOPIC,
+                            key = existingNoteId,
+                            value = objectMapper.writeValueAsString(changeEvent)
+                        )
+
+                        // MeiliSearch 에 필드 색인 정보가 삭제되었는지 검증
+                        eventually(15.seconds) {
+                            testMeiliSearchHelper.assertData(
+                                "$baseData/noteFieldIndex/delete-note-field-index-after.json",
+                                verbose = false
+                            )
+                        }
+                    }
+                }
+
+                feature("Delete operation 테스트") {
+                    scenario("Note가 $NOTE_CHANGE_TOPIC 토픽에 메시지가 발행될 때, 해당 Note의 필드 색인 정보가 삭제되어야 한다.") {
+
+                        // 데이터베이스에 노트가 삭제된 상황을 가정함.
+                        testDataHelper.setData("${baseData}/noteFieldIndex/delete-note.json")
+                        testMeiliSearchHelper.insertIndex("${baseData}/noteFieldIndex/note-field-index.json")
+
+                        // 여기에는 삭제될 노트의 필드 인덱스가 들어있음.
+                        testMeiliSearchHelper.insertData("${baseData}/noteFieldIndex/delete-note-field-index.json")
+                        testDebeziumHelper.registerConnector("testsets/debezium/mongo-note-connector.json")
+
+                        // 기존에 존재하는 Note
+                        val existingNoteId = "66a7b2a60e0a514d2a1c0001"
+                        val existingNote = objectMapper.createObjectNode().apply {
+                            putObject("_id").put("\$oid", existingNoteId)
+                            put("externalId", "a1b2c3d4-e5f6-4789-0123-4567890abcde")
+                            put("title", "카페인 분석 노트: 에티오피아 예가체프")
+                            put("thumbnail", "https://images.example.com/thumbnails/coffee_yirgacheffe.jpg")
+                            putObject("createdDate").put("\$date", "2024-07-29T10:00:00Z")
+                            putObject("modifiedDate").put("\$date", "2024-07-29T10:00:00Z")
+                            put("status", NoteStatus.ACTIVE.name)
+                            putArray("fields") // 빈 배열 생성
+                            putArray("displayFields") // 빈 배열 생성
+
+                            put("isOpen", true)
+                            put("owner", "user_alpha_1234")
+                            put("hash", "190ec684c1d1b32ea48603ca54f32dd1")
+                        }
+
+
+                        // 해당 노트 삭제 메시지 발행
+                        val changeEvent = createChangeMessage<Note>(
+                            before = existingNote.toString(),
+                            after = null,
+                            op = DebeziumOperation.DELETE
                         )
 
                         testKafkaHelper.sendMessage(
