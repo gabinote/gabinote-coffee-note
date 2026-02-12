@@ -51,6 +51,19 @@ class NoteFieldIndexService(
         }
     }
 
+    fun searchAllNoteFieldValueFacets(
+        owner: String,
+        query: String,
+    ): List<NoteFieldValueFacetWithCountResServiceDto> {
+        val data = noteFieldIndexRepository.searchAllFieldValueFacets(
+            owner = owner,
+            query = query,
+        )
+        return data.map {
+            noteFieldIndexMapper.toNoteFieldValueFacetWithCountResServiceDto(it)
+        }
+    }
+
     fun createFromNote(note: Note) {
         val noteIndex = convertToNoteFieldIndex(note)
         noteFieldIndexRepository.saveAll(noteIndex)

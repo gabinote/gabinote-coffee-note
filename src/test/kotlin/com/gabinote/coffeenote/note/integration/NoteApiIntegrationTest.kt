@@ -176,6 +176,25 @@ class NoteApiIntegrationTest : IntegrationTestTemplate() {
                 }
             }
 
+            feature("[GET] /api/v1/notes/me/facets/fields/values/search") {
+                scenario("모든 필드 값으로 검색하면, 요청자 소유의 모든 필드 값 패싯을 반환해야 한다.") {
+                    Given {
+                        useNoteFieldsIndex()
+                        testMeiliSearchHelper.insertData("/testsets/note/integration/get-api-v1-notes-me-facets-fields-values-search.json")
+                        basePath(apiPrefix)
+                        accept("application/json")
+                        header("X-Token-Sub", "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e")
+                        header("X-Token-Roles", "user")
+                        queryParam("query", "Ethiopia")
+                    }.When {
+                        get("/notes/me/facets/fields/values/search")
+                    }.Then {
+                        statusCode(200)
+                        body("facets.size()", equalTo(3))
+                    }
+                }
+            }
+
             feature("[POST] /api/v1/note/me") {
                 scenario("올바른 노트 생성 요청이 주어지면, 새로운 노트를 생성하여 반환해야 한다.") {
                     Given {
