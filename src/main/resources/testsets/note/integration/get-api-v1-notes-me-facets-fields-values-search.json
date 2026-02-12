@@ -1,0 +1,38 @@
+{
+  "uid": "noteFieldIndex",
+  "data": [
+    {
+      "id": "all-value-index-1",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "name": "Origin",
+      "value": "Ethiopia",
+      "noteId": "note-1",
+      "noteHash": "hash001"
+    },
+    {
+      "id": "all-value-index-2",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "name": "Roast Level",
+      "value": "Ethiopia Light Roast",
+      "noteId": "note-2",
+      "noteHash": "hash002"
+    },
+    {
+      "id": "all-value-index-3",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
+      "name": "Variety",
+      "value": "Ethiopian Heirloom",
+      "noteId": "note-3",
+      "noteHash": "hash003"
+    },
+    {
+      "id": "all-value-index-4",
+      "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6523e",
+      "name": "Processing",
+      "value": "Natural Process Ethiopia",
+      "noteId": "note-4",
+      "noteHash": "hash004"
+    }
+  ]
+}
+

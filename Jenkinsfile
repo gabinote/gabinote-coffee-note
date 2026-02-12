@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         REGISTRY_URL = "${env.PRIVATE_REGISTRY_URL}"
-        APP_VERSION = '1.0.1'
+        APP_VERSION = '1.0.2'
         IMAGE_NAME = 'coffeenote'
 
         REGISTRY_CRED_ID = 'private-registry-auth'
