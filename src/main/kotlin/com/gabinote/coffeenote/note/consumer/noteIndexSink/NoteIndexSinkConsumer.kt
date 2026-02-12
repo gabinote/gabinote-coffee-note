@@ -60,7 +60,7 @@ class NoteIndexSinkConsumer(
             when (changeMessage.op) {
                 DebeziumOperation.CREATE -> upsertNoteIndex(noteChangeInfo)
                 DebeziumOperation.UPDATE -> updateNoteIndex(noteChangeInfo)
-//                DebeziumOperation.DELETE -> deleteNoteIndex(noteChangeInfo)
+                DebeziumOperation.DELETE -> deleteNoteIndex(noteChangeInfo)
                 else -> logger.warn { "Unsupported Debezium operation: ${changeMessage.op}" }
             }
 
@@ -104,7 +104,7 @@ class NoteIndexSinkConsumer(
             when (changeMessage.op) {
                 DebeziumOperation.CREATE -> upsertNoteFieldIndex(noteChangeInfo)
                 DebeziumOperation.UPDATE -> updateNoteFieldIndex(noteChangeInfo)
-//                DebeziumOperation.DELETE -> deleteNoteFieldIndex(noteChangeInfo)
+                DebeziumOperation.DELETE -> deleteNoteFieldIndex(noteChangeInfo)
                 else -> logger.warn { "Unsupported Debezium operation: ${changeMessage.op}" }
             }
             ack.acknowledge()
@@ -156,12 +156,14 @@ class NoteIndexSinkConsumer(
         return after.status == NoteStatus.DELETED
     }
 
+
     private fun deleteNoteIndex(message: BeforeAfterNote) {
         val note = message.before ?: throw IllegalArgumentException("parsed note before is null")
         val noteId = note.externalId
         logger.debug { "Delete note index for note externalId=${noteId}" }
         noteIndexService.deleteByNoteId(UUID.fromString(noteId))
     }
+
 
     private fun updateNoteFieldIndex(message: BeforeAfterNote) {
         when {
