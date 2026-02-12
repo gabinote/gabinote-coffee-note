@@ -305,6 +305,149 @@ class NoteFieldIndexServiceTest : ServiceTestTemplate() {
                 }
             }
 
+            describe("NoteFieldIndexService.searchAllNoteFieldValueFacets") {
+                context("소유자와 쿼리가 주어졌을 때") {
+                    val owner = "test-owner"
+                    val query = "test"
+
+                    val facetWithCounts = listOf(
+                        FacetWithCount(facet = "value1", count = 8),
+                        FacetWithCount(facet = "value2", count = 5),
+                        FacetWithCount(facet = "value3", count = 2)
+                    )
+
+                    val expectedDtos = listOf(
+                        NoteFieldValueFacetWithCountResServiceDto(facet = "value1", count = 8),
+                        NoteFieldValueFacetWithCountResServiceDto(facet = "value2", count = 5),
+                        NoteFieldValueFacetWithCountResServiceDto(facet = "value3", count = 2)
+                    )
+
+                    beforeTest {
+                        every {
+                            noteFieldIndexRepository.searchAllFieldValueFacets(
+                                owner = owner,
+                                query = query
+                            )
+                        } returns facetWithCounts
+
+                        facetWithCounts.forEachIndexed { index, facetWithCount ->
+                            every {
+                                noteFieldIndexMapper.toNoteFieldValueFacetWithCountResServiceDto(facetWithCount)
+                            } returns expectedDtos[index]
+                        }
+                    }
+
+                    it("모든 필드의 값 Facet 목록을 반환한다") {
+                        val result = noteFieldIndexService.searchAllNoteFieldValueFacets(
+                            owner = owner,
+                            query = query
+                        )
+
+                        result shouldHaveSize 3
+                        result[0].facet shouldBe "value1"
+                        result[0].count shouldBe 8
+                        result[1].facet shouldBe "value2"
+                        result[1].count shouldBe 5
+                        result[2].facet shouldBe "value3"
+                        result[2].count shouldBe 2
+
+                        verify(exactly = 1) {
+                            noteFieldIndexRepository.searchAllFieldValueFacets(
+                                owner = owner,
+                                query = query
+                            )
+                        }
+
+                        verify(exactly = 3) {
+                            noteFieldIndexMapper.toNoteFieldValueFacetWithCountResServiceDto(any())
+                        }
+                    }
+                }
+
+                context("결과가 없을 때") {
+                    val owner = "test-owner"
+                    val query = "nonexistent"
+
+                    beforeTest {
+                        every {
+                            noteFieldIndexRepository.searchAllFieldValueFacets(
+                                owner = owner,
+                                query = query
+                            )
+                        } returns emptyList()
+                    }
+
+                    it("빈 리스트를 반환한다") {
+                        val result = noteFieldIndexService.searchAllNoteFieldValueFacets(
+                            owner = owner,
+                            query = query
+                        )
+
+                        result shouldHaveSize 0
+
+                        verify(exactly = 1) {
+                            noteFieldIndexRepository.searchAllFieldValueFacets(
+                                owner = owner,
+                                query = query
+                            )
+                        }
+
+                        verify(exactly = 0) {
+                            noteFieldIndexMapper.toNoteFieldValueFacetWithCountResServiceDto(any())
+                        }
+                    }
+                }
+
+                context("단일 결과만 있을 때") {
+                    val owner = "test-owner"
+                    val query = "unique"
+
+                    val facetWithCounts = listOf(
+                        FacetWithCount(facet = "unique-value", count = 15)
+                    )
+
+                    val expectedDtos = listOf(
+                        NoteFieldValueFacetWithCountResServiceDto(facet = "unique-value", count = 15)
+                    )
+
+                    beforeTest {
+                        every {
+                            noteFieldIndexRepository.searchAllFieldValueFacets(
+                                owner = owner,
+                                query = query
+                            )
+                        } returns facetWithCounts
+
+                        every {
+                            noteFieldIndexMapper.toNoteFieldValueFacetWithCountResServiceDto(facetWithCounts[0])
+                        } returns expectedDtos[0]
+                    }
+
+                    it("단일 필드 값 Facet을 반환한다") {
+                        val result = noteFieldIndexService.searchAllNoteFieldValueFacets(
+                            owner = owner,
+                            query = query
+                        )
+
+                        result shouldHaveSize 1
+                        result[0].facet shouldBe "unique-value"
+                        result[0].count shouldBe 15
+
+                        verify(exactly = 1) {
+                            noteFieldIndexRepository.searchAllFieldValueFacets(
+                                owner = owner,
+                                query = query
+                            )
+                        }
+
+                        verify(exactly = 1) {
+                            noteFieldIndexMapper.toNoteFieldValueFacetWithCountResServiceDto(any())
+                        }
+                    }
+                }
+            }
+
+
             describe("NoteFieldIndexService.createFromNote") {
                 context("올바른 Note 객체가 주어졌을 때") {
 

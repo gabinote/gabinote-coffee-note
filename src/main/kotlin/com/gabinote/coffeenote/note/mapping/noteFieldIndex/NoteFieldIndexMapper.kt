@@ -1,10 +1,7 @@
 package com.gabinote.coffeenote.note.mapping.noteFieldIndex
 
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.data.FacetWithCount
-import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldNameFacetListResControllerDto
-import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldNameFacetWithCountResControllerDto
-import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetListResControllerDto
-import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetWithCountResControllerDto
+import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.*
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.service.NoteFieldNameFacetWithCountResServiceDto
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.service.NoteFieldValueFacetWithCountResServiceDto
 import org.mapstruct.Mapper
@@ -21,6 +18,12 @@ interface NoteFieldIndexMapper {
 
     fun toNoteFieldNameListResControllerDto(facets: List<NoteFieldNameFacetWithCountResControllerDto>): NoteFieldNameFacetListResControllerDto =
         NoteFieldNameFacetListResControllerDto(facets = facets)
+
+    fun toAllNoteFieldValueFacetWithCountResControllerDto(
+        facets: List<NoteFieldValueFacetWithCountResControllerDto>,
+    ): AllNoteFieldValueFacetListResControllerDto = AllNoteFieldValueFacetListResControllerDto(
+        facets
+    )
 
     fun toNoteFieldValueListResControllerDto(
         facets: List<NoteFieldValueFacetWithCountResControllerDto>,

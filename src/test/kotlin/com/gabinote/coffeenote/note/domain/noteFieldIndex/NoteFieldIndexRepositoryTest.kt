@@ -160,7 +160,68 @@ class NoteFieldIndexRepositoryTest : MeiliSearchTestTemplate() {
                     }
                 }
             }
+            describe("NoteFieldIndexRepository.searchAllFieldValueFacets") {
 
+                context("와일드 카드와 올바른 owner가 주어지면") {
+                    useBaseData()
+                    val query = "*"
+                    val owner = "barista_park_02"
+                    val except = listOf(
+                        FacetWithCount(facet = "92°C", count = 1),
+                        FacetWithCount(facet = "20g", count = 1),
+                        FacetWithCount(facet = "더블 워시드 (Double Washed)", count = 1),
+                        FacetWithCount(facet = "미디엄", count = 1),
+                        FacetWithCount(facet = "블랙커런트, 자몽, 토마토, 쥬시한 산미", count = 1),
+                        FacetWithCount(facet = "하리오 V60", count = 1),
+                        FacetWithCount(facet = "2분 30초", count = 1),
+                        FacetWithCount(facet = "케냐 AA", count = 1),
+                    )
+                    it("해당 Owner 소유의 필드 값 facet 목록을 반환한다") {
+
+                        val res = noteFieldIndexRepository.searchAllFieldValueFacets(
+                            owner = owner,
+                            query = query,
+                        )
+
+                        res.isSameElements(except) shouldBe true
+                    }
+                }
+
+                context("특정 문자열과 올바른 owner가 주어지면") {
+                    useBaseData()
+                    val query = "9"
+                    val owner = "barista_park_02"
+                    val except = listOf(
+                        FacetWithCount(facet = "92°C", count = 1),
+                    )
+                    it("해당 Owner에 대해 특정 문자열을 포함하는 필드 값 facet 목록을 반환한다") {
+
+                        val res = noteFieldIndexRepository.searchAllFieldValueFacets(
+                            owner = owner,
+                            query = query,
+                        )
+
+                        res.isSameElements(except) shouldBe true
+                    }
+                }
+
+                context("존재하지 않는 owner 가 주어지면") {
+                    useBaseData()
+                    val query = "*"
+                    val owner = "user_not_exist"
+                    val except = emptyList<FacetWithCount>()
+                    it("빈 필드 값 facet 목록을 반환한다") {
+
+                        val res = noteFieldIndexRepository.searchAllFieldValueFacets(
+                            owner = owner,
+                            query = query,
+                        )
+
+                        res.isSameElements(except) shouldBe true
+                    }
+                }
+
+            }
             describe("NoteFieldIndexRepository.save") {
 
                 context("노트 필드 인덱스가 주어지면") {

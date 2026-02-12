@@ -13,6 +13,7 @@ import com.gabinote.coffeenote.note.dto.note.controller.NoteUpdateReqControllerD
 import com.gabinote.coffeenote.note.dto.note.service.NoteListResServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteResServiceDto
 import com.gabinote.coffeenote.note.dto.noteField.controller.NoteFieldCreateReqControllerDto
+import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.AllNoteFieldValueFacetListResControllerDto
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetListResControllerDto
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetWithCountResControllerDto
 import com.gabinote.coffeenote.note.dto.noteIndex.service.NoteIndexResServiceDto
@@ -1511,6 +1512,255 @@ class NoteApiControllerTest : WebMvcTestTemplate() {
                                 mockMvc.perform(
                                     get("$apiPrefix/notes/me/facets/fields/{fieldName}/values/search", fieldName)
                                         .param("query", invalidQuery)
+                                )
+                                    .andDo(print())
+                                    .andExpect(status().isBadRequest)
+                            }
+                        }
+                    }
+                }
+            }
+
+            describe("NoteApiController.getMyNotesAllFieldValuesFacets") {
+                context("올바른 요청이 주어지면") {
+                    val requestor = UUID.randomUUID().toString()
+                    val query = "test"
+                    val facetWithCount1 =
+                        NoteFieldValueFacetWithCountResControllerDto(
+                            facet = "value1",
+                            count = 5
+                        )
+                    val facetWithCount2 =
+                        NoteFieldValueFacetWithCountResControllerDto(
+                            facet = "value2",
+                            count = 10
+                        )
+                    val expected =
+                        AllNoteFieldValueFacetListResControllerDto(
+                            facets = listOf(facetWithCount1, facetWithCount2)
+                        )
+
+                    beforeTest {
+                        every { userContext.uid } returns requestor
+                        every {
+                            noteFieldIndexService.searchAllNoteFieldValueFacets(
+                                query = query,
+                                owner = requestor
+                            )
+                        } returns listOf(mockk(), mockk())
+                        every {
+                            noteFieldIndexMapper.toNoteFieldValueFacetWithCountResControllerDto(any())
+                        } returnsMany listOf(facetWithCount1, facetWithCount2)
+                        every {
+                            noteFieldIndexMapper.toAllNoteFieldValueFacetWithCountResControllerDto(
+                                facets = listOf(facetWithCount1, facetWithCount2)
+                            )
+                        } returns expected
+                    }
+
+                    it("모든 필드의 값 패싯을 조회하고, 200 OK를 응답한다") {
+                        mockMvc.perform(
+                            get("$apiPrefix/notes/me/facets/fields/values/search")
+                                .param("query", query)
+                        )
+                            .andDo(print())
+                            .andExpect(status().isOk)
+                            .andExpect(content().json(objectMapper.writeValueAsString(expected)))
+                            .andDo(
+                                document(
+                                    "notes/getMyNotesAllFieldValuesFacets",
+                                    preprocessRequest(prettyPrint()),
+                                    preprocessResponse(prettyPrint()),
+                                    resource(
+                                        ResourceSnippetParameters
+                                            .builder()
+                                            .tags("Note")
+                                            .description("내 노트의 모든 필드 값 패싯 검색")
+                                            .queryParameters(
+                                                parameterWithName("query").description("검색 쿼리 (최대 100자, 한글/영어/숫자 또는 와일드카드(*) 허용, 공백/하이픈/언더바 불허)")
+                                            )
+                                            .responseFields(
+                                                fieldWithPath("facets[]").description("필드 값 패싯 목록"),
+                                                fieldWithPath("facets[].facet").type(com.epages.restdocs.apispec.SimpleType.STRING)
+                                                    .description("필드 값"),
+                                                fieldWithPath("facets[].count").type(com.epages.restdocs.apispec.SimpleType.NUMBER)
+                                                    .description("해당 값을 가진 노트의 개수")
+                                            )
+                                            .build()
+                                    )
+                                )
+                            )
+
+                        verify(exactly = 1) {
+                            noteFieldIndexService.searchAllNoteFieldValueFacets(
+                                query = query,
+                                owner = requestor
+                            )
+                        }
+                        verify(exactly = 2) {
+                            noteFieldIndexMapper.toNoteFieldValueFacetWithCountResControllerDto(any())
+                        }
+                        verify(exactly = 1) {
+                            noteFieldIndexMapper.toAllNoteFieldValueFacetWithCountResControllerDto(
+                                facets = listOf(facetWithCount1, facetWithCount2)
+                            )
+                        }
+                    }
+                }
+
+                describe("query 검증 테스트") {
+                    describe("성공케이스") {
+                        context("query가 와일드카드(*)만 있으면") {
+                            val requestor = UUID.randomUUID().toString()
+                            val wildcardQuery = "*"
+                            val facetWithCount =
+                                NoteFieldValueFacetWithCountResControllerDto(
+                                    facet = "value1",
+                                    count = 5
+                                )
+                            val expected =
+                                AllNoteFieldValueFacetListResControllerDto(
+                                    facets = listOf(facetWithCount)
+                                )
+
+                            beforeTest {
+                                every { userContext.uid } returns requestor
+                                every {
+                                    noteFieldIndexService.searchAllNoteFieldValueFacets(
+                                        query = wildcardQuery,
+                                        owner = requestor
+                                    )
+                                } returns listOf(mockk())
+                                every {
+                                    noteFieldIndexMapper.toNoteFieldValueFacetWithCountResControllerDto(any())
+                                } returns facetWithCount
+                                every {
+                                    noteFieldIndexMapper.toAllNoteFieldValueFacetWithCountResControllerDto(
+                                        facets = listOf(facetWithCount)
+                                    )
+                                } returns expected
+                            }
+
+                            it("200 OK를 응답한다 (와일드카드는 허용됨)") {
+                                mockMvc.perform(
+                                    get("$apiPrefix/notes/me/facets/fields/values/search")
+                                        .param("query", wildcardQuery)
+                                )
+                                    .andDo(print())
+                                    .andExpect(status().isOk)
+                                    .andExpect(content().json(objectMapper.writeValueAsString(expected)))
+                            }
+                        }
+
+                        context("query가 한글/영어/숫자 조합이면") {
+                            val requestor = UUID.randomUUID().toString()
+                            val validQuery = "한글test123"
+                            val facetWithCount =
+                                NoteFieldValueFacetWithCountResControllerDto(
+                                    facet = "value1",
+                                    count = 5
+                                )
+                            val expected =
+                                AllNoteFieldValueFacetListResControllerDto(
+                                    facets = listOf(facetWithCount)
+                                )
+
+                            beforeTest {
+                                every { userContext.uid } returns requestor
+                                every {
+                                    noteFieldIndexService.searchAllNoteFieldValueFacets(
+                                        query = validQuery,
+                                        owner = requestor
+                                    )
+                                } returns listOf(mockk())
+                                every {
+                                    noteFieldIndexMapper.toNoteFieldValueFacetWithCountResControllerDto(any())
+                                } returns facetWithCount
+                                every {
+                                    noteFieldIndexMapper.toAllNoteFieldValueFacetWithCountResControllerDto(
+                                        facets = listOf(facetWithCount)
+                                    )
+                                } returns expected
+                            }
+
+                            it("200 OK를 응답한다") {
+                                mockMvc.perform(
+                                    get("$apiPrefix/notes/me/facets/fields/values/search")
+                                        .param("query", validQuery)
+                                )
+                                    .andDo(print())
+                                    .andExpect(status().isOk)
+                                    .andExpect(content().json(objectMapper.writeValueAsString(expected)))
+                            }
+                        }
+                    }
+
+                    describe("실패케이스") {
+                        context("query가 빈 문자열이면") {
+                            it("400 Bad Request를 응답한다") {
+                                mockMvc.perform(
+                                    get("$apiPrefix/notes/me/facets/fields/values/search")
+                                        .param("query", "")
+                                )
+                                    .andDo(print())
+                                    .andExpect(status().isBadRequest)
+                            }
+                        }
+
+                        context("query가 공백만 있으면") {
+                            it("400 Bad Request를 응답한다") {
+                                mockMvc.perform(
+                                    get("$apiPrefix/notes/me/facets/fields/values/search")
+                                        .param("query", "   ")
+                                )
+                                    .andDo(print())
+                                    .andExpect(status().isBadRequest)
+                            }
+                        }
+
+                        context("query가 100자를 초과하면") {
+                            val longQuery = "a".repeat(101)
+
+                            it("400 Bad Request를 응답한다") {
+                                mockMvc.perform(
+                                    get("$apiPrefix/notes/me/facets/fields/values/search")
+                                        .param("query", longQuery)
+                                )
+                                    .andDo(print())
+                                    .andExpect(status().isBadRequest)
+                            }
+                        }
+
+                        context("query에 허용되지 않는 특수문자가 포함되면") {
+                            val invalidQuery = "test@value"
+
+                            it("400 Bad Request를 응답한다") {
+                                mockMvc.perform(
+                                    get("$apiPrefix/notes/me/facets/fields/values/search")
+                                        .param("query", invalidQuery)
+                                )
+                                    .andDo(print())
+                                    .andExpect(status().isBadRequest)
+                            }
+                        }
+
+                        context("query에 공백이 포함되면") {
+                            val invalidQuery = "test value"
+
+                            it("400 Bad Request를 응답한다") {
+                                mockMvc.perform(
+                                    get("$apiPrefix/notes/me/facets/fields/values/search")
+                                        .param("query", invalidQuery)
+                                )
+                                    .andDo(print())
+                                    .andExpect(status().isBadRequest)
+                            }
+                        }
+
+                        context("query 파라미터가 없으면") {
+                            it("400 Bad Request를 응답한다") {
+                                mockMvc.perform(
+                                    get("$apiPrefix/notes/me/facets/fields/values/search")
                                 )
                                     .andDo(print())
                                     .andExpect(status().isBadRequest)

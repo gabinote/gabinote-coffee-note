@@ -1,10 +1,7 @@
 package com.gabinote.coffeenote.note.mapping.noteFieldIndex
 
 import com.gabinote.coffeenote.common.util.meiliSearch.helper.data.FacetWithCount
-import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldNameFacetListResControllerDto
-import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldNameFacetWithCountResControllerDto
-import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetListResControllerDto
-import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetWithCountResControllerDto
+import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.*
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.service.NoteFieldNameFacetWithCountResServiceDto
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.service.NoteFieldValueFacetWithCountResServiceDto
 import com.gabinote.coffeenote.testSupport.testTemplate.MockkTestTemplate
@@ -98,6 +95,23 @@ class NoteFieldIndexMapperTest : MockkTestTemplate() {
 
                     it("NoteFieldNameFacetListResControllerDto 리스트로 변환되어야 한다.") {
                         val result = noteFieldIndexMapper.toNoteFieldNameListResControllerDto(facets)
+                        result shouldBe expected
+                    }
+                }
+            }
+
+            describe("NoteFieldIndexMapper.toAllNoteFieldValueFacetWithCountResControllerDto") {
+                context("NoteFieldValueFacetWithCountResControllerDto 리스트가 주어지면,") {
+                    val facets = listOf(
+                        NoteFieldValueFacetWithCountResControllerDto(facet = "value1", count = 10),
+                        NoteFieldValueFacetWithCountResControllerDto(facet = "value2", count = 20),
+                        NoteFieldValueFacetWithCountResControllerDto(facet = "value3", count = 30)
+                    )
+                    val expected =
+                        AllNoteFieldValueFacetListResControllerDto(facets = facets)
+
+                    it("AllNoteFieldValueFacetListResControllerDto로 변환되어야 한다.") {
+                        val result = noteFieldIndexMapper.toAllNoteFieldValueFacetWithCountResControllerDto(facets)
                         result shouldBe expected
                     }
                 }

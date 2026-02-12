@@ -14,6 +14,7 @@ import com.gabinote.coffeenote.note.dto.note.controller.NoteResControllerDto
 import com.gabinote.coffeenote.note.dto.note.controller.NoteUpdateReqControllerDto
 import com.gabinote.coffeenote.note.dto.noteField.constraint.NoteFieldConstraints
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.constraint.NoteFieldIndexConstraints
+import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.AllNoteFieldValueFacetListResControllerDto
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldNameFacetListResControllerDto
 import com.gabinote.coffeenote.note.dto.noteFieldIndex.controller.NoteFieldValueFacetListResControllerDto
 import com.gabinote.coffeenote.note.dto.noteIndex.controller.NoteIndexResControllerDto
@@ -135,6 +136,33 @@ class NoteApiController(
         return ResponseEntity.ok(res)
 
     }
+
+    @NeedAuth
+    @GetMapping("/notes/me/facets/fields/values/search")
+    fun getMyNotesAllFieldValuesFacets(
+
+        @Pattern(
+            regexp = NoteFieldIndexConstraints.SEARCH_VALUE_STRING_REGEX,
+            message = "special characters are not allowed"
+        )
+        @Length(
+            max = NoteFieldIndexConstraints.SEARCH_VALUE_MAX_LENGTH,
+            message = "query must be at most ${NoteFieldIndexConstraints.SEARCH_VALUE_MAX_LENGTH} characters long"
+        )
+        @NotBlank(message = "query must not be blank")
+        query: String,
+    ): ResponseEntity<AllNoteFieldValueFacetListResControllerDto> {
+        val facets = noteFieldIndexService.searchAllNoteFieldValueFacets(
+            query = query,
+            owner = userContext.uid
+        )
+        val data = facets.map { noteFieldIndexMapper.toNoteFieldValueFacetWithCountResControllerDto(it) }
+        val res = noteFieldIndexMapper.toAllNoteFieldValueFacetWithCountResControllerDto(
+            facets = data
+        )
+        return ResponseEntity.ok(res)
+    }
+
 
     @NeedAuth
     @GetMapping("/notes/me/facets/fields/{fieldName}/values/search")

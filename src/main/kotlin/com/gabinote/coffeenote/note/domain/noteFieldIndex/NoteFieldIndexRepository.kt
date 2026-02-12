@@ -61,6 +61,24 @@ class NoteFieldIndexRepository(
         )
     }
 
+    fun searchAllFieldValueFacets(
+        owner: String,
+        query: String,
+    ): List<FacetWithCount> {
+        validationInput(owner, query)
+        val filter = listOf(
+            filterText("owner", owner),
+        )
+        val facets = listOf("value")
+
+        return index.searchFacetWithName(
+            query = query,
+            filter = filter,
+            facets = facets,
+            facetName = "value"
+        )
+    }
+
     fun findAllByNoteIds(noteIds: List<String>): List<NoteFieldIndexNoteIdHash> {
         val filter = listOf(
             filterTextIn("noteId", noteIds)
