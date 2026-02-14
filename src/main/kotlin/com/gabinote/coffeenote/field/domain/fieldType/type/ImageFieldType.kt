@@ -1,6 +1,7 @@
 package com.gabinote.coffeenote.field.domain.fieldType.type
 
 import com.gabinote.coffeenote.common.util.collection.CollectionHelper.firstOrEmptyString
+import com.gabinote.coffeenote.common.util.img.ImgValidationHelper
 import com.gabinote.coffeenote.field.domain.attribute.Attribute
 import com.gabinote.coffeenote.field.domain.fieldType.FieldType
 import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeAttributeKey
@@ -54,18 +55,17 @@ class ImageFieldType : FieldType() {
             )
         }
 
-        values.firstOrEmptyString()
+        val value = values.firstOrEmptyString()
 
-        // match with uuid regex
-//        val uuidRegex = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$".toRegex()
-//        if (!value.matches(uuidRegex)) {
-//            results.add(
-//                FieldTypeValidationResult(
-//                    valid = false,
-//                    message = "Image field value must be a valid UUID"
-//                )
-//            )
-//        }
+
+        if (!ImgValidationHelper.isImage(value)) {
+            results.add(
+                FieldTypeValidationResult(
+                    valid = false,
+                    message = "Image field value must be a valid image reference (UUID + extension format)"
+                )
+            )
+        }
 
 
         if (results.isEmpty()) {

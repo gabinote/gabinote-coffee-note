@@ -6,7 +6,7 @@
       },
       "externalId": "a1b2c3d4-e5f6-4789-8234-567890abcdef",
       "title": "My First Coffee Note",
-      "thumbnail": "https://example.com/thumbnail1.jpg",
+      "thumbnail": "f1e2d3c4-b5a6-4789-8012-3456789abcde.jpg",
       "createdDate": {
         "$date": "2024-01-01T10:00:00Z"
       },

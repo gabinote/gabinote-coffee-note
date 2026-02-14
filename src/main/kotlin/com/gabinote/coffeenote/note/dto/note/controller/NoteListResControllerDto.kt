@@ -11,6 +11,7 @@ data class NoteListResControllerDto(
 
     var externalId: UUID,
     var title: String,
+
     var thumbnail: String? = null,
     var createdDate: LocalDateTime,
     var modifiedDate: LocalDateTime,

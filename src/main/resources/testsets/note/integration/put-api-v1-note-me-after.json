@@ -4,7 +4,7 @@
       "_id": "$anyObject()",
       "externalId": "e5f6a7b8-c9d0-4123-8678-901234ef0123",
       "title": "Updated Note Title",
-      "thumbnail": "https://example.com/updated.jpg",
+      "thumbnail": "a1b2c3d4-e5f6-7890-abcd-ef1234567890.jpg",
       "createdDate": {
         "$date": "2024-01-10T10:00:00Z"
       },
@@ -37,7 +37,7 @@
       ],
       "isOpen": false,
       "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
-      "hash": "66f35e851736598a30e16eff91b5d28e",
+      "hash": "029e600d3c5873183d46dcd74a79d47f",
       "status": "ACTIVE"
     }
   ]

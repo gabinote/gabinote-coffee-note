@@ -2,10 +2,12 @@ package com.gabinote.coffeenote.note.dto.note.controller
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
+import com.gabinote.coffeenote.common.util.img.ImgValidationHelper
 import com.gabinote.coffeenote.note.dto.note.constraint.NoteConstraints
 import com.gabinote.coffeenote.note.dto.noteField.controller.NoteFieldCreateReqControllerDto
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Size
 import org.hibernate.validator.constraints.Length
 
@@ -19,6 +21,7 @@ data class NoteCreateReqControllerDto(
     )
     var title: String,
 
+    @field:Pattern(message = "thumbnail must be uuid + format ", regexp = ImgValidationHelper.UUID_REGEX)
     @field:Length(
         max = NoteConstraints.THUMBNAIL_MAX_LENGTH,
         message = "thumbnail must be at most ${NoteConstraints.THUMBNAIL_MAX_LENGTH} characters"

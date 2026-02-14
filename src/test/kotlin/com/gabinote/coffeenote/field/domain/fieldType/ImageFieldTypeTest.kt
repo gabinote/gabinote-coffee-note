@@ -33,7 +33,7 @@ class ImageFieldTypeTest : MockkTestTemplate() {
 
             describe("validation values") {
                 context("올바른 Image Value가 주어지면") {
-                    val validValues = setOf(UUID.randomUUID().toString())
+                    val validValues = setOf("${UUID.randomUUID()}.jpg")
                     it("Validation 에 통과한다.") {
                         val res = imageFieldType.validationValues(validValues, emptySet())
 
@@ -43,6 +43,14 @@ class ImageFieldTypeTest : MockkTestTemplate() {
 
                 context("Value가 한개가 아니라면") {
                     val invalidValues = setOf(UUID.randomUUID().toString(), UUID.randomUUID().toString())
+                    it("Validation 에 통과하지 못한다.") {
+                        val res = imageFieldType.validationValues(invalidValues, emptySet())
+                        res.all { !it.valid } shouldBe true
+                    }
+                }
+
+                context("올바르지 않은 Image Value가 주어지면") {
+                    val invalidValues = setOf("invalid-uuid")
                     it("Validation 에 통과하지 못한다.") {
                         val res = imageFieldType.validationValues(invalidValues, emptySet())
                         res.all { !it.valid } shouldBe true
