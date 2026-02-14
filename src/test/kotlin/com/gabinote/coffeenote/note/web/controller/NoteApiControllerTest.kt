@@ -2645,7 +2645,7 @@ class NoteApiControllerTest : WebMvcTestTemplate() {
                                                 fieldWithPath("title").type(com.epages.restdocs.apispec.SimpleType.STRING)
                                                     .description("노트 제목 (최대 100자, 필수)"),
                                                 fieldWithPath("thumbnail").type(com.epages.restdocs.apispec.SimpleType.STRING)
-                                                    .description("썸네일 URL (최대 36자, 선택)").optional(),
+                                                    .description("썸네일 URL (최대 50자, 선택)").optional(),
                                                 fieldWithPath("is_open").type(com.epages.restdocs.apispec.SimpleType.BOOLEAN)
                                                     .description("공개 여부"),
                                                 fieldWithPath("fields[]").description("필드 목록 (최소 1개, 최대 50개)"),
@@ -2845,7 +2845,7 @@ class NoteApiControllerTest : WebMvcTestTemplate() {
                             }
                         }
 
-                        context("thumbnail이 36자 이하면") {
+                        context("thumbnail이 50자 이하면") {
                             val request = NoteUpdateReqControllerDto(
                                 title = "수정된 노트",
                                 thumbnail = "a".repeat(36),
@@ -2880,10 +2880,10 @@ class NoteApiControllerTest : WebMvcTestTemplate() {
                     }
 
                     describe("실패케이스") {
-                        context("thumbnail이 36자를 초과하면") {
+                        context("thumbnail이 50자를 초과하면") {
                             val request = NoteUpdateReqControllerDto(
                                 title = "수정된 노트",
-                                thumbnail = "a".repeat(37),
+                                thumbnail = "a".repeat(51),
                                 fields = listOf(validField),
                                 isOpen = false
                             )
