@@ -2305,10 +2305,10 @@ class NoteApiControllerTest : WebMvcTestTemplate() {
                             }
                         }
 
-                        context("thumbnail이 36자 이하면") {
+                        context("thumbnail이 50자 이하면") {
                             val request = com.gabinote.coffeenote.note.dto.note.controller.NoteCreateReqControllerDto(
                                 title = "테스트 노트",
-                                thumbnail = "a".repeat(36),
+                                thumbnail = "a".repeat(50),
                                 fields = listOf(validField),
                                 isOpen = false
                             )
@@ -2339,10 +2339,10 @@ class NoteApiControllerTest : WebMvcTestTemplate() {
                     }
 
                     describe("실패케이스") {
-                        context("thumbnail이 36자를 초과하면") {
+                        context("thumbnail이 50자를 초과하면") {
                             val request = com.gabinote.coffeenote.note.dto.note.controller.NoteCreateReqControllerDto(
                                 title = "테스트 노트",
-                                thumbnail = "a".repeat(37),
+                                thumbnail = "a".repeat(51),
                                 fields = listOf(validField),
                                 isOpen = false
                             )
