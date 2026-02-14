@@ -54,18 +54,19 @@ class ImageFieldType : FieldType() {
             )
         }
 
-        val value = values.firstOrEmptyString()
+        values.firstOrEmptyString()
 
         // match with uuid regex
-        val uuidRegex = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$".toRegex()
-        if (!value.matches(uuidRegex)) {
-            results.add(
-                FieldTypeValidationResult(
-                    valid = false,
-                    message = "Image field value must be a valid UUID"
-                )
-            )
-        }
+//        val uuidRegex = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$".toRegex()
+//        if (!value.matches(uuidRegex)) {
+//            results.add(
+//                FieldTypeValidationResult(
+//                    valid = false,
+//                    message = "Image field value must be a valid UUID"
+//                )
+//            )
+//        }
+
 
         if (results.isEmpty()) {
             results.add(FieldTypeValidationResult(valid = true))

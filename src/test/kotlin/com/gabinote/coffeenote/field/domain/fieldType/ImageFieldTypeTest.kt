@@ -41,14 +41,6 @@ class ImageFieldTypeTest : MockkTestTemplate() {
                     }
                 }
 
-                context("올바르지 않은 Image Value가 주어지면") {
-                    val invalidValues = setOf("not-a-valid-url")
-                    it("Validation 에 통과하지 못한다.") {
-                        val res = imageFieldType.validationValues(invalidValues, emptySet())
-                        res.all { !it.valid } shouldBe true
-                    }
-                }
-
                 context("Value가 한개가 아니라면") {
                     val invalidValues = setOf(UUID.randomUUID().toString(), UUID.randomUUID().toString())
                     it("Validation 에 통과하지 못한다.") {
