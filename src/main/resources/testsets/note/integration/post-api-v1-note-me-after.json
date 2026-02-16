@@ -4,7 +4,7 @@
       "_id": "$anyObject()",
       "externalId": "a1b2c3d4-e5f6-4789-8234-567890abcdef",
       "title": "My First Coffee Note",
-      "thumbnail": "https://example.com/thumbnail1.jpg",
+      "thumbnail": "f1e2d3c4-b5a6-4789-8012-3456789abcde.jpg",
       "createdDate": {
         "$date": "2024-01-01T10:00:00Z"
       },
@@ -44,7 +44,7 @@
       "_id": "$anyObject()",
       "externalId": "00000000-0000-0000-0000-000000000000",
       "title": "New Coffee Note",
-      "thumbnail": "https://example.com/new-note.jpg",
+      "thumbnail": "ee60b567-ba13-4414-908a-6d901ae3892f.jpg",
       "createdDate": {
         "$date": "2002-08-27T15:00:00Z"
       },
@@ -77,7 +77,7 @@
       ],
       "isOpen": false,
       "owner": "d15cdbf8-22bc-47e2-9e9a-4d171cb6522e",
-      "hash": "ea5bd6e889c5699e59590b6ddd2b8e76",
+      "hash": "87c685ada5a52f9697b51d93d51d21da",
       "status": "ACTIVE"
     }
   ]

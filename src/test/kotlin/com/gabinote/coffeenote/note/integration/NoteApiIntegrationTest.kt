@@ -79,7 +79,7 @@ class NoteApiIntegrationTest : IntegrationTestTemplate() {
                         statusCode(200)
                         body("external_id", equalTo("c3d4e5f6-a7b8-4901-8456-789012cdef01"))
                         body("title", equalTo("Detailed Coffee Note"))
-                        body("thumbnail", equalTo("https://example.com/thumbnail2.jpg"))
+                        body("thumbnail", equalTo("c1d2e3f4-a5b6-4789-bcde-f012345678ab.jpg"))
                         body("is_open", equalTo(true))
                         body("owner", equalTo("d15cdbf8-22bc-47e2-9e9a-4d171cb6522e"))
                         body("fields.size()", equalTo(2))
@@ -219,7 +219,7 @@ class NoteApiIntegrationTest : IntegrationTestTemplate() {
                         body(
                             jsonBuilder {
                                 "title" to "New Coffee Note"
-                                "thumbnail" to "https://example.com/new-note.jpg"
+                                "thumbnail" to "ee60b567-ba13-4414-908a-6d901ae3892f.jpg"
                                 "is_open" to false
                                 "fields" arr {
                                     +obj {
@@ -243,7 +243,7 @@ class NoteApiIntegrationTest : IntegrationTestTemplate() {
                         statusCode(201)
                         testDataHelper.assertData("/testsets/note/integration/post-api-v1-note-me-after.json")
                         body("title", equalTo("New Coffee Note"))
-                        body("thumbnail", equalTo("https://example.com/new-note.jpg"))
+                        body("thumbnail", equalTo("ee60b567-ba13-4414-908a-6d901ae3892f.jpg"))
                         body("is_open", equalTo(false))
                         body("owner", equalTo("d15cdbf8-22bc-47e2-9e9a-4d171cb6522e"))
                         body("external_id", equalTo("00000000-0000-0000-0000-000000000000"))
@@ -286,7 +286,7 @@ class NoteApiIntegrationTest : IntegrationTestTemplate() {
                         body(
                             jsonBuilder {
                                 "title" to "Updated Note Title"
-                                "thumbnail" to "https://example.com/updated.jpg"
+                                "thumbnail" to "a1b2c3d4-e5f6-7890-abcd-ef1234567890.jpg"
                                 "is_open" to false
                                 "fields" arr {
                                     +obj {
@@ -310,7 +310,7 @@ class NoteApiIntegrationTest : IntegrationTestTemplate() {
                         statusCode(200)
                         testDataHelper.assertData("/testsets/note/integration/put-api-v1-note-me-after.json")
                         body("title", equalTo("Updated Note Title"))
-                        body("thumbnail", equalTo("https://example.com/updated.jpg"))
+                        body("thumbnail", equalTo("a1b2c3d4-e5f6-7890-abcd-ef1234567890.jpg"))
                         body("is_open", equalTo(false))
                         body("owner", equalTo("d15cdbf8-22bc-47e2-9e9a-4d171cb6522e"))
                         body("external_id", equalTo("e5f6a7b8-c9d0-4123-8678-901234ef0123"))
@@ -382,7 +382,7 @@ class NoteApiIntegrationTest : IntegrationTestTemplate() {
                         statusCode(200)
                         body("external_id", equalTo("d4e5f6a7-b8c9-4012-8567-890123def012"))
                         body("title", equalTo("Open Coffee Note"))
-                        body("thumbnail", equalTo("https://example.com/thumbnail3.jpg"))
+                        body("thumbnail", equalTo("d1e2f3a4-b5c6-4789-9012-3456789abcde.jpg"))
                         body("is_open", equalTo(true))
                         body("owner", equalTo("695b8482-c259-4493-82e2-8988599d21e9"))
                         body("fields.size()", equalTo(1))
