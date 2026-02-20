@@ -34,9 +34,9 @@ abstract class ListSelectFieldType : FieldType() {
                         message = "At least two options are required. if you want to have only one option, use a Toggle field instead."
                     )
 
-                    value.size > 100 -> FieldTypeValidationResult(
+                    value.size > 200 -> FieldTypeValidationResult(
                         valid = false,
-                        message = "Maximum number of options is 100."
+                        message = "Maximum number of options is 200."
                     )
 
                     value.any { it.isEmpty() } -> FieldTypeValidationResult(

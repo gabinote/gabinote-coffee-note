@@ -649,7 +649,28 @@ class FieldAdminApiControllerTest : FieldApiTestTemplate() {
                             "attribute.value의 원소 중 하나가 50자 초과"
                         ),
 
-                        // 10. name 필드 누락
+                        // 10. attribute.value 개수 초과 (>200)
+                        row(
+                            jsonBuilder {
+                                "name" to "validName"
+                                "icon" to "123"
+                                "type" to "TEXT"
+                                "attributes" arr {
+                                    +obj {
+                                        "key" to "test"
+                                        "value" arr {
+                                            // 201개의 값 (최대 200개)
+                                            repeat(201) { index ->
+                                                +"value$index"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "attribute.value 개수 200개 초과"
+                        ),
+
+                        // 11. name 필드 누락
                         row(
                             jsonBuilder {
                                 // "name" 생략
@@ -978,6 +999,24 @@ class FieldAdminApiControllerTest : FieldApiTestTemplate() {
                                 }
                             },
                             "attributes 내부 key 길이 초과"
+                        ),
+
+                        // 8. attribute.value 개수 초과 (>200)
+                        row(
+                            jsonBuilder {
+                                "attributes" arr {
+                                    +obj {
+                                        "key" to "test"
+                                        "value" arr {
+                                            // 201개의 값 (최대 200개)
+                                            repeat(201) { index ->
+                                                +"value$index"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "attribute.value 개수 200개 초과"
                         ),
                     ).forAll { invalidDto, reason ->
                         context("$reason 인 올바르지 않은 요청이 주어졌을 때") {
