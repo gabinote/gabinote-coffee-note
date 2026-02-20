@@ -1054,15 +1054,15 @@ class TemplateApiControllerTest : TemplateControllerTest() {
                                         "order" to 1
                                         "is_display" to true
                                         "attributes" arr {
-                                            // 101개의 값 (최대 100개)
-                                            repeat(101) { index ->
+                                            // 201개의 값 (최대 200개)
+                                            repeat(201) { index ->
                                                 +"value$index"
                                             }
                                         }
                                     }
                                 }
                             },
-                            "field attribute value 개수 100개 초과"
+                            "field attribute value 개수 200개 초과"
                         ),
 
                         // TemplateField 필수 필드 누락
@@ -1648,15 +1648,15 @@ class TemplateApiControllerTest : TemplateControllerTest() {
                                         "order" to 1
                                         "is_display" to true
                                         "attributes" arr {
-                                            // 101개의 값 (최대 100개)
-                                            repeat(101) { index ->
+                                            // 201개의 값 (최대 200개)
+                                            repeat(201) { index ->
                                                 +"value$index"
                                             }
                                         }
                                     }
                                 }
                             },
-                            "field attribute value 개수 100개 초과"
+                            "field attribute value 개수 200개 초과"
                         ),
 
                         // TemplateField 필수 필드 누락

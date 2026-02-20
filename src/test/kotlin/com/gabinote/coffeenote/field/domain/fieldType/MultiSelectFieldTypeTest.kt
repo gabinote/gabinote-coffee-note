@@ -100,11 +100,11 @@ class MultiSelectFieldTypeTest : MockkTestTemplate() {
                             setOf(
                                 Attribute(
                                     key = "values",
-                                    value = TestCollectionHelper.generateRandomStringSet(maxLength = 50, count = 101)
+                                    value = TestCollectionHelper.generateRandomStringSet(maxLength = 50, count = 201)
                                 ),
                                 Attribute(key = "allowAddValue", value = setOf("true"))
                             ),
-                            "values attributes 의 value 가 100개를 초과하면"
+                            "values attributes 의 value 가 200개를 초과하면"
                         ),
                     ).forAll { invalidAttributes, reason ->
                         context(reason) {

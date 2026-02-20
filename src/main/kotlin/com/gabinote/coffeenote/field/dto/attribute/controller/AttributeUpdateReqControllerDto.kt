@@ -23,9 +23,9 @@ data class AttributeUpdateReqControllerDto(
 
     /**
      * 속성 값 집합
-     * 각 값은 최대 50자까지 허용되며 전체 집합은 최대 100개 요소까지 허용
+     * 각 값은 최대 50자까지 허용되며 전체 집합은 최대 200개 요소까지 허용
      */
     @field:CollectionElementLength(length = 50, resourceName = "attribute value")
-    @field:Size(max = 100, message = "value must be at most 100")
-    val value: Set<String>
+    @field:Size(max = 200, message = "value must be at most 200")
+    val value: Set<String>,
 )
