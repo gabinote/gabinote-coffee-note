@@ -1,9 +1,6 @@
 package com.gabinote.coffeenote.common.web.advice
 
-import com.gabinote.coffeenote.common.util.exception.service.ResourceDuplicate
-import com.gabinote.coffeenote.common.util.exception.service.ResourceNotFound
-import com.gabinote.coffeenote.common.util.exception.service.ResourceNotValid
-import com.gabinote.coffeenote.common.util.exception.service.ServerError
+import com.gabinote.coffeenote.common.util.exception.service.*
 import com.gabinote.coffeenote.common.util.log.ErrorLog
 import com.gabinote.coffeenote.common.web.advice.ExceptionAdviceHelper.getRequestId
 import com.gabinote.coffeenote.common.web.advice.ExceptionAdviceHelper.problemDetail
@@ -147,6 +144,34 @@ class ServiceExceptionAdvice {
             message = ex.logMessage
         )
         logger.error { log.toString() }
+        return ResponseEntity(problemDetail, status)
+    }
+
+    @ExceptionHandler(ForbiddenByPolicy::class)
+    fun handleForbiddenByPolicy(
+        ex: ForbiddenByPolicy,
+        request: HttpServletRequest,
+    ): ResponseEntity<ProblemDetail> {
+        val requestId = getRequestId(request)
+        val status = HttpStatus.FORBIDDEN
+
+        val problemDetail = problemDetail(
+            status = status,
+            title = "Forbidden By Policy",
+            detail = ex.errorMessage,
+            requestId = requestId
+        )
+
+        val log = ErrorLog(
+            requestId = requestId,
+            method = request.method,
+            path = request.requestURI,
+            status = status,
+            error = "ForbiddenByPolicy",
+            message = ex.errorMessage
+        )
+
+        logger.info { log.toString() }
         return ResponseEntity(problemDetail, status)
     }
 

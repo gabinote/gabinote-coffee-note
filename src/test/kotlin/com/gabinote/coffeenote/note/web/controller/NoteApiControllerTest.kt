@@ -8,7 +8,6 @@ import com.epages.restdocs.apispec.Schema
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.gabinote.coffeenote.common.mapping.slice.SliceMapper
 import com.gabinote.coffeenote.common.util.context.UserContext
-import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeFactory
 import com.gabinote.coffeenote.note.dto.note.controller.NoteUpdateReqControllerDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteListResServiceDto
 import com.gabinote.coffeenote.note.dto.note.service.NoteResServiceDto
@@ -33,7 +32,6 @@ import com.gabinote.coffeenote.testSupport.testUtil.page.TestPageableUtil.create
 import com.gabinote.coffeenote.testSupport.testUtil.page.TestSliceUtil.toSlice
 import com.gabinote.coffeenote.testSupport.testUtil.page.TestSliceUtil.toSliceResponse
 import com.ninjasquad.springmockk.MockkBean
-import com.ninjasquad.springmockk.SpykBean
 import io.mockk.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -80,8 +78,6 @@ class NoteApiControllerTest : WebMvcTestTemplate() {
     @MockkBean
     private lateinit var noteIndexMapper: NoteIndexMapper
 
-    @SpykBean
-    lateinit var fieldTypeFactory: FieldTypeFactory
 
     private val apiPrefix = "/api/v1"
 

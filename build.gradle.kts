@@ -44,11 +44,7 @@ dependencies {
     kapt("org.springframework.boot:spring-boot-configuration-processor")
 
     // test
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-
-//        exclude(group = "com.vaadin.external.google", module = "android-json")
-
-    }
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     // junit
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -87,6 +83,10 @@ dependencies {
     implementation("com.meilisearch.sdk:meilisearch-java:0.16.1") {
         exclude(group = "com.vaadin.external.google", module = "android-json")
     }
+
+    //keycloak
+    testImplementation("com.github.dasniko:testcontainers-keycloak:3.7.0")
+    implementation("org.keycloak:keycloak-admin-client:26.0.5")
 
     // caching
     implementation("org.springframework.boot:spring-boot-starter-cache")

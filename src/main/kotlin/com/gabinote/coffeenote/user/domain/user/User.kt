@@ -1,0 +1,53 @@
+package com.gabinote.coffeenote.user.domain.user
+
+import org.bson.types.ObjectId
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.annotation.Id
+import org.springframework.data.annotation.LastModifiedDate
+import org.springframework.data.mongodb.core.index.Indexed
+import org.springframework.data.mongodb.core.mapping.Document
+import java.time.LocalDateTime
+
+@Document(collection = "users")
+data class User(
+    @Id
+    var id: ObjectId? = null,
+
+    @Indexed(unique = true)
+    var uid: String,
+
+    @CreatedDate
+    var createdDate: LocalDateTime? = null,
+
+    @LastModifiedDate
+    var modifiedDate: LocalDateTime? = null,
+
+    var nickname: String,
+
+    var profileImg: String,
+
+    @JvmField
+    var isOpenProfile: Boolean = true,
+
+    @JvmField
+    var isMarketingEmailAgreed: Boolean,
+
+    @JvmField
+    var isMarketingPushAgreed: Boolean,
+
+    @JvmField
+    var isNightPushAgreed: Boolean,
+) {
+    fun changeNickname(nickname: String) {
+        this.nickname = nickname
+    }
+
+    fun changeProfileImg(profileImg: String) {
+        this.profileImg = profileImg
+    }
+
+    fun update(nickname: String, profileImg: String) {
+        this.nickname = nickname
+        this.profileImg = profileImg
+    }
+}

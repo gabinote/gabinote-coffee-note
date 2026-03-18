@@ -7,6 +7,7 @@ import com.gabinote.coffeenote.note.service.noteIndex.NoteIndexService
 import com.gabinote.coffeenote.user.service.withdrawProcessHistory.WithdrawProcessHistoryService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
 class NoteUserWithdrawService(
@@ -20,7 +21,7 @@ class NoteUserWithdrawService(
     fun deleteAllNotesByWithdrawUser(uid: String) {
         noteService.deleteAllByOwner(uid)
         withdrawProcessHistoryService.create(
-            uid = uid,
+            uid = UUID.fromString(uid),
             process = WithdrawProcess.NOTE_DELETE
         )
     }
@@ -28,7 +29,7 @@ class NoteUserWithdrawService(
     @Transactional
     fun deleteAllNoteIndexesByWithdrawUser(uid: String) {
         withdrawProcessHistoryService.create(
-            uid = uid,
+            uid = UUID.fromString(uid),
             process = WithdrawProcess.NOTE_INDEX_DELETE,
             isPassed = true
         )
@@ -39,7 +40,7 @@ class NoteUserWithdrawService(
     @Transactional
     fun deleteAllNoteFieldsIndexesByWithdrawUser(uid: String) {
         withdrawProcessHistoryService.create(
-            uid = uid,
+            uid = UUID.fromString(uid),
             process = WithdrawProcess.NOTE_FIELD_INDEX_DELETE,
             isPassed = true
         )
@@ -49,7 +50,7 @@ class NoteUserWithdrawService(
 
     fun createDeleteNoteFailHistory(uid: String, process: WithdrawProcess) {
         withdrawProcessHistoryService.create(
-            uid = uid,
+            uid = UUID.fromString(uid),
             process = process,
             isPassed = false
         )

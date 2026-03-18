@@ -5,9 +5,11 @@ import com.gabinote.coffeenote.note.service.note.NoteService
 import com.gabinote.coffeenote.note.service.noteFieldIndex.NoteFieldIndexService
 import com.gabinote.coffeenote.note.service.noteIndex.NoteIndexService
 import com.gabinote.coffeenote.testSupport.testTemplate.ServiceTestTemplate
+import com.gabinote.coffeenote.testSupport.testUtil.uuid.TestUuidSource
 import com.gabinote.coffeenote.user.service.withdrawProcessHistory.WithdrawProcessHistoryService
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
+import java.util.*
 
 class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
 
@@ -40,13 +42,13 @@ class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
 
             describe("NoteUserWithdrawService.deleteAllNotesByWithdrawUser") {
                 context("유효한 uid가 주어졌을 때") {
-                    val uid = "test-user-uid"
+                    val uid = TestUuidSource.UUID_STRING.toString()
 
                     beforeTest {
                         every { noteService.deleteAllByOwner(uid) } just runs
                         every {
                             withdrawProcessHistoryService.create(
-                                uid = uid,
+                                uid = UUID.fromString(uid),
                                 process = WithdrawProcess.NOTE_DELETE
                             )
                         } just runs
@@ -60,7 +62,7 @@ class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
                         }
                         verify(exactly = 1) {
                             withdrawProcessHistoryService.create(
-                                uid = uid,
+                                uid = UUID.fromString(uid),
                                 process = WithdrawProcess.NOTE_DELETE
                             )
                         }
@@ -68,13 +70,13 @@ class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
                 }
 
                 context("노트가 없는 사용자의 uid가 주어졌을 때") {
-                    val uid = "user-without-notes"
+                    val uid = TestUuidSource.UUID_STRING.toString()
 
                     beforeTest {
                         every { noteService.deleteAllByOwner(uid) } just runs
                         every {
                             withdrawProcessHistoryService.create(
-                                uid = uid,
+                                uid = UUID.fromString(uid),
                                 process = WithdrawProcess.NOTE_DELETE
                             )
                         } just runs
@@ -88,7 +90,7 @@ class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
                         }
                         verify(exactly = 1) {
                             withdrawProcessHistoryService.create(
-                                uid = uid,
+                                uid = UUID.fromString(uid),
                                 process = WithdrawProcess.NOTE_DELETE
                             )
                         }
@@ -98,13 +100,13 @@ class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
 
             describe("NoteUserWithdrawService.deleteAllNoteIndexesByWithdrawUser") {
                 context("유효한 uid가 주어졌을 때") {
-                    val uid = "test-user-uid"
+                    val uid = TestUuidSource.UUID_STRING.toString()
 
                     beforeTest {
                         every { noteIndexService.deleteAllByOwner(uid) } just runs
                         every {
                             withdrawProcessHistoryService.create(
-                                uid = uid,
+                                uid = UUID.fromString(uid),
                                 process = WithdrawProcess.NOTE_INDEX_DELETE,
                                 isPassed = true
                             )
@@ -119,7 +121,7 @@ class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
                         }
                         verify(exactly = 1) {
                             withdrawProcessHistoryService.create(
-                                uid = uid,
+                                uid = UUID.fromString(uid),
                                 process = WithdrawProcess.NOTE_INDEX_DELETE,
                                 isPassed = true
                             )
@@ -130,13 +132,13 @@ class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
 
             describe("NoteUserWithdrawService.deleteAllNoteFieldsIndexesByWithdrawUser") {
                 context("유효한 uid가 주어졌을 때") {
-                    val uid = "test-user-uid"
+                    val uid = TestUuidSource.UUID_STRING.toString()
 
                     beforeTest {
                         every { noteFieldIndexService.deleteAllByOwner(uid) } just runs
                         every {
                             withdrawProcessHistoryService.create(
-                                uid = uid,
+                                uid = UUID.fromString(uid),
                                 process = WithdrawProcess.NOTE_FIELD_INDEX_DELETE,
                                 isPassed = true
                             )
@@ -151,7 +153,7 @@ class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
                         }
                         verify(exactly = 1) {
                             withdrawProcessHistoryService.create(
-                                uid = uid,
+                                uid = UUID.fromString(uid),
                                 process = WithdrawProcess.NOTE_FIELD_INDEX_DELETE,
                                 isPassed = true
                             )
@@ -162,12 +164,12 @@ class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
 
             describe("NoteUserWithdrawService.createDeleteNoteFailHistory") {
                 context("유효한 uid가 주어졌을 때") {
-                    val uid = "test-user-uid"
+                    val uid = TestUuidSource.UUID_STRING.toString()
 
                     beforeTest {
                         every {
                             withdrawProcessHistoryService.create(
-                                uid = uid,
+                                uid = UUID.fromString(uid),
                                 process = WithdrawProcess.NOTE_DELETE,
                                 isPassed = false
                             )
@@ -179,7 +181,7 @@ class NoteUserWithdrawServiceTest : ServiceTestTemplate() {
 
                         verify(exactly = 1) {
                             withdrawProcessHistoryService.create(
-                                uid = uid,
+                                uid = UUID.fromString(uid),
                                 process = WithdrawProcess.NOTE_DELETE,
                                 isPassed = false
                             )

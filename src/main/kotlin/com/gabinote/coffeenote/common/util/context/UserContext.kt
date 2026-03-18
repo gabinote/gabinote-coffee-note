@@ -3,6 +3,7 @@ package com.gabinote.coffeenote.common.util.context
 import org.springframework.context.annotation.Scope
 import org.springframework.context.annotation.ScopedProxyMode
 import org.springframework.stereotype.Component
+import java.util.*
 
 /**
  * 요청(Request) 스코프를 가지는 사용자 컨텍스트 클래스
@@ -30,4 +31,8 @@ class UserContext(
      * 사용자가 로그인된 상태인지 여부를 반환
      */
     fun isLoggedIn(): Boolean = _uid != null
+
+    fun uidWithUUID(): UUID {
+        return UUID.fromString(uid)
+    }
 }

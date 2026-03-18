@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "_id": "$anyObject()",
+      "uid": "00000000-0000-0000-0000-000000000000",
+      "nickname": "NewUser",
+      "profileImg": "https://cdn.gabinote.com/profiles/new_user.png",
+      "createdDate": { "$date": "2002-08-27T15:00:00Z" },
+      "modifiedDate": { "$date": "2002-08-27T15:00:00Z" },
+      "isOpenProfile": true,
+      "isMarketingEmailAgreed": false,
+      "isMarketingPushAgreed": false,
+      "isNightPushAgreed": false
+    }
+  ]
+}
+

@@ -18,7 +18,6 @@ class NoteSinkScheduler(
     private val noteFieldIndexSyncService: NoteFieldIndexSyncService,
     private val timeProvider: TimeProvider,
 
-
     @Value("\${gabinote.note.sink.note-index.minor.batch-size}")
     private val minorNoteIndexSinkBatchSize: Int,
 
@@ -30,7 +29,8 @@ class NoteSinkScheduler(
 
     @Value("\${gabinote.note.sink.note-field-index.major.batch-size}")
     private val majorNoteFieldIndexSinkBatchSize: Int,
-) {
+
+    ) {
 
 
     @Scheduled(cron = "\${gabinote.note.sink.note-index.minor.cron}")

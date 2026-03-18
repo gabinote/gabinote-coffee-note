@@ -1,8 +1,10 @@
 package com.gabinote.coffeenote.testSupport.testTemplate
 
 
+import com.gabinote.coffeenote.field.domain.fieldType.FieldTypeFactory
 import com.gabinote.coffeenote.testSupport.testConfig.jackson.UseJackson
 import com.gabinote.coffeenote.testSupport.testUtil.time.TestTimeProvider
+import com.ninjasquad.springmockk.SpykBean
 import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.junit5.MockKExtension
 import org.junit.jupiter.api.extension.ExtendWith
@@ -27,5 +29,8 @@ abstract class WebMvcTestTemplate : DescribeSpec() {
 
     @TestConfiguration
     class FilterConfig
+
+    @SpykBean
+    lateinit var fieldTypeFactory: FieldTypeFactory
 
 }

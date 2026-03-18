@@ -36,6 +36,11 @@ logging:
 
 
 gabinote:
+  withdraw:
+    purge:
+      max-retry-attempts: 5
+      batch-size: 100
+      schedule: "0 0 3 * * *"  # 3 AM
   note:
     sink:
       note-index:
@@ -56,3 +61,12 @@ gabinote:
   common:
     gateway:
       secret: "test-gateway-secret"
+
+test-keycloak:
+  admin-client:
+    realm: master
+    client-id: test-admin-cli
+    client-secret: admin-secret
+  test-client:
+    id: gabinote-test-client
+    secret: test-secret
