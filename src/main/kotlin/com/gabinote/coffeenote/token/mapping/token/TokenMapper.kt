@@ -1,0 +1,54 @@
+package com.gabinote.coffeenote.token.mapping.token
+
+
+import com.gabinote.coffeenote.token.dto.token.controller.RedirectIdpReqControllerDto
+import com.gabinote.coffeenote.token.dto.token.controller.TokenExchangeReqControllerDto
+import com.gabinote.coffeenote.token.dto.token.controller.TokenResControllerDto
+import com.gabinote.coffeenote.token.dto.token.service.RedirectIdpReqServiceDto
+import com.gabinote.coffeenote.token.dto.token.service.TokenExchangeReqServiceDto
+import com.gabinote.coffeenote.token.dto.token.service.TokenExchangeResServiceDto
+import com.gabinote.coffeenote.token.dto.token.service.TokenRefreshResServiceDto
+import org.mapstruct.Mapper
+import org.mapstruct.Mapping
+
+/**
+ * Token 관련 Mapper
+ */
+@Mapper(
+    componentModel = "spring"
+)
+interface TokenMapper {
+
+    /**
+     * TokenExchangeResServiceDto -> TokenResControllerDto 변환
+     * 이때 오직 Access 토큰과 만료 시기만 매핑
+     * @param dto TokenExchangeResServiceDto
+     * @return TokenResControllerDto
+     */
+    @Mapping(source = "accessTokenExpiresIn", target = "expiresIn")
+    fun toExchangeResControllerDto(dto: TokenExchangeResServiceDto): TokenResControllerDto
+
+    /**
+     * TokenRefreshResServiceDto -> TokenResControllerDto 변환
+     * 이때 오직 Access 토큰과 만료 시기만 매핑
+     * @param dto TokenRefreshResServiceDto
+     * @return TokenResControllerDto
+     */
+    @Mapping(source = "accessTokenExpiresIn", target = "expiresIn")
+    fun toRefreshResControllerDto(dto: TokenRefreshResServiceDto): TokenResControllerDto
+
+    /**
+     * TokenExchangeReqControllerDto -> TokenExchangeReqServiceDto 변환
+     * @param dto TokenExchangeReqControllerDto
+     * @return TokenExchangeReqServiceDto
+     */
+    fun toExchangeReqServiceDto(dto: TokenExchangeReqControllerDto): TokenExchangeReqServiceDto
+
+
+    /**
+     *  RedirectIdpReqControllerDto -> RedirectIdpReqServiceDto 변환
+     *  @param dto RedirectIdpReqControllerDto
+     *  @return RedirectIdpReqServiceDto
+     */
+    fun toRedirectReqServiceDto(dto: RedirectIdpReqControllerDto): RedirectIdpReqServiceDto
+}

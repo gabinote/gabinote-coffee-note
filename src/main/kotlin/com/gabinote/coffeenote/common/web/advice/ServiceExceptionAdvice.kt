@@ -175,4 +175,56 @@ class ServiceExceptionAdvice {
         return ResponseEntity(problemDetail, status)
     }
 
+    @ExceptionHandler(BadToken::class)
+    fun handleBadToken(
+        ex: BadToken,
+        request: HttpServletRequest,
+    ): ResponseEntity<ProblemDetail> {
+        val requestId = getRequestId(request)
+        val status = HttpStatus.UNAUTHORIZED
+
+        val problemDetail = problemDetail(
+            status = status,
+            title = "Bad Token",
+            detail = ex.errorMessage,
+            requestId = requestId
+        )
+
+        val log = ErrorLog(
+            requestId = requestId,
+            method = request.method,
+            path = request.requestURI,
+            status = status,
+            error = "BadToken",
+            message = ex.logMessage
+        )
+        logger.error { log.toString() }
+        return ResponseEntity(problemDetail, status)
+    }
+
+    @ExceptionHandler(ResourceForbidden::class)
+    fun handleResourceForbidden(
+        ex: ResourceForbidden,
+        request: HttpServletRequest,
+    ): ResponseEntity<ProblemDetail> {
+        val requestId = getRequestId(request)
+        val status = HttpStatus.FORBIDDEN
+        val problemDetail = problemDetail(
+            status = status,
+            title = "Resource Forbidden",
+            detail = ex.message,
+            requestId = requestId
+        )
+        val log = ErrorLog(
+            requestId = requestId,
+            method = request.method,
+            path = request.requestURI,
+            status = status,
+            error = "Resource Forbidden",
+            message = ex.message
+        )
+        logger.info { log.toString() }
+        return ResponseEntity(problemDetail, status)
+    }
+
 }

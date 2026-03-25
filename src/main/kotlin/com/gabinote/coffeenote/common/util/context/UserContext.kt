@@ -12,27 +12,28 @@ import java.util.*
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 class UserContext(
+    var isAuthorized: Boolean = false,
     private var _uid: String? = null,
     var roles: List<String> = emptyList(),
 ) {
-    /**
-     * 현재 요청의 사용자 고유 ID
-     * 값이 설정되지 않은 상태에서 접근하려고 하면 UserContextNotFound 예외 발생
-     *
-     * @throws UserContextNotFound 사용자 컨텍스트에 UID가 설정되지 않은 경우 발생
-     */
     var uid: String
         get() = _uid ?: throw UserContextNotFound()
         set(value) {
             _uid = value
         }
 
-    /**
-     * 사용자가 로그인된 상태인지 여부를 반환
-     */
     fun isLoggedIn(): Boolean = _uid != null
 
     fun uidWithUUID(): UUID {
         return UUID.fromString(uid)
+    }
+
+    fun setContext(
+        uid: String,
+        roles: List<String>,
+    ) {
+        this.isAuthorized = true
+        this._uid = uid
+        this.roles = roles
     }
 }

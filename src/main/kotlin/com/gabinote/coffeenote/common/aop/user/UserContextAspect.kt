@@ -23,19 +23,18 @@ private val logger = KotlinLogging.logger {}
 class UserContextAspect(
     private val userContext: UserContext,
 ) {
-    /**
-     * 모든 RestController 메서드 호출 전, UserContext를 초기화
-     * HTTP 헤더에서 "X-Token-Sub"와 "X-Token-Roles" 값을 추출하여 UserContext에 설정
-     * @param joinPoint AOP 조인 포인트
-     */
+
     @Before("@within(org.springframework.web.bind.annotation.RestController)")
     fun initUserContext(joinPoint: JoinPoint) {
         val request = (RequestContextHolder.currentRequestAttributes() as ServletRequestAttributes).request
-        // keycloak sub
-        userContext.uid = request.getHeader("X-Token-Sub")
-
-        // keycloak roles
-        userContext.roles = request.getHeader("X-Token-Roles")?.split(",") ?: emptyList()
+        val uid = request.getHeader("X-Token-Sub")
+        val roles = request.getHeader("X-Token-Roles")
+        if (uid != null && roles != null) {
+            userContext.setContext(
+                uid = uid,
+                roles = roles.split(",")
+            )
+        }
 
         logger.debug { "User context initialized with uid: ${userContext.uid} and roles: ${userContext.roles}" }
     }

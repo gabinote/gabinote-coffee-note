@@ -1,4 +1,4 @@
-package com.gabinote.coffeenote.testSupport.testConfig.keycloak
+package com.gabinote.coffeenote.testSupport.testUtil.keycloak
 
 enum class TestUser(
     val id: String,

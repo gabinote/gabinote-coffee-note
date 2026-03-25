@@ -5,6 +5,7 @@ import com.gabinote.coffeenote.testSupport.testConfig.common.UseTestContainers
 import com.gabinote.coffeenote.testSupport.testUtil.database.TestDataHelper
 import com.gabinote.coffeenote.testSupport.testUtil.debezium.TestDebeziumHelper
 import com.gabinote.coffeenote.testSupport.testUtil.kafka.TestKafkaHelper
+import com.gabinote.coffeenote.testSupport.testUtil.keycloak.TestKeycloakUtil
 import com.gabinote.coffeenote.testSupport.testUtil.meilisearch.TestMeiliSearchHelper
 import com.gabinote.coffeenote.testSupport.testUtil.time.TestTimeProvider
 import com.gabinote.coffeenote.testSupport.testUtil.uuid.TestUuidSource
@@ -27,6 +28,7 @@ import org.testcontainers.junit.jupiter.Testcontainers
     TestTimeProvider::class,
     TestKafkaHelper::class,
     TestDebeziumHelper::class,
+    TestKeycloakUtil::class,
 )
 @Testcontainers
 @UseTestContainers
@@ -53,6 +55,9 @@ abstract class IntegrationTestTemplate : FeatureSpec() {
     @Autowired
     lateinit var testUuidSource: TestUuidSource
 
+    @Autowired
+    lateinit var testKeycloakUtil: TestKeycloakUtil
+
 
     val apiPrefix: String = "/api/v1"
 
@@ -71,6 +76,9 @@ abstract class IntegrationTestTemplate : FeatureSpec() {
 
         beforeTest {
             testUuidSource.disableQueueMode()
+            testKeycloakUtil.recreateRealm()
+            testKafkaHelper.deleteAllTopics()
+            testDebeziumHelper.deleteAllConnectors()
         }
     }
 }

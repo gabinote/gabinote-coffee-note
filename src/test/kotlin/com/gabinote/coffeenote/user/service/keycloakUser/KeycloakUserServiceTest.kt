@@ -2,10 +2,9 @@ package com.gabinote.coffeenote.user.service.keycloakUser
 
 import com.gabinote.coffeenote.common.config.KeycloakConfig
 import com.gabinote.coffeenote.common.util.exception.service.ServerError
-import com.gabinote.coffeenote.testSupport.testConfig.keycloak.TestKeycloakUtil
-import com.gabinote.coffeenote.testSupport.testConfig.keycloak.TestUser
 import com.gabinote.coffeenote.testSupport.testConfig.keycloak.UseTestKeycloak
-
+import com.gabinote.coffeenote.testSupport.testUtil.keycloak.TestKeycloakUtil
+import com.gabinote.coffeenote.testSupport.testUtil.keycloak.TestUser
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
